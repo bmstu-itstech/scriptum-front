@@ -1,6 +1,27 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --container-max-width: 100rem;
+
+  --color-white-main: #f9fafb;
+  --color-dark-main: #111827;
+
+  --color-gray-sub: #4b5563;
+  --color-gray-light: #b6acaf;
+  --color-gray-border: #e5e7eb;
+  --color-gray-light2: #6b7280;
+  --color-purple-main: #971aff;
+  --color-purple-dark: #8e1ced;
+  --color-purple-light: #d29cff40;
+
+  --font-size-lg: 1.875rem;
+  --font-size-md: 1.5rem;
+  --font-size-base: 1.125rem;
+  --font-size-sm: 1rem;
+  --font-size-xs: 0.875rem;
+
+  --shadow-lg: 0px 4px 4px 0px #00000025;
 }
 
 @media (prefers-color-scheme: dark) {
