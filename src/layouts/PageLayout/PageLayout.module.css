@@ -1,0 +1,16 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    gap: 4rem;
+}
+
+.title {
+    font-size: var(--font-size-title);
+    margin-top: 8rem;
+}
+.subtitle {
+    font-size: var(--font-size-title);
+    margin-top: 3rem;
+}
