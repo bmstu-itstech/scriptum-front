@@ -1,0 +1,21 @@
+.scriptPanel {
+  width: 100%;
+  height: 100%;
+}
+
+.scriptPanel__title {
+  font-size: 1rem;
+  color: var(--color-gray-sub);
+}
+
+.scriptPanel__items {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: space-between;
+  align-items: start;
+  column-gap: 3rem;
+  row-gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
