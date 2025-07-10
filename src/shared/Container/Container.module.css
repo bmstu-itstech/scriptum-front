@@ -1,4 +1,6 @@
 .container {
-    max-width: var(--container-max-width);
-    width: 100%;
+  max-width: var(--container-max-width);
+  padding: 0 5rem;
+  width: 100%;
+  background: var(--color-white-main);
 }

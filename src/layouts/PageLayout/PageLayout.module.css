@@ -1,16 +1,18 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: top;
-    align-items: center;
-    gap: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
 }
 
 .title {
-    font-size: var(--font-size-title);
-    margin-top: 8rem;
+  font-size: var(--font-size-lg);
+  color: var(--color-dark-main);
+  margin-top: 2rem;
 }
 .subtitle {
-    font-size: var(--font-size-title);
-    margin-top: 3rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-sub);
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
 }
