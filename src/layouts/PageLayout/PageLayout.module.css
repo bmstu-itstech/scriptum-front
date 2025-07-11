@@ -6,14 +6,9 @@
 }
 
 .title {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--color-dark-main);
   margin-top: 2rem;
 }
 .subtitle {
-  font-size: var(--font-size-sm);
-  color: var(--color-gray-sub);
   margin-top: 0.5rem;
   margin-bottom: 2rem;
 }
