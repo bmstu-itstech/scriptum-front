@@ -1,0 +1,29 @@
+.ScriptInfo {
+  width: 100%;
+  height: 14rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ScriptInfo__title {
+}
+
+.ScriptInfo__subtitle {
+}
+
+.ScriptInfo__info {
+  display: flex;
+  gap: 4rem;
+}
+
+.ScriptInfo__author {
+  color: var(--color-gray-light2);
+  font-size: var(--font-size-sm);
+}
+
+.ScriptInfo__date {
+  color: var(--color-gray-light2);
+  font-size: var(--font-size-sm);
+}
