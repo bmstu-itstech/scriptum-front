@@ -12,8 +12,8 @@ import {CalendarIcon} from '@/components/icons/CalendarIcon';
 
 export const ScriptElement: FC<Props> = ({
   className,
-  title,
-  id,
+  scriptTitle,
+  scriptId,
   countOfRuns,
   subtitle,
   author,
@@ -23,7 +23,7 @@ export const ScriptElement: FC<Props> = ({
   return (
     <div className={cn(className, styles.scriptElement, basicStyles.layout)} {...props}>
       <div className={styles.scriptElement__supblock}>
-        <h2 className={styles.scriptElement__title}>{title}</h2>
+        <h2 className={styles.scriptElement__title}>{scriptTitle}</h2>
         <p className={styles.scriptElement__runs}>Кол. запусков: {countOfRuns}</p>
       </div>
 

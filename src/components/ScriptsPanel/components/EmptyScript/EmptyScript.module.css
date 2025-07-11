@@ -20,7 +20,7 @@
 }
 
 .layout {
-  border-radius: 1rem;
+  border-radius: var(--border-radius-base);
   transition: box-shadow 0.2s;
   height: 18rem;
   background: var(--color-white-main);

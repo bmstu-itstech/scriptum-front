@@ -7,7 +7,7 @@
   font-size: var(--font-size-base);
   outline: none;
   border: 2px solid var(--color-gray-border);
-  border-radius: 1rem;
+  border-radius: var(--border-radius-base);
 
   &:focus {
     border-color: var(--color-gray-light2);
