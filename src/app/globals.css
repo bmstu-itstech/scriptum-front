@@ -5,6 +5,8 @@
   --container-max-width: 100rem;
 
   --color-white-main: #f9fafb;
+  --color-white-sub: #f9fafb50;
+
   --color-dark-main: #111827;
 
   --color-gray-sub: #4b5563;
@@ -12,7 +14,7 @@
   --color-gray-border: #e5e7eb;
   --color-gray-light2: #6b7280;
   --color-gray-stroke: #d1d5db;
-  
+
   --color-purple-main: #971aff;
   --color-purple-dark: #8e1ced;
   --color-purple-light: #d29cff40;
@@ -22,6 +24,8 @@
   --font-size-base: 1.125rem;
   --font-size-sm: 1rem;
   --font-size-xs: 0.875rem;
+
+  --border-radius-base: 1rem;
 
   --shadow-lg: 0px 4px 4px 0px #00000025;
 }
@@ -64,4 +68,16 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.layout__title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-dark-main);
+}
+
+.layout__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-sub);
+  font-weight: 400;
 }
