@@ -1,0 +1,13 @@
+.ScriptParametrsLayout {
+  border: 1px solid var(--color-gray-border);
+  border-radius: var(--border-radius-base);
+  width: 100%;
+}
+
+.ScriptParametrsLayout__header {
+  background: var(--color-white-main);
+}
+
+.ScriptParametrsLayout__content {
+  background: var(--color-white-sub);
+}

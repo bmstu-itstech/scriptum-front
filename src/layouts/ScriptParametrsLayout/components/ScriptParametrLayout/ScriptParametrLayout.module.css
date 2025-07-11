@@ -1,0 +1,17 @@
+.ScriptParametrLayout {
+  dispay: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 7rem;
+  width: 50%;
+}
+
+.ScriptParametrLayout__info {
+  dispay: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.ScriptParametrLayout__content {
+  background: var(--color-white-sub);
+}
