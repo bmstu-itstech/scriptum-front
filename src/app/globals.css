@@ -11,6 +11,7 @@
   --color-gray-light: #b6acaf;
   --color-gray-border: #e5e7eb;
   --color-gray-light2: #6b7280;
+  --color-gray-stroke: #d1d5db;
   --color-purple-main: #971aff;
   --color-purple-dark: #8e1ced;
   --color-purple-light: #d29cff40;
@@ -38,7 +39,7 @@ body {
 }
 
 body {
-  color: var(--foreground);
+  color: var(--color-dark-main);
   background: var(--background);
   font-family: Inter, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -50,6 +51,7 @@ body {
   padding: 0;
   margin: 0;
   line-height: 1.4;
+  font-weight: 400;
 }
 
 a {
