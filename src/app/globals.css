@@ -17,7 +17,7 @@
 	--color-gray-bio: #374151;
 
 	--color-purple-main: #971aff;
-	--color-purple-dark: #8e1ced;
+	--color-purple-dark: #7a00e6;
 	--color-purple-light: #d29cff40;
 
 	--font-size-lg: 1.875rem;
@@ -101,12 +101,17 @@ a {
 }
 
 .openScriptBtn {
+	width: 100%;
 	padding-top: 10px;
 	padding-right: 16px;
 	padding-bottom: 10px;
 	padding-left: 16px;
 	background-color: var(--color-purple-main);
 	color: var(--color-white);
+	font-weight: 400;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+
 }
 
 .openScriptBtn:hover {
