@@ -1,7 +1,7 @@
 import type { Props } from '@/layouts/HeaderLayout/HeaderLayout.props';
 import { Container } from '@/shared/Container';
 import type { FC } from 'react';
-import styles from '@/layouts/HeaderLayout/HeaderLayout.module.css';
+import styles from './HeaderLayout.module.css';
 import cn from 'classnames';
 
 export const HeaderLayout: FC<Props> = ({ head, center, tail, className, ...props }) => {
