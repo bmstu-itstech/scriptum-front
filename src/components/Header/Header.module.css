@@ -64,6 +64,7 @@
 }
 
 .personData {
+	color: var(--color-gray-bio);
 	font-weight: 500;
 	/* 14px */
 	font-size: 0.875rem;

@@ -21,7 +21,7 @@
 	color: var(--color-dark-main);
 
 	.icon {
-		fill: var(--color-dark-main);
+		filter: brightness(0) saturate(100%) invert(7%) sepia(17%) saturate(2110%) hue-rotate(182deg) brightness(87%) contrast(94%);
 	}
 }
 
@@ -30,7 +30,7 @@
 	color: var(--color-purple-main);
 
 	.icon {
-		fill: var(--color-purple-main);
+		filter: brightness(0) saturate(100%) invert(20%) sepia(86%) saturate(6732%) hue-rotate(271deg) brightness(102%) contrast(104%);
 	}
 }
 
