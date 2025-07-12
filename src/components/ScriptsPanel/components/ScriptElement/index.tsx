@@ -9,6 +9,8 @@ import { getDate } from '@/utils/getRowFromDate';
 import { TextWithIcon } from '@/shared/TextWithIcon';
 import { PersonIcon } from '@/components/icons/PersonIcon';
 import { CalendarIcon } from '@/components/icons/CalendarIcon';
+import { EditIcon } from '@/components/icons/EditIcon';
+import { DeleteIcon } from '@/components/icons/DeleteIcon';
 
 export const ScriptElement: FC<Props> = ({
 	className,
@@ -41,6 +43,8 @@ export const ScriptElement: FC<Props> = ({
 			</div>
 			<div className={styles.scriptElement__interactive}>
 				<Button className='openScriptBtn' icon={<RunIcon />}>Запустить</Button>
+				<Button className='editScriptBtn' icon={<EditIcon />}></Button>
+				<Button className='deleteScriptBtn' icon={<DeleteIcon />}></Button>
 			</div>
 
 		</div>
