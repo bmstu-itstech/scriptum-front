@@ -1,0 +1,10 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.head,
+.center,
+.tail {
+	border: 1px solid #d52b2b;
+}
