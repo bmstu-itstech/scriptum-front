@@ -2,7 +2,7 @@ import type {Props} from '@/components/ScriptsPanel/components/ScriptElement/Scr
 import type {FC} from 'react';
 import cn from 'classnames';
 import styles from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.module.css';
-import basicStyles from '@/components/ScriptsPanel/components/EmptyScript/EmptyScript.module.css'
+import basicStyles from '@/components/ScriptsPanel/components/EmptyScript/EmptyScript.module.css';
 import {Button} from '@/shared/Button';
 import {RunIcon} from '@/components/icons/RunIcon';
 import {getDate} from '@/utils/getRowFromDate';
@@ -21,7 +21,10 @@ export const ScriptElement: FC<Props> = ({
   ...props
 }) => {
   return (
-    <div className={cn(className, styles.scriptElement, basicStyles.layout)} {...props}>
+    <div
+      id={id.toString()}
+      className={cn(className, styles.scriptElement, basicStyles.layout)}
+      {...props}>
       <div className={styles.scriptElement__supblock}>
         <h2 className={styles.scriptElement__title}>{title}</h2>
         <p className={styles.scriptElement__runs}>Кол. запусков: {countOfRuns}</p>

@@ -12,4 +12,5 @@ export const HeaderLayout: FC<Props> = ({ head, center, tail, className, ...prop
 			{tail && <div className={styles.tail}>{tail}</div>}
 		</Container>
 	);
+
 };

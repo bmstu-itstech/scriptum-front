@@ -1,6 +1,6 @@
 'use client';
 import type Props from '@/components/Search/Search.props';
-import {useState, type FC, useCallback, useEffect} from 'react';
+import {useState, type FC, useCallback} from 'react';
 import cn from 'classnames';
 import styles from '@/components/Search/Search.module.css';
 // import debounce from 'lodash.debounce';
@@ -10,6 +10,7 @@ export const Search: FC<Props> = ({callback, icon, placeholder, className, ...pr
 
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
+    callback();
   }, []);
 
   return (
