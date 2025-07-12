@@ -3,18 +3,19 @@ import type {FC} from 'react';
 import cn from 'classnames';
 import styles from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.module.css';
 import basicStyles from '@/components/ScriptsPanel/components/EmptyScript/EmptyScript.module.css';
-import {Button} from '@/shared/Button';
+import {Button} from '@/layouts/Button';
 import {RunIcon} from '@/components/icons/RunIcon';
 import {getDate} from '@/utils/getRowFromDate';
 import {TextWithIcon} from '@/shared/TextWithIcon';
 import {PersonIcon} from '@/components/icons/PersonIcon';
 import {CalendarIcon} from '@/components/icons/CalendarIcon';
-import Link from 'next/link';
+import {EditIcon} from '@/components/icons/EditIcon';
+import {DeleteIcon} from '@/components/icons/DeleteIcon';
 
 export const ScriptElement: FC<Props> = ({
   className,
-  scriptTitle,
-  scriptId,
+  title,
+  id,
   countOfRuns,
   subtitle,
   author,
@@ -22,12 +23,12 @@ export const ScriptElement: FC<Props> = ({
   ...props
 }) => {
   return (
-    <Link
-      href={`/script/${scriptId}`}
+    <div
+      id={id.toString()}
       className={cn(className, styles.scriptElement, basicStyles.layout)}
       {...props}>
       <div className={styles.scriptElement__supblock}>
-        <h2 className={styles.scriptElement__title}>{scriptTitle}</h2>
+        <h2 className={styles.scriptElement__title}>{title}</h2>
         <p className={styles.scriptElement__runs}>Кол. запусков: {countOfRuns}</p>
       </div>
 
@@ -41,8 +42,12 @@ export const ScriptElement: FC<Props> = ({
         </TextWithIcon>
       </div>
       <div className={styles.scriptElement__interactive}>
-        <Button icon={<RunIcon />}>Запустить</Button>
+        <Button className='openScriptBtn' icon={<RunIcon />}>
+          Запустить
+        </Button>
+        <Button className='editScriptBtn' icon={<EditIcon />}></Button>
+        <Button className='deleteScriptBtn' icon={<DeleteIcon />}></Button>
       </div>
-    </Link>
+    </div>
   );
 };

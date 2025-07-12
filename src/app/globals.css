@@ -25,6 +25,10 @@
   --color-purple-dark: #8e1ced;
   --color-purple-light: #d29cff40;
 
+  --color-blue-light: #eff6ff;
+
+  --color-red-light: #fee2e2;
+
   --font-size-lg: 1.875rem;
   --font-size-md: 1.5rem;
   --font-size-large: 1.25rem;
@@ -107,4 +111,31 @@ a {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 0.2s;
+}
+.editScriptBtn {
+	min-width: 2.5rem;
+	height: 2.5rem;
+	background: var(--color-white);
+}
+
+.editScriptBtn:hover {
+	background: var(--color-blue-light);
+
+	img {
+		filter: brightness(0) saturate(100%) invert(32%) sepia(87%) saturate(4427%) hue-rotate(218deg) brightness(97%) contrast(90%);
+	}
+}
+
+.deleteScriptBtn {
+	min-width: 2.5rem;
+	height: 2.5rem;
+	background: var(--color-white);
+}
+
+.deleteScriptBtn:hover {
+	background: var(--color-red-light);
+
+	img {
+		filter: brightness(0) saturate(100%) invert(22%) sepia(39%) saturate(6175%) hue-rotate(348deg) brightness(88%) contrast(94%);
+	}
 }
