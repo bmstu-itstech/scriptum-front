@@ -6,7 +6,6 @@
 // import {searchUsecase} from '@/components/Search/Search.usecase';
 // import styles from '@/app/page.module.css';
 
-
 // export default function Home() {
 //   return (
 //     <PageLayout title={mainPageUsecase.title} subtitle={mainPageUsecase.subtitle}>
@@ -24,15 +23,16 @@
 //   );
 // }
 
-
-{/* 
+{
+  /* 
 	<FileInputLayout
 		icon={<UploadIcon />}
 		isRequired={true}
 		placeholder="Выберите Python-файл"
 		errorText="Необходимо загрузить Python-файл"
 	/> 
-*/}
+*/
+}
 
 // import { AlertLayout } from '@/layouts/AlertLayout';
 
@@ -56,10 +56,8 @@
 // 			/>
 // 		</>
 
-import { Auth } from "@/components/Auth";
+import {Auth} from '@/components/Auth';
 
 export default function Home() {
-	return (
-		<Auth />
-	);
+  return <Auth />;
 }
