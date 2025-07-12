@@ -1,70 +1,53 @@
-import {Button} from '@/shared/Button';
-import {SiriusIcon} from '../icons/SiriusIcon';
-import {PersonIcon} from '../icons/PersonIcon';
-import {Props as LinkProps} from '@/shared/Link/Link.props';
-import {HomeIcon} from '../icons/HomeIcon';
-import {TaskIcon} from '../icons/TaskIcon';
-import {LoadIcon} from '../icons/LoadIcon';
-import {Link} from '@/shared/Link';
+import { Button } from '@/shared/Button';
+import { SiriusIcon } from '../icons/SiriusIcon';
+import { PersonIcon } from '../icons/PersonIcon';
+import { Props as LinkProps } from '@/shared/Link/Link.props';
+import { HomeIcon } from '../icons/HomeIcon';
+import { TaskIcon } from '../icons/TaskIcon';
+import { LoadIcon } from '../icons/LoadIcon';
+import { Link } from '@/shared/Link';
+import cn from 'classnames';
+import style from './Header.module.css';
 
-// export const headUsecase = {
-// 	icon: <SiriusIcon width={40} height={40} />,
-// 	title: 'Scriptum',
-// 	subtitle: 'Система управления скриптами',
-// };
 const Links: LinkProps[] = [
-  {
-    icon: <HomeIcon />,
-    title: 'Главная',
-  },
-  {
-    icon: <TaskIcon />,
-    title: 'Задачи',
-  },
-  {
-    icon: <LoadIcon />,
-    title: 'Загрузка скрипта',
-  },
+	{
+		icon: <HomeIcon />,
+		title: 'Главная',
+	},
+	{
+		icon: <TaskIcon />,
+		title: 'Задачи',
+	},
+	{
+		icon: <LoadIcon />,
+		title: 'Загрузка скрипта',
+	},
 ];
 
 export const HeaderUsecase = {
-  head: (
-    <>
-      <SiriusIcon />
-      <p>Scriptum</p>
-      <p>Система управления скриптами</p>
-    </>
-  ),
-  center: (
-    <>
-      {Links.map((link, index) => (
-        <Link key={index} icon={link.icon} title={link.title} />
-      ))}
-    </>
-  ),
-  tail: (
-    <>
-      <span>Иванов Иван</span>
-      <Button icon={<PersonIcon />}>Выйти</Button>
-    </>
-  ),
+	head: (
+		<div className={cn(style.company)}>
+			<SiriusIcon className={cn(style.icon)} />
+			<div className={cn(style.info)}>
+				<p className={cn(style.title)}>Scriptum</p>
+				<p className={cn(style.subtitle)}> Система управления скриптами</p>
+			</div>
+		</div>
+	),
+	center: (
+		<div className={cn(style.links)}>
+			{Links.map((link, index) => (
+				<Link key={index} icon={link.icon} title={link.title} />
+			))}
+		</div>
+	),
+	tail: (
+		<div className={cn(style.options)}>
+			<div className={cn(style.personBlock)} >
+				<PersonIcon className={cn(style.personIcon)} />
+				<p className={cn(style.personData)}>Иванов Иван</p>
+			</div>
+			<Button icon={<PersonIcon />}>Выйти</Button>
+		</div>
+	),
 };
-
-// export const centerUsecase = () => {
-//   return (
-//     <nav>
-//       {Links.map((link, index) => (
-//         <Link key={index} icon={link.icon} title={link.title} />
-//       ))}
-//     </nav>
-//   );
-// };
-
-// export const tailUsecase = () => {
-//   return (
-//     <div>
-//       <span>Иванов Иван</span>
-//       <Button icon={<PersonIcon />}>Выйти</Button>
-//     </div>
-//   );
-// };

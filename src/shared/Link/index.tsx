@@ -5,8 +5,8 @@ import type { Props } from "@/shared/Link/Link.props";
 
 export const Link: FC<Props> = ({ icon, title, className, ...props }) => {
 	return (
-		<a className={cn(styles.link, className)} {...props}>
-			{icon && <span className={cn(styles.icon)}>{icon}</span>}
+		<a className={cn(styles.link, 'smoothTransition', className)} {...props}>
+			<span className={cn(styles.icon)}>{icon}</span>
 			<span className={cn(styles.title)}>{title}</span>
 		</a>
 	);

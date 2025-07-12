@@ -17,6 +17,7 @@
   --color-gray-border: #e5e7eb;
   --color-gray-light2: #6b7280;
   --color-gray-stroke: #d1d5db;
+  --color-gray-background: #F3F4F6;
 
   --color-purple-main: #971aff;
   --color-purple-dark: #8e1ced;
@@ -99,4 +100,9 @@ a {
   font-size: var(--font-size-sm);
   color: var(--color-gray-sub);
   font-weight: 400;
+}
+.smoothTransition {
+	transition-property: all;
+	transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+	transition-duration: .2s;
 }
