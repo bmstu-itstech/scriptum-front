@@ -4,6 +4,7 @@
 
   --container-max-width: 100rem;
 
+  --color-white: #ffffff;
   --color-white-main: #f9fafb;
   --color-white-sub: #f9fafb50;
   --color-white-clear: #ffffff;
@@ -17,7 +18,8 @@
   --color-gray-border: #e5e7eb;
   --color-gray-light2: #6b7280;
   --color-gray-stroke: #d1d5db;
-  --color-gray-background: #F3F4F6;
+  --color-gray-background: #f3f4f6;
+  --color-gray-bio: #374151;
 
   --color-purple-main: #971aff;
   --color-purple-dark: #8e1ced;
@@ -102,7 +104,7 @@ a {
   font-weight: 400;
 }
 .smoothTransition {
-	transition-property: all;
-	transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-	transition-duration: .2s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.2s;
 }

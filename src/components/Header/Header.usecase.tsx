@@ -1,4 +1,4 @@
-import { Button } from '@/shared/Button';
+import { Button } from '@/layouts/Button';
 import { SiriusIcon } from '../icons/SiriusIcon';
 import { PersonIcon } from '../icons/PersonIcon';
 import { Props as LinkProps } from '@/shared/Link/Link.props';
@@ -8,6 +8,7 @@ import { LoadIcon } from '../icons/LoadIcon';
 import { Link } from '@/shared/Link';
 import cn from 'classnames';
 import style from './Header.module.css';
+import { LogoutIcon } from '../icons/LogoutIcon';
 
 const Links: LinkProps[] = [
 	{
@@ -47,7 +48,7 @@ export const HeaderUsecase = {
 				<PersonIcon className={cn(style.personIcon)} />
 				<p className={cn(style.personData)}>Иванов Иван</p>
 			</div>
-			<Button icon={<PersonIcon />}>Выйти</Button>
+			<Button className='logoutBtn' icon={<LogoutIcon />}>Выйти</Button>
 		</div>
 	),
 };
