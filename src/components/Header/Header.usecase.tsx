@@ -10,7 +10,7 @@ import cn from 'classnames';
 import style from './Header.module.css';
 import { LogoutIcon } from '../icons/LogoutIcon';
 
-const Links: LinkProps[] = [
+export const Links: LinkProps[] = [
 	{
 		icon: <HomeIcon />,
 		title: 'Главная',
