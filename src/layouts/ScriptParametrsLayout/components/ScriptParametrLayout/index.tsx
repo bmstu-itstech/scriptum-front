@@ -12,21 +12,42 @@ export const ScriptParametrLayout: FC<Props> = ({
   const ScriptParametrInput = useMemo(() => {
     return (
       <div className={styles.ScriptParametrLayout}>
-        <div className={styles.ScriptParametrLayout__info}>
-          <p className={styles.ScriptParametrLayout__title}>{title}</p>
-          <div className={styles.ScriptParametrLayout__type_measure}>
-            <p className={styles.ScriptParametrLayout__type}>{type}</p>
-            <p className={styles.ScriptParametrLayout__measure}>{measure}</p>
+        <div className={styles.ScriptParametrLayout__info_input}>
+          <p className={styles.ScriptParametrLayout__title_input}>{title}</p>
+          <div className={styles.ScriptParametrLayout__type_measure_input}>
+            <p className={styles.ScriptParametrLayout__type_input}>{type}</p>
+            <p className={styles.ScriptParametrLayout__measure_input}>{measure}</p>
           </div>
         </div>
-        <input className={styles.ScriptParametrLayout__input} type='text' name='inputParametr' />
-        <p className={styles.ScriptParametrLayout__translation}>{translation}</p>
+        <input
+          className={styles.ScriptParametrLayout__input_input}
+          type='text'
+          name='inputParametr'
+        />
+        <p className={styles.ScriptParametrLayout__translation_input}>{translation}</p>
       </div>
     );
   }, []);
 
   const ScriptParametrOutput = useMemo(() => {
-    return <div></div>;
+    return (
+      <div className={styles.ScriptParametrLayout}>
+        <div className={styles.ScriptParametrLayout__info_input}>
+          <p className={styles.ScriptParametrLayout__title_input}>{title}</p>
+          <div className={styles.ScriptParametrLayout__type_measure_input}>
+            <p className={styles.ScriptParametrLayout__type_input}>{type}</p>
+            <p className={styles.ScriptParametrLayout__measure_input}>{measure}</p>
+          </div>
+        </div>
+        <input
+          readOnly
+          className={styles.ScriptParametrLayout__input_input}
+          type='text'
+          name='inputParametr'
+        />
+        <p className={styles.ScriptParametrLayout__translation_input}>{translation}</p>
+      </div>
+    );
   }, []);
   return typeOfCard == 'input' ? ScriptParametrInput : ScriptParametrOutput;
 };
