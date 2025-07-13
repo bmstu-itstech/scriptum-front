@@ -1,3 +1,5 @@
 import type { HTMLAttributes } from 'react';
 
-export type Props = HTMLAttributes<HTMLDivElement>
+export interface Props extends HTMLAttributes<HTMLDivElement> {
+  activePath : string;
+}
