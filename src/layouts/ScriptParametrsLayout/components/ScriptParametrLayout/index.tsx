@@ -1,6 +1,5 @@
 import type {Props} from '@/layouts/ScriptParametrsLayout/components/ScriptParametrLayout/ScriptParametr.props';
 import {useMemo, type FC} from 'react';
-import cn from 'classnames';
 import styles from '@/layouts/ScriptParametrsLayout/components/ScriptParametrLayout/ScriptParametrLayout.module.css';
 export const ScriptParametrLayout: FC<Props> = ({
   typeOfCard,

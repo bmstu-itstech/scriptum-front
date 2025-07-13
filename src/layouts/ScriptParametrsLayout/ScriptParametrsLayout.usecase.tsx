@@ -7,7 +7,15 @@ import {
 
 export const ScriptParametersLayoutUsecase1 = {
   params: {
-    input: [ScriptInputParametr1, ScriptInputParametr2, ScriptInputParametr3],
+    input: [
+      ScriptInputParametr1,
+      ScriptInputParametr2,
+      ScriptInputParametr3,
+      ScriptInputParametr3,
+      ScriptInputParametr3,
+      ,
+      ScriptInputParametr3,
+    ],
     output: [ScriptOutputParametr1],
   },
 };
