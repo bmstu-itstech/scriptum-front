@@ -1,36 +1,48 @@
 .search__input {
-  height: 100%;
-  width: 100%;
-  padding: 1rem 0.75rem 1rem 2.75rem;
-  background: var(--color-white-main);
-  color: var(--color-dark-main);
-  font-size: var(--font-size-base);
-  outline: none;
-  border: 2px solid var(--color-gray-border);
-  border-radius: var(--border-radius-base);
+	height: 100%;
+	width: 100%;
+	padding: 1rem 0.75rem 1rem 2.75rem;
+	background: var(--color-white);
+	color: var(--color-dark-main);
+	font-size: var(--font-size-base);
+	outline: none;
+	border: 2px solid var(--color-gray-border);
+	border-radius: 1rem;
 
-  &:focus {
-    border-color: var(--color-gray-light2);
-  }
-  &::placeholder {
-    color: var(--color-gray-light);
-  }
+	&:hover {
+		border-color: var(--color-gray-border2);
+	}
+
+	&:focus {
+		border-color: var(--color-purple-main);
+	}
+
+	&::placeholder {
+		color: var(--color-gray-light);
+	}
 }
 
 .search__container {
-  display: flex;
-  position: relative;
-  justify-content: start;
-  align-items: center;
-  height: 4rem;
-  width: 100%;
-  background: var(--color-white-main);
+	display: flex;
+	position: relative;
+	justify-content: start;
+	align-items: center;
+	height: 4rem;
+	width: 100%;
+	background: var(--color-white-main);
+
+	&:focus-within .search__icon {
+		filter: brightness(0) saturate(100%) invert(37%) sepia(46%) saturate(6798%) hue-rotate(251deg) brightness(102%) contrast(101%)
+	}
 }
 
 .search__icon {
-  position: absolute;
-  transform: translateY(-50%);
-  top: 50%;
-  left: 0.75rem;
-  aspect-ratio: 1/1;
+	position: absolute;
+	transform: translateY(-50%);
+	top: 50%;
+	left: 0.75rem;
+	aspect-ratio: 1/1;
+
+	display: inline-block;
+	line-height: 0;
 }
