@@ -1,28 +1,4 @@
-import type {IScriptItem} from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
-import type {HTMLAttributes, ReactNode} from 'react';
+import {IScriptStruct} from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.props';
+import type {HTMLAttributes} from 'react';
 
-interface IInputData {
-  title: string;
-  translate: string;
-  type: string;
-  measure: string;
-}
-
-interface IOutputData {
-  title: string;
-  translate: string;
-  type: string;
-  measure: string;
-}
-
-export default interface IScript extends IScriptItem, HTMLAttributes<HTMLDivElement> {
-  params: {
-    input: IInputData[];
-    output: IOutputData[];
-  };
-}
-
-export interface Props extends IScript {
-  type: 'input' | 'output';
-  header: ReactNode;
-}
+export type Props = IScriptStruct & HTMLAttributes<HTMLDivElement>;

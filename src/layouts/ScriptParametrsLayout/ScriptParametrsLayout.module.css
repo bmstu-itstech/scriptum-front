@@ -6,8 +6,14 @@
 
 .ScriptParametrsLayout__header {
   background: var(--color-white-main);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--color-gray-border);
 }
 
 .ScriptParametrsLayout__content {
+  display: grid;
+  column-gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
   background: var(--color-white-sub);
+  padding: 1rem 2rem;
 }

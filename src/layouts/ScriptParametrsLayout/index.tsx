@@ -1,12 +1,10 @@
-import type {Props} from '@/components/ScriptParametrs/ScriptParametrs.props';
+import { Props } from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.props';
 import type {FC} from 'react';
 import cn from 'classnames';
-import styles from '@/components/ScriptParametrs/ScriptParametrs.module.css';
+import styles from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.module.css'
 
-export const ScriptParametrs: FC<Props> = ({
-  type,
+export const ScriptParametrsLayout: FC<Props> = ({
   header,
-  params,
   className,
   children,
   ...props

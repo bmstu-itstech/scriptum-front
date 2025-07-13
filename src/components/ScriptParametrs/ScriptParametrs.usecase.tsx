@@ -1,32 +1,19 @@
-export const ScriptParametersUsecase1 = {
-  params: {
-    input: [
-      {
-        title: 'Diametr',
-        translate: 'Диаметр трубы',
-        type: 'Вещественные числа',
-        measure: 'м.',
-      },
-      {
-        title: 'GradientPreassure',
-        translate: 'Градиент давления',
-        type: 'Вещественные числа',
-        measure: 'бар./м.',
-      },
-      {
-        title: 'Roughness',
-        translate: 'Шероховатость трубы',
-        type: 'Целое число',
-        measure: 'ед.',
-      },
-    ],
-    output: [
-      {
-        title: 'DPGrav',
-        translate: 'Потери давления награвитацию',
-        type: 'Вещественные числа',
-        measure: 'м.',
-      },
-    ],
-  },
+import cn from 'classnames'
+import styles from '@/components/ScriptParametrs/ScriptParametrs.module.css'
+export const ScriptParametersInputUsecase = {
+  header: (
+    <div className={cn()}>
+      <h2>Входные параметры</h2>
+      <h4>Здесь входные параметры</h4>
+    </div>
+  ),
+};
+
+export const ScriptParametersOutputUsecase = {
+  header: (
+    <div className={cn()}>
+      <h2>Выходные параметры</h2>
+      <h4>Здесь выходные параметры</h4>
+    </div>
+  ),
 };

@@ -13,10 +13,10 @@ export const ScriptParametrLayout: FC<Props> = ({
     return (
       <div className={styles.ScriptParametrLayout}>
         <div className={styles.ScriptParametrLayout__info}>
-          <p>{title}</p>
-          <div>
-            <p>{type}</p>
-            <p>{measure}</p>
+          <p className={styles.ScriptParametrLayout__title}>{title}</p>
+          <div className={styles.ScriptParametrLayout__type_measure}>
+            <p className={styles.ScriptParametrLayout__type}>{type}</p>
+            <p className={styles.ScriptParametrLayout__measure}>{measure}</p>
           </div>
         </div>
         <input className={styles.ScriptParametrLayout__input} type='text' name='inputParametr' />

@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 7rem;
-  width: 50%;
+  width: 100%;
 }
 
 .ScriptParametrLayout__info {
@@ -14,4 +14,42 @@
 
 .ScriptParametrLayout__content {
   background: var(--color-white-sub);
+}
+
+.ScriptParametrLayout__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  width: 100%;
+}
+
+.ScriptParametrLayout__type_measure {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.ScriptParametrLayout__type {
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--border-radius-base);
+  background: var(--color-gray-light);
+  font-size: var(--font-size-sm);
+  align-text: center;
+}
+
+.ScriptParametrLayout__measure {
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--border-radius-base);
+  background: var(--color-purple-light);
+  color: var(--color-purple-main);
+  font-size: var(--font-size-sm);
+  align-text: center;
+}
+
+.ScriptParametrLayout__input {
+  background: var(--color-white-main);
+  border-radius: var(--border-radius-base);
+  outline: none;
+  padding: 0.4rem 0.8rem;
+  color: var(--color-dark-main);
 }
