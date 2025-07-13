@@ -50,7 +50,7 @@ export const Header: FC<Props> = ({activePath, className, ...props}) => {
             <PersonIcon className={cn(style.personIcon)} />
             <p className={cn(style.personData)}>Иванов Иван</p>
           </div>
-          <Button className='logoutBtn' icon={<LogoutIcon />}>
+          <Button className={style.logoutBtn} icon={<LogoutIcon />}>
             Выйти
           </Button>
         </div>
