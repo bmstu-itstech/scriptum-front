@@ -1,3 +1,3 @@
 export const searchUsecase = {
-  placeholder: 'Поиск скриптов по названию и описанию...',
+	placeholder: 'Поиск скриптов по названию и описанию...',
 };
