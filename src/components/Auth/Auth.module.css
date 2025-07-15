@@ -1,0 +1,27 @@
+.header {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		align-items: center;
+	}
+
+	.title {
+		font-weight: 700;
+		font-size: 1.875rem;
+		line-height: 2.25rem;
+		color: var(--color-dark-main)
+	}
+
+	.subtitle {
+		font-weight: 400;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		color: var(--color-gray-sub)
+	}
+}
