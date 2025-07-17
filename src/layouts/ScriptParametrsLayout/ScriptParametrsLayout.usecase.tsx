@@ -13,7 +13,6 @@ export const ScriptParametersLayoutUsecase1 = {
       ScriptInputParametr3,
       ScriptInputParametr3,
       ScriptInputParametr3,
-      ,
       ScriptInputParametr3,
     ],
     output: [ScriptOutputParametr1],
