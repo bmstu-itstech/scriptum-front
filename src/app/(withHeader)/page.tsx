@@ -6,7 +6,6 @@ import {SearchIcon} from '@/components/icons/SearchIcon';
 import {searchUsecase} from '@/components/Search/Search.usecase';
 import styles from '@/app/(withHeader)/page.module.css';
 
-
 export default function Home() {
   return (
     <PageLayout title={mainPageUsecase.title} subtitle={mainPageUsecase.subtitle}>
