@@ -1,16 +1,32 @@
+'use client';
 import {Props} from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.props';
-import type {FC} from 'react';
+import {useCallback, type FC, useState} from 'react';
 import cn from 'classnames';
 import styles from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.module.css';
-import {ShowMoreParametrs} from '@/layouts/ScriptParametrsLayout/components/ShowMoreParametrs';
-import {ShowMoreParametrsUsecase} from '@/layouts/ScriptParametrsLayout/components/ShowMoreParametrs/ShowMoreParametrs.usecase';
+import {UpArrowIcon} from '@/components/icons/UpArrowIcon';
+import {DownArrowIcon} from '@/components/icons/DownArrowIcon';
 
 export const ScriptParametrsLayout: FC<Props> = ({header, className, children, ...props}) => {
+  const [countOfShown, setCountOfShown] = useState(4);
+  const onShowMoreClick = useCallback(() => {
+    setCountOfShown(children.length);
+  }, []);
+  const onShowLessClick = useCallback(() => {
+    setCountOfShown(4);
+  }, []);
   return (
     <div className={cn(className, styles.ScriptParametrsLayout)} {...props}>
       <div className={styles.ScriptParametrsLayout__header}>{header}</div>
-      <div className={styles.ScriptParametrsLayout__content}>{children}</div>
-      {children.length > 4 && <ShowMoreParametrs>{ShowMoreParametrsUsecase}</ShowMoreParametrs>}
+      <div className={styles.ScriptParametrsLayout__content}>{children.slice(0, countOfShown)}</div>
+      {children.length > countOfShown ? (
+        <button className={styles.ScriptParametrsLayout__extendBtn} onClick={onShowMoreClick}>
+          <DownArrowIcon />
+        </button>
+      ) : (
+        <button className={styles.ScriptParametrsLayout__extendBtn} onClick={onShowLessClick}>
+          <UpArrowIcon />
+        </button>
+      )}
     </div>
   );
 };

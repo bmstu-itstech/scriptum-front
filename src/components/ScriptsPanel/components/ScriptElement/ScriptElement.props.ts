@@ -9,4 +9,4 @@ export interface IScriptItem {
   data: Date;
 }
 
-export interface Props extends HTMLAttributes<HTMLDivElement>, IScriptItem {}
+export interface Props extends HTMLAttributes<HTMLAnchorElement>, IScriptItem {}

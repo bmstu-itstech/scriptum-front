@@ -9,6 +9,7 @@ import {getDate} from '@/utils/getRowFromDate';
 import {TextWithIcon} from '@/shared/TextWithIcon';
 import {PersonIcon} from '@/components/icons/PersonIcon';
 import {CalendarIcon} from '@/components/icons/CalendarIcon';
+import Link from 'next/link';
 
 export const ScriptElement: FC<Props> = ({
   className,
@@ -21,7 +22,7 @@ export const ScriptElement: FC<Props> = ({
   ...props
 }) => {
   return (
-    <div className={cn(className, styles.scriptElement, basicStyles.layout)} {...props}>
+    <Link href={`/script/${scriptId}`} className={cn(className, styles.scriptElement, basicStyles.layout)} {...props}>
       <div className={styles.scriptElement__supblock}>
         <h2 className={styles.scriptElement__title}>{scriptTitle}</h2>
         <p className={styles.scriptElement__runs}>Кол. запусков: {countOfRuns}</p>
@@ -39,6 +40,6 @@ export const ScriptElement: FC<Props> = ({
       <div className={styles.scriptElement__interactive}>
         <Button icon={<RunIcon />}>Запустить</Button>
       </div>
-    </div>
+    </Link>
   );
 };

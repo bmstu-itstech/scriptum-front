@@ -6,11 +6,14 @@
 
   --color-white-main: #f9fafb;
   --color-white-sub: #f9fafb50;
+  --color-white-clear: #ffffff;
 
   --color-dark-main: #111827;
 
   --color-gray-sub: #4b5563;
+  --color-gray-dark: #374151;
   --color-gray-light: #b6acaf;
+  --color-gray-superlight: #f3f4f6;
   --color-gray-border: #e5e7eb;
   --color-gray-light2: #6b7280;
   --color-gray-stroke: #d1d5db;
@@ -21,11 +24,15 @@
 
   --font-size-lg: 1.875rem;
   --font-size-md: 1.5rem;
+  --font-size-large: 1.25rem;
   --font-size-base: 1.125rem;
   --font-size-sm: 1rem;
   --font-size-xs: 0.875rem;
+  --font-size-xxs: 0.75rem;
 
   --border-radius-base: 1rem;
+  --border-radius-md: 0.75rem;
+  --border-radius-xs: 0.25rem;
 
   --shadow-lg: 0px 4px 4px 0px #00000025;
 }
@@ -73,6 +80,18 @@ a {
 .layout__title {
   font-size: var(--font-size-lg);
   font-weight: 700;
+  color: var(--color-dark-main);
+}
+
+.layout__title-sm {
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  color: var(--color-dark-main);
+}
+
+.layout__title-xs {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
   color: var(--color-dark-main);
 }
 
