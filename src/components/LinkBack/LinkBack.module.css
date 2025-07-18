@@ -5,3 +5,8 @@
   cursor: pointer;
   margin-right: auto;
 }
+
+.LinkBack__title {
+  color: var(--color-gray-sub);
+  font-size: var(--font-size-base);
+}
