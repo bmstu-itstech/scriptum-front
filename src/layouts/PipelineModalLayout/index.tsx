@@ -24,8 +24,8 @@ export const PipelineModalLayout: FC<Props> = ({
     isOpen,
     onClose,
     status,
-    title, 
-    subtitle, 
+    scriptNumber, 
+    scriptName, 
     className, 
     timeStart, 
     duration, 
@@ -82,8 +82,8 @@ export const PipelineModalLayout: FC<Props> = ({
                         {button}
                     </div>
                     <div className={style.titleWrapper}>
-                        <h3 className={style.title}>{title}</h3>
-                        <p className={style.subtitle}>{subtitle}</p>
+                        <h3 className={style.scriptNumber}>{scriptNumber}</h3>
+                        <p className={style.scriptName}>{scriptName}</p>
                     </div>
                 </header>
                 
