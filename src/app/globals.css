@@ -16,19 +16,39 @@
   --color-gray-light: #b6acaf;
   --color-gray-superlight: #f3f4f6;
   --color-gray-border: #e5e7eb;
-  --color-gray-border2: #D1D5DB;
+  --color-gray-border2: #d1d5db;
   --color-gray-light2: #6b7280;
   --color-gray-stroke: #d1d5db;
   --color-gray-background: #f3f4f6;
   --color-gray-bio: #374151;
+  --color-gray-code: #1f2937;
+  --color-gray-close-modal: #9ca3af;
+
+  --color-blue-light: #eff6ff;
+  --color-blue-light-border: #bfdbfe;
+  --color-blue-main: #2563eb;
+  --color-blue-background: #dbeafe;
 
   --color-purple-main: #971aff;
   --color-purple-dark: #8e1ced;
   --color-purple-light: #d29cff40;
 
-  --color-blue-light: #eff6ff;
-
   --color-red-light: #fee2e2;
+  --color-red-light-border: #fecaca;
+  --color-red-main: #dc2626;
+  --color-red-close-modal: #ef4444;
+  --color-red-darker-main: #b91c1c;
+  --color-red-dark-main: #991b1b;
+  --color-red-light-main: #f87171;
+  --color-red-background: #fef2f280;
+  --color-red-light-background: #fef2f2;
+
+  --color-green-main: #15803d;
+  --color-green-light: #16a34a;
+  --color-green-light-border: #bbf7d0;
+  --color-green-stroke: #4ade80;
+  --color-green-background: #f0fdf4;
+  --color-green-light-background: #dcfce7;
 
   --font-size-lg: 1.875rem;
   --font-size-md: 1.5rem;
@@ -114,29 +134,31 @@ a {
   transition-duration: 0.2s;
 }
 .editScriptBtn {
-	min-width: 2.5rem;
-	height: 2.5rem;
-	background: var(--color-white);
+  min-width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-white);
 }
 
 .editScriptBtn:hover {
-	background: var(--color-blue-light);
+  background: var(--color-blue-light);
 
-	img {
-		filter: brightness(0) saturate(100%) invert(32%) sepia(87%) saturate(4427%) hue-rotate(218deg) brightness(97%) contrast(90%);
-	}
+  img {
+    filter: brightness(0) saturate(100%) invert(32%) sepia(87%) saturate(4427%) hue-rotate(218deg)
+      brightness(97%) contrast(90%);
+  }
 }
 
 .deleteScriptBtn {
-	min-width: 2.5rem;
-	height: 2.5rem;
-	background: var(--color-white);
+  min-width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-white);
 }
 
 .deleteScriptBtn:hover {
-	background: var(--color-red-light);
+  background: var(--color-red-light);
 
-	img {
-		filter: brightness(0) saturate(100%) invert(22%) sepia(39%) saturate(6175%) hue-rotate(348deg) brightness(88%) contrast(94%);
-	}
+  img {
+    filter: brightness(0) saturate(100%) invert(22%) sepia(39%) saturate(6175%) hue-rotate(348deg)
+      brightness(88%) contrast(94%);
+  }
 }
