@@ -30,7 +30,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable}`}>
+			<body
+				style={{ backgroundColor: 'var(--color-white-main)' }}
+				className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable}`}
+			>
 				<Header />
 				{children}
 				{/* <Footer/> */}

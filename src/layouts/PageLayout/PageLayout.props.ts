@@ -3,6 +3,6 @@ import React from 'react';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
 	icon?: React.ReactElement;
-	title: string;
-	subtitle: string;
+	title?: string;
+	subtitle?: string;
 }

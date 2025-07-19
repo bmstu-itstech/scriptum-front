@@ -1,12 +1,15 @@
 .LinkBack {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  cursor: pointer;
-  margin-right: auto;
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	cursor: pointer;
+	margin-right: auto;
 }
 
 .LinkBack__title {
-  color: var(--color-gray-sub);
-  font-size: var(--font-size-base);
+	color: var(--color-gray-sub);
+	font-size: var(--font-size-base);
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.5rem;
 }

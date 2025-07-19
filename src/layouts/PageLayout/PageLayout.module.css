@@ -3,6 +3,7 @@
 	flex-direction: column;
 	justify-content: top;
 	align-items: center;
+	gap: 2rem;
 }
 
 .header {
