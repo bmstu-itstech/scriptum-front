@@ -1,0 +1,17 @@
+.authContainer {
+  margin-inline: auto;
+  width: 28rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-radius: 1.5rem;
+  background: white;
+  border: 1px solid var(--color-gray-border);
+}
+
+.head,
+.center,
+.tail {
+  width: 100%;
+}
