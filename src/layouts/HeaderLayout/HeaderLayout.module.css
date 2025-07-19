@@ -1,22 +1,23 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  padding-top: 12px;
-  padding-bottom: 12px;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	padding-top: .75rem;
+	padding-bottom: .75rem;
+	margin-bottom: 2rem;
 }
 
 .head,
 .center,
 .tail {
-  width: fit-content;
-  display: flex;
-  align-items: center;
+	width: fit-content;
+	display: flex;
+	align-items: center;
 }
 
 .center {
-  position: absolute;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
+	position: absolute;
+	top: .875rem;
+	left: 50%;
+	transform: translateX(-50%);
 }
