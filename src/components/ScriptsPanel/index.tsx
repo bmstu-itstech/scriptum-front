@@ -14,7 +14,7 @@ export const ScriptPanel: FC<Props> = ({className, ...props}) => {
       <div className={cn(styles.scriptPanel__items)}>
         <EmptyScript />
         {ScriptsPanelUsecase.map(item => {
-          return <ScriptElement {...item} key={item.id} />;
+          return <ScriptElement {...item} key={item.scriptId} />;
         })}
       </div>
     </div>

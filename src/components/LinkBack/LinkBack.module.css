@@ -1,0 +1,12 @@
+.LinkBack {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+  margin-right: auto;
+}
+
+.LinkBack__title {
+  color: var(--color-gray-sub);
+  font-size: var(--font-size-base);
+}

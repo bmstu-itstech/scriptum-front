@@ -1,33 +1,33 @@
 .EmptyScript {
-	border: 1px dashed var(--color-gray-stroke);
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
+  border: 1px dashed var(--color-gray-stroke);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .EmptyScript__content {
-	display: flex;
-	color: var(--color-gray-light2);
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  color: var(--color-gray-light2);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .EmptyScript__title {
-	margin-top: 0.75rem;
-	font-weight: 500;
-	font-size: var(--font-size-base);
+  margin-top: 0.75rem;
+  font-weight: 500;
+  font-size: var(--font-size-base);
 }
 
 .layout {
-	border-radius: 1rem;
-	transition: box-shadow 0.2s;
-	height: 18rem;
-	background: var(--color-white);
-	display: flex;
-	flex-direction: column;
+  border-radius: var(--border-radius-base);
+  transition: box-shadow 0.2s;
+  height: 18rem;
+  background: var(--color-white-main);
+  display: flex;
+  flex-direction: column;
 
-	&:hover {
-		box-shadow: var(--shadow-lg);
-	}
+  &:hover {
+    box-shadow: var(--shadow-lg);
+  }
 }

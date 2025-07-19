@@ -1,12 +1,12 @@
 import type {HTMLAttributes} from 'react';
 
 export interface IScriptItem {
-  id: number;
-  title: string;
+  scriptId: number;
+  scriptTitle: string;
   subtitle: string;
   countOfRuns: number;
   author: string;
   data: Date;
 }
 
-export interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'id'>, IScriptItem {}
+export interface Props extends HTMLAttributes<HTMLAnchorElement>, IScriptItem {}

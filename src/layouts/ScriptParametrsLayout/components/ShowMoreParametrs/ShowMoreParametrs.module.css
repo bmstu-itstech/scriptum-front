@@ -1,0 +1,6 @@
+.main {
+  margin-inline: auto;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-dark-main);
+}

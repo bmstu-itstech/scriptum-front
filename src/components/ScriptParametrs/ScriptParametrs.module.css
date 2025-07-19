@@ -1,0 +1,11 @@
+.ScriptParametrs__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ScriptParametrs__title {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}

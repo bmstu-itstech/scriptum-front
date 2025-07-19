@@ -164,11 +164,12 @@ a.secondary {
   }
 }
 
-.test {
-  background: red;
-}
 
 .page__search {
   max-width: 42rem;
   margin-bottom: 2rem;
+}
+
+.page__container {
+  gap: 2rem;
 }

@@ -1,0 +1,32 @@
+.ScriptParametrsLayout {
+  overflow: hidden;
+  border: 1px solid var(--color-gray-border);
+  border-radius: var(--border-radius-base);
+  width: 100%;
+}
+
+.ScriptParametrsLayout__header {
+  background: var(--color-white-main);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--color-gray-border);
+}
+
+.ScriptParametrsLayout__content {
+  display: grid;
+  column-gap: 2rem;
+  row-gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  background: var(--color-white-clear);
+  padding: 1rem 2rem;
+}
+
+.ScriptParametrsLayout__extendBtn {
+  width: 4rem;
+  height: 4rem;
+  margin-inline: auto;
+  justify-self: center;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

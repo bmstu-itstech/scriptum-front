@@ -1,0 +1,39 @@
+.ScriptInfo {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  align-items: center;
+  border: 1px solid var(--color-gray-border);
+  border-radius: var(--border-radius-base);
+  background: var(--color-white-clear);
+}
+
+.ScriptInfo__title {
+  max-width: 60%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.ScriptInfo__subtitle {
+  max-width: 60%;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ScriptInfo__info {
+  display: flex;
+  gap: 4rem;
+}
+
+.ScriptInfo__author {
+  color: var(--color-gray-light2);
+  font-size: var(--font-size-sm);
+}
+
+.ScriptInfo__date {
+  color: var(--color-gray-light2);
+  font-size: var(--font-size-sm);
+}
