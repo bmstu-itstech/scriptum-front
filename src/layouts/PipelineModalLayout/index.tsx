@@ -77,7 +77,7 @@ export const PipelineModalLayout: FC<Props> = ({
                     <CloseModalIcon />
                 </button>
                 
-                <header className={style.header}>
+                <h1 className={style.header}>
                     <div className={style.buttonWrapper}>
                         {button}
                     </div>
@@ -85,7 +85,7 @@ export const PipelineModalLayout: FC<Props> = ({
                         <h3 className={style.scriptNumber}>{scriptNumber}</h3>
                         <p className={style.scriptName}>{scriptName}</p>
                     </div>
-                </header>
+                </h1>
                 
                 <div className={style.content}>
                     <div className={style.timing}>
