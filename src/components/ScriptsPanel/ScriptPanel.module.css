@@ -1,22 +1,32 @@
 .scriptPanel {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .scriptPanel__title {
-  font-size: var(--font-size-xs);
-  margin-bottom: 1.5rem;
-  color: var(--color-gray-sub);
+	margin-bottom: 1.5rem;
+}
+
+.stats {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	color: var(--color-gray-sub);
+	font-size: 0.875rem;
+}
+
+.divider {
+	color: var(--color-gray-border);
 }
 
 .scriptPanel__items {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  justify-content: space-between;
-  align-items: start;
-  column-gap: 3rem;
-  row-gap: 1.5rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+	width: 100%;
+	height: 100%;
+	display: grid;
+	justify-content: space-between;
+	align-items: start;
+	column-gap: 3rem;
+	row-gap: 1.5rem;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
 }

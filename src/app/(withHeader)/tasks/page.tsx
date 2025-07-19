@@ -1,5 +1,5 @@
 'use client'
-import { pipelines, tasksPageUsecase } from "./page.usecase";
+import { APIPipelines, tasksPageUsecase } from "./page.usecase";
 import { useState, useMemo } from 'react';
 import { useDebounce } from 'use-debounce';
 import { Search } from "@/components/Search";
@@ -17,7 +17,7 @@ export default function TasksPage() {
 	const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
 
 	const filteredPipelines = useMemo(() => {
-		return pipelines.filter(pipeline => {
+		return APIPipelines.filter(pipeline => {
 			const searchLower = debouncedSearchTerm.toLowerCase();
 
 			const matchesSearch =
@@ -62,11 +62,11 @@ export default function TasksPage() {
 				<div className={style.stats}>
 					<span className={style.counter}>Найдено: {filteredPipelines.length}</span>
 					<span className={style.divider}>|</span>
-					<span className={style.counter}>Всего: {pipelines.length}</span>
+					<span className={style.counter}>Всего: {APIPipelines.length}</span>
 				</div>
 			</div>
 
-			<div className={style.pipelines}>
+			<div className={style.APIPipelines}>
 				{filteredPipelines.length > 0 ? (
 					filteredPipelines.map((pipeline) => (
 						<PipelineLayout

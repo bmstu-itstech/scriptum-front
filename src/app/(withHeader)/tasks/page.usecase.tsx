@@ -5,7 +5,7 @@ export const tasksPageUsecase = {
 	subtitle: 'Отслеживайте выполнение скриптов в реальном времени',
 };
 
-export const pipelines = [
+export const APIPipelines = [
 	{
 		id: 1,
 		status: PipelineStatus.ERROR,
