@@ -11,7 +11,7 @@ import {ScriptParametrLayout} from '@/layouts/ScriptParametrsLayout/components/S
 import {LinkBack} from '@/components/LinkBack';
 import {BackArrowIcon} from '@/components/icons/BackArrowIcon';
 import LinkBtnStyles from '@/components/LinkBack/LinkBack.module.css';
-import styles from '@/app/script/[id]/page.module.css'
+import styles from '@/app/(withHeader)/script/[id]/page.module.css'
 
 export default function Page() {
   // const [data, isLoading] = useGetScriptByid()
