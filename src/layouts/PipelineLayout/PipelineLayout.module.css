@@ -1,0 +1,77 @@
+.pipeline {
+    display: flex;
+    gap: 1rem 1.5rem;
+    align-items: start;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background-color: white;
+    border: 1px solid var(--color-gray-border);
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.dataSection {
+    .title {
+        font-weight: 400;
+        font-size: .875rem;
+        line-height: 1.25rem;
+        color: var(--color-gray-light2);
+    }
+}
+
+.dataSection.number {
+    .title {
+        font-family: Consolas, monospace;
+    }
+
+    .content {
+        font-weight: 600;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: var(--color-dark-main);
+    }
+}
+
+.dataSection.name {
+    flex: 1;
+
+    .content {
+        font-weight: 500;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: var(--color-dark-main);
+    }
+}
+
+.dataSection.time {
+    .content {
+        font-weight: 500;
+        font-size: .875rem;
+        line-height: 1.25rem;
+        color: var(--color-gray-bio);
+    }
+}
+
+.timeBlock {
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.buttonSection {
+    align-self: center;
+}
+
+@media (max-width: 850px) {
+    .timeBlock {
+        border-top: 1px solid var(--color-gray-background);
+        padding-top: 1rem;
+        order: 5; 
+        flex-basis: 100%;
+        justify-content: space-between;
+
+        .title {
+            display: none;
+        }
+    }
+}

@@ -14,26 +14,36 @@
 	--color-gray-border2: #d1d5db;
 	--color-gray-light2: #6b7280;
 	--color-gray-stroke: #d1d5db;
-	--color-gray-input: #9ca3af;
 	--color-gray-background: #f3f4f6;
 	--color-gray-bio: #374151;
+	--color-gray-code: #1f2937;
+	--color-gray-close-modal: #9ca3af;
 
 	--color-blue-light: #eff6ff;
+	--color-blue-light-border: #bfdbfe;
+	--color-blue-main: #2563eb;
+	--color-blue-background: #dbeafe;
 
 	--color-purple-main: #971aff;
 	--color-purple-dark: #8e1ced;
 	--color-purple-light: #d29cff40;
 
-  	--color-red-light: #fee2e2;
+	--color-red-light: #fee2e2;
+	--color-red-light-border: #fecaca;
 	--color-red-main: #dc2626;
-	--color-red-light: #f87171;
+	--color-red-close-modal: #ef4444;
+	--color-red-darker-main: #b91c1c;
+	--color-red-dark-main: #991b1b;
+	--color-red-light-main: #f87171;
 	--color-red-background: #fef2f280;
-
+	--color-red-light-background: #fef2f2;
 
 	--color-green-main: #15803d;
 	--color-green-light: #16a34a;
+	--color-green-light-border: #bbf7d0;
 	--color-green-stroke: #4ade80;
 	--color-green-background: #f0fdf4;
+	--color-green-light-background: #dcfce7;
 
 	--color-yellow-main: #f59e0b;
 	--color-yellow-light: #fbbf24;
@@ -45,7 +55,7 @@
 	--font-size-sm: 1rem;
 	--font-size-xs: 0.875rem;
 
-  --shadow-lg: 0px 4px 4px 0px #00000025;
+	--shadow-lg: 0px 4px 4px 0px #00000025;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,11 +72,11 @@ body {
 }
 
 body {
-  color: var(--color-dark-main);
-  background: var(--color-white-main);
-  font-family: Inter, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	color: var(--color-dark-main);
+	background: var(--color-white-main);
+	font-family: Inter, Helvetica, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -120,4 +130,19 @@ input[type="file"] {
 	white-space: nowrap;
 	border: 0;
 	opacity: 0;
+}
+
+button {
+	all: unset;
+	appearance: none;
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+	outline: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
 }
