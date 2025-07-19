@@ -1,3 +1,3 @@
 import type { HTMLAttributes } from 'react';
 
-export type Props = HTMLAttributes<HTMLImageElement>;
+export type Props = HTMLAttributes<HTMLOrSVGElement>;

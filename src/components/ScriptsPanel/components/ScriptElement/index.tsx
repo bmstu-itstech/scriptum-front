@@ -10,6 +10,8 @@ import { TextWithIcon } from '@/shared/TextWithIcon';
 import { PersonIcon } from '@/components/icons/PersonIcon';
 import { CalendarIcon } from '@/components/icons/CalendarIcon';
 import Link from 'next/link';
+import { DeleteIcon } from '@/components/icons/DeleteIcon';
+import { EditIcon } from '@/components/icons/EditIcon';
 
 export const ScriptElement: FC<Props> = ({
 	className,
@@ -42,7 +44,9 @@ export const ScriptElement: FC<Props> = ({
 			</div>
 			<div className={styles.scriptElement__interactive}>
 				<Button icon={<RunIcon />}>Запустить</Button>
-			</div>
-		</Link>
+				<span className={cn(styles.scriptElement__editIcon, 'smoothTransition')}><EditIcon /></span>
+				<span className={cn(styles.scriptElement__delIcon, 'smoothTransition')}><DeleteIcon /></span>
+			</div >
+		</Link >
 	);
 };
