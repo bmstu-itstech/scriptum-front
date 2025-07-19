@@ -1,5 +1,5 @@
 'use client';
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { Props } from './InputLayout.props';
 import cn from 'classnames';
 import styles from './InputLayout.module.css';
@@ -15,9 +15,9 @@ export const InputLayout: FC<Props> = ({
 }) => {
 	const [showPassword, setShowPassword] = useState(false);
 
-	const togglePasswordVisibility = () => {
+	const togglePasswordVisibility = useCallback(() => {
 		setShowPassword(!showPassword);
-	};
+	},[]);
 
 	const currentIcon = isPassword
 		? (showPassword ? toggleIcons?.hide : toggleIcons?.show)
