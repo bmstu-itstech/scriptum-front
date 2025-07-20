@@ -14,13 +14,13 @@ import { DeleteIcon } from '@/components/icons/DeleteIcon';
 import { EditIcon } from '@/components/icons/EditIcon';
 
 export const ScriptElement: FC<Props> = ({
-	className,
 	scriptTitle,
 	scriptId,
 	countOfRuns,
 	subtitle,
 	author,
 	data,
+	className,
 	...props
 }) => {
 	return (

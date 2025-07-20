@@ -172,3 +172,7 @@ a.secondary {
 .page__container {
 	gap: 2rem;
 }
+
+.stats {
+	align-self: start;
+}

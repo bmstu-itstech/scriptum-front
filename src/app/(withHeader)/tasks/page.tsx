@@ -11,6 +11,7 @@ import { PipelineLayout } from "@/layouts/PipelineLayout"
 import style from './page.module.css'
 import { PageLayout } from "@/layouts/PageLayout"
 import { Pagination } from "@/shared/Pagination"
+import { Stats } from "@/shared/Stats"
 
 export default function TasksPage() {
 	const [searchTerm, setSearchTerm] = useState('')
@@ -70,13 +71,12 @@ export default function TasksPage() {
 					/>
 				</div>
 
-				<div className={style.stats}>
-					<span className={style.counter}>Найдено: {filteredPipelines.length}</span>
-					<span className={style.divider}>|</span>
-					<span className={style.counter}>
-						Страница {currentPage} из {totalPages}
-					</span>
-				</div>
+				<Stats
+					stats={[
+						{ text: "Найдено", count: filteredPipelines.length },
+						{ text: "Страница", count: currentPage, total: totalPages }
+					]}
+				/>
 			</div>
 
 			<div className={style.pipelines}>
