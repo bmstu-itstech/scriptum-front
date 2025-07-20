@@ -1,45 +1,45 @@
-import {InputLayout} from '@/layouts/InputLayout';
-import {LoginLogoIcon} from '../icons/LoginLogoIcon';
+import { InputLayout } from '@/layouts/InputLayout';
+import { LoginLogoIcon } from '../icons/LoginLogoIcon';
 import styles from './Auth.module.css';
-import {OpenEyeIcon} from '../icons/OpenEyeIcon';
-import {CloseEyeIcon} from '../icons/CloseEyeIcon';
+import { OpenEyeIcon } from '../icons/OpenEyeIcon';
+import { CloseEyeIcon } from '../icons/CloseEyeIcon';
 import cn from 'classnames';
 import Link from 'next/link';
-import {LoginIcon} from '@/components/icons/LoginIcon';
+import { LoginIcon } from '@/components/icons/LoginIcon';
 
 export const authUsecase = {
-  head: (
-    <div className={cn(styles.header)}>
-      <div className={styles.icon}>{<LoginLogoIcon />}</div>
-      <div className={styles.content}>
-        <h1 className={styles.title}>Вход</h1>
-        <p className={styles.subtitle}>Войдите в систему управления скриптами</p>
-      </div>
-    </div>
-  ),
-  center: (
-    <>
-      <InputLayout
-        isPassword={false}
-        isRequired={true}
-        placeholder={'Введите ваш логин'}
-        errorText={'Логин обязателен для заполнения'}
-      />
-      <InputLayout
-        isPassword={true}
-        isRequired={true}
-        placeholder={'Введите ваш пароль'}
-        errorText={'Пароль обязателен для заполнения'}
-        toggleIcons={{
-          show: <OpenEyeIcon />,
-          hide: <CloseEyeIcon />,
-        }}
-      />
-    </>
-  ),
-  tail: (
-    <Link className={styles.loginBtn} href={'/'}>
-      <LoginIcon /> Войти
-    </Link>
-  ),
+	head: (
+		<div className={cn(styles.header)}>
+			<div className={styles.icon}>{<LoginLogoIcon />}</div>
+			<div className={styles.content}>
+				<h1 className={styles.title}>Вход</h1>
+				<p className={styles.subtitle}>Войдите в систему управления скриптами</p>
+			</div>
+		</div>
+	),
+	center: (
+		<>
+			<InputLayout
+				isPassword={false}
+				isRequired={true}
+				placeholder={'Введите ваш логин'}
+				errorText={'Логин обязателен для заполнения'}
+			/>
+			<InputLayout
+				isPassword={true}
+				isRequired={true}
+				placeholder={'Введите ваш пароль'}
+				errorText={'Пароль обязателен для заполнения'}
+				toggleIcons={{
+					show: <OpenEyeIcon />,
+					hide: <CloseEyeIcon />,
+				}}
+			/>
+		</>
+	),
+	tail: (
+		<Link className={styles.loginBtn} href={'/'}>
+			<LoginIcon /> Войти
+		</Link>
+	),
 };

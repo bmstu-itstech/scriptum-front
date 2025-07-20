@@ -38,7 +38,10 @@
 	background-color: #F9FAFB80;
 
 	&::placeholder {
-		color: var(--color-gray-input);
+		color: var(--color-gray-close-modal);
+		font-weight: 500;
+		font-size: 1rem;
+		line-height: 1.5rem;
 	}
 
 	&:hover {
