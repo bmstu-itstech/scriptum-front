@@ -30,3 +30,9 @@
 	border: none;
 	cursor: pointer;
 }
+
+@media (max-width: 1024) {
+	.ScriptParametrsLayout__content {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
