@@ -22,7 +22,7 @@
 	grid-column: 3;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1440px) {
 	.header {
 		grid-template-columns: auto 1fr auto;
 		grid-template-rows: auto auto;

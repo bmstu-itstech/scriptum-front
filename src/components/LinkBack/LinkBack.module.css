@@ -4,6 +4,13 @@
 	align-items: center;
 	cursor: pointer;
 	margin-right: auto;
+	transition: all 0.2s ease;
+
+	&:hover {
+		text-decoration: underline;
+		text-underline-offset: 0.25rem;
+		text-decoration-color: var(--color-gray-sub);
+	}
 }
 
 .LinkBack__title {

@@ -17,7 +17,7 @@ export const InputLayout: FC<Props> = ({
 
 	const togglePasswordVisibility = useCallback(() => {
 		setShowPassword(!showPassword);
-	},[]);
+	}, [showPassword]);
 
 	const currentIcon = isPassword
 		? (showPassword ? toggleIcons?.hide : toggleIcons?.show)

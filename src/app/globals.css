@@ -32,6 +32,11 @@
 	--color-purple-main: #971aff;
 	--color-purple-dark: #8e1ced;
 	--color-purple-light: #d29cff40;
+	--color-purple-light-background: #fAf5ff;
+	--color-purple-darker-background: #f3e8ff;
+	--color-purple-title: #581c87;
+	--color-purple-text: #6b21A8;
+	--color-purple-border: #e9d5ff;
 
 	--color-red-light: #fee2e2;
 	--color-red-light-border: #fecaca;
@@ -53,6 +58,8 @@
 	--color-yellow-main: #f59e0b;
 	--color-yellow-light: #fbbf24;
 	--color-yellow-background: #fffbeb;
+
+	--color-orange-main: #f97316;
 
 	--font-size-lg: 1.875rem;
 	--font-size-md: 1.5rem;

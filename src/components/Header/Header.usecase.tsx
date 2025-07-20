@@ -3,6 +3,8 @@ import { TaskIcon } from '../icons/TaskIcon';
 import { LoadIcon } from '../icons/LoadIcon';
 import { LinkDirection } from '@/shared/consts/links';
 import type { ReactElement } from 'react';
+import { CreateUserIcon } from '../icons/CreateUserIcon';
+import { HandleUsersIcon } from '../icons/handleUsersIcon';
 
 interface LinkProps {
 	icon: ReactElement;
@@ -25,5 +27,15 @@ export const Links: (LinkProps & { direction: string })[] = [
 		icon: <LoadIcon />,
 		title: 'Загрузка',
 		direction: LinkDirection.Load,
+	},
+	{
+		icon: <CreateUserIcon />,
+		title: 'Создание',
+		direction: LinkDirection.CreateUser,
+	},
+	{
+		icon: <HandleUsersIcon />,
+		title: 'Управление',
+		direction: LinkDirection.HandleUsers,
 	},
 ];

@@ -49,3 +49,11 @@
 	font-size: .875rem;
 	line-height: 20px;
 }
+
+@media (max-width: 1024px) {
+
+	.ScriptInfo__title,
+	.ScriptInfo__subtitle {
+		max-width: 100%;
+	}
+}
