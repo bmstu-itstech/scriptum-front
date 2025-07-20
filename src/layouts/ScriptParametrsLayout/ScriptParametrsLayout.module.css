@@ -1,34 +1,54 @@
 .ScriptParametrsLayout {
-	overflow: hidden;
-	border: 1px solid var(--color-gray-border);
-	border-radius: var(--border-radius-base);
-	width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-border);
+  border-radius: var(--border-radius-base);
+  width: 100%;
 }
 
 .ScriptParametrsLayout__header {
-	background: var(--color-white-main);
-	padding: 1.5rem 2rem;
-	border-bottom: 1px solid var(--color-gray-border);
+  background: var(--color-white-main);
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--color-gray-border);
 }
 
 .ScriptParametrsLayout__content {
-	display: grid;
-	column-gap: 1.5rem;
-	row-gap: 1.5rem;
-	grid-template-columns: repeat(2, 1fr);
-	background: var(--color-white-clear);
-	padding: 2rem;
+  display: grid;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  background: var(--color-white-clear);
+  padding: 2rem;
+  height: fit-content;
+  max-height: 20rem;
+  overflow: hidden;
+  transition: max-height 5s ease-in;
 }
 
+.ScriptParametrsLayout__content.expanded {
+  max-height: 1000rem;
+}
+
+.ScriptParametrsLayout__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .ScriptParametrsLayout__extendBtn {
-	width: 4rem;
-	height: 4rem;
-	margin-inline: auto;
-	justify-self: center;
-	background: transparent;
-	outline: none;
-	border: none;
-	cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ScriptParametrsLayout__extendBtn_btn {
+  fill: var(--color-gray-sub);
+  transition: fill 0.2s ease-in;
+
+  &:hover {
+    fill: var(--color-gray-main);
+  }
 }
 
 @media (max-width: 1024) {
