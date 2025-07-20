@@ -6,3 +6,5 @@ export enum PipelineStatus {
 
 export const OUTPUT_FILENAME = 'output-result.txt';
 export const INPUT_FILENAME = 'input-parameters.txt';
+
+export const ITEMS_PER_PAGE = 7;

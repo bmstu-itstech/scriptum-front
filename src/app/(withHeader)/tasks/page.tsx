@@ -1,34 +1,39 @@
 'use client'
-import { APIPipelines, tasksPageUsecase } from "./page.usecase";
-import { useState, useMemo } from 'react';
-import { useDebounce } from 'use-debounce';
-import { Search } from "@/components/Search";
-import { SearchIcon } from "@/components/icons/SearchIcon";
-import { Filter } from "@/components/Filter/Filter";
-import { FilterIcon } from "@/components/icons/FilterIcon";
-import { PipelineStatus } from "@/shared/consts/pipeline";
-import { PipelineLayout } from "@/layouts/PipelineLayout";
-import style from './page.module.css';
-import { PageLayout } from "@/layouts/PageLayout";
+import { APIPipelines, tasksPageUsecase } from "./page.usecase"
+import { useState, useMemo } from 'react'
+import { useDebounce } from 'use-debounce'
+import { Search } from "@/components/Search"
+import { SearchIcon } from "@/components/icons/SearchIcon"
+import { Filter } from "@/components/Filter/Filter"
+import { FilterIcon } from "@/components/icons/FilterIcon"
+import { ITEMS_PER_PAGE, PipelineStatus } from "@/shared/consts/pipeline"
+import { PipelineLayout } from "@/layouts/PipelineLayout"
+import style from './page.module.css'
+import { PageLayout } from "@/layouts/PageLayout"
+import { Pagination } from "@/shared/Pagination"
 
 export default function TasksPage() {
-	const [searchTerm, setSearchTerm] = useState('');
-	const [statusFilter, setStatusFilter] = useState<PipelineStatus | 'all'>('all');
-	const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
+	const [searchTerm, setSearchTerm] = useState('')
+	const [statusFilter, setStatusFilter] = useState<PipelineStatus | 'all'>('all')
+	const [currentPage, setCurrentPage] = useState(1)
+	const [debouncedSearchTerm] = useDebounce(searchTerm, 300)
 
 	const filteredPipelines = useMemo(() => {
 		return APIPipelines.filter(pipeline => {
-			const searchLower = debouncedSearchTerm.toLowerCase();
-
+			const searchLower = debouncedSearchTerm.toLowerCase()
 			const matchesSearch =
 				pipeline.scriptName.toLowerCase().includes(searchLower) ||
-				pipeline.scriptNumber.toLowerCase().includes(searchLower);
+				pipeline.scriptNumber.toLowerCase().includes(searchLower)
+			const matchesStatus = statusFilter === 'all' || pipeline.status === statusFilter
+			return matchesSearch && matchesStatus
+		})
+	}, [debouncedSearchTerm, statusFilter])
 
-			const matchesStatus = statusFilter === 'all' || pipeline.status === statusFilter;
-
-			return matchesSearch && matchesStatus;
-		});
-	}, [debouncedSearchTerm, statusFilter]);
+	const totalPages = Math.ceil(filteredPipelines.length / ITEMS_PER_PAGE)
+	const paginatedPipelines = useMemo(() => {
+		const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+		return filteredPipelines.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+	}, [filteredPipelines, currentPage])
 
 	return (
 		<PageLayout
@@ -40,14 +45,20 @@ export default function TasksPage() {
 				<div className={style.searchFilterGroup}>
 					<Search
 						placeholder="Поиск по названию скрипта или номеру задачи..."
-						callback={setSearchTerm}
+						callback={(value) => {
+							setSearchTerm(value)
+							setCurrentPage(1)
+						}}
 						icon={<SearchIcon />}
 						className={style.search}
 					/>
 
 					<Filter
 						placeholder="Все статусы"
-						callback={(value) => setStatusFilter(value as PipelineStatus | 'all')}
+						callback={(value) => {
+							setStatusFilter(value as PipelineStatus | 'all')
+							setCurrentPage(1)
+						}}
 						options={[
 							{ value: 'all', label: 'Все статусы' },
 							{ value: PipelineStatus.OK, label: 'Успешно' },
@@ -62,13 +73,15 @@ export default function TasksPage() {
 				<div className={style.stats}>
 					<span className={style.counter}>Найдено: {filteredPipelines.length}</span>
 					<span className={style.divider}>|</span>
-					<span className={style.counter}>Всего: {APIPipelines.length}</span>
+					<span className={style.counter}>
+						Страница {currentPage} из {totalPages}
+					</span>
 				</div>
 			</div>
 
 			<div className={style.pipelines}>
-				{filteredPipelines.length > 0 ? (
-					filteredPipelines.map((pipeline) => (
+				{paginatedPipelines.length > 0 ? (
+					paginatedPipelines.map((pipeline) => (
 						<PipelineLayout
 							key={pipeline.id}
 							status={pipeline.status}
@@ -86,6 +99,13 @@ export default function TasksPage() {
 					</div>
 				)}
 			</div>
+
+			<Pagination
+				currentPage={currentPage}
+				totalPages={totalPages}
+				onPageChange={setCurrentPage}
+				className={style.paginationContainer}
+			/>
 		</PageLayout>
-	);
+	)
 }
