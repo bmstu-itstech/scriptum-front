@@ -66,7 +66,7 @@ export default function TasksPage() {
 				</div>
 			</div>
 
-			<div className={style.APIPipelines}>
+			<div className={style.pipelines}>
 				{filteredPipelines.length > 0 ? (
 					filteredPipelines.map((pipeline) => (
 						<PipelineLayout
