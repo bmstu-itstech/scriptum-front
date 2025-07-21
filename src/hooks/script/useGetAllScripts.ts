@@ -3,7 +3,7 @@ import { scriptsList } from '@/shared/api/script/getAllScripts';
 
 export const useGetAllScripts = () => {
   const {
-    data: accessData,
+    data,
     isLoading,
     refetch,
     error,
@@ -12,5 +12,5 @@ export const useGetAllScripts = () => {
     queryFn: scriptsList,
   });
 
-  return {accessData, isLoading, refetch, error};
+  return {data, isLoading, refetch, error};
 };

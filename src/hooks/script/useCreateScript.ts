@@ -3,7 +3,7 @@ import {createScript} from '@/shared/api/script/createScript';
 
 export const useCreateScript = () => {
   const {
-    data: accessData,
+    data,
     isPending,
     error,
   } = useMutation({
@@ -11,5 +11,5 @@ export const useCreateScript = () => {
     mutationFn: createScript,
   });
 
-  return {accessData, isPending, error};
+  return {data, isPending, error};
 };

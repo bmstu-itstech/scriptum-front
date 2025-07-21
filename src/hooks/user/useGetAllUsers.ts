@@ -3,7 +3,7 @@ import {usersList} from '@/shared/api/user/getAllUsers';
 
 export const useGetAllUsers = () => {
   const {
-    data: accessData,
+    data,
     isLoading,
     refetch,
     error,
@@ -12,5 +12,5 @@ export const useGetAllUsers = () => {
     queryFn: usersList,
   });
 
-  return {accessData, isLoading, refetch, error};
+  return {data, isLoading, refetch, error};
 };

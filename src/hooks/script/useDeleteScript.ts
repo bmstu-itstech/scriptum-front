@@ -3,7 +3,7 @@ import { deleteScript } from '@/shared/api/script/deleteScript';
 
 export const useDeleteScript = (id: number) => {
   const {
-    data: accessData,
+    data,
     isPending,
     error,
   } = useMutation({
@@ -11,5 +11,5 @@ export const useDeleteScript = (id: number) => {
     mutationFn: () => deleteScript(id),
   });
 
-  return {accessData, isPending, error};
+  return {data, isPending, error};
 };
