@@ -10,6 +10,7 @@
 .tableRow {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 	background-color: var(--color-white-main);
 	border-bottom: 1px solid var(--color-gray-border);
 }
@@ -205,7 +206,7 @@
 	color: var(--color-gray-sub);
 
 	&:hover {
-		background-color: var(--color-white-main);
+		background-color: var(--color-gray-border);
 	}
 }
 

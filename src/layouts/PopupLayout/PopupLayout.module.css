@@ -1,9 +1,28 @@
 .alert {
-	padding: 1.5rem;
+	position: fixed;
+	top: 1.5rem;
+	right: 1.5rem;
+	width: 380px;
+	max-width: calc(100% - 3rem);
+	padding: 1.25rem;
 	border-radius: 0.75rem;
-	width: 100%;
 	display: flex;
 	border: 1px solid;
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	transform: translateX(120%);
+	opacity: 0;
+	transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.alert.visible {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.alert.closing {
+	transform: translateX(120%);
+	opacity: 0;
 }
 
 .alertContainer {
@@ -11,6 +30,7 @@
 	gap: 1rem;
 	align-items: flex-start;
 	width: 100%;
+	position: relative;
 }
 
 .iconContainer {
@@ -18,21 +38,26 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.3);
 }
 
 .icon {
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 1.25rem;
+	height: 1.25rem;
 }
 
 .content {
 	flex: 1;
 	min-width: 0;
+	padding-right: 1.5rem;
 }
 
 .title {
-	font-size: 1.125rem;
-	line-height: 1.75rem;
+	font-size: 1rem;
+	line-height: 1.5;
 	font-weight: 600;
 	margin-bottom: 0.25rem;
 }
@@ -40,84 +65,93 @@
 .description {
 	font-size: 0.875rem;
 	line-height: 1.5;
+	opacity: 0.9;
 }
 
 .closeButton {
+	line-height: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
 	flex-shrink: 0;
-	border-radius: 0.5rem;
-	padding: 0.25rem;
+	border-radius: 50%;
+	padding: 0.65rem;
 	transition: all 0.2s;
-	margin-left: auto;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: inherit;
 
 	&:hover {
-		background-color: rgba(255, 255, 255, 0.5);
+		background-color: rgba(0, 0, 0, 0.05);
 	}
 }
 
 .closeIcon {
-	width: 1.25rem;
-	height: 1.25rem;
+	width: 1rem;
+	height: 1rem;
+}
+
+.progressBar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 3px;
+	width: 100%;
+	transform-origin: left;
+	animation: progress linear forwards;
+	border-bottom-left-radius: 0.75rem;
+	border-bottom-right-radius: 0.75rem;
+}
+
+@keyframes progress {
+	from {
+		transform: scaleX(1);
+	}
+
+	to {
+		transform: scaleX(0);
+	}
 }
 
 .success {
 	background-color: var(--color-green-background);
 	border-color: var(--color-green-stroke);
+	color: var(--color-green-main);
 
-	.icon {
-		color: var(--color-green-main);
+	.iconContainer {
+		background-color: var(--color-green-background);
 	}
 
-	.title {
-		color: var(--color-green-main);
-	}
-
-	.description {
-		color: var(--color-green-light);
-	}
-
-	.closeButton {
-		color: var(--color-green-main);
+	.progressBar {
+		background-color: var(--color-green-main);
 	}
 }
 
 .error {
-	background-color: var(--color-red-background);
+	background-color: var(--color-red-light-background);
 	border-color: var(--color-red-light);
+	color: var(--color-red-main);
 
-	.icon {
-		color: var(--color-red-main);
+	.iconContainer {
+		background-color: var(--color-red-light-background);
 	}
 
-	.title {
-		color: var(--color-red-main);
-	}
-
-	.description {
-		color: var(--color-red-light);
-	}
-
-	.closeButton {
-		color: var(--color-red-main);
+	.progressBar {
+		background-color: var(--color-red-main);
 	}
 }
 
 .warning {
 	background-color: var(--color-yellow-background);
 	border-color: var(--color-yellow-light);
+	color: var(--color-yellow-main);
 
-	.icon {
-		color: var(--color-yellow-main);
+	.iconContainer {
+		background-color: var(--color-yellow-background);
 	}
 
-	.title {
-		color: var(--color-yellow-main);
-	}
-
-	.description {
-		color: var(--color-yellow-light);
-	}
-
-	.closeButton {
-		color: var(--color-yellow-main);
+	.progressBar {
+		background-color: var(--color-yellow-main);
 	}
 }

@@ -1,9 +1,12 @@
 import type { HTMLAttributes } from 'react';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
-	variant: 'success' | 'error' | 'warning';
+	type: 'alert' | 'confirm';
 	title: string;
-	description: string;
-	duration?: number;
+	message: string;
+	isVisible: boolean;
 	onClose: () => void;
+	onConfirm?: () => void;
+	confirmText?: string;
+	cancelText?: string;
 }

@@ -1,3 +1,3 @@
-import type { HTMLAttributes } from 'react';
+export interface Props extends React.SVGProps<SVGSVGElement> {
 
-export type Props = HTMLAttributes<HTMLOrSVGElement>;
+}
