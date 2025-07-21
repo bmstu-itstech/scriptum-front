@@ -52,6 +52,7 @@
 	--color-green-light: #16a34a;
 	--color-green-light-border: #bbf7d0;
 	--color-green-stroke: #4ade80;
+	--color-green-light-stroke: #e8ffef;
 	--color-green-background: #f0fdf4;
 	--color-green-light-background: #dcfce7;
 
@@ -60,6 +61,7 @@
 	--color-yellow-background: #fffbeb;
 
 	--color-orange-main: #f97316;
+	--color-orange-dark-main: #c2410c;
 
 	--font-size-lg: 1.875rem;
 	--font-size-md: 1.5rem;

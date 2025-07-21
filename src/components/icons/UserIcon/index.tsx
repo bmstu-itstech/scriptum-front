@@ -1,0 +1,31 @@
+import { FC } from "react";
+import { Props } from "./UserIcon.props";
+
+export const UserIcon: FC<Props> = ({ className, ...props }) => {
+	return (
+		<svg
+			width="17"
+			height="16"
+			viewBox="0 0 17 16"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			className={className}
+			{...props}
+		>
+			<path
+				d="M12.9998 14V12.6667C12.9998 11.9594 12.7189 11.2811 12.2188 10.781C11.7187 10.281 11.0404 10 10.3332 10H6.33317C5.62593 10 4.94765 10.281 4.44755 10.781C3.94746 11.2811 3.6665 11.9594 3.6665 12.6667V14"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+			<path
+				d="M8.33317 7.33333C9.80593 7.33333 10.9998 6.13943 10.9998 4.66667C10.9998 3.19391 9.80593 2 8.33317 2C6.86041 2 5.6665 3.19391 5.6665 4.66667C5.6665 6.13943 6.86041 7.33333 8.33317 7.33333Z"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+		</svg>
+	);
+};

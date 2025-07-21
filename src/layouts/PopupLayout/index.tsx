@@ -1,13 +1,13 @@
 import { FC } from "react";
 import cn from 'classnames';
-import styles from './AlertLayout.module.css';
-import { Props } from "./AlertLayout.props";
+import styles from './PopupLayout.module.css';
+import { Props } from "./PopupLayout.props";
 import { CloseIcon } from "@/components/icons/CloseIcon";
 import { SuccessIcon } from "@/components/icons/SuccessIcon";
 import { ErrorIcon } from "@/components/icons/ErrorIcon";
 import { WarningIcon } from "@/components/icons/WarningIcon";
 
-export const AlertLayout: FC<Props> = ({
+export const PopupLayout: FC<Props> = ({
 	variant = 'success',
 	title,
 	description,

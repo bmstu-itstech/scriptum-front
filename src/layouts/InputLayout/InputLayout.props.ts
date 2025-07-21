@@ -5,8 +5,8 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 		show: React.ReactNode;
 		hide: React.ReactNode;
 	},
-	isPassword: boolean;
-	isRequired: boolean;
+	isPassword?: boolean;
+	isRequired?: boolean;
 	placeholder: string;
 	errorText: string;
 }
