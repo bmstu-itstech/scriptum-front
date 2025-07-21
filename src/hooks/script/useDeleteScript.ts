@@ -1,0 +1,15 @@
+import {useMutation} from '@tanstack/react-query';
+import { deleteScript } from '@/shared/api/script/deleteScript';
+
+export const useDeleteScript = (id: number) => {
+  const {
+    data: accessData,
+    isPending,
+    error,
+  } = useMutation({
+    mutationKey: ['deleteScript', id.toString()],
+    mutationFn: () => deleteScript(id),
+  });
+
+  return {accessData, isPending, error};
+};
