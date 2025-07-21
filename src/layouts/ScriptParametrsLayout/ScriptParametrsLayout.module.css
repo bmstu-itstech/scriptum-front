@@ -3,6 +3,7 @@
   border: 1px solid var(--color-gray-border);
   border-radius: var(--border-radius-base);
   width: 100%;
+  padding-bottom: 1rem;
 }
 
 .ScriptParametrsLayout__header {
@@ -19,7 +20,7 @@
   background: var(--color-white-clear);
   padding: 2rem;
   height: fit-content;
-  max-height: 20rem;
+  max-height: 21rem;
   overflow: hidden;
   transition: max-height 5s ease-in;
 }
@@ -52,7 +53,7 @@
 }
 
 @media (max-width: 1024) {
-	.ScriptParametrsLayout__content {
-		grid-template-columns: repeat(1, 1fr);
-	}
+  .ScriptParametrsLayout__content {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
