@@ -1,52 +1,70 @@
-import type { Props } from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
-import type { FC } from 'react';
+import type {Props} from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
+import type {FC} from 'react';
 import cn from 'classnames';
 import styles from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.module.css';
 import basicStyles from '@/components/ScriptsPanel/components/EmptyScript/EmptyScript.module.css';
-import { Button } from '@/shared/Button';
-import { RunIcon } from '@/components/icons/RunIcon';
-import { getDate } from '@/utils/getRowFromDate';
-import { TextWithIcon } from '@/shared/TextWithIcon';
-import { PersonIcon } from '@/components/icons/PersonIcon';
-import { CalendarIcon } from '@/components/icons/CalendarIcon';
+import {Button} from '@/shared/Button';
+import {RunIcon} from '@/components/icons/RunIcon';
+import {getDate} from '@/utils/getRowFromDate';
+import {TextWithIcon} from '@/shared/TextWithIcon';
+import {PersonIcon} from '@/components/icons/PersonIcon';
+import {CalendarIcon} from '@/components/icons/CalendarIcon';
 import Link from 'next/link';
-import { DeleteIcon } from '@/components/icons/DeleteIcon';
-import { EditIcon } from '@/components/icons/EditIcon';
+import {DeleteIcon} from '@/components/icons/DeleteIcon';
+import {EditIcon} from '@/components/icons/EditIcon';
+import {useStartScript} from '@/hooks/script/useStartScript';
+import {useDeleteScript} from '@/hooks/script/useDeleteScript';
+import { AlertLayout } from '@/layouts/AlertLayout';
 
 export const ScriptElement: FC<Props> = ({
-	scriptTitle,
-	scriptId,
-	countOfRuns,
-	subtitle,
-	author,
-	data,
-	className,
-	...props
+  scriptTitle,
+  scriptId,
+  countOfRuns,
+  subtitle,
+  author,
+  data,
+  className,
+  ...props
 }) => {
-	return (
-		<Link
-			href={`/script/${scriptId}`}
-			className={cn(className, styles.scriptElement, basicStyles.layout)}
-			{...props}>
-			<div className={styles.scriptElement__supblock}>
-				<h2 className={styles.scriptElement__title}>{scriptTitle}</h2>
-				<p className={styles.scriptElement__runs}>Кол. запусков: {countOfRuns}</p>
-			</div>
+  const {isPending: runIsPending, mutate: runMutate} = useStartScript(scriptId);
+  const {isPending: deleteIsPending, mutate: deleteMutate} = useDeleteScript(scriptId);
+  return (
+    <Link
+      href={`/script/${scriptId}`}
+      className={cn(className, styles.scriptElement, basicStyles.layout)}
+      {...props}>
+      <div className={styles.scriptElement__supblock}>
+        <h2 className={styles.scriptElement__title}>{scriptTitle}</h2>
+        <p className={styles.scriptElement__runs}>Кол. запусков: {countOfRuns}</p>
+      </div>
 
-			<h3 className={styles.scriptElement__subtitle}>{subtitle}</h3>
-			<div className={styles.scriptElement__info}>
-				<TextWithIcon icon={<PersonIcon />} className={styles.scriptElement__author}>
-					{author}
-				</TextWithIcon>
-				<TextWithIcon icon={<CalendarIcon />} className={styles.scriptElement__data}>
-					{getDate(data)}
-				</TextWithIcon>
-			</div>
-			<div className={styles.scriptElement__interactive}>
-				<Button icon={<RunIcon />}>Запустить</Button>
-				<span className={cn(styles.scriptElement__editIcon, 'smoothTransition')}><EditIcon /></span>
-				<span className={cn(styles.scriptElement__delIcon, 'smoothTransition')}><DeleteIcon /></span>
-			</div >
-		</Link >
-	);
+      <h3 className={styles.scriptElement__subtitle}>{subtitle}</h3>
+      <div className={styles.scriptElement__info}>
+        <TextWithIcon icon={<PersonIcon />} className={styles.scriptElement__author}>
+          {author}
+        </TextWithIcon>
+        <TextWithIcon icon={<CalendarIcon />} className={styles.scriptElement__data}>
+          {getDate(data)}
+        </TextWithIcon>
+      </div>
+      <div className={styles.scriptElement__interactive}>
+        <Button
+          onClick={e => {
+            e.preventDefault();
+            runMutate();
+          }}
+          className={styles.scriptElement__runBtn}
+          isLoading={runIsPending}
+          icon={<RunIcon />}>
+          Запустить
+        </Button>
+        <span className={cn(styles.scriptElement__editIcon, 'smoothTransition')}>
+          <EditIcon />
+        </span>
+        <span className={cn(styles.scriptElement__delIcon, 'smoothTransition')}>
+          <DeleteIcon />
+        </span>
+      </div>
+    </Link>
+  );
 };
