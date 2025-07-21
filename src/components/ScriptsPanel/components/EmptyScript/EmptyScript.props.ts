@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
 
-export default interface Props extends HTMLAttributes<HTMLButtonElement>{
+export default interface Props extends HTMLAttributes<HTMLButtonElement> {
 
 }

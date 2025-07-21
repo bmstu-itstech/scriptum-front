@@ -26,7 +26,7 @@ export const Links: (LinkProps & { direction: string })[] = [
 	{
 		icon: <LoadIcon />,
 		title: 'Загрузка',
-		direction: LinkDirection.Load,
+		direction: LinkDirection.CreateScript,
 	},
 	{
 		icon: <CreateUserIcon />,
