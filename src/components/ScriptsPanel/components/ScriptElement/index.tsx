@@ -14,7 +14,6 @@ import { DeleteIcon } from '@/components/icons/DeleteIcon';
 import { EditIcon } from '@/components/icons/EditIcon';
 import { DialogLayout } from '@/layouts/DialogLayout';
 import { PopupLayout } from '@/layouts/PopupLayout';
-import { useLockBodyScroll } from '@/utils/hooks';
 
 export const ScriptElement: FC<Props> = ({
 	scriptTitle,

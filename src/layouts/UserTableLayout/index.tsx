@@ -29,6 +29,7 @@ export const UserTableLayout: FC<Props> = ({
 		confirmPassword: string
 		role: UserRole
 	} | null>(null)
+
 	const [errors, setErrors] = useState<{
 		email?: string | null
 		password?: string | null

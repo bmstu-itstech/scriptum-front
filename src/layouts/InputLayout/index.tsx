@@ -5,6 +5,8 @@ import cn from 'classnames';
 import styles from './InputLayout.module.css';
 
 export const InputLayout: FC<Props> = ({
+	value,
+	onChange,
 	toggleIcons,
 	isPassword = false,
 	isRequired = false,
@@ -27,6 +29,8 @@ export const InputLayout: FC<Props> = ({
 		<div className={cn(styles.inputContainer, className)} {...props}>
 			<div className={cn(styles.inputBlock)}>
 				<input
+					value={value}
+					onChange={onChange}
 					required={isRequired}
 					type={isPassword && !showPassword ? 'password' : 'text'}
 					placeholder={placeholder}
@@ -36,14 +40,14 @@ export const InputLayout: FC<Props> = ({
 					<button
 						type="button"
 						className={cn(styles.icon, 'smoothTransition')}
-						onClick={isPassword ? togglePasswordVisibility : undefined}
+						onClick={togglePasswordVisibility}
 						aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
 					>
 						{currentIcon}
 					</button>
 				)}
 			</div>
-			<span className={cn(styles.errorText)}>{errorText}</span>
+			{errorText && <span className={cn(styles.errorText)}>{errorText}</span>}
 		</div>
 	);
 };
