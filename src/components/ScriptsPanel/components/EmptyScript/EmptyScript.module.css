@@ -2,7 +2,7 @@
 	border-radius: var(--border-radius-base);
 	transition: box-shadow 0.2s;
 	height: 18rem;
-	background: var(--color-white-main);
+	background: white;
 	display: flex;
 	flex-direction: column;
 
