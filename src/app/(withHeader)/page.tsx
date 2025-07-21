@@ -15,19 +15,25 @@ import { Stats } from '@/shared/Stats'
 const ITEMS_PER_PAGE = 6;
 
 export default function Home() {
+	const [scripts, setScripts] = useState(APIScripts)
 	const [searchTerm, setSearchTerm] = useState('')
 	const [currentPage, setCurrentPage] = useState(1)
 	const [debouncedSearchTerm] = useDebounce(searchTerm, 300)
 
+	const handleDeleteScript = (scriptId: number) => {
+		// API //
+		setScripts(prevScripts => prevScripts.filter(script => script.scriptId !== scriptId))
+	}
+
 	const filteredScripts = useMemo(() => {
-		return APIScripts.filter(script => {
+		return scripts.filter(script => {
 			const searchLower = debouncedSearchTerm.toLowerCase()
 			return (
 				script.scriptTitle.toLowerCase().includes(searchLower) ||
 				script.subtitle.toLowerCase().includes(searchLower)
 			)
 		})
-	}, [debouncedSearchTerm])
+	}, [debouncedSearchTerm, scripts])
 
 	const totalPages = Math.ceil(filteredScripts.length / ITEMS_PER_PAGE) || 1
 	const paginatedScripts = useMemo(() => {
@@ -56,7 +62,10 @@ export default function Home() {
 				className={styles.stats}
 			/>
 
-			<ScriptPanel scripts={paginatedScripts} />
+			<ScriptPanel
+				scripts={paginatedScripts}
+				onDeleteScript={handleDeleteScript}
+			/>
 
 			{totalPages > 1 && (
 				<Pagination

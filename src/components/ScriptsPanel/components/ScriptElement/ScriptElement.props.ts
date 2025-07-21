@@ -7,6 +7,7 @@ export interface IScriptItem {
 	countOfRuns: number;
 	author: string;
 	data: Date;
+	onDeleteScript: (scriptId: number) => void;
 }
 
 export interface Props extends HTMLAttributes<HTMLAnchorElement>, IScriptItem { }
