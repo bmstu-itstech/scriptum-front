@@ -5,7 +5,7 @@ import { EmptyScript } from './components/EmptyScript';
 import cn from 'classnames';
 import { Props } from './ScriptsPanel.props';
 
-export const ScriptPanel: FC<Props> = ({ scripts, className, ...props }) => {
+export const ScriptPanel: FC<Props> = ({ scripts, onDeleteScript, className, ...props }) => {
 	return (
 		<div className={cn(styles.scriptsPanel, className)} {...props}>
 			<div className={styles.scriptsList}>
@@ -20,6 +20,7 @@ export const ScriptPanel: FC<Props> = ({ scripts, className, ...props }) => {
 							author={script.author}
 							data={script.data}
 							className={cn()}
+							onDeleteScript={onDeleteScript}
 						/>
 					))
 				) : (

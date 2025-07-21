@@ -1,19 +1,19 @@
-import type {Props} from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
-import type {FC} from 'react';
+import type { Props } from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
+import type { FC } from 'react';
 import cn from 'classnames';
 import styles from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.module.css';
 import basicStyles from '@/components/ScriptsPanel/components/EmptyScript/EmptyScript.module.css';
-import {Button} from '@/shared/Button';
-import {RunIcon} from '@/components/icons/RunIcon';
-import {getDate} from '@/utils/getRowFromDate';
-import {TextWithIcon} from '@/shared/TextWithIcon';
-import {PersonIcon} from '@/components/icons/PersonIcon';
-import {CalendarIcon} from '@/components/icons/CalendarIcon';
+import { Button } from '@/shared/Button';
+import { RunIcon } from '@/components/icons/RunIcon';
+import { getDate } from '@/utils/getRowFromDate';
+import { TextWithIcon } from '@/shared/TextWithIcon';
+import { PersonIcon } from '@/components/icons/PersonIcon';
+import { CalendarIcon } from '@/components/icons/CalendarIcon';
 import Link from 'next/link';
-import {DeleteIcon} from '@/components/icons/DeleteIcon';
-import {EditIcon} from '@/components/icons/EditIcon';
-import {useStartScript} from '@/hooks/script/useStartScript';
-import {useDeleteScript} from '@/hooks/script/useDeleteScript';
+import { DeleteIcon } from '@/components/icons/DeleteIcon';
+import { EditIcon } from '@/components/icons/EditIcon';
+import { useStartScript } from '@/hooks/script/useStartScript';
+import { useDeleteScript } from '@/hooks/script/useDeleteScript';
 import { AlertLayout } from '@/layouts/AlertLayout';
 
 export const ScriptElement: FC<Props> = ({
@@ -26,8 +26,8 @@ export const ScriptElement: FC<Props> = ({
   className,
   ...props
 }) => {
-  const {isPending: runIsPending, mutate: runMutate} = useStartScript(scriptId);
-  const {isPending: deleteIsPending, mutate: deleteMutate} = useDeleteScript(scriptId);
+  const { isPending: runIsPending, mutate: runMutate } = useStartScript(scriptId);
+  const { isPending: deleteIsPending, mutate: deleteMutate } = useDeleteScript(scriptId);
   return (
     <Link
       href={`/script/${scriptId}`}

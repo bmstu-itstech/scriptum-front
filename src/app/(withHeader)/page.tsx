@@ -1,16 +1,16 @@
 'use client';
 
-import {PageLayout} from '@/layouts/PageLayout';
-import {APIScripts, mainPageUsecase} from '@/app/(withHeader)/page.usecase';
-import {ScriptPanel} from '@/components/ScriptsPanel';
-import {Search} from '@/components/Search';
-import {SearchIcon} from '@/components/icons/SearchIcon';
-import {searchUsecase} from '@/components/Search/Search.usecase';
+import { PageLayout } from '@/layouts/PageLayout';
+import { APIScripts, mainPageUsecase } from '@/app/(withHeader)/page.usecase';
+import { ScriptPanel } from '@/components/ScriptsPanel';
+import { Search } from '@/components/Search';
+import { SearchIcon } from '@/components/icons/SearchIcon';
+import { searchUsecase } from '@/components/Search/Search.usecase';
 import styles from '@/app/(withHeader)/page.module.css';
-import {useDebounce} from 'use-debounce';
-import {useMemo, useState} from 'react';
-import {Pagination} from '@/shared/Pagination';
-import {Stats} from '@/shared/Stats';
+import { useDebounce } from 'use-debounce';
+import { useMemo, useState } from 'react';
+import { Pagination } from '@/shared/Pagination';
+import { Stats } from '@/shared/Stats';
 // import { useGetAllScripts } from '@/hooks/script/useGetAllScripts';
 
 const ITEMS_PER_PAGE = 6;
@@ -21,7 +21,7 @@ export default function Home() {
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
 
   // const {data, isLoading, error} = useGetAllScripts();
-  
+
   const filteredScripts = useMemo(() => {
     return APIScripts.filter(script => {
       const searchLower = debouncedSearchTerm.toLowerCase();
@@ -52,9 +52,9 @@ export default function Home() {
 
       <Stats
         stats={[
-          {text: 'Всего скриптов', count: APIScripts.length},
-          {text: 'Найдено', count: filteredScripts.length},
-          {text: 'Страница', count: currentPage, total: totalPages},
+          { text: 'Всего скриптов', count: APIScripts.length },
+          { text: 'Найдено', count: filteredScripts.length },
+          { text: 'Страница', count: currentPage, total: totalPages },
         ]}
         className={styles.stats}
       />
