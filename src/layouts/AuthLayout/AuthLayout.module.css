@@ -1,17 +1,18 @@
 .authContainer {
-  margin-inline: auto;
-  width: 28rem;
-  padding: 2.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  border-radius: 1.5rem;
-  background: white;
-  border: 1px solid var(--color-gray-border);
+	margin-inline: auto;
+	width: 28rem;
+	padding: 2.5rem 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	border-radius: 1.5rem;
+	background: white;
+	border: 1px solid var(--color-gray-border);
+	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, 0.08);
 }
 
 .head,
 .center,
 .tail {
-  width: 100%;
+	width: 100%;
 }
