@@ -9,6 +9,7 @@ import { CloseModalIcon } from '@/components/icons/CloseModalIcon';
 import { CopyTxtIcon } from '@/components/icons/CopyTxtIcon';
 import { ExportTxtIcon } from '@/components/icons/ExportTxtIcon';
 import ReactDOM from 'react-dom';
+import { PopupLayout } from '../PopupLayout';
 
 const getResultTitle = (status: PipelineStatus) => {
 	switch (status) {
@@ -40,6 +41,18 @@ export const PipelineModalLayout: FC<Props> = ({
 	const resultTitle = getResultTitle(status);
 	const isError = status === PipelineStatus.ERROR;
 
+	const [popup, setPopup] = useState<{
+		visible: boolean
+		variant: 'success' | 'error' | 'warning'
+		title: string
+		description?: string
+	} | null>(null)
+
+	const showPopup = (variant: 'success' | 'error' | 'warning', title: string, description?: string) => {
+		setPopup({ visible: true, variant, title, description })
+		setTimeout(() => setPopup(null), 5000)
+	}
+
 	const handleCopy = useCallback(async (text: string, type: 'input' | 'output') => {
 		try {
 			await navigator.clipboard.writeText(text);
@@ -50,8 +63,8 @@ export const PipelineModalLayout: FC<Props> = ({
 				setShowOutputTooltip(true);
 				setTimeout(() => setShowOutputTooltip(false), 2000);
 			}
-		} catch (err) {
-			// console.error('Ошибка при копировании: ', err);
+		} catch {
+			showPopup('error', 'Ошибка при копировании', `Не удалось скопировать текст`)
 		}
 	}, []);
 
@@ -84,7 +97,16 @@ export const PipelineModalLayout: FC<Props> = ({
 
 	if (!isOpen) return null;
 
-	return ReactDOM.createPortal((
+	return ReactDOM.createPortal((<>
+		{popup && (
+			<PopupLayout
+				variant={popup.variant}
+				title={popup.title}
+				description={popup.description || ''}
+				onClose={() => setPopup(null)}
+			/>
+		)}
+
 		<div className={cn(style.modal, className)} {...props}>
 			<div className={style.overlay} onClick={onClose}></div>
 			<div className={style.modalContent}>
@@ -177,5 +199,5 @@ export const PipelineModalLayout: FC<Props> = ({
 			</div>
 
 		</div>
-	), document.body);
+	</>), document.body);
 }
