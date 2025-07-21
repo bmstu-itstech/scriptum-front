@@ -1,6 +1,22 @@
 import type { HTMLAttributes } from 'react';
 
-export interface IScriptItem {
+// export interface IScriptBit {
+//   type: string;
+//   name: string;
+//   description: string;
+//   unit: string;
+// }
+
+// export interface IScript {
+//   script_id: number;
+//   fields: IScriptBit[];
+//   path: string;
+//   owner: number;
+//   visibility: 'private' | 'global';
+//   created_at: Date;
+// }
+
+export interface IScriptItem  {
 	scriptId: number;
 	scriptTitle: string;
 	subtitle: string;
