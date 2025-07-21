@@ -92,7 +92,7 @@ body {
 
 body {
 	color: var(--color-dark-main);
-	background: var(--background);
+	background: var(--color-white-main);
 	font-family: Inter, Helvetica, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
