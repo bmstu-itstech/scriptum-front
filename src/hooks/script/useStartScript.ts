@@ -3,7 +3,7 @@ import {startScript} from '@/shared/api/script/startScript';
 
 export const useStartScript = (id: number) => {
   const {
-    data: accessData,
+    data,
     isPending,
     error,
   } = useMutation({
@@ -11,5 +11,5 @@ export const useStartScript = (id: number) => {
     mutationFn: () => startScript(id),
   });
 
-  return {accessData, isPending, error};
+  return {data, isPending, error};
 };

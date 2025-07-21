@@ -3,7 +3,7 @@ import {searchScriptsList} from '@/shared/api/script/getSearchScripts';
 
 export const useSearchScripts = (name: string) => {
   const {
-    data: accessData,
+    data,
     isLoading,
     refetch,
     error,
@@ -12,5 +12,5 @@ export const useSearchScripts = (name: string) => {
     queryFn: () => searchScriptsList(name),
   });
 
-  return {accessData, isLoading, refetch, error};
+  return {data, isLoading, refetch, error};
 };
