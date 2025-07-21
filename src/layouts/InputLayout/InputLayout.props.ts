@@ -1,6 +1,7 @@
 import type { HTMLAttributes } from 'react';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
+	value: string;
 	toggleIcons?: {
 		show: React.ReactNode;
 		hide: React.ReactNode;
