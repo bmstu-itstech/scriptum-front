@@ -1,3 +1,7 @@
+.headerRow {
+	background-color: var(--color-white-main);
+}
+
 .headerCell {
 	color: var(--color-gray-light2);
 	font-weight: 500;
