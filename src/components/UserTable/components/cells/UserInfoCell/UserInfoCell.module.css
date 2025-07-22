@@ -1,0 +1,13 @@
+.userName {
+	font-weight: 500;
+	font-size: .875rem;
+	line-height: 1.25rem;
+	color: var(--color-dark-main);
+}
+
+.userEmail {
+	font-weight: 400;
+	font-size: .875rem;
+	line-height: 1.25rem;
+	color: var(--color-gray-light2);
+}

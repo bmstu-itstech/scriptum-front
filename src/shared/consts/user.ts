@@ -9,3 +9,11 @@ export interface IUser {
 	email: string;
 	role: UserRole;
 }
+
+export interface EditUserData {
+	fullname: string;
+	email: string;
+	password: string;
+	confirmPassword: string;
+	role: UserRole;
+}

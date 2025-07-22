@@ -12,6 +12,7 @@ import { UserRole } from '@/shared/consts/user'
 import { Pagination } from '@/shared/Pagination'
 import { UserTableLayout } from '@/layouts/UserTableLayout'
 import style from './page.module.css'
+import { UserTable } from "@/components/UserTable"
 
 const ITEMS_PER_PAGE = 8
 
@@ -98,7 +99,7 @@ export default function HandlePage() {
 
 			<div className={style.usersList}>
 				{paginatedUsers.length > 0 ? (
-					<UserTableLayout
+					<UserTable
 						users={paginatedUsers}
 						onEditUser={handleEditUser}
 						onDeleteUser={handleDeleteUser}
