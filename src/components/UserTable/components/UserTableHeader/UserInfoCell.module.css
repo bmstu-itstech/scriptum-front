@@ -1,0 +1,9 @@
+.headerCell {
+	color: var(--color-gray-light2);
+	font-weight: 500;
+	font-size: .75rem;
+	line-height: 1rem;
+	letter-spacing: 0.05em;
+	text-align: left;
+	text-transform: uppercase;
+}

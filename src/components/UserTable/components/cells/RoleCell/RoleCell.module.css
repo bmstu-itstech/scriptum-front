@@ -1,0 +1,86 @@
+.roleCell {
+	display: flex;
+	gap: .5rem;
+	align-items: center;
+}
+
+.roleAdminIcon {
+	color: var(--color-orange-main);
+}
+
+.roleAdmin {
+	font-weight: 500;
+	font-size: .875rem;
+	line-height: 1.25rem;
+	color: var(--color-orange-dark-main);
+}
+
+.roleUserIcon {
+	color: var(--color-gray-sub);
+}
+
+.roleUser {
+	font-weight: 500;
+	font-size: .875rem;
+	line-height: 1.25rem;
+	color: var(--color-gray-sub);
+}
+
+.roleCheckbox {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	cursor: pointer;
+	user-select: none;
+}
+
+.roleCheckbox input {
+	position: absolute;
+	opacity: 0;
+	height: 0;
+	width: 0;
+}
+
+.checkmark {
+	position: relative;
+	display: inline-block;
+	height: 1.25rem;
+	width: 1.25rem;
+	min-width: 1.25rem;
+	background-color: white;
+	border: 1px solid var(--color-gray-stroke);
+	border-radius: 0.375rem;
+	transition: all 0.2s ease;
+}
+
+.roleCheckbox:hover input~.checkmark {
+	border-color: var(--color-purple-main);
+}
+
+.roleCheckbox input:checked~.checkmark {
+	background-color: var(--color-purple-main);
+	border-color: var(--color-purple-main);
+}
+
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+	top: .1rem;
+	left: .360rem;
+	width: 0.3125rem;
+	height: 0.625rem;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.roleCheckbox input:checked~.checkmark:after {
+	display: block;
+}
+
+.roleLabel {
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	color: var(--color-dark-main);
+}
