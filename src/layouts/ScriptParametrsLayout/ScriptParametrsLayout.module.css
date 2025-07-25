@@ -16,7 +16,7 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  background: var(--color-white-main);
+  background: var(--color-white-clear);
   gap: 1.5rem;
 }
 
