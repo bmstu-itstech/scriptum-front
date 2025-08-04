@@ -1,0 +1,23 @@
+.fileInput {
+  border: 2px dashed var(--color-gray-stroke);
+  transition: background 0.5s;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  height: 3rem;
+  cursor: pointer;
+
+  &:hover {
+	background-color: var(--color-gray-superlight);
+  }
+}
+
+.hover {
+	background-color: var(--color-gray-superlight);
+}
+
+.fileInput__text{
+	color: var(--color-gray-sub);
+}
