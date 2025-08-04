@@ -1,7 +1,7 @@
 .filter__select {
 	height: 100%;
 	width: 100%;
-	padding: 1rem 0.75rem 1rem 2.75rem;
+	/* padding: 1rem 0.75rem 1rem 2.75rem; */
 	background: var(--color-white);
 	color: var(--color-dark-main);
 	font-size: var(--font-size-base);
@@ -43,4 +43,5 @@
 	display: inline-block;
 	line-height: 0;
 	pointer-events: none;
+	z-index: 2;
 }
