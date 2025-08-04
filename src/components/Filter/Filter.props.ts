@@ -5,11 +5,12 @@ interface Option {
 	label: string;
 }
 
-export default interface Props extends HTMLAttributes<HTMLSelectElement> {
+export default interface Props {
 	icon?: ReactElement;
 	name: string;
 	value: string;
 	placeholder: string;
 	callback: (value: string) => void;
+	className?: string;
 	options: Option[];
 }
