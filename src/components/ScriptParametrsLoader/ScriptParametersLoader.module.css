@@ -1,0 +1,41 @@
+.justifyBetween {
+  justify-content: space-between;
+}
+
+.headerList {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.headerItem {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 0.75rem 1.5rem;
+  color: var(--color-gray-light2);
+  font-weight: 500;
+  font-size: var(--font-size-xxs);
+}
+
+.addButton {
+  width: fit-content;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: var(--color-white-main);
+  background-color: var(--color-purple-main);
+}
+
+.addIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.headerName {
+  height: fit-content;
+}
+
+.extendedBlock__main {
+  padding-inline: 1.5rem;
+}
