@@ -1,13 +1,15 @@
-import type { HTMLAttributes } from 'react';
+import type {HTMLAttributes, HTMLInputTypeAttribute} from 'react';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
-	value: string;
-	toggleIcons?: {
-		show: React.ReactNode;
-		hide: React.ReactNode;
-	},
-	isPassword?: boolean;
-	isRequired?: boolean;
-	placeholder: string;
-	errorText: string;
+export interface Props extends HTMLAttributes<HTMLInputElement> {
+  toggleIcons?: {
+    show: React.ReactNode;
+    hide: React.ReactNode;
+  };
+  type: string;
+  errorText: string;
+  inputClassName?: string;
+  inputTitle?: string;
+  isPassword?: boolean;
+  placeholder?: string;
+  isRequired?: boolean;
 }
