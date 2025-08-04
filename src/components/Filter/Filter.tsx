@@ -1,44 +1,45 @@
 'use client';
 import type Props from '@/components/Filter/Filter.props';
-import { useState, type FC, useCallback } from 'react';
+import {type FC} from 'react';
 import cn from 'classnames';
 import styles from '@/components/Filter/Filter.module.css';
+import Select, {type SingleValue, type ActionMeta} from 'react-select';
+import {colourStyles, Option} from '@/components/Filter/Filter.usecase';
 
 export const Filter: FC<Props> = ({
-	callback,
-	icon,
-	placeholder,
-	className,
-	options = [],
-	...props
+  callback,
+  name,
+  value,
+  icon,
+  placeholder,
+  className,
+  options = [],
+  ...props
 }) => {
-	const [value, setValue] = useState('');
+  const handleChange = (newValue: SingleValue<Option>, actionMeta: ActionMeta<Option>) => {
+    callback(newValue?.value || '');
+  };
 
-	const onChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-		setValue(e.currentTarget.value);
-		callback(e.currentTarget.value);
-	}, [callback]);
+  const selectedOption = options.find(option => option.value === value) || null;
 
-	return (
-		<div className={cn(styles.filter__container, className)}>
-			{icon && <span className={styles.filter__icon}>{icon}</span>}
-			<select
-				value={value}
-				onChange={onChange}
-				className={cn(styles.filter__select, 'smoothTransition')}
-				{...props}
-			>
-				{placeholder && (
-					<option value="" disabled hidden>
-						{placeholder}
-					</option>
-				)}
-				{options.map((option) => (
-					<option key={option.value} value={option.value}>
-						{option.label}
-					</option>
-				))}
-			</select>
-		</div>
-	);
+  return (
+    <div className={cn(styles.filter__container, className)}>
+      {icon && <span className={styles.filter__icon}>{icon}</span>}
+      <Select<Option>
+        className={cn(styles.filter__select, 'smoothTransition')}
+        classNamePrefix='select'
+        value={selectedOption}
+        onChange={handleChange}
+        options={options}
+        placeholder={placeholder}
+        name={name}
+        isSearchable={false}
+        components={{
+          IndicatorSeparator: () => null,
+        }}
+        styles={colourStyles}
+        {...props}
+      />
+    </div>
+  );
 };

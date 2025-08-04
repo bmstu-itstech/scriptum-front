@@ -7,6 +7,8 @@ interface Option {
 
 export default interface Props extends HTMLAttributes<HTMLSelectElement> {
 	icon?: ReactElement;
+	name: string;
+	value: string;
 	placeholder: string;
 	callback: (value: string) => void;
 	options: Option[];
