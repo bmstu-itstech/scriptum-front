@@ -1,4 +1,6 @@
+import { ParametrType, ParametrMeasure } from '@/shared/consts/parametr';
 import { PipelineStatus } from '@/shared/consts/pipeline';
+import { UserRole } from '@/shared/consts/user';
 import type { GroupBase, StylesConfig } from 'react-select';
 
 export type Option = {value: string; label: string};
@@ -10,6 +12,28 @@ export const statusUsecase = [
   {value: PipelineStatus.RUNNING, label: 'Выполняется'},
 ];
 
+export const roleUsecase = [
+  {value: 'all', label: 'Все роли'},
+  {value: UserRole.ADMIN, label: 'Администраторы'},
+  {value: UserRole.USER, label: 'Пользователи'},
+];
+
+export const measureUsecase = [
+  {value: ParametrMeasure.None, label: 'Безразмерная'},
+  {value: ParametrMeasure.M, label: 'Метры (м)'},
+  {value: ParametrMeasure.CM, label: 'Сантиметры (см)'},
+  {value: ParametrMeasure.MM, label: 'Миллиметры (мм)'},
+  {value: ParametrMeasure.T, label: 'Тонны (т)'},
+  {value: ParametrMeasure.KG, label: 'Килограммы (кг)'},
+  {value: ParametrMeasure.G, label: 'Граммы (г)'},
+];
+
+export const typeUsecase = [
+  {value: ParametrType.FLOAT, label: ParametrType.FLOAT},
+  {value: ParametrType.INT, label: ParametrType.INT},
+  {value: ParametrType.COMP, label: ParametrType.COMP},
+];
+
 export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
   control: (base, state) => ({
     ...base,
@@ -18,7 +42,6 @@ export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     backgroundColor: 'transparent',
     cursor: 'pointer',
     height: '100%',
-    padding: '0rem 0rem 0rem 1.75rem',
   }),
   option: (base, state) => ({
     ...base,
@@ -52,6 +75,7 @@ export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     background: 'var(--color-white)',
     color: 'var(--color-dark-main)',
     fontSize: 'var(--font-size-base)',
+    textWrap: 'nowrap',
   }),
   menuList: base => ({
     ...base,

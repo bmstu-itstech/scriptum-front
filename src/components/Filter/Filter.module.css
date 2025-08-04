@@ -20,28 +20,11 @@
 	}
 }
 
-.filter__container {
-	display: flex;
-	position: relative;
-	justify-content: start;
-	align-items: center;
-	height: 4rem;
-	width: 100%;
-	background: var(--color-white-main);
-
-	&:focus-within .filter__icon {
-		filter: brightness(0) saturate(100%) invert(37%) sepia(46%) saturate(6798%) hue-rotate(251deg) brightness(102%) contrast(101%)
-	}
-}
 
 .filter__icon {
-	position: absolute;
-	transform: translateY(-50%);
-	top: 50%;
-	left: 0.75rem;
+	margin-left: 0.75rem;
 	aspect-ratio: 1/1;
 	display: inline-block;
 	line-height: 0;
 	pointer-events: none;
-	z-index: 2;
 }
