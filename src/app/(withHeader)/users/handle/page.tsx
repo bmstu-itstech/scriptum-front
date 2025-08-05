@@ -10,9 +10,9 @@ import { FilterIcon } from '@/components/icons/FilterIcon'
 import { Stats } from '@/shared/Stats'
 import { UserRole } from '@/shared/consts/user'
 import { Pagination } from '@/shared/Pagination'
-import { UserTableLayout } from '@/layouts/UserTableLayout'
 import style from './page.module.css'
 import { UserTable } from "@/components/UserTable"
+import { roleUsecase } from '@/components/Filter/Filter.usecase'
 
 const ITEMS_PER_PAGE = 8
 
@@ -54,71 +54,68 @@ export default function HandlePage() {
 	}
 
 	return (
-		<PageLayout
-			title={handleUsersPageUsecase.title}
-			subtitle={handleUsersPageUsecase.subtitle}
-			className={style.container}
-		>
-			<div className={style.controlPanel}>
-				<div className={style.searchFilterGroup}>
-					<Search
-						placeholder="Поиск по имени или email..."
-						callback={(value) => {
-							setSearchTerm(value)
-							setCurrentPage(1)
-						}}
-						icon={<SearchIcon />}
-						className={style.search}
-					/>
+    <PageLayout
+      title={handleUsersPageUsecase.title}
+      subtitle={handleUsersPageUsecase.subtitle}
+      className={style.container}>
+      <div className={style.controlPanel}>
+        <div className={style.searchFilterGroup}>
+          <Search
+            placeholder='Поиск по имени или email...'
+            callback={value => {
+              setSearchTerm(value);
+              setCurrentPage(1);
+            }}
+            icon={<SearchIcon />}
+            className={style.search}
+          />
 
-					<Filter
-						placeholder="Все роли"
-						callback={(value) => {
-							setRoleFilter(value as UserRole | 'all')
-							setCurrentPage(1)
-						}}
-						options={[
-							{ value: 'all', label: 'Все роли' },
-							{ value: UserRole.ADMIN, label: 'Администраторы' },
-							{ value: UserRole.USER, label: 'Пользователи' },
-						]}
-						icon={<FilterIcon />}
-						className={style.filter}
-					/>
-				</div>
+          <Filter
+            placeholder='Все роли'
+            name='roleFilter'
+            value={roleFilter}
+            callback={value => {
+              setRoleFilter(value as UserRole | 'all');
+              setCurrentPage(1);
+            }}
+            options={roleUsecase}
+            icon={<FilterIcon />}
+            className={style.filter}
+          />
+        </div>
 
-				<Stats
-					stats={[
-						{ text: "Всего пользователей", count: users.length },
-						{ text: "Администраторов", count: adminCount },
-						{ text: "Найдено", count: filteredUsers.length },
-						{ text: "Страница", count: currentPage, total: totalPages }
-					]}
-				/>
-			</div>
+        <Stats
+          stats={[
+            {text: 'Всего пользователей', count: users.length},
+            {text: 'Администраторов', count: adminCount},
+            {text: 'Найдено', count: filteredUsers.length},
+            {text: 'Страница', count: currentPage, total: totalPages},
+          ]}
+        />
+      </div>
 
-			<div className={style.usersList}>
-				{paginatedUsers.length > 0 ? (
-					<UserTable
-						users={paginatedUsers}
-						onEditUser={handleEditUser}
-						onDeleteUser={handleDeleteUser}
-					/>
-				) : (
-					<div className={style.emptyState}>
-						Ничего не найдено. Попробуйте изменить параметры поиска
-					</div>
-				)}
-			</div>
+      <div className={style.usersList}>
+        {paginatedUsers.length > 0 ? (
+          <UserTable
+            users={paginatedUsers}
+            onEditUser={handleEditUser}
+            onDeleteUser={handleDeleteUser}
+          />
+        ) : (
+          <div className={style.emptyState}>
+            Ничего не найдено. Попробуйте изменить параметры поиска
+          </div>
+        )}
+      </div>
 
-			{totalPages > 1 && (
-				<Pagination
-					currentPage={currentPage}
-					totalPages={totalPages}
-					onPageChange={setCurrentPage}
-					className={style.paginationContainer}
-				/>
-			)}
-		</PageLayout>
-	)
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          className={style.paginationContainer}
+        />
+      )}
+    </PageLayout>
+  );
 }

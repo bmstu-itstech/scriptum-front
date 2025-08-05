@@ -29,6 +29,7 @@
 .filter {
 	width: 16rem;
 	min-width: 12rem;
+	height: 4rem;
 }
 
 .usersList {
