@@ -1,6 +1,7 @@
 .ScriptParametrsLayout {
   border-radius: var(--border-radius-base);
   background-color: var(--color-white-main);
+  border: 1px solid var(--color-gray-border);
   width: 100%;
 }
 

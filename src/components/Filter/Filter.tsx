@@ -33,7 +33,7 @@ export const Filter: FC<Props> = ({
   return (
     // <div className={cn(styles.filter__container, className)}>
     <Select<Option>
-      className={cn(className, styles.filter__select, 'smoothTransition')}
+      className={cn(styles.filter__select, 'smoothTransition', className)}
       classNamePrefix='select'
       value={selectedOption}
       onChange={handleChange}

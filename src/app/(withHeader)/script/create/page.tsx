@@ -46,6 +46,13 @@ export default function CreatePage() {
         //   </div>
         // }
       />
+      <ScriptParametrsLoader
+        type='output'
+        // headerClassname={stylesLayout.smallPadding}
+        // header={pageCreateUsecase.input.header}
+        //   </div>
+        // }
+      />
     </PageLayout>
   );
 }
