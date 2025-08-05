@@ -6,6 +6,13 @@
 
 .desc {
   height: 8rem;
+  resize: none;
+  text-wrap: 'pretty';
+
+  &::placeholder {
+    /* font-family: Inter; */
+    font-size: var(--font-size-sm);
+  }
 }
 
 .justifyBetween {
@@ -44,11 +51,26 @@
   height: fit-content;
 }
 
-.infoblock__header{
-    padding: 1.5rem 1.5rem 0rem 1.5rem;
+.infoblock__header {
+  padding: 1.5rem 1.5rem 0rem 1.5rem;
 }
-.infoblock__content{
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.infoblock__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.saveBtn{
+  background-color: var(--color-purple-dark);
+  width: fit-content;
+  margin-inline: auto;
+  color: var(--color-white-main);
+  padding: 1rem 2rem;
 }

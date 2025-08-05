@@ -12,7 +12,7 @@ import style from './page.module.css';
 import {PageLayout} from '@/layouts/PageLayout';
 import {Pagination} from '@/shared/Pagination';
 import {Stats} from '@/shared/Stats';
-import {statusUsecase} from '@/components/Filter/Filter.usecase';
+import {pageSelectStyles, statusUsecase} from '@/components/Filter/Filter.usecase';
 
 export default function TasksPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -57,6 +57,7 @@ export default function TasksPage() {
           <Filter
             placeholder='Все статусы'
             name='statusFilter'
+            style={pageSelectStyles}
             value={statusFilter}
             callback={value => {
               setStatusFilter(value as PipelineStatus | 'all');
