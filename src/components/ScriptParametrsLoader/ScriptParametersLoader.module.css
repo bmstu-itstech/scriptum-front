@@ -39,3 +39,24 @@
 .extendedBlock__main {
   padding-inline: 1.5rem;
 }
+
+.preblock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 2rem;
+}
+
+.preblock__icon {
+  margin-bottom: 0.5rem;
+}
+
+.preblock__text {
+  color: var(--color-gray-light2);
+  font-size: var(--font-size-sm);
+}
+
+.preblock__subtext {
+  color: var(--color-gray-light2);
+  font-size: var(--font-size-xs);
+}
