@@ -4,7 +4,7 @@ import {type FC, type ReactElement} from 'react';
 import cn from 'classnames';
 import styles from '@/components/Filter/Filter.module.css';
 import Select, {type SingleValue, type ActionMeta, components, type ControlProps} from 'react-select';
-import {colourStyles, Option} from '@/components/Filter/Filter.usecase';
+import {colourStyles, Option, selectStyles} from '@/components/Filter/Filter.usecase';
 
 
 export const Filter: FC<Props> = ({
@@ -14,6 +14,7 @@ export const Filter: FC<Props> = ({
   icon,
   placeholder,
   className,
+  style,
   options = [],
   ...props
 }) => {
@@ -45,7 +46,7 @@ export const Filter: FC<Props> = ({
         Control,
         IndicatorSeparator: () => null,
       }}
-      styles={colourStyles}
+      styles={style ? { ...colourStyles, ...style } : { ...colourStyles, ...selectStyles}}
       {...props}
     />
     // </div>

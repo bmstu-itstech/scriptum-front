@@ -70,15 +70,39 @@ export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     fontSize: 'var(--font-size-base)',
     outline: 'none',
   }),
-  placeholder: base => ({
-    ...base,
-    background: 'var(--color-white)',
-    color: 'var(--color-dark-main)',
-    fontSize: 'var(--font-size-base)',
-    textWrap: 'nowrap',
-  }),
+  // placeholder: base => ({
+  //   ...base,
+  //   background: 'var(--color-white)',
+  //   color: 'var(--color-gray-close-modal)',
+  //   userSelect: 'none',
+  //   fontSize: 'var(--font-size-base)',
+  //   textWrap: 'nowrap',
+  // }),
   menuList: base => ({
     ...base,
     paddingBlock: '0px',
   }),
 };
+
+export const pageSelectStyles: StylesConfig<Option, false, GroupBase<Option>> = {
+  placeholder: base => ({
+    ...base,
+    background: 'var(--color-white)',
+    color: 'var(--color-gray-close-modal)',
+    userSelect: 'none',
+    fontSize: 'var(--font-size-base)',
+    textWrap: 'nowrap',
+  }),
+}
+
+
+export const selectStyles: StylesConfig<Option, false, GroupBase<Option>> = {
+  placeholder: base => ({
+    ...base,
+    background: 'var(--color-white)',
+    color: 'var(--color-gray-close-modal)',
+    userSelect: 'none',
+    fontSize: 'var(--font-size-sm)',
+    textWrap: 'nowrap',
+  }),
+}
