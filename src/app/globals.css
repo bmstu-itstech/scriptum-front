@@ -143,6 +143,12 @@ a {
 	font-weight: 400;
 }
 
+.layout__inputLabel {
+	font-size: var(--font-size-xs);
+	color: var(--color-gray-bio);
+	font-weight: 400;
+}
+
 .smoothTransition {
 	transition-property: all;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
