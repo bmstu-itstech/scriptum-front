@@ -28,6 +28,10 @@ export interface IScriptStruct {
 
 export interface Props extends IScriptStruct, HTMLAttributes<HTMLDivElement> {
   children: ReactElement[];
+  preBlock?: ReactElement;
+  headerClassname?: string;
+  contentClassname?: string;
+  mainExtendedClassname?: string;
 }
 
 // export interface Props extends IScript, IScriptStruct {
