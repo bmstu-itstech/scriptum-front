@@ -2,5 +2,6 @@ import {IScriptStruct} from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayo
 import type { HTMLAttributes, ReactElement } from 'react';
 
 export interface Props extends IScriptStruct, HTMLAttributes<HTMLDivElement> {
-    children: ReactElement[];
+  children: ReactElement[];
+  contentClassname?: string;
 }
