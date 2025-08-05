@@ -4,10 +4,14 @@ import type { FC } from 'react';
 // import styles from '@/components/ScriptParametrs/ScriptParametrs.module.css';
 import { ScriptParametrsLayout } from '@/layouts/ScriptParametrsLayout';
 
-export const ScriptParametrs: FC<Props> = ({ header, className, children, ...props }) => {
+export const ScriptParametrs: FC<Props> = ({ header, className,contentClassname, children, ...props }) => {
 	return (
-		<ScriptParametrsLayout header={header} className={className} {...props}>
-			{children}
-		</ScriptParametrsLayout>
-	);
+    <ScriptParametrsLayout
+      contentClassname={contentClassname}
+      header={header}
+      className={className}
+      {...props}>
+      {children}
+    </ScriptParametrsLayout>
+  );
 };
