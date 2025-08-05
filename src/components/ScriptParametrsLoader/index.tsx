@@ -11,16 +11,32 @@ import { Button } from '@/layouts/Button';
 import { AddParametrIcon } from '@/components/icons/AddParametricon';
 import { ScriptParametersLoaderRow } from '@/components/ScriptParametrsLoader/components/ScriptParametrsLoaderRow/index';
 import { DocumentNoParamsIcon } from '@/components/icons/DocumentNoParamsIcon';
+import { useFormikContext } from 'formik';
 
 export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) => {
-  const [params, setParams] = useState<ScriptParametersLoaderRowProps[]>([]);
+  const { values, setFieldValue } = useFormikContext<any>();
+  const name = type == 'input' ? 'inputParams' : 'outputParams'
+  const params = values[name] || [];
 
-  const onClick = useCallback(() => {
-    setParams(prev => [...prev, { name: '', desc: '', measure: '', type: '' }]);
-  }, []);
+  const addParam = () => {
+    setFieldValue(name, [
+      ...params,
+      { name: '', desc: '', measure: '', type: '' }
+    ]);
+  };
 
-  const [parametrType, setParametrType] = useState('');
-  const [parametrMeasure, setParametrMeasure] = useState('');
+  const updateParam = (index: number, field: string, value: string) => {
+    const updated = [...params];
+    updated[index] = { ...updated[index], [field]: value };
+    setFieldValue(name, updated);
+  };
+
+  const removeParam = (index: number) => {
+    const filtered = params.filter((_, i) => i !== index);
+    setFieldValue(name, filtered);
+  };
+
+
 
   const PreBlock = () => {
     if (params.length === 0) {
@@ -60,7 +76,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
             <p className={cn('layout__title-sm', styles.headerName)}>Входные параметры</p>
             <Button
               className={styles.addButton}
-              onClick={onClick}
+              onClick={addParam}
               icon={<AddParametrIcon className={styles.addIcon} />}>
               Добавить параметр
             </Button>
@@ -70,7 +86,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
             <p className={cn('layout__title-sm', styles.headerName)}>Выходные параметры</p>
             <Button
               className={styles.addButton}
-              onClick={onClick}
+              onClick={addParam}
               icon={<AddParametrIcon className={styles.addIcon} />}>
               Добавить параметр
             </Button>
@@ -79,12 +95,13 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
       }
       preBlock={<PreBlock />}
       {...props}>
-      {params.map((row, ind) => {
+      {params.map((row, ind: number) => {
         return (
           <ScriptParametersLoaderRow
-            measureValue={parametrMeasure}
-            typeValue={parametrType}
             key={ind}
+            arrayName={name}
+            onRemove={(index) => removeParam(index)}
+            index={ind}
           />
         );
       })}
