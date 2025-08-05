@@ -13,8 +13,6 @@ import {BackArrowIcon} from '@/components/icons/BackArrowIcon';
 import LinkBtnStyles from '@/components/LinkBack/LinkBack.module.css';
 import styles from '@/app/(withHeader)/script/[id]/page.module.css';
 import {ScriptSettings} from '@/components/ScriptSettings';
-import {Button} from '@/shared/Button';
-import {RunIcon} from '@/components/icons/RunIcon';
 import {RunCodeButton} from '@/shared/RunCodeButton';
 
 export default function Page() {
@@ -27,12 +25,12 @@ export default function Page() {
         icon={<BackArrowIcon />}
       />
       <ScriptInfo {...scriptElementUsecase1} />
-      <ScriptParametrs header={ScriptParametersInputUsecase.header}>
+      <ScriptParametrs contentClassname={styles.col2} header={ScriptParametersInputUsecase.header}>
         {ScriptParametersLayoutUsecase1.params.input.map((item, id) => {
           return <ScriptParametrLayout key={id} typeOfCard='input' {...item} />;
         })}
       </ScriptParametrs>
-      <ScriptParametrs header={ScriptParametersOutputUsecase.header}>
+      <ScriptParametrs contentClassname={styles.col2} header={ScriptParametersOutputUsecase.header}>
         {ScriptParametersLayoutUsecase1.params.output.map((item, id) => {
           return <ScriptParametrLayout key={id} typeOfCard='output' {...item} />;
         })}

@@ -6,3 +6,7 @@
   max-width: 13rem;
   height: 3.5rem;
 }
+
+.col2 {
+  grid-template-columns: repeat(2, 1fr);
+}
