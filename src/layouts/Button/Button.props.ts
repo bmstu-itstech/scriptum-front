@@ -1,5 +1,6 @@
-import type { HTMLAttributes, ReactElement } from 'react';
+import type {HTMLAttributes, ReactElement} from 'react';
 
 export interface Props extends HTMLAttributes<HTMLButtonElement> {
-	icon?: ReactElement;
+  icon?: ReactElement;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 }
