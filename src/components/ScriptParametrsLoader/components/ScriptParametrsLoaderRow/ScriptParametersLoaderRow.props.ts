@@ -1,6 +1,7 @@
 export interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  measureValue: string;
-  typeValue: string;
+  index: number;
+  // onUpdate: () => {};
+  onRemove: (index: number) => {};
 }
 
 export interface ScriptParametersLoaderRowProps {

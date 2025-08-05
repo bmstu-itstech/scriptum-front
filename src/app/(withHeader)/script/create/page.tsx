@@ -10,11 +10,22 @@ import { Button } from '@/layouts/Button';
 import { ScriptSchema } from '@/app/(withHeader)/script/create/page.usecase';
 import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 
+
+export interface IFormik {
+  name: string,
+  desc: string,
+  file: File,
+  inputParams: [name: string, desc: string, type: string, measure: string],
+  outputParams: [name: string, desc: string, type: string, measure: string]
+}
+
 export default function CreatePage() {
   return (
     <PageLayout>
       <Formik
-        initialValues={{ name: '', desc: '', file: null }}
+        initialValues={{
+          name: '', desc: '', file: null, inputParams: [], outputParams: []
+        }}
         onSubmit={(values) => {
           console.log(values);
         }}
