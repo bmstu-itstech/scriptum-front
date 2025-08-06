@@ -6,7 +6,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
     hide: React.ReactNode;
   };
   type: string;
-  errorText: string | null;
+  errorText?: string | null;
   value: string;
   name: string;
   inputClassName?: string;
