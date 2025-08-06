@@ -1,37 +1,33 @@
-.filter{
-	position: relative;
-	/* height: fit-content; */
-}
+
 
 .filter__select {
-	height: 100%;
-	width: 100%;
-	/* padding: 1rem 0.75rem 1rem 2.75rem; */
-	background: var(--color-white);
-	color: var(--color-dark-main);
-	font-size: var(--font-size-base);
-	outline: none;
-	border: 2px solid var(--color-gray-border);
-	border-radius: 1rem;
-	appearance: none;
-	cursor: pointer;
+  height: 100%;
+  width: 100%;
+  /* padding: 1rem 0.75rem 1rem 2.75rem; */
+  background: var(--color-white);
+  color: var(--color-dark-main);
+  font-size: var(--font-size-base);
+  outline: none;
+  border: 2px solid var(--color-gray-border);
+  border-radius: 1rem;
+  appearance: none;
+  cursor: pointer;
 
-	&:hover {
-		border-color: var(--color-gray-border2);
-	}
+  &:hover:not(:focus) {
+    border-color: var(--color-gray-border2);
+  }
 
-	&:focus {
-		border-color: var(--color-purple-main);
-	}
+  /* &:focus {
+    border-color: var(--color-purple-main);
+  } */
 }
 
-
 .filter__icon {
-	margin-left: 0.75rem;
-	aspect-ratio: 1/1;
-	display: inline-block;
-	line-height: 0;
-	pointer-events: none;
+  margin-left: 0.75rem;
+  aspect-ratio: 1/1;
+  display: inline-block;
+  line-height: 0;
+  pointer-events: none;
 }
 
 .errorText {

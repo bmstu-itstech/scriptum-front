@@ -3,38 +3,38 @@ import { PipelineStatus } from '@/shared/consts/pipeline';
 import { UserRole } from '@/shared/consts/user';
 import type { GroupBase, StylesConfig } from 'react-select';
 
-export type Option = {value: string; label: string};
+export type Option = { value: string; label: string };
 
 export const statusUsecase = [
-  {value: 'all', label: 'Все статусы'},
-  {value: PipelineStatus.OK, label: 'Успешно'},
-  {value: PipelineStatus.ERROR, label: 'Ошибка'},
-  {value: PipelineStatus.RUNNING, label: 'Выполняется'},
+  { value: 'all', label: 'Все статусы' },
+  { value: PipelineStatus.OK, label: 'Успешно' },
+  { value: PipelineStatus.ERROR, label: 'Ошибка' },
+  { value: PipelineStatus.RUNNING, label: 'Выполняется' },
 ];
 
 export const roleUsecase = [
-  {value: 'all', label: 'Все роли'},
-  {value: UserRole.ADMIN, label: 'Администраторы'},
-  {value: UserRole.USER, label: 'Пользователи'},
+  { value: 'all', label: 'Все роли' },
+  { value: UserRole.ADMIN, label: 'Администраторы' },
+  { value: UserRole.USER, label: 'Пользователи' },
 ];
 
 export const measureUsecase = [
-  {value: ParametrMeasure.None, label: 'Безразмерная'},
-  {value: ParametrMeasure.M, label: 'Метры (м)'},
-  {value: ParametrMeasure.CM, label: 'Сантиметры (см)'},
-  {value: ParametrMeasure.MM, label: 'Миллиметры (мм)'},
-  {value: ParametrMeasure.T, label: 'Тонны (т)'},
-  {value: ParametrMeasure.KG, label: 'Килограммы (кг)'},
-  {value: ParametrMeasure.G, label: 'Граммы (г)'},
+  { value: ParametrMeasure.None, label: 'Безразмерная' },
+  { value: ParametrMeasure.M, label: 'Метры (м)' },
+  { value: ParametrMeasure.CM, label: 'Сантиметры (см)' },
+  { value: ParametrMeasure.MM, label: 'Миллиметры (мм)' },
+  { value: ParametrMeasure.T, label: 'Тонны (т)' },
+  { value: ParametrMeasure.KG, label: 'Килограммы (кг)' },
+  { value: ParametrMeasure.G, label: 'Граммы (г)' },
 ];
 
 export const typeUsecase = [
-  {value: ParametrType.FLOAT, label: ParametrType.FLOAT},
-  {value: ParametrType.INT, label: ParametrType.INT},
-  {value: ParametrType.COMP, label: ParametrType.COMP},
+  { value: ParametrType.FLOAT, label: ParametrType.FLOAT },
+  { value: ParametrType.INT, label: ParametrType.INT },
+  { value: ParametrType.COMP, label: ParametrType.COMP },
 ];
 
-export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
+export const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
   control: (base, state) => ({
     ...base,
     border: 'none',
@@ -43,13 +43,13 @@ export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     cursor: 'pointer',
     height: '100%',
     minHeight: '100%',
-    
+
   }),
+  menuPortal: base => ({ ...base, zIndex: 9999 }),
 
   container: (base, state) => ({
     ...base,
     border: state.isFocused ? '2px solid var(--color-purple-main)' : '2px solid var(--color-gray-border)',
-
   }),
 
   // option: (base, state) => ({
@@ -85,7 +85,7 @@ export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     ...base,
     paddingBlock: '0px',
   }),
-  valueContainer : base => ({
+  valueContainer: base => ({
     ...base,
     paddingInlineStart: '1rem',
   })
