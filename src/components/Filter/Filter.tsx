@@ -41,6 +41,7 @@ export const Filter: FC<Props> = ({
       options={options}
       placeholder={placeholder}
       name={name}
+      menuPosition="fixed"
       isSearchable={false}
       components={{
         Control,
