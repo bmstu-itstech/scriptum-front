@@ -42,7 +42,16 @@ export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     backgroundColor: 'transparent',
     cursor: 'pointer',
     height: '100%',
+    minHeight: '100%',
+    
   }),
+
+  container: (base, state) => ({
+    ...base,
+    border: state.isFocused ? '2px solid var(--color-purple-main)' : '2px solid var(--color-gray-border)',
+
+  }),
+
   // option: (base, state) => ({
   //   ...base,
   //   cursor: 'pointer',
@@ -76,6 +85,10 @@ export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     ...base,
     paddingBlock: '0px',
   }),
+  valueContainer : base => ({
+    ...base,
+    paddingInlineStart: '1rem',
+  })
 };
 
 export const pageSelectStyles: StylesConfig<Option, false, GroupBase<Option>> = {
