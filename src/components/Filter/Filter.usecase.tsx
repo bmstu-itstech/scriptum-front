@@ -43,33 +43,27 @@ export  const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     cursor: 'pointer',
     height: '100%',
   }),
-  option: (base, state) => ({
-    ...base,
-    cursor: 'pointer',
-    background:
-      state.isFocused && !state.isSelected
-        ? 'var(--color-purple-border)'
-        : state.isSelected
-        ? 'var(--color-purple-main)'
-        : 'var(--color-white-main)',
-    color: state.isSelected ? 'var(--color-white-main)' : 'var(--color-dark-main)',
-    ':active': {
-      ...base[':active'],
-      backgroundColor: !state.isDisabled
-        ? state.isSelected
-          ? 'var(--color-purple-main)'
-          : 'var(--color-purple-border)'
-        : undefined,
-    },
-  }),
+  // option: (base, state) => ({
+  //   ...base,
+  //   cursor: 'pointer',
+  //   // fontSize: 'var(--font-size-sm)',
+  //   background:
+  //     state.isFocused && !state.isSelected
+  //       ? 'var(--color-purple-border)'
+  //       : state.isSelected
+  //       ? 'var(--color-purple-main)'
+  //       : 'var(--color-white-main)',
+  //   color: state.isSelected ? 'var(--color-white-main)' : 'var(--color-dark-main)',
+  //   ':active': {
+  //     ...base[':active'],
+  //     backgroundColor: !state.isDisabled
+  //       ? state.isSelected
+  //         ? 'var(--color-purple-main)'
+  //         : 'var(--color-purple-border)'
+  //       : undefined,
+  //   },
+  // }),
 
-  singleValue: base => ({
-    ...base,
-    background: 'var(--color-white)',
-    color: 'var(--color-dark-main)',
-    fontSize: 'var(--font-size-base)',
-    outline: 'none',
-  }),
   // placeholder: base => ({
   //   ...base,
   //   background: 'var(--color-white)',
@@ -93,6 +87,33 @@ export const pageSelectStyles: StylesConfig<Option, false, GroupBase<Option>> = 
     fontSize: 'var(--font-size-base)',
     textWrap: 'nowrap',
   }),
+  singleValue: base => ({
+    ...base,
+    background: 'var(--color-white)',
+    color: 'var(--color-dark-main)',
+    fontSize: 'var(--font-size-base)',
+    outline: 'none',
+  }),
+  option: (base, state) => ({
+    ...base,
+    cursor: 'pointer',
+    fontSize: 'var(--font-size-sm)',
+    background:
+      state.isFocused && !state.isSelected
+        ? 'var(--color-purple-border)'
+        : state.isSelected
+          ? 'var(--color-purple-main)'
+          : 'var(--color-white-main)',
+    color: state.isSelected ? 'var(--color-white-main)' : 'var(--color-dark-main)',
+    ':active': {
+      ...base[':active'],
+      backgroundColor: !state.isDisabled
+        ? state.isSelected
+          ? 'var(--color-purple-main)'
+          : 'var(--color-purple-border)'
+        : undefined,
+    },
+  }),
 }
 
 
@@ -104,5 +125,32 @@ export const selectStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     userSelect: 'none',
     fontSize: 'var(--font-size-sm)',
     textWrap: 'nowrap',
+  }),
+  singleValue: base => ({
+    ...base,
+    background: 'var(--color-white)',
+    color: 'var(--color-dark-main)',
+    fontSize: 'var(--font-size-sm)',
+    outline: 'none',
+  }),
+  option: (base, state) => ({
+    ...base,
+    cursor: 'pointer',
+    fontSize: 'var(--font-size-sm)',
+    background:
+      state.isFocused && !state.isSelected
+        ? 'var(--color-purple-border)'
+        : state.isSelected
+          ? 'var(--color-purple-main)'
+          : 'var(--color-white-main)',
+    color: state.isSelected ? 'var(--color-white-main)' : 'var(--color-dark-main)',
+    ':active': {
+      ...base[':active'],
+      backgroundColor: !state.isDisabled
+        ? state.isSelected
+          ? 'var(--color-purple-main)'
+          : 'var(--color-purple-border)'
+        : undefined,
+    },
   }),
 }
