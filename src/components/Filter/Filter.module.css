@@ -1,3 +1,8 @@
+.filter{
+	position: relative;
+	/* height: fit-content; */
+}
+
 .filter__select {
 	height: 100%;
 	width: 100%;
@@ -27,4 +32,32 @@
 	display: inline-block;
 	line-height: 0;
 	pointer-events: none;
+}
+
+.errorText {
+  display: flex;
+  /* position: absolute; */
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+  top: 100%;
+  /* opacity: 0; */
+  /* visibility: hidden; */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  color: var(--color-red-main);
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 50%;
+    background-color: var(--color-red-main);
+  }
 }
