@@ -13,7 +13,7 @@ export const InputLayout: FC<Props> = ({
   isPassword = false,
   isRequired = false,
   placeholder,
-  errorText,
+  errorText = null,
   inputTitle,
   isTextArea = false,
   type,
