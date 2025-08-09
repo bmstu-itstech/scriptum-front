@@ -1,4 +1,4 @@
-import { useRef, FC } from 'react';
+import { useRef, FC, memo } from 'react';
 import cn from 'classnames';
 import { TextWithIcon } from '@/shared/TextWithIcon';
 import { UploadIcon } from '@/components/icons/UploadIcon';
@@ -6,7 +6,7 @@ import type { FileProps } from '@/layouts/InputLayout/InputLayout.props';
 import styles from '@/layouts/InputLayout/components/FileInput.module.css';
 import stylesBase from '@/layouts/InputLayout/InputLayout.module.css';
 
-export const FileInput: FC<FileProps> = ({
+const FileInput: FC<FileProps> = ({
   onChange,
   name,
   placeholder,
@@ -91,3 +91,5 @@ export const FileInput: FC<FileProps> = ({
     </div>
   );
 };
+
+export default memo(FileInput)

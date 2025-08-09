@@ -1,7 +1,7 @@
 'use client'
 import { PageLayout } from '@/layouts/PageLayout';
-import { pageCreateUsecase } from '@/app/(withHeader)/script/create/page.usecase';
-import { InputLayout } from '@/layouts/InputLayout';
+import { pageCreateUsecase, ScriptInitialValues } from '@/app/(withHeader)/script/create/page.usecase';
+import  InputLayout  from '@/layouts/InputLayout';
 import { InfoBlockLayout } from '@/layouts/InfoBlockLayout';
 import styles from '@/app/(withHeader)/script/create/page.module.css';
 import { ScriptParametrsLoader } from '@/components/ScriptParametrsLoader';
@@ -11,23 +11,15 @@ import { ScriptSchema } from '@/app/(withHeader)/script/create/page.usecase';
 import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 
 
-export interface IFormik {
-  name: string,
-  desc: string,
-  file: File,
-  inputParams: [name: string, desc: string, type: string, measure: string],
-  outputParams: [name: string, desc: string, type: string, measure: string]
-}
-
 export default function CreatePage() {
+  
   return (
     <PageLayout>
       <Formik
-        initialValues={{
-          name: '', desc: '', file: null, inputParams: [], outputParams: []
-        }}
+        initialValues={ScriptInitialValues}
         onSubmit={(values) => {
           console.log(values);
+          alert('Я ОТПРАВИЛ')
         }}
         validationSchema={ScriptSchema}
       >

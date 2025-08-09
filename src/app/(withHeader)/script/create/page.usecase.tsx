@@ -17,7 +17,7 @@ export const pageCreateUsecase = {
       scriptCode: {
         title: 'Python-файл (*.py) *',
         placeholder: 'Выберите Python-файл',
-  
+
       },
 
       scriptDesc: {
@@ -44,15 +44,45 @@ export const pageCreateUsecase = {
   },
 };
 
+const ParametrSheme = Yup.object().shape({
+  name: Yup.string()
+    .min(2, 'Название должно иметь хотя бы 2 символа')
+    .max(50, 'Название должно быть меньше 50 символов')
+    .required('Название обязательно'),
+  desc: Yup.string()
+    .min(2, 'Описание должно иметь хотя бы 2 символа')
+    .max(50, 'Описание должно быть меньше 50 символов')
+    .required('Описание обязательно'),
+  type: Yup.string()
+    .min(2, 'Тип должен иметь хотя бы 2 символа')
+    .max(50, 'Тип должен быть меньше 50 символов')
+    .required('Тип обязателен'),
+  measure: Yup.string()
+    .min(2, 'Единица измерения должна иметь хотя бы 2 символа')
+    .max(50, 'Единица измерения должна быть меньше 50 символов')
+    .required('Единица измерения обязательна'),
+})
+
 export const ScriptSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Название должно иметь хотя бы 2 символа')
     .max(50, 'Название должно быть меньше 50 символов')
     .required('Название обязательно'),
   desc: Yup.string()
-    .min(2, 'Название должно иметь хотя бы 2 символа')
-    .max(50, 'Название должно быть меньше 50 символов')
+    .min(2, 'Описание должно иметь хотя бы 2 символа')
+    .max(50, 'Описание должно быть меньше 50 символов')
     .required('Описание обязательно'),
+  inputParams: Yup.array().of(ParametrSheme),
+  outputParams: Yup.array().of(ParametrSheme),
+  // parameter['type']: Yup.string(),
+  // type: Yup.string()
+  //   .min(2, 'Тип должен иметь хотя бы 2 символа')
+  //   .max(50, 'Тип должен быть меньше 50 символов')
+  //   .required('Тип обязателен'),
+  // measure: Yup.string()
+  //   .min(2, 'Единица измерения должна иметь хотя бы 2 символа')
+  //   .max(50, 'Единица измерения должна быть меньше 50 символов')
+  //   .required('Единица измерения обязательна'),
   file: Yup.mixed()
     .required('Скрипт обязателен')
     .test(
@@ -62,3 +92,22 @@ export const ScriptSchema = Yup.object().shape({
     )
 
 });
+
+export interface Parameter {
+  name: string;
+  desc: string;
+  type: string;
+  measure: string;
+}
+
+export interface ScriptFormValues {
+  name: string;
+  desc: string;
+  file: File | null;
+  inputParams: Parameter[];
+  outputParams: Parameter[];
+}
+
+export const ScriptInitialValues: ScriptFormValues = {
+  name: '', desc: '', file: null, inputParams: [], outputParams: []
+};
