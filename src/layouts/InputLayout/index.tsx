@@ -1,12 +1,12 @@
 // InputLayout.tsx
 'use client';
-import { FC, useCallback, useState, type ChangeEventHandler } from 'react';
+import { FC, memo, useCallback, useMemo, useState, type ChangeEventHandler } from 'react';
 import { Props } from './InputLayout.props';
 import cn from 'classnames';
 import styles from './InputLayout.module.css';
-import { FileInput } from '@/layouts/InputLayout/components';
+import FileInput from '@/layouts/InputLayout/components';
 
-export const InputLayout: FC<Props> = ({
+const InputLayout: FC<Props> = ({
   onChange,
   name,
   toggleIcons,
@@ -28,25 +28,27 @@ export const InputLayout: FC<Props> = ({
     setShowPassword(!showPassword);
   }, [showPassword]);
 
-  const currentIcon = isPassword ? (showPassword ? toggleIcons?.hide : toggleIcons?.show) : null;
-
+  const currentIcon = useMemo(() => isPassword ? (showPassword ? toggleIcons?.hide : toggleIcons?.show) : null, [isPassword, showPassword])
+  // console.log('значение input ' + name + ': ' + value + 'А ERROR TEXT : ' + errorText)
   if (type === 'file') {
     return (
-      <FileInput
-        type={type}
-        name={name}
-        onChange={onChange}
-        inputClassName={inputClassName}
-        errorText={errorText}
-        inputTitle={inputTitle}
-        placeholder={placeholder}
-        className={className}
-      />
+      useMemo(() =>
+        <FileInput
+          type={type}
+          name={name}
+          onChange={onChange}
+          inputClassName={inputClassName}
+          errorText={errorText}
+          inputTitle={inputTitle}
+          placeholder={placeholder}
+          className={className}
+        />
+        , [type, name, onChange, inputClassName, errorText, inputTitle, placeholder, className])
     );
   }
 
   return (
-    <div className={cn(styles.inputContainer, className)} {...props}>
+    useMemo(() => <div className={cn(styles.inputContainer, className)} {...props}>
       {inputTitle && (
         <label htmlFor={name} className='layout__inputLabel'>
           {inputTitle}
@@ -85,6 +87,12 @@ export const InputLayout: FC<Props> = ({
         )}
       </div>
       {errorText && <span className={cn(styles.errorText)}>{errorText}</span>}
-    </div>
+    </div>, [
+      type, name, onChange, inputClassName, errorText, inputTitle, placeholder, className
+    ])
+
   );
 };
+
+
+export default memo(InputLayout)
