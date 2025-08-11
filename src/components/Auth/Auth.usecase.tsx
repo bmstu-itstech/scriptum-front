@@ -1,4 +1,4 @@
-import { InputLayout } from '@/layouts/InputLayout';
+import  InputLayout  from '@/layouts/InputLayout';
 import { LoginLogoIcon } from '../icons/LoginLogoIcon';
 import styles from './Auth.module.css';
 import { OpenEyeIcon } from '../icons/OpenEyeIcon';
