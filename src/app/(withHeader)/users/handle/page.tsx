@@ -12,7 +12,7 @@ import { UserRole } from '@/shared/consts/user'
 import { Pagination } from '@/shared/Pagination'
 import style from './page.module.css'
 import { UserTable } from "@/components/UserTable"
-import { roleUsecase } from '@/components/Filter/Filter.usecase'
+import { pageSelectStyles, roleUsecase } from '@/components/Filter/Filter.usecase'
 
 const ITEMS_PER_PAGE = 8
 
@@ -74,12 +74,13 @@ export default function HandlePage() {
             placeholder='Все роли'
             name='roleFilter'
             value={roleFilter}
-            callback={value => {
+            onChange={value => {
               setRoleFilter(value as UserRole | 'all');
               setCurrentPage(1);
             }}
             options={roleUsecase}
             icon={<FilterIcon />}
+            style={pageSelectStyles}
             className={style.filter}
           />
         </div>

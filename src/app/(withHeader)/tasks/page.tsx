@@ -59,7 +59,7 @@ export default function TasksPage() {
             name='statusFilter'
             style={pageSelectStyles}
             value={statusFilter}
-            callback={value => {
+            onChange={value => {
               setStatusFilter(value as PipelineStatus | 'all');
               setCurrentPage(1);
             }}
