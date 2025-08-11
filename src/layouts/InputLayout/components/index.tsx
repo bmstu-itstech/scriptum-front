@@ -7,7 +7,8 @@ import styles from '@/layouts/InputLayout/components/FileInput.module.css';
 import stylesBase from '@/layouts/InputLayout/InputLayout.module.css';
 import { useFormikContext } from 'formik';
 import { type ScriptFormValues } from '@/app/(withHeader)/script/create/page.usecase';
-
+import { CloseModalIcon } from '@/components/icons/CloseModalIcon';
+import { PythonIcon } from '@/components/icons/PythonIcon';
 
 const FileInput: FC<FileProps> = ({
   onChange,
@@ -22,7 +23,14 @@ const FileInput: FC<FileProps> = ({
   const { values } = useFormikContext<ScriptFormValues>();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const FileComponent = useMemo(() => { return (<div className={styles.fileComponent}>{values.file?.name}</div>) }, [])
+  const FileComponent = useMemo(() => {
+    return (<div className={styles.fileComponent}>
+      <PythonIcon className={styles.python} />
+      <p className={styles.FileName}>{values.file?.name}</p>
+      {values.file?.size && <p className={styles.FileSize}> ({(values.file.size / 1024).toFixed(2)} KB)</p>}
+      <CloseModalIcon className={styles.deleteFile} />
+    </div>)
+  }, [])
   const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     event.stopPropagation();
