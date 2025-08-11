@@ -12,27 +12,56 @@
   cursor: pointer;
 
   &:hover {
-	background-color: var(--color-gray-superlight);
+    background-color: var(--color-gray-superlight);
   }
 }
 
 .hover {
-	background-color: var(--color-gray-superlight);
+  background-color: var(--color-gray-superlight);
 }
 
-.fileInput__text{
-	color: var(--color-gray-sub);
+.fileInput__text {
+  color: var(--color-gray-sub);
 }
 
-.fileComponent{
-  width: fit-content;
-  height: fit-content;
+.fileComponent {
+  position: relative;
+  width: 7rem;
+  height: 7rem;
   aspect-ratio: 1/1;
   padding: 1rem;
   border-radius: var(--border-radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-dark-main);
+  flex-direction: column;
+  border: 1px dashed var(--color-dark-main);
   color: var(--color-dark-main);
+}
+
+.deleteFile {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  &:hover {
+    color: var(--color-red-dark-main);
+  }
+}
+
+.python {
+  width: 3rem;
+  height: 3rem;
+}
+.FileName {
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+  line-height: 1.25rem;
+}
+.FileSize {
+  font-weight: 400;
+  font-size: var(--font-size-xxs);
+  line-height: 1rem;
+  color: var(--color-gray-sub);
 }
