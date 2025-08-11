@@ -6,13 +6,13 @@ import { memo, useCallback, useMemo, type FC } from 'react';
 import cn from 'classnames';
 import { Filter } from '@/components/Filter/Filter';
 import { measureUsecase, typeUsecase } from '@/components/Filter/Filter.usecase';
-import { useFormikContext, type FormikErrors } from 'formik';
+import { useField, useFormikContext, type FormikErrors } from 'formik';
 import { ScriptFormValues, type Parameter } from '@/app/(withHeader)/script/create/page.usecase';
 
 interface RowProps {
   index: number;
   arrayName: string; // 'inputParams' или 'outputParams'
-  onRemove: (index: number) => void;
+  onRemove: () => void;
   className?: string;
 }
 
@@ -22,70 +22,71 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({
   onRemove,
   className,
 }) => {
-  const { values, setFieldValue, errors, touched } = useFormikContext<ScriptFormValues>();
+  const { setFieldValue, setFieldTouched } = useFormikContext<ScriptFormValues>();
 
-  const getError = (fieldName: keyof Parameter) => {
-    const arrayErrors = errors[arrayName] as FormikErrors<Parameter>[] | undefined;
-    const arrayTouched = touched[arrayName] as { [key in keyof Parameter]?: boolean }[] | undefined;
-
-    if (arrayErrors?.[index]?.[fieldName] && arrayTouched?.[index]?.[fieldName]) {
-      return arrayErrors[index][fieldName];
-    }
-    return '';
-  };
+  const [nameField, nameMeta] = useField<string>(`${arrayName}[${index}].name`);
+  const [descField, descMeta] = useField<string>(`${arrayName}[${index}].desc`);
+  const [typeField, typeMeta] = useField<string>(`${arrayName}[${index}].type`);
+  const [measureField, measureMeta] = useField<string>(`${arrayName}[${index}].measure`);
 
   const handleFieldChange = useCallback((fieldName: keyof Parameter, value: string) => {
     setFieldValue(`${arrayName}[${index}].${fieldName}`, value);
-  }, [arrayName, index, setFieldValue]);
+  }, [arrayName, index, setFieldValue, onRemove]);
+
 
   return (
     <div className={`${styles.row} animationAppear ${className}`}>
       <InputLayout
-        errorText={getError('name')}
+        errorText={nameMeta.touched && nameMeta.error ? nameMeta.error : null}
         type="text"
         placeholder={usecase.name.placeholder}
         className={styles.input}
-        name={`${arrayName}[${index}].name`}
-        value={values[arrayName][index]?.name || ''}
-        onChange={(e) => handleFieldChange('name', e.currentTarget.value)}
+        {...nameField}
       />
 
       <InputLayout
-        errorText={getError('desc')}
+        errorText={descMeta.touched && descMeta.error ? descMeta.error : null}
         type="text"
         placeholder={usecase.desc.placeholder}
         className={styles.input}
-        name={`${arrayName}[${index}].desc`}
-        value={values[arrayName][index]?.desc || ''}
-        onChange={(e) => handleFieldChange('desc', e.currentTarget.value)}
+        {...descField}
       />
 
       <Filter
-        errorText={getError('type')}
-        name={`${arrayName}[${index}].type`}
+        index={index}
         options={typeUsecase}
-        value={values[arrayName][index]?.type || ''}
         placeholder="Выберите тип"
-        callback={(value: string) => handleFieldChange('type', value)}
+        name={typeField.name}
+        value={typeField.value}
+        // {...typeField}
+        onBlur={() => setFieldTouched(typeField.name, true, true)}
+        onChange={(value: string) => handleFieldChange('type', value)}
         selectClassName={styles.filter__type}
+        errorText={typeMeta.touched && typeMeta.error ? typeMeta.error : null}
+
       />
 
       <Filter
-        errorText={getError('measure')}
-        name={`${arrayName}[${index}].measure`}
+        index={index+10000}
         options={measureUsecase}
-        value={values[arrayName][index]?.measure || ''}
         placeholder="Выберите единицу измерения"
-        callback={(value: string) => handleFieldChange('measure', value)}
+        name={measureField.name}
+        value={measureField.value}
+        // {...measureField}
+        onBlur={() => setFieldTouched(measureField.name, true, true)}
+        onChange={(value: string) => handleFieldChange('measure', value)}
         selectClassName={styles.filter__measure}
+        errorText={measureMeta.touched && measureMeta.error ? measureMeta.error : null}
       />
 
-      <span
-        onClick={() => onRemove(index)}
+      <button
+        title='del'
+        type='button'
+        onClick={() => onRemove()}
         className={cn(styles.scriptElement__delIcon, 'smoothTransition')}
       >
         <DeleteIcon />
-      </span>
+      </button>
     </div>
   );
 };

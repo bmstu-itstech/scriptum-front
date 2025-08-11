@@ -1,6 +1,6 @@
 'use client';
 import { ScriptParametrsLayout } from '@/layouts/ScriptParametrsLayout';
-import { useCallback, useState, type FC } from 'react';
+import { useCallback, useMemo, useState, type FC } from 'react';
 import { Props } from '@/components/ScriptParametrsLoader/ScriptParametrsLoader.props';
 import { pageCreateUsecase, type ScriptFormValues } from '@/app/(withHeader)/script/create/page.usecase';
 import cn from 'classnames';
@@ -8,29 +8,19 @@ import stylesLayout from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.
 import styles from '@/components/ScriptParametrsLoader/ScriptParametersLoader.module.css';
 import { Button } from '@/layouts/Button';
 import { AddParametrIcon } from '@/components/icons/AddParametricon';
-import  ScriptParametersLoaderRow  from '@/components/ScriptParametrsLoader/components/ScriptParametrsLoaderRow/index';
+import ScriptParametersLoaderRow from '@/components/ScriptParametrsLoader/components/ScriptParametrsLoaderRow/index';
 import { DocumentNoParamsIcon } from '@/components/icons/DocumentNoParamsIcon';
 import { useFormikContext } from 'formik';
-
+import { FieldArray } from 'formik';
+import { ExtendedBlock } from '@/shared/ExtendedBlock';
 
 export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) => {
-  const { values, setFieldValue } = useFormikContext<ScriptFormValues>();
+  const { values } = useFormikContext<ScriptFormValues>();
   const name = type === 'input' ? 'inputParams' : 'outputParams';
   const params = values[name] || [];
+  console.log('loader перерендерился')
 
-  const addParam = () => {
-    setFieldValue(name, [
-      ...params,
-      { name: '', desc: '', measure: '', type: '' }
-    ]);
-  };
-
-  const removeParam = (index: number) => {
-    const filtered = params.filter((_, i) => i !== index);
-    setFieldValue(name, filtered);
-  };
-
-  const PreBlock = () => {
+  const PreBlock = useMemo(() => {
     if (params.length === 0) {
       return (
         <div className={styles.preblock}>
@@ -51,39 +41,54 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
         )}
       </div>
     );
-  };
+  }, [params]);
 
   return (
-    <ScriptParametrsLayout
-      className={className}
-      mainExtendedClassname={styles.extendedBlock__main}
-      headerClassname={stylesLayout.smallPadding}
-      header={
-        <div className={cn(styles.headerList, styles.justifyBetween)}>
-          <p className={cn('layout__title-sm', styles.headerName)}>
-            {type === 'input' ? 'Входные параметры' : 'Выходные параметры'}
-          </p>
-          <Button
-            className={styles.addButton}
-            onClick={addParam}
-            icon={<AddParametrIcon className={styles.addIcon} />}
-          >
-            Добавить параметр
-          </Button>
-        </div>
-      }
-      preBlock={<PreBlock />}
-      {...props}
-    >
-      {params.map((row, index) => (
-        <ScriptParametersLoaderRow
-          key={index}
-          arrayName={name}
-          index={index}
-          onRemove={removeParam}
-          {...row}
-        />
-      ))}
-    </ScriptParametrsLayout>
+    <FieldArray name={name}>
+      {({ remove, push }) => (
+        <ScriptParametrsLayout
+          className={className}
+          headerClassname={stylesLayout.smallPadding}
+          header={
+            <div className={cn(styles.headerList, styles.justifyBetween)}>
+              <p className={cn('layout__title-sm', styles.headerName)}>
+                {type === 'input' ? 'Входные параметры' : 'Выходные параметры'}
+              </p>
+              <Button
+                className={styles.addButton}
+                onClick={() => push({
+                  name: '',
+                  desc: '',
+                  type: '',
+                  measure: '',
+                })}
+                icon={<AddParametrIcon className={styles.addIcon} />}
+              >
+                Добавить параметр
+              </Button>
+            </div>
+          }
+
+          {...props}
+        >
+          {PreBlock}
+          <ExtendedBlock
+            mainExtendedClassname={styles.extendedBlock__main}>
+            {params.map((row, index) => (
+              <ScriptParametersLoaderRow
+                key={index}
+                arrayName={name}
+                index={index}
+                onRemove={() => remove(index)}
+                {...row}
+              />
+            ))
+
+            }
+          </ExtendedBlock>
+        </ScriptParametrsLayout>
+      )}
+    </FieldArray>
+
   );
 };

@@ -1,5 +1,5 @@
-import type {IScriptItem} from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
-import type {HTMLAttributes, ReactElement} from 'react';
+import type { IScriptItem } from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
+import type { HTMLAttributes, JSX, ReactElement } from 'react';
 
 interface IInputData {
   title: string;
@@ -27,13 +27,6 @@ export interface IScriptStruct {
 }
 
 export interface Props extends IScriptStruct, HTMLAttributes<HTMLDivElement> {
-  children: ReactElement[];
-  preBlock?: ReactElement;
-  headerClassname?: string;
-  contentClassname?: string;
-  mainExtendedClassname?: string;
+  children: ReactElement | ReactElement[];
+  headerClassname?: string; 
 }
-
-// export interface Props extends IScript, IScriptStruct {
-//   typeOfCard: 'input' | 'output';
-// }

@@ -7,7 +7,8 @@
   align-items: center;
   gap: 0.75rem;
   color: var(--color-gray-sub);
-  height: 3rem;
+  height: fit-content;
+  padding-block: 0.8005rem;
   cursor: pointer;
 
   &:hover {
@@ -21,4 +22,17 @@
 
 .fileInput__text{
 	color: var(--color-gray-sub);
+}
+
+.fileComponent{
+  width: fit-content;
+  height: fit-content;
+  aspect-ratio: 1/1;
+  padding: 1rem;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-dark-main);
+  color: var(--color-dark-main);
 }

@@ -5,7 +5,7 @@ import  InputLayout  from '@/layouts/InputLayout';
 import { InfoBlockLayout } from '@/layouts/InfoBlockLayout';
 import styles from '@/app/(withHeader)/script/create/page.module.css';
 import { ScriptParametrsLoader } from '@/components/ScriptParametrsLoader';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FastField, Field } from 'formik';
 import { Button } from '@/layouts/Button';
 import { ScriptSchema } from '@/app/(withHeader)/script/create/page.usecase';
 import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
@@ -13,6 +13,7 @@ import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 
 export default function CreatePage() {
   
+  console.log('страница перерендерилпсь')
   return (
     <PageLayout>
       <Formik

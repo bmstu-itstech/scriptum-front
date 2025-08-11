@@ -3,25 +3,28 @@ import type Props from '@/components/Filter/Filter.props';
 import { type FC, type ReactElement } from 'react';
 import cn from 'classnames';
 import styles from '@/components/Filter/Filter.module.css';
-import Select, { type SingleValue, type ActionMeta, components, type ControlProps } from 'react-select';
+import Select, { type SingleValue, type ActionMeta, components, type ControlProps, SelectComponentsConfig } from 'react-select';
 import { colourStyles, Option, selectStyles } from '@/components/Filter/Filter.usecase';
 
 
-export const Filter: FC<Props> = ({
-  callback,
+export const Filter: React.FC<Props> = ({
   name,
   value,
   icon,
   placeholder,
   className,
+  index,
+  onChange,
+  onBlur,
   selectClassName,
   errorText = null,
   style,
   options = [],
   ...props
 }) => {
+  
   const handleChange = (newValue: SingleValue<Option>) => {
-    callback(newValue?.value || '');
+    onChange?.(newValue?.value ?? '');
   };
 
   const selectedOption = options.find(option => option.value === value) || null;
@@ -34,18 +37,18 @@ export const Filter: FC<Props> = ({
   );
 
   return (
-
     <div className={cn(styles.filter, className)}>
       <Select<Option>
         className={cn(styles.filter__select, 'smoothTransition', selectClassName)}
         classNamePrefix='select'
         value={selectedOption}
         onChange={handleChange}
+        onBlur={onBlur}
         options={options}
         placeholder={placeholder}
+        instanceId={`inputParam-type-${index}`}
         name={name}
-        menuPortalTarget={document.body} 
-        // menuPosition="fixed"
+        menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
         isSearchable={false}
         components={{
           Control,
