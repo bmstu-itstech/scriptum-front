@@ -1,9 +1,6 @@
 .inputContainer {
   width: 100%;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  gap: 0.5rem;
+
 
   &.error {
     .errorText {
@@ -57,10 +54,10 @@
 
 .errorText {
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   align-items: center;
   gap: 0.5rem;
-  top: 100%;
+  /* top: 100%; */
   /* opacity: 0; */
   /* visibility: hidden; */
   -moz-user-select: none;

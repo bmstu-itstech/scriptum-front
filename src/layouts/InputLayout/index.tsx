@@ -27,28 +27,27 @@ const InputLayout: FC<Props> = ({
   const togglePasswordVisibility = useCallback(() => {
     setShowPassword(!showPassword);
   }, [showPassword]);
-
+  console.log('я перерендерил input с именем '+ name)
   const currentIcon = useMemo(() => isPassword ? (showPassword ? toggleIcons?.hide : toggleIcons?.show) : null, [isPassword, showPassword])
-  // console.log('значение input ' + name + ': ' + value + 'А ERROR TEXT : ' + errorText)
+
   if (type === 'file') {
     return (
-      useMemo(() =>
-        <FileInput
-          type={type}
-          name={name}
-          onChange={onChange}
-          inputClassName={inputClassName}
-          errorText={errorText}
-          inputTitle={inputTitle}
-          placeholder={placeholder}
-          className={className}
-        />
-        , [type, name, onChange, inputClassName, errorText, inputTitle, placeholder, className])
+      <FileInput
+        type={type}
+        name={name}
+        onChange={onChange}
+        inputClassName={inputClassName}
+        errorText={errorText}
+        inputTitle={inputTitle}
+        placeholder={placeholder}
+        className={className}
+      />
+
     );
   }
 
   return (
-    useMemo(() => <div className={cn(styles.inputContainer, className)} {...props}>
+    <div className={cn(styles.inputContainer, className)} {...props}>
       {inputTitle && (
         <label htmlFor={name} className='layout__inputLabel'>
           {inputTitle}
@@ -87,11 +86,7 @@ const InputLayout: FC<Props> = ({
         )}
       </div>
       {errorText && <span className={cn(styles.errorText)}>{errorText}</span>}
-    </div>, [
-      type, name, onChange, inputClassName, errorText, inputTitle, placeholder, className
-    ])
-
-  );
+    </div>)
 };
 
 

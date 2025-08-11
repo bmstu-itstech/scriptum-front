@@ -1,10 +1,13 @@
-import { useRef, FC, memo } from 'react';
+import { useRef, FC, memo, useState, useMemo } from 'react';
 import cn from 'classnames';
 import { TextWithIcon } from '@/shared/TextWithIcon';
 import { UploadIcon } from '@/components/icons/UploadIcon';
 import type { FileProps } from '@/layouts/InputLayout/InputLayout.props';
 import styles from '@/layouts/InputLayout/components/FileInput.module.css';
 import stylesBase from '@/layouts/InputLayout/InputLayout.module.css';
+import { useFormikContext } from 'formik';
+import { type ScriptFormValues } from '@/app/(withHeader)/script/create/page.usecase';
+
 
 const FileInput: FC<FileProps> = ({
   onChange,
@@ -16,8 +19,10 @@ const FileInput: FC<FileProps> = ({
   className,
   ...props
 }) => {
+  const { values } = useFormikContext<ScriptFormValues>();
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const FileComponent = useMemo(() => { return (<div className={styles.fileComponent}>{values.file?.name}</div>) }, [])
   const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -40,7 +45,7 @@ const FileInput: FC<FileProps> = ({
 
   const handleFileChange = (file: File) => {
     if (inputRef.current) {
-      // Создаем fake event для совместимости с Formik
+
       const event = {
         target: {
           name: name,
@@ -68,9 +73,10 @@ const FileInput: FC<FileProps> = ({
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
-        <TextWithIcon icon={<UploadIcon />}>
+        {values.file ? FileComponent : (<TextWithIcon icon={<UploadIcon />}>
           {placeholder || 'Перетащите файл или кликните для выбора'}
-        </TextWithIcon>
+        </TextWithIcon>)}
+
 
         <input
           id={name}

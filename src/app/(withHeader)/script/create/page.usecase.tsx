@@ -109,5 +109,6 @@ export interface ScriptFormValues {
 }
 
 export const ScriptInitialValues: ScriptFormValues = {
-  name: '', desc: '', file: null, inputParams: [], outputParams: []
+  name: '', desc: '', file: null, inputParams: [],
+  outputParams: []
 };

@@ -2,7 +2,7 @@
 import style from './page.module.css'
 import { PageLayout } from "@/layouts/PageLayout"
 import { createUserPageUsecase, createUserSectionUsecase } from './page.usecase';
-import { InputLayout } from '@/layouts/InputLayout';
+import  InputLayout  from '@/layouts/InputLayout';
 import InputLayoutStyle from '@/layouts/InputLayout/InputLayout.module.css';
 import { SectionLayout } from '@/layouts/SectionLayout';
 import { ShieldIcon } from '@/components/icons/ShieldIcon';

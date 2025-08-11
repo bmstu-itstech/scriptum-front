@@ -19,7 +19,7 @@ export const roleUsecase = [
 ];
 
 export const measureUsecase = [
-  { value: ParametrMeasure.None, label: 'Безразмерная' },
+  { value: ParametrMeasure.None, label: ParametrMeasure.None },
   { value: ParametrMeasure.M, label: 'Метры (м)' },
   { value: ParametrMeasure.CM, label: 'Сантиметры (см)' },
   { value: ParametrMeasure.MM, label: 'Миллиметры (мм)' },
