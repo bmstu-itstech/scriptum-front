@@ -40,6 +40,10 @@
   padding-inline: 1.5rem;
 }
 
+.extendedBlock__content{
+  grid-template-columns: 1fr;
+}
+
 .preblock {
   display: flex;
   flex-direction: column;
