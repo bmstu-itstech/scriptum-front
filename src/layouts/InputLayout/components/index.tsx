@@ -1,4 +1,4 @@
-import { useRef, FC, memo, useState, useMemo } from 'react';
+import { useRef, FC, memo, useState, useMemo, useCallback } from 'react';
 import cn from 'classnames';
 import { TextWithIcon } from '@/shared/TextWithIcon';
 import { UploadIcon } from '@/components/icons/UploadIcon';
@@ -20,17 +20,26 @@ const FileInput: FC<FileProps> = ({
   className,
   ...props
 }) => {
-  const { values } = useFormikContext<ScriptFormValues>();
+  const { values, setFieldValue } = useFormikContext<ScriptFormValues>();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const FileComponent = useMemo(() => {
+  const handleDeleteFile = useCallback((e: React.MouseEvent<HTMLImageElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+    setFieldValue(name, null);
+  }, [name, setFieldValue]);
+
+  const FileComponent = () => {
     return (<div className={styles.fileComponent}>
       <PythonIcon className={styles.python} />
       <p className={styles.FileName}>{values.file?.name}</p>
       {values.file?.size && <p className={styles.FileSize}> ({(values.file.size / 1024).toFixed(2)} KB)</p>}
-      <CloseModalIcon className={styles.deleteFile} />
+      <CloseModalIcon onClick={handleDeleteFile} className={styles.deleteFile} />
     </div>)
-  }, [])
+  }
   const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -81,7 +90,7 @@ const FileInput: FC<FileProps> = ({
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
-        {values.file ? FileComponent : (<TextWithIcon icon={<UploadIcon />}>
+        {values.file ? <FileComponent /> : (<TextWithIcon icon={<UploadIcon />}>
           {placeholder || 'Перетащите файл или кликните для выбора'}
         </TextWithIcon>)}
 
