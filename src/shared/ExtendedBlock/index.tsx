@@ -1,39 +1,44 @@
-import {useCallback, useState, type FC} from 'react';
-import {Props} from '@/shared/ExtendedBlock/ExtendedBlock.props';
-import {DownArrowIcon} from '@/components/icons/DownArrowIcon';
-import {UpArrowIcon} from '@/components/icons/UpArrowIcon';
+import { memo, useCallback, useEffect, useState, type FC } from 'react';
+import { Props } from '@/shared/ExtendedBlock/ExtendedBlock.props';
+import { DownArrowIcon } from '@/components/icons/DownArrowIcon';
+import { UpArrowIcon } from '@/components/icons/UpArrowIcon';
 import styles from '@/shared/ExtendedBlock/ExtendedBlock.module.css';
 import cn from 'classnames';
 
-export const ExtendedBlock: FC<Props> = ({children, contentClassname, mainExtendedClassname}) => {
+export const ExtendedBlock: FC<Props> = ({ children, contentClassname, mainExtendedClassname }) => {
   const [countOfShown, setCountOfShown] = useState(4);
+  const [countOfChildren, setCountOfChildren] = useState(children.length);
+  useEffect(() => {
+    setCountOfChildren(children.length);
+  });
+
   const onShowMoreClick = useCallback(() => {
-    setCountOfShown(children.length);
-  }, []);
+    setCountOfShown(countOfChildren);
+  }, [countOfChildren]);
   const onShowLessClick = useCallback(() => {
     setCountOfShown(4);
   }, []);
-
+  console.log('в ExtendedBlock', countOfChildren, ' ', countOfShown);
   return (
     <>
       <div className={cn(styles.ExtendedBlock, mainExtendedClassname)}>
         <div className={cn(styles.ScriptParametrsLayout__content, contentClassname)}>
           {children.slice(0, 4)}
         </div>
-        {children.length > 4 && (
+        {countOfChildren > 4 && (
           <div
             className={cn(styles.ScriptParametrsLayout__content, contentClassname, {
               [styles.expanded]: countOfShown > 4,
             })}>
-            <div className={styles.ScriptParametrsLayout__content__children}>
+            <div className={cn(styles.ScriptParametrsLayout__content__children, contentClassname)}>
               {children.slice(4)}
             </div>
           </div>
         )}
       </div>
-      {children.length > 4 ? (
+      {countOfChildren > 4 ? (
         <div className={styles.ScriptParametrsLayout__btn}>
-          {children.length > countOfShown ? (
+          {countOfChildren > countOfShown ? (
             <button
               title='showMore'
               type='button'
@@ -45,7 +50,7 @@ export const ExtendedBlock: FC<Props> = ({children, contentClassname, mainExtend
             <button
               title='showLess'
               type='button'
-              className={styles.ScriptParametrsLayout__extendBtn}
+              className={cn(styles.ScriptParametrsLayout__extendBtn, styles.ScriptParametrsLayout__extendBtn__showLess)}
               onClick={onShowLessClick}>
               <UpArrowIcon className={styles.ScriptParametrsLayout__extendBtn_btn} />
             </button>

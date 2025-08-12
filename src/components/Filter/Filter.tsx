@@ -46,10 +46,11 @@ export const Filter: React.FC<Props> = ({
         onBlur={onBlur}
         options={options}
         placeholder={placeholder}
+        tabSelectsValue={false}
         instanceId={`inputParam-type-${index}`}
         name={name}
         menuPortalTarget={typeof window !== 'undefined' ? document.body : undefined}
-        isSearchable={false}
+        isSearchable={true}
         components={{
           Control,
           IndicatorSeparator: () => null,

@@ -18,8 +18,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
   const { values } = useFormikContext<ScriptFormValues>();
   const name = type === 'input' ? 'inputParams' : 'outputParams';
   const params = values[name] || [];
-  console.log('loader перерендерился')
-
+  
   const PreBlock = useMemo(() => {
     if (params.length === 0) {
       return (
@@ -73,7 +72,9 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
         >
           {PreBlock}
           <ExtendedBlock
-            mainExtendedClassname={styles.extendedBlock__main}>
+            mainExtendedClassname={styles.extendedBlock__main}
+            contentClassname={styles.extendedBlock__content}>
+
             {params.map((row, index) => (
               <ScriptParametersLoaderRow
                 key={index}

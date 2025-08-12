@@ -27,7 +27,7 @@ const InputLayout: FC<Props> = ({
   const togglePasswordVisibility = useCallback(() => {
     setShowPassword(!showPassword);
   }, [showPassword]);
-  console.log('я перерендерил input с именем '+ name)
+  
   const currentIcon = useMemo(() => isPassword ? (showPassword ? toggleIcons?.hide : toggleIcons?.show) : null, [isPassword, showPassword])
 
   if (type === 'file') {

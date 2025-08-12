@@ -22,7 +22,7 @@
   
   background: var(--color-white-clear);
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.6s ease-in;
+  transition: grid-template-rows 0.4s ease-in;
 }
 
 .ScriptParametrsLayout__content.expanded {
@@ -34,7 +34,7 @@
   display: grid;
   column-gap: 1.5rem;
   row-gap: 1.5rem;
-  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(2, 1fr); */
   grid-column: span 2;
   background: var(--color-white-clear);
   /* padding: 2rem; */
@@ -62,6 +62,15 @@
   &:hover {
     fill: var(--color-gray-main);
   }
+
+  &:active {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in;
+  }
+}
+
+.ScriptParametrsLayout__extendBtn__showLess{
+  padding-top: 0.5rem;
 }
 
 @media (max-width: 1024) {
