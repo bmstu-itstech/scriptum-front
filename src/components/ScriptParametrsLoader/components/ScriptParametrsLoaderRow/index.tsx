@@ -68,6 +68,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({
             onBlur={field.onBlur}
             errorText={meta.touched && meta.error ? meta.error : null}
             selectClassName={styles.filter__type}
+            // className={styles.filter__type}
             isFormik
           />
         )}
@@ -85,7 +86,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({
             onChange={field.onChange}
             onBlur={field.onBlur}
             errorText={meta.touched && meta.error ? meta.error : null}
-            selectClassName={styles.filter__type}
+            selectClassName={styles.filter__measure}
             isFormik
           />
         )}
