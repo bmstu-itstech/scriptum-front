@@ -15,6 +15,12 @@
     background-color: var(--color-gray-superlight);
   }
 
+  &:focus{
+    outline: none;
+    border-color: var(--color-purple-main);
+  }
+
+
   &.hasError,
   &.hasError:hover,
   &.hasError:focus {
@@ -43,6 +49,7 @@
   flex-direction: column;
   border: 1px dashed var(--color-dark-main);
   color: var(--color-dark-main);
+
 }
 
 .deleteFile {
@@ -54,6 +61,7 @@
   &:hover {
     color: var(--color-red-dark-main);
   }
+
 }
 
 .python {

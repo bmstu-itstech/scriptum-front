@@ -83,6 +83,7 @@ const FileInput: FC<FileProps> = ({
 
       <label
         htmlFor={name}
+        tabIndex={0}
         className={cn(styles.fileInput, {
           [styles.hasError]: errorText
         })}
@@ -97,6 +98,7 @@ const FileInput: FC<FileProps> = ({
 
         <input
           id={name}
+          tabIndex={-1}
           ref={inputRef}
           name={name}
           type="file"
