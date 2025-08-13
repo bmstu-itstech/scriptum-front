@@ -27,7 +27,7 @@ const InputLayout: FC<Props> = ({
   const togglePasswordVisibility = useCallback(() => {
     setShowPassword(!showPassword);
   }, [showPassword]);
-  
+
   const currentIcon = useMemo(() => isPassword ? (showPassword ? toggleIcons?.hide : toggleIcons?.show) : null, [isPassword, showPassword])
 
   if (type === 'file') {
@@ -62,7 +62,7 @@ const InputLayout: FC<Props> = ({
           onChange={onChange as ChangeEventHandler<HTMLTextAreaElement> | undefined}
           required={isRequired}
           placeholder={placeholder}
-          className={cn(styles.input, 'smoothTransition', inputClassName)}
+          className={cn(styles.input, 'smoothTransition', inputClassName, { [styles.errorInput]: errorText })}
         /> : <input
           id={name}
           name={name}
@@ -71,7 +71,7 @@ const InputLayout: FC<Props> = ({
           required={isRequired}
           type={isPassword && !showPassword ? 'password' : type}
           placeholder={placeholder}
-          className={cn(styles.input, 'smoothTransition', inputClassName)}
+          className={cn(styles.input, 'smoothTransition', inputClassName, { [styles.errorInput]: errorText })}
         />}
 
         {isPassword && currentIcon && (

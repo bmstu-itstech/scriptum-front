@@ -35,7 +35,7 @@ export const typeUsecase = [
 ];
 
 export const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
-  control: (base, state) => ({
+  control: (base) => ({
     ...base,
     border: 'none',
     boxShadow: 'none',
@@ -43,13 +43,19 @@ export const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     cursor: 'pointer',
     height: '100%',
     minHeight: '100%',
-
   }),
   menuPortal: base => ({ ...base, zIndex: 9999 }),
 
   container: (base, state) => ({
     ...base,
-    border: state.isFocused ? '2px solid var(--color-purple-main)' : '2px solid var(--color-gray-border)',
+    border: state.isFocused
+      ? '2px solid var(--color-purple-main)'
+      : '2px solid var(--color-gray-border)',
+    '&:hover': {
+      border: state.isFocused
+        ? '2px solid var(--color-purple-main)'
+        : '2px solid var(--color-gray-border2)',
+    },
   }),
 
   // option: (base, state) => ({

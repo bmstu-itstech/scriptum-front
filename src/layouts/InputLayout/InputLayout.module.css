@@ -1,7 +1,6 @@
 .inputContainer {
   width: 100%;
 
-
   &.error {
     .errorText {
       opacity: 1;
@@ -39,6 +38,12 @@
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  &.errorInput,
+  &.errorInput:hover,
+  &.errorInput:focus {
+    border-color: var(--color-red-light-main);
   }
 
   &:hover {

@@ -13,6 +13,7 @@ export const Search: FC<Props> = ({ callback, icon, placeholder, className, ...p
 	}, [callback]);
 
 	return (
+		
 		<div className={cn(styles.search__container, className)}>
 			{icon && <span className={styles.search__icon}>{icon}</span>}
 			<input
