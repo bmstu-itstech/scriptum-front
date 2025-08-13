@@ -14,6 +14,12 @@
   &:hover {
     background-color: var(--color-gray-superlight);
   }
+
+  &.hasError,
+  &.hasError:hover,
+  &.hasError:focus {
+    border-color: var(--color-red-light-main);
+  }
 }
 
 .hover {
