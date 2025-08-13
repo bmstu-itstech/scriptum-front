@@ -2,12 +2,12 @@ import InputLayout from '@/layouts/InputLayout';
 import styles from '@/components/ScriptParametrsLoader/components/ScriptParametrsLoaderRow/ScriptParametersLoader.module.css';
 import { usecase } from '@/components/ScriptParametrsLoader/components/ScriptParametrsLoaderRow/ScriptParametersLoader.usecase';
 import { DeleteIcon } from '@/components/icons/DeleteIcon';
-import { memo, useCallback, useMemo, type FC } from 'react';
+import { memo, type FC } from 'react';
 import cn from 'classnames';
 import { Filter } from '@/components/Filter/Filter';
 import { measureUsecase, typeUsecase } from '@/components/Filter/Filter.usecase';
-import { useField, useFormikContext, type FormikErrors } from 'formik';
-import { ScriptFormValues, type Parameter } from '@/app/(withHeader)/script/create/page.usecase';
+import { FastField } from 'formik';
+
 
 interface RowProps {
   index: number;
@@ -22,62 +22,74 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({
   onRemove,
   className,
 }) => {
-  const { setFieldValue, setFieldTouched } = useFormikContext<ScriptFormValues>();
-
-  const [nameField, nameMeta] = useField<string>(`${arrayName}[${index}].name`);
-  const [descField, descMeta] = useField<string>(`${arrayName}[${index}].desc`);
-  const [typeField, typeMeta] = useField<string>(`${arrayName}[${index}].type`);
-  const [measureField, measureMeta] = useField<string>(`${arrayName}[${index}].measure`);
-
-  const handleFieldChange = useCallback((fieldName: keyof Parameter, value: string) => {
-    setFieldValue(`${arrayName}[${index}].${fieldName}`, value);
-  }, [arrayName, index, setFieldValue, onRemove]);
-
 
   return (
     <div className={`${styles.row} animationAppear ${className}`}>
-      <InputLayout
-        errorText={nameMeta.touched && nameMeta.error ? nameMeta.error : null}
-        type="text"
-        placeholder={usecase.name.placeholder}
-        className={styles.input}
-        {...nameField}
-      />
 
-      <InputLayout
-        errorText={descMeta.touched && descMeta.error ? descMeta.error : null}
-        type="text"
-        placeholder={usecase.desc.placeholder}
-        className={styles.input}
-        {...descField}
-      />
+      <FastField name={`${arrayName}[${index}].name`}>
+        {({ field, form, meta }: any) => (
+          <InputLayout
+            type='text'
+            name={field.name}
+            placeholder={usecase.name.placeholder}
+            value={field.value}
+            onChange={field.onChange}
+            className={styles.input}
+            onBlur={field.onBlur}
+            errorText={meta.touched && meta.error ? meta.error : null}
+          />
+        )}
+      </FastField>
 
-      <Filter
-        index={index}
-        options={typeUsecase}
-        placeholder="Выберите тип"
-        name={typeField.name}
-        value={typeField.value}
-        // {...typeField}
-        onBlur={() => setFieldTouched(typeField.name, true, true)}
-        onChange={(value: string) => handleFieldChange('type', value)}
-        selectClassName={styles.filter__type}
-        errorText={typeMeta.touched && typeMeta.error ? typeMeta.error : null}
+      <FastField name={`${arrayName}[${index}].desc`}>
+        {({ field, form, meta }: any) => (
+          <InputLayout
+            type='text'
+            name={field.name}
+            placeholder={usecase.desc.placeholder}
+            value={field.value}
+            onChange={field.onChange}
+            className={styles.input}
+            onBlur={field.onBlur}
+            errorText={meta.touched && meta.error ? meta.error : null}
+          />
+        )}
+      </FastField>
 
-      />
+      <FastField name={`${arrayName}[${index}].type`}>
+        {({ field, form, meta }: any) => (
+          <Filter
+            name={field.name}
+            index={index}
+            options={typeUsecase}
+            placeholder="Выберите тип"
+            value={field.value}
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+            errorText={meta.touched && meta.error ? meta.error : null}
+            selectClassName={styles.filter__type}
+            isFormik
+          />
+        )}
+      </FastField>
 
-      <Filter
-        index={index+10000}
-        options={measureUsecase}
-        placeholder="Выберите единицу измерения"
-        name={measureField.name}
-        value={measureField.value}
-        // {...measureField}
-        onBlur={() => setFieldTouched(measureField.name, true, true)}
-        onChange={(value: string) => handleFieldChange('measure', value)}
-        selectClassName={styles.filter__measure}
-        errorText={measureMeta.touched && measureMeta.error ? measureMeta.error : null}
-      />
+
+      <FastField name={`${arrayName}[${index}].measure`}>
+        {({ field, form, meta }: any) => (
+          <Filter
+            name={field.name}
+            index={index + 10000}
+            options={measureUsecase}
+            placeholder="Выберите единицу измерения"
+            value={field.value}
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+            errorText={meta.touched && meta.error ? meta.error : null}
+            selectClassName={styles.filter__type}
+            isFormik
+          />
+        )}
+      </FastField>
 
       <button
         title='del'

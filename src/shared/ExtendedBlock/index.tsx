@@ -18,7 +18,7 @@ export const ExtendedBlock: FC<Props> = ({ children, contentClassname, mainExten
   const onShowLessClick = useCallback(() => {
     setCountOfShown(4);
   }, []);
-  console.log('в ExtendedBlock', countOfChildren, ' ', countOfShown);
+  
   return (
     <>
       <div className={cn(styles.ExtendedBlock, mainExtendedClassname)}>

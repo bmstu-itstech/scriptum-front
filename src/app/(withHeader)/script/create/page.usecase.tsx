@@ -100,12 +100,16 @@ export interface Parameter {
   measure: string;
 }
 
+export interface ParameterWithId extends Parameter {
+  id: number;
+}
+
 export interface ScriptFormValues {
   name: string;
   desc: string;
   file: File | null;
-  inputParams: Parameter[];
-  outputParams: Parameter[];
+  inputParams: ParameterWithId[];
+  outputParams: ParameterWithId[];
 }
 
 export const ScriptInitialValues: ScriptFormValues = {

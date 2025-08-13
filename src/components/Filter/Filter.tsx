@@ -19,12 +19,26 @@ export const Filter: React.FC<Props> = ({
   selectClassName,
   errorText = null,
   style,
+  isFormik = false,
   options = [],
   ...props
 }) => {
   
   const handleChange = (newValue: SingleValue<Option>) => {
     onChange?.(newValue?.value ?? '');
+  };
+
+  const handleChangeFormik = (newValue: SingleValue<Option>) => {
+    onChange({
+      target: {
+        name,
+        value: newValue?.value ?? ''
+      }
+    });
+  };
+
+  const handleBlur = () => {
+    onBlur?.({ target: { name } });
   };
 
   const selectedOption = options.find(option => option.value === value) || null;
@@ -42,8 +56,8 @@ export const Filter: React.FC<Props> = ({
         className={cn(styles.filter__select, 'smoothTransition', selectClassName, { [styles.error]: errorText })}
         classNamePrefix='select'
         value={selectedOption}
-        onChange={handleChange}
-        onBlur={onBlur}
+        onChange={isFormik ? handleChangeFormik : handleChange}
+        onBlur={handleBlur}
         options={options}
         placeholder={placeholder}
         tabSelectsValue={false}
