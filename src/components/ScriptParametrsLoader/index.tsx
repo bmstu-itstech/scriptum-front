@@ -18,7 +18,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
   const { values } = useFormikContext<ScriptFormValues>();
   const name = type === 'input' ? 'inputParams' : 'outputParams';
   const params = values[name] || [];
-  
+
   const PreBlock = useMemo(() => {
     if (params.length === 0) {
       return (
@@ -50,9 +50,15 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
           headerClassname={stylesLayout.smallPadding}
           header={
             <div className={cn(styles.headerList, styles.justifyBetween)}>
-              <p className={cn('layout__title-sm', styles.headerName)}>
-                {type === 'input' ? 'Входные параметры' : 'Выходные параметры'}
-              </p>
+              <div className={styles.headerList__left}> 
+                <p className={cn('layout__title-sm', styles.headerName)}>
+                  {type === 'input' ? 'Входные параметры' : 'Выходные параметры'}
+                </p>
+                <p className={styles.headerList_subtitle}>
+                  Количество параметров: {params.length}
+                </p >
+              </div>
+
               <Button
                 className={styles.addButton}
                 onClick={() => push({
