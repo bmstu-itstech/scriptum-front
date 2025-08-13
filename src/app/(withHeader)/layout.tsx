@@ -12,7 +12,6 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        style={{ backgroundColor: 'var(--color-white-main)' }}
       // className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable}`}
       >
         <Header />

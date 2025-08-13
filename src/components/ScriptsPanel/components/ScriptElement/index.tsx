@@ -15,15 +15,18 @@ import { EditIcon } from '@/components/icons/EditIcon';
 import { DialogLayout } from '@/layouts/DialogLayout';
 import { PopupLayout } from '@/layouts/PopupLayout';
 import { RunCodeButton } from '@/shared/RunCodeButton';
+import { useDeleteScript } from '@/hooks/script/useDeleteScript';
 
 export const ScriptElement: FC<Props> = ({
-  scriptTitle,
-  scriptId,
-  countOfRuns,
-  subtitle,
-  author,
-  data,
-  onDeleteScript,
+  script_id,
+  script_name,
+  script_description,
+  in_fields,
+  out_fields,
+  file_id,
+  owner,
+  visibility,
+  created_at,
   className,
   ...props
 }) => {
@@ -51,17 +54,18 @@ export const ScriptElement: FC<Props> = ({
     message: string;
     onConfirm: () => void;
   } | null>(null);
-
+  const { mutate } = useDeleteScript();
+  
   const handleDeleteClick = (scriptId: number) => {
     setDialog({
       visible: true,
       type: 'delete',
       scriptId,
       title: 'Подтвердите удаление',
-      message: `Вы уверены, что хотите удалить скрипт "${scriptTitle}"?`,
+      message: `Вы уверены, что хотите удалить скрипт "${script_name}"?`,
       onConfirm: () => {
-        onDeleteScript(scriptId);
-        showPopup('success', 'Скрипт удалён', `Скрипт "${scriptTitle}" был удалён`);
+        mutate(scriptId);
+        showPopup('success', 'Скрипт удалён', `Скрипт "${script_name}" был удалён`);
         setDialog(null);
       },
     });
@@ -92,32 +96,32 @@ export const ScriptElement: FC<Props> = ({
       )}
 
       <Link
-        href={`/script/${scriptId}`}
+        href={`/script/${script_id}`}
         className={cn(className, styles.scriptElement, basicStyles.layout)}
         {...props}>
         <div className={styles.scriptElement__supblock}>
-          <h2 className={styles.scriptElement__title}>{scriptTitle}</h2>
-          <p className={styles.scriptElement__runs}>Кол. запусков: {countOfRuns}</p>
+          <h2 className={styles.scriptElement__title}>{script_name}</h2>
+          <p className={styles.scriptElement__runs}>Кол. запусков: {2}</p>
         </div>
 
-        <h3 className={styles.scriptElement__subtitle}>{subtitle}</h3>
+        <h3 className={styles.scriptElement__subtitle}>{script_description}</h3>
         <div className={styles.scriptElement__info}>
           <TextWithIcon icon={<PersonIcon />} className={styles.scriptElement__author}>
-            {author}
+            {owner}
           </TextWithIcon>
           <TextWithIcon icon={<CalendarIcon />} className={styles.scriptElement__data}>
-            {getDate(data)}
+            {created_at}
           </TextWithIcon>
         </div>
         <div className={styles.scriptElement__interactive}>
-          <RunCodeButton scriptId={scriptId} />
+          <RunCodeButton scriptId={script_id} />
           <span className={cn(styles.scriptElement__editIcon, 'smoothTransition')}>
             <EditIcon />
           </span>
           <span
             onClick={e => {
               e.preventDefault();
-              handleDeleteClick(scriptId);
+              handleDeleteClick(script_id);
             }}
             className={cn(styles.scriptElement__delIcon, 'smoothTransition')}>
             <DeleteIcon />

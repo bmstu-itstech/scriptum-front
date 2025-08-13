@@ -3,5 +3,4 @@ import { Props as ScriptProps } from './components/ScriptElement/ScriptElement.p
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
 	scripts: ScriptProps[];
-	onDeleteScript: (scriptId: number) => void;
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { PageLayout } from '@/layouts/PageLayout';
-import { APIScripts, mainPageUsecase } from '@/app/(withHeader)/page.usecase';
+import { mainPageUsecase } from '@/app/(withHeader)/page.usecase';
 import { ScriptPanel } from '@/components/ScriptsPanel';
 import { Search } from '@/components/Search';
 import { SearchIcon } from '@/components/icons/SearchIcon';
@@ -11,21 +11,22 @@ import { useDebounce } from 'use-debounce';
 import { useMemo, useState } from 'react';
 import { Pagination } from '@/shared/Pagination';
 import { Stats } from '@/shared/Stats';
-// import { useGetAllScripts } from '@/hooks/script/useGetAllScripts';
+import { useGetAllScripts } from '@/hooks/script/useGetAllScripts';
 
 const ITEMS_PER_PAGE = 6;
 
 export default function Home() {
+  const { data: data = [], isLoading } = useGetAllScripts();
 	const [searchTerm, setSearchTerm] = useState('')
 	const [currentPage, setCurrentPage] = useState(1)
 	const [debouncedSearchTerm] = useDebounce(searchTerm, 300)
 
 	const filteredScripts = useMemo(() => {
-		return APIScripts.filter(script => {
+    return data.filter(script => {
 			const searchLower = debouncedSearchTerm.toLowerCase()
 			return (
-				script.scriptTitle.toLowerCase().includes(searchLower) ||
-				script.subtitle.toLowerCase().includes(searchLower)
+				script.script_name.toLowerCase().includes(searchLower) ||
+				script.script_description.toLowerCase().includes(searchLower)
 			)
 		})
 	}, [debouncedSearchTerm])
@@ -50,7 +51,7 @@ export default function Home() {
 
       <Stats
         stats={[
-          { text: 'Всего скриптов', count: APIScripts.length },
+          { text: 'Всего скриптов', count: data.length },
           { text: 'Найдено', count: filteredScripts.length },
           { text: 'Страница', count: currentPage, total: totalPages },
         ]}

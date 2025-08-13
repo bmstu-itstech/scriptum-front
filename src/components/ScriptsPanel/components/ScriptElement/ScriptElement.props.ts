@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-
+import {IScript} from '@/domain/entities/script'
 // export interface IScriptBit {
 //   type: string;
 //   name: string;
@@ -16,14 +16,14 @@ import type { HTMLAttributes } from 'react';
 //   created_at: Date;
 // }
 
-export interface IScriptItem  {
-	scriptId: number;
-	scriptTitle: string;
-	subtitle: string;
-	countOfRuns: number;
-	author: string;
-	data: Date;
-	onDeleteScript: (scriptId: number) => void;
-}
+// export interface IScriptItem  {
+// 	scriptId: number;
+// 	scriptTitle: string;
+// 	subtitle: string;
+// 	countOfRuns: number;
+// 	author: string;
+// 	data: Date;
+// 	// onDeleteScript: (scriptId: number) => void;
+// }
 
-export interface Props extends HTMLAttributes<HTMLAnchorElement>, IScriptItem { }
+export interface Props extends HTMLAttributes<HTMLAnchorElement>, IScript {}

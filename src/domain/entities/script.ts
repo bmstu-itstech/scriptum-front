@@ -7,11 +7,14 @@ export interface IScriptBit {
 
 export interface IScript {
   script_id: number;
-  fields: IScriptBit[];
-  path: string;
+  script_name: string;
+  script_description: string;
+  in_fields: IScriptBit[];
+  out_fields: IScriptBit[];
+  file_id: number;
   owner: number;
   visibility: 'private' | 'global';
-  created_at: Date;
+  created_at: string;
 }
 
 export interface IScriptStart {
