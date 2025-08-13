@@ -5,6 +5,7 @@ import { Props } from './InputLayout.props';
 import cn from 'classnames';
 import styles from './InputLayout.module.css';
 import FileInput from '@/layouts/InputLayout/components';
+import { ErrorMessage } from 'formik';
 
 const InputLayout: FC<Props> = ({
   onChange,

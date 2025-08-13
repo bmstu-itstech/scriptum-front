@@ -13,11 +13,12 @@ export default interface Props {
   name: string;
   value: string;
   placeholder: string;
-  onChange: (value: string) => void;
-  onBlur?: () => void;
+  onChange: (value: any) => void;
+  onBlur?: (e: any) => void;
   className?: string;
   selectClassName?: string;
   options: Option[];
   errorText?: string | null;
+  isFormik?: boolean;
   style?: StylesConfig<Option, false, GroupBase<Option>>;
 }

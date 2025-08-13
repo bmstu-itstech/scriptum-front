@@ -30,7 +30,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
       );
     }
     return (
-      <div className={cn(styles.headerList, styles.justifyBetween)}>
+      <div className={cn(styles.headerList, styles.listBorder, styles.justifyBetween)}>
         {(type === 'input' ? pageCreateUsecase.input.blocks : pageCreateUsecase.output.blocks).map(
           (block, ind) => (
             <p key={ind} className={cn(`layout__title-sm`, styles.headerItem)}>
@@ -40,7 +40,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
         )}
       </div>
     );
-  }, [params]);
+  }, [params.length]);
 
   return (
     <FieldArray name={name}>
@@ -62,6 +62,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
               <Button
                 className={styles.addButton}
                 onClick={() => push({
+                  id: crypto.randomUUID(),
                   name: '',
                   desc: '',
                   type: '',
@@ -81,12 +82,12 @@ export const ScriptParametrsLoader: FC<Props> = ({ type, className, ...props }) 
             mainExtendedClassname={styles.extendedBlock__main}
             contentClassname={styles.extendedBlock__content}>
 
-            {params.map((row, index) => (
+            {params.map((row, ind) => (
               <ScriptParametersLoaderRow
-                key={index}
+                key={row.id}
                 arrayName={name}
-                index={index}
-                onRemove={() => remove(index)}
+                index={ind}
+                onRemove={() =>  remove(ind)}
                 {...row}
               />
             ))

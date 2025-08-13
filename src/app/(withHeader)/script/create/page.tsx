@@ -1,7 +1,7 @@
 'use client'
 import { PageLayout } from '@/layouts/PageLayout';
 import { pageCreateUsecase, ScriptInitialValues } from '@/app/(withHeader)/script/create/page.usecase';
-import  InputLayout  from '@/layouts/InputLayout';
+import InputLayout from '@/layouts/InputLayout';
 import { InfoBlockLayout } from '@/layouts/InfoBlockLayout';
 import styles from '@/app/(withHeader)/script/create/page.module.css';
 import { ScriptParametrsLoader } from '@/components/ScriptParametrsLoader';
@@ -12,7 +12,7 @@ import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 
 
 export default function CreatePage() {
-  
+
   // console.log('страница перерендерилпсь')
   return (
     <PageLayout>
@@ -24,7 +24,7 @@ export default function CreatePage() {
         }}
         validationSchema={ScriptSchema}
       >
-        {({ handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched }) => (
+        {({ handleSubmit, handleBlur, setFieldValue, values, errors, touched }) => (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <InfoBlockLayout
               headerClassname={styles.infoblock__header}
@@ -33,41 +33,54 @@ export default function CreatePage() {
               header={pageCreateUsecase.main.header}
             >
               <div className={styles.flex}>
-                <InputLayout
-                  type='text'
-                  name='name'
-                  value={values.name}
-                  onChange={handleChange}
-                  inputTitle={pageCreateUsecase.main.blocks.scriptTitle.title}
-                  placeholder={pageCreateUsecase.main.blocks.scriptTitle.placeholder}
-                  errorText={errors.name && touched.name ? errors.name : null}
-                  onBlur={handleBlur}
-                />
-                <InputLayout
-                  type='file'
-                  name='file'
-                  value=''
-                  onChange={(event) => {
-                    setFieldValue('file', event.currentTarget.files?.[0]);
-                  }}
-                  inputTitle={pageCreateUsecase.main.blocks.scriptCode.title}
-                  placeholder={pageCreateUsecase.main.blocks.scriptCode.placeholder}
-                  errorText={errors.file && touched.file ? errors.file : null}
-                  onBlur={handleBlur}
-                />
+                <FastField name={`name`}>
+                  {({ field}: any) => (
+                    <InputLayout
+                      type='text'
+                      value={field.value ?? ''}
+                      inputTitle={pageCreateUsecase.main.blocks.scriptTitle.title}
+                      className={styles.input}
+                      placeholder={pageCreateUsecase.main.blocks.scriptTitle.placeholder}
+                      errorText={errors.name && touched.name ? errors.name : null}
+                      {...field}
+                      
+                    />
+                  )}
+                </FastField>
+                <FastField name={`file`}>
+                  {({ field }: any) => (
+                    <InputLayout
+                      type='file'
+                      name={field.name}
+                      value={field.value ?? ''}
+                      onChange={(event) => {
+                        setFieldValue('file', event.currentTarget.files?.[0]);
+                      }}
+                      inputTitle={pageCreateUsecase.main.blocks.scriptCode.title}
+                      placeholder={pageCreateUsecase.main.blocks.scriptCode.placeholder}
+                      errorText={errors.file && touched.file ? errors.file : null}
+                      onBlur={handleBlur}
+                    />
+                  )}
+                </FastField>
+
               </div>
-              <InputLayout
-                type='text'
-                name='desc'
-                value={values.desc}
-                isTextArea
-                onChange={handleChange}
-                inputClassName={styles.desc}
-                inputTitle={pageCreateUsecase.main.blocks.scriptDesc.title}
-                placeholder={pageCreateUsecase.main.blocks.scriptDesc.placeholder}
-                errorText={errors.desc && touched.desc ? errors.desc : null}
-                onBlur={handleBlur}
-              />
+              <FastField name={`desc`}>
+                {({ field }: any) => (
+                  <InputLayout
+                    type='text'
+                    inputTitle={pageCreateUsecase.main.blocks.scriptDesc.title}
+                    className={styles.input}
+                    isTextArea
+                    inputClassName={styles.desc}
+                    value={field.value ?? ''}
+                    placeholder={pageCreateUsecase.main.blocks.scriptDesc.placeholder}
+                    errorText={errors.desc && touched.desc ? errors.desc : null}
+                    {...field}
+
+                  />
+                )}
+              </FastField>
             </InfoBlockLayout>
             <ScriptParametrsLoader type='input' />
             <ScriptParametrsLoader type='output' />
