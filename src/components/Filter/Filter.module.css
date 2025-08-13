@@ -1,5 +1,3 @@
-
-
 .filter__select {
   height: 100%;
   width: 100%;
@@ -13,11 +11,21 @@
   appearance: none;
   cursor: pointer;
 
-  &:hover:not(:focus) {
+  &.error,
+  &.error:hover,
+  &.error:focus {
+    border-color: var(--color-red-light-main);
+  }
+
+  /* обработчики лежат в usecase filter */
+  /* &:hover {
     border-color: var(--color-gray-border2);
   }
 
-  /* &:focus {
+  &:focus,
+  &:focus:hover,
+  &:focus-visible,
+  &:focus-visible:hover {
     border-color: var(--color-purple-main);
   } */
 }

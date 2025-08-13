@@ -39,7 +39,7 @@ export const Filter: React.FC<Props> = ({
   return (
     <div className={cn(styles.filter, className)}>
       <Select<Option>
-        className={cn(styles.filter__select, 'smoothTransition', selectClassName)}
+        className={cn(styles.filter__select, 'smoothTransition', selectClassName, { [styles.error]: errorText })}
         classNamePrefix='select'
         value={selectedOption}
         onChange={handleChange}

@@ -13,7 +13,7 @@ import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 
 export default function CreatePage() {
   
-  console.log('страница перерендерилпсь')
+  // console.log('страница перерендерилпсь')
   return (
     <PageLayout>
       <Formik
@@ -24,7 +24,7 @@ export default function CreatePage() {
         }}
         validationSchema={ScriptSchema}
       >
-        {({ handleSubmit, handleChange, setFieldValue, values, errors, touched }) => (
+        {({ handleSubmit, handleChange, handleBlur, setFieldValue, values, errors, touched }) => (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <InfoBlockLayout
               headerClassname={styles.infoblock__header}
@@ -41,6 +41,7 @@ export default function CreatePage() {
                   inputTitle={pageCreateUsecase.main.blocks.scriptTitle.title}
                   placeholder={pageCreateUsecase.main.blocks.scriptTitle.placeholder}
                   errorText={errors.name && touched.name ? errors.name : null}
+                  onBlur={handleBlur}
                 />
                 <InputLayout
                   type='file'
@@ -52,6 +53,7 @@ export default function CreatePage() {
                   inputTitle={pageCreateUsecase.main.blocks.scriptCode.title}
                   placeholder={pageCreateUsecase.main.blocks.scriptCode.placeholder}
                   errorText={errors.file && touched.file ? errors.file : null}
+                  onBlur={handleBlur}
                 />
               </div>
               <InputLayout
@@ -64,6 +66,7 @@ export default function CreatePage() {
                 inputTitle={pageCreateUsecase.main.blocks.scriptDesc.title}
                 placeholder={pageCreateUsecase.main.blocks.scriptDesc.placeholder}
                 errorText={errors.desc && touched.desc ? errors.desc : null}
+                onBlur={handleBlur}
               />
             </InfoBlockLayout>
             <ScriptParametrsLoader type='input' />
