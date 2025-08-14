@@ -1,8 +1,8 @@
-import {IScript} from '@/domain/entities/script';
+import {type IScriptSend} from '@/domain/entities/script';
 import {client} from '../axios';
 
-const createScript: () => Promise<IScript> = async () => {
-  const res = await client.post(`/scripts`);
+const createScript: (values: IScriptSend) => Promise<IScriptSend> = async (values) => {
+  const res = await client.post(`/scripts`, values);
   if (res.status >= 300) {
     throw new Error();
   }
