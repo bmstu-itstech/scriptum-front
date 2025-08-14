@@ -12,11 +12,15 @@ import { useMemo, useState } from 'react';
 import { Pagination } from '@/shared/Pagination';
 import { Stats } from '@/shared/Stats';
 import { useGetAllScripts } from '@/hooks/script/useGetAllScripts';
+import { APIScripts } from '@/app/(withHeader)/page.usecase';
 
 const ITEMS_PER_PAGE = 6;
 
 export default function Home() {
-  const { data: data = [], isLoading } = useGetAllScripts();
+  
+  // const { data: data = [], isLoading } = useGetAllScripts();
+  const data = APIScripts
+
 	const [searchTerm, setSearchTerm] = useState('')
 	const [currentPage, setCurrentPage] = useState(1)
 	const [debouncedSearchTerm] = useDebounce(searchTerm, 300)

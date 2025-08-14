@@ -114,7 +114,7 @@ export const ScriptElement: FC<Props> = ({
           </TextWithIcon>
         </div>
         <div className={styles.scriptElement__interactive}>
-          <RunCodeButton scriptId={script_id} />
+          <RunCodeButton />
           <span className={cn(styles.scriptElement__editIcon, 'smoothTransition')}>
             <EditIcon />
           </span>

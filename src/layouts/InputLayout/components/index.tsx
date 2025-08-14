@@ -8,7 +8,7 @@ import stylesBase from '@/layouts/InputLayout/InputLayout.module.css';
 import { useFormikContext } from 'formik';
 import { type ScriptFormValues } from '@/app/(withHeader)/script/create/page.usecase';
 import { CloseModalIcon } from '@/components/icons/CloseModalIcon';
-import { PythonIcon } from '@/components/icons/PythonIcon';
+import { PythonIcon } from '@/components/icons/AttentionIcon copy';
 
 const FileInput: FC<FileProps> = ({
   onChange,
