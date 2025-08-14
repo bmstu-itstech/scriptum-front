@@ -1,22 +1,47 @@
-import {ScriptInfo} from '@/components/ScriptInfo';
-import {ScriptParametrs} from '@/components/ScriptParametrs';
-import {PageLayout} from '@/layouts/PageLayout';
-import {scriptElementUsecase1} from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.usecase';
+'use client'
+import { ScriptInfo } from '@/components/ScriptInfo';
+import { ScriptParametrs } from '@/components/ScriptParametrs';
+import { PageLayout } from '@/layouts/PageLayout';
+import { scriptElementUsecase1 } from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.usecase';
 import {
   ScriptParametersInputUsecase,
   ScriptParametersOutputUsecase,
 } from '@/components/ScriptParametrs/ScriptParametrs.usecase';
-import {ScriptParametersLayoutUsecase1} from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.usecase';
-import {ScriptParametrLayout} from '@/layouts/ScriptParametrsLayout/components/ScriptParametrLayout';
-import {LinkBack} from '@/components/LinkBack';
-import {BackArrowIcon} from '@/components/icons/BackArrowIcon';
+import { ScriptParametersLayoutUsecase1 } from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.usecase';
+import { ScriptParametrLayout } from '@/layouts/ScriptParametrsLayout/components/ScriptParametrLayout';
+import { LinkBack } from '@/components/LinkBack';
+import { BackArrowIcon } from '@/components/icons/BackArrowIcon';
 import LinkBtnStyles from '@/components/LinkBack/LinkBack.module.css';
 import styles from '@/app/(withHeader)/script/[id]/page.module.css';
-import {ScriptSettings} from '@/components/ScriptSettings';
-import {RunCodeButton} from '@/shared/RunCodeButton';
+import { ScriptSettings } from '@/components/ScriptSettings';
+import { RunCodeButton } from '@/shared/RunCodeButton';
+import { useGetScriptById } from '@/hooks/script/useGetScriptById';
+import cn from 'classnames';
+import { useParams } from 'next/navigation';
+import { Formik } from 'formik';
+import { runScriptValidationSchema } from '@/app/(withHeader)/script/[id]/page.usecase';
+import { useStartScript } from '@/hooks/script/useStartScript';
 
 export default function Page() {
-  // const [data, isLoading] = useGetScriptByid()
+
+  const params = useParams();
+  const script_id = Number(params.id);
+
+  const { data, isLoading } = useGetScriptById(script_id);
+
+  if (!data || isLoading) {
+    return <div>Loading...</div>;
+  }
+  const { mutate, isPending } = useStartScript(script_id);
+
+  const initialValues = {
+    in_params: data.in_fields.map((item) => ({
+      type: item.type,
+      data: '',
+    })),
+    notify_by_email: false,
+  }
+
   return (
     <PageLayout className={styles.page__container}>
       <LinkBack
@@ -24,19 +49,36 @@ export default function Page() {
         title='Вернуться к списку скриптов'
         icon={<BackArrowIcon />}
       />
-      <ScriptInfo {...scriptElementUsecase1} />
-      <ScriptParametrs contentClassname={styles.col2} header={ScriptParametersInputUsecase.header}>
-        {ScriptParametersLayoutUsecase1.params.input.map((item, id) => {
-          return <ScriptParametrLayout key={id} typeOfCard='input' {...item} />;
-        })}
-      </ScriptParametrs>
-      <ScriptParametrs contentClassname={styles.col2} header={ScriptParametersOutputUsecase.header}>
-        {ScriptParametersLayoutUsecase1.params.output.map((item, id) => {
-          return <ScriptParametrLayout key={id} typeOfCard='output' {...item} />;
-        })}
-      </ScriptParametrs>
-      <ScriptSettings />
-      <RunCodeButton className={styles.page_runScriptBtn} scriptId={1} />
+      <ScriptInfo {...data} />
+
+      <Formik
+        initialValues={initialValues}
+        validationSchema={runScriptValidationSchema}
+        onSubmit={(values) => {
+          mutate({
+            in_params: values.in_params,
+            notify_by_email: values.notify_by_email,
+          });
+        }}
+      >
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <ScriptParametrs contentClassname={cn(styles.col2, styles.padding)} header={ScriptParametersInputUsecase.header}>
+              {data.in_fields.map((item, id) => {
+                return <ScriptParametrLayout formikName={`in_params[${id}].data`} key={id} typeOfCard='input' {...item} />;
+              })}
+            </ScriptParametrs>
+            <ScriptParametrs contentClassname={cn(styles.col2, styles.padding)} header={ScriptParametersOutputUsecase.header}>
+              {data.out_fields.map((item, id) => {
+                return <ScriptParametrLayout key={id} typeOfCard='output' {...item} />;
+              })}
+            </ScriptParametrs>
+            <ScriptSettings />
+            <RunCodeButton isLoading={isPending} className={styles.page_runScriptBtn} />
+          </form>
+        )}
+      </Formik>
     </PageLayout>
   );
 }
+

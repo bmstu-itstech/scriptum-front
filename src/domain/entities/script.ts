@@ -5,6 +5,11 @@ export interface IScriptBit {
   unit: string;
 }
 
+export interface IScriptInput {
+  type: string;
+  data: string;
+}
+
 export interface IScriptSend {
   script_name: string;
   script_description: string;
@@ -35,6 +40,6 @@ export interface IScriptCreateReturn {
 }
 
 export interface IScriptStart {
-  in_params: IScriptBit[];
+  in_params: IScriptInput[];
   notify_by_email: boolean;
 }

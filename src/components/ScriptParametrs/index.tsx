@@ -9,7 +9,6 @@ import { ExtendedBlock } from '@/shared/ExtendedBlock';
 export const ScriptParametrs: FC<Props> = ({ header, className, contentClassname, children, ...props }) => {
   return (
     <ScriptParametrsLayout
-  
       header={header}
       className={className}
       {...props}>

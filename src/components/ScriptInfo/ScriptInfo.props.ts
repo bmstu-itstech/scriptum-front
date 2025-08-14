@@ -1,4 +1,4 @@
-import type {IScriptItem} from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
+import {IScript} from '@/domain/entities/script';
 import type {HTMLAttributes} from 'react';
 
-export type Props = IScriptItem & HTMLAttributes<HTMLDivElement>;
+export type Props = IScript & HTMLAttributes<HTMLDivElement>;
