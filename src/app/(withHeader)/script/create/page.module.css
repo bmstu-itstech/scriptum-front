@@ -70,6 +70,7 @@
 .saveBtn{
   background-color: var(--color-purple-dark);
   width: fit-content;
+  max-width: fit-content;
   margin-inline: auto;
   color: var(--color-white-main);
   padding: 1rem 2rem;
