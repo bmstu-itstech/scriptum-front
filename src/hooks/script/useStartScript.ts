@@ -1,11 +1,12 @@
-import {useMutation} from '@tanstack/react-query';
-import {startScript} from '@/shared/api/script/startScript';
+import { useMutation } from '@tanstack/react-query';
+import { startScript } from '@/shared/api/script/startScript';
+import type { IScriptStart } from '@/domain/entities/script';
 
 export const useStartScript = (id: number) => {
-  const {data, isPending, error, mutate} = useMutation({
-    mutationKey: ['startScript', id.toString()],
-    mutationFn: () => startScript(id),
+  const { isPending, error, mutate } = useMutation({
+    mutationKey: ['startScript'],
+    mutationFn: (value: IScriptStart) => startScript(value, id),
   });
 
-  return {data, isPending, error, mutate};
+  return { isPending, error, mutate };
 };
