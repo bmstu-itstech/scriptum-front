@@ -17,6 +17,7 @@ const InputLayout: FC<Props> = ({
   errorText = null,
   inputTitle,
   isTextArea = false,
+  inputLabelClassName,
   type,
   value,
   inputClassName,
@@ -50,7 +51,7 @@ const InputLayout: FC<Props> = ({
   return (
     <div className={cn(styles.inputContainer, className)} {...props}>
       {inputTitle && (
-        <label htmlFor={name} className='layout__inputLabel'>
+        <label htmlFor={name} className={cn('layout__inputLabel', inputLabelClassName)}>
           {inputTitle}
         </label>
       )}
@@ -70,7 +71,7 @@ const InputLayout: FC<Props> = ({
           value={type === 'file' ? undefined : value}
           onChange={onChange}
           required={isRequired}
-          type={isPassword && !showPassword ? 'password' : type}
+          type={isPassword && !showPassword ? 'password' : 'text'}
           placeholder={placeholder}
           className={cn(styles.input, 'smoothTransition', inputClassName, { [styles.errorInput]: errorText })}
         />}

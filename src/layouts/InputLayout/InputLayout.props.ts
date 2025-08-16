@@ -15,6 +15,7 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   isRequired?: boolean;
   isTextArea?: boolean;
+  inputLabelClassName?: string;
 }
 
 export interface FileProps extends HTMLAttributes<HTMLInputElement> {
