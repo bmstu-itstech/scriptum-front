@@ -1,103 +1,18 @@
 'use client';
 import style from './page.module.css'
 import { PageLayout } from "@/layouts/PageLayout"
-import { createUserPageUsecase, createUserSectionUsecase } from './page.usecase';
-import  InputLayout  from '@/layouts/InputLayout';
+import { createUserInitialValues, createUserPageUsecase, createUserSectionUsecase, createUserValidationSchema } from './page.usecase';
+import InputLayout from '@/layouts/InputLayout';
 import InputLayoutStyle from '@/layouts/InputLayout/InputLayout.module.css';
 import { SectionLayout } from '@/layouts/SectionLayout';
 import { ShieldIcon } from '@/components/icons/ShieldIcon';
 import { Button } from '@/layouts/Button';
 import { SaveIcon } from '@/components/icons/SaveIcon';
-import { useState, useCallback, ChangeEvent } from 'react';
-import { validateEmail, validateFullname, validatePassword } from '@/utils/validators';
+import { useState } from 'react';
 import { PopupLayout } from '@/layouts/PopupLayout';
+import { Form, Formik } from 'formik';
 
 export default function TasksPage() {
-	const [formData, setFormData] = useState({
-		fullName: '',
-		email: '',
-		password: '',
-		confirmPassword: '',
-		isAdmin: false
-	});
-
-	const [errors, setErrors] = useState({
-		fullName: '',
-		email: '',
-		password: '',
-		confirmPassword: ''
-	});
-
-	const handleChange = useCallback((field: string, value: string | boolean) => {
-		setFormData(prev => ({
-			...prev,
-			[field]: value
-		}));
-
-		if (typeof value === 'string' && errors[field as keyof typeof errors]) {
-			setErrors(prev => ({
-				...prev,
-				[field]: ''
-			}));
-		}
-	}, [errors]);
-
-	const validateField = useCallback((field: string, value: string) => {
-		let error = '';
-
-		switch (field) {
-			case 'fullName':
-				error = validateFullname(value) ?? '';
-				break;
-			case 'email':
-				error = validateEmail(value) ?? '';
-				break;
-			case 'password':
-				error = validatePassword(value, formData.confirmPassword) ?? '';
-				if (error === 'Пароли не совпадают') error = ''
-				break;
-			case 'confirmPassword':
-				if (value && formData.password && value !== formData.password) {
-					error = 'Пароли не совпадают';
-				}
-				break;
-		}
-
-		setErrors(prev => ({
-			...prev,
-			[field]: error
-		}));
-
-		return !error;
-	}, [formData.password, formData.confirmPassword]);
-
-	const handleBlur = useCallback((field: string) => {
-		if (field === 'password' || field === 'confirmPassword') {
-			validateField('password', formData.password);
-			validateField('confirmPassword', formData.confirmPassword);
-		} else {
-			validateField(field, formData[field as keyof typeof formData] as string);
-		}
-	}, [formData, validateField]);
-
-	const validateForm = useCallback(() => {
-		let isValid = true;
-		const newErrors = {
-			fullName: validateFullname(formData.fullName) ?? '',
-			email: validateEmail(formData.email) ?? '',
-			password: validatePassword(formData.password, formData.confirmPassword) ?? '',
-			confirmPassword: ''
-		};
-
-		if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword) {
-			newErrors.confirmPassword = 'Пароли не совпадают';
-			if (newErrors.password === 'Пароли не совпадают') newErrors.password = ''
-			isValid = false;
-		}
-
-		setErrors(newErrors);
-		return isValid && !Object.values(newErrors).some(error => error);
-	}, [formData]);
 
 	const [popup, setPopup] = useState<{
 		visible: boolean
@@ -110,22 +25,6 @@ export default function TasksPage() {
 		setPopup({ visible: true, variant, title, description })
 		setTimeout(() => setPopup(null), 5000)
 	}
-
-	const handleSubmit = useCallback((e: React.FormEvent) => {
-		e.preventDefault();
-
-		if (validateForm()) {
-			// API formData //
-			showPopup('success', 'Готово!', 'Аккаунт пользователя успешно создан');
-			setFormData({
-				fullName: '',
-				email: '',
-				password: '',
-				confirmPassword: '',
-				isAdmin: false
-			})
-		}
-	}, [formData, validateForm]);
 
 	return (<>
 		{popup && (
@@ -142,93 +41,115 @@ export default function TasksPage() {
 			subtitle={createUserPageUsecase.subtitle}
 			className={style.container}
 		>
-			<form onSubmit={handleSubmit}>
-				<SectionLayout
-					title={createUserSectionUsecase.title}
-					subtitle={createUserSectionUsecase.subtitle}
-				>
-					<div className={style.createUserInput}>
-						<p className={style.label}>Полное имя</p>
-						<InputLayout
-							value={formData.fullName}
-							onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange('fullName', e.target.value)}
-							onBlur={() => handleBlur('fullName')}
-							isPassword={false}
-							isRequired={true}
-							placeholder={'Введите полное имя (ФИО)'}
-							errorText={errors.fullName}
-							className={errors.fullName && InputLayoutStyle.error}
-						/>
-					</div>
-					<div className={style.createUserInput}>
-						<p className={style.label}>Email адрес</p>
-						<InputLayout
-							value={formData.email}
-							onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange('email', e.target.value)}
-							onBlur={() => handleBlur('email')}
-							isPassword={false}
-							isRequired={true}
-							placeholder={'Введите email адрес'}
-							errorText={errors.email}
-							className={errors.email && InputLayoutStyle.error}
-						/>
-					</div>
-					<div className={style.createUserInput}>
-						<p className={style.label}>Пароль</p>
-						<InputLayout
-							value={formData.password}
-							onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange('password', e.target.value)}
-							onBlur={() => handleBlur('password')}
-							isPassword={true}
-							isRequired={true}
-							placeholder={'Введите пароль'}
-							errorText={errors.password}
-							className={errors.password && InputLayoutStyle.error}
-						/>
-					</div>
-					<div className={style.createUserInput}>
-						<p className={style.label}>Повторите пароль</p>
-						<InputLayout
-							value={formData.confirmPassword}
-							onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange('confirmPassword', e.target.value)}
-							onBlur={() => handleBlur('confirmPassword')}
-							isPassword={true}
-							isRequired={true}
-							placeholder={'Введите еще раз пароль'}
-							errorText={errors.confirmPassword}
-							className={errors.confirmPassword && InputLayoutStyle.error}
-						/>
-					</div>
-					<div className={style.permissionCheckbox}>
-						<label className={style.checkboxContainer}>
-							<input
-								type="checkbox"
-								className={style.checkboxInput}
-								checked={formData.isAdmin}
-								onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange('isAdmin', e.target.checked)}
-							/>
-							<span className={style.checkmark}></span>
-							<div className={style.checkboxContent}>
-								<div className={style.checkboxTitle}>
-									<ShieldIcon className={style.checkboxIcon} />
-									Права администратора
-								</div>
-								<p className={style.checkboxDescription}>
-									Пользователь с правами администратора сможет создавать других пользователей,
-									управлять скриптами всех пользователей и просматривать все задачи в системе.
-								</p>
+			<Formik
+				validationSchema={createUserValidationSchema}
+				initialValues={createUserInitialValues}
+				onSubmit={(values, { setSubmitting }) => {
+					setSubmitting(true);
+					// Simulate API call
+					setTimeout(() => {
+						console.log('User created:', values);
+						showPopup('success', 'Готово!', 'Аккаунт пользователя успешно создан');
+						setSubmitting(false);
+					}, 1000);
+					setSubmitting(false);
+				}}>
+				{({ errors, touched, handleBlur, handleChange, values, isSubmitting }) => (
+					<Form>
+						<SectionLayout
+							title={createUserSectionUsecase.title}
+							subtitle={createUserSectionUsecase.subtitle}
+						>
+							<div className={style.createUserInput}>
+								<p className={style.label}>Полное имя</p>
+								<InputLayout
+									type='text'
+									value={values.fullName}
+									name='fullName'
+									onChange={handleChange}
+									onBlur={handleBlur}
+									isRequired
+									placeholder={'Введите полное имя (ФИО)'}
+									errorText={errors.fullName && touched.fullName ? errors.fullName : null}
+								// className={errors.fullName && InputLayoutStyle.error}
+								/>
 							</div>
-						</label>
-					</div>
-					<Button
-						className={style.saveBtn}
-						icon={<SaveIcon />}
-					>
-						Создать пользователя
-					</Button>
-				</SectionLayout>
-			</form>
+							<div className={style.createUserInput}>
+								<p className={style.label}>Email адрес</p>
+								<InputLayout
+									type='email'
+									name='email'
+									value={values.email}
+									onChange={handleChange}
+									onBlur={handleBlur}
+									isRequired
+									placeholder={'Введите email адрес'}
+									errorText={errors.email && touched.email ? errors.email : null}
+								/>
+							</div>
+							<div className={style.createUserInput}>
+								<p className={style.label}>Пароль</p>
+								<InputLayout
+									type='password'
+									name='password'
+									value={values.password}
+									onChange={handleChange}
+									onBlur={handleBlur}
+									isPassword
+									isRequired
+									placeholder={'Введите пароль'}
+									errorText={errors.password && touched.password ? errors.password : null}
+								/>
+							</div>
+							<div className={style.createUserInput}>
+								<p className={style.label}>Повторите пароль</p>
+								<InputLayout
+									type='password'
+									name='confirmPassword'
+									value={values.confirmPassword}
+									onChange={handleChange}
+									onBlur={handleBlur}
+									isPassword
+									isRequired
+									placeholder={'Введите еще раз пароль'}
+									errorText={errors.confirmPassword && touched.confirmPassword ? errors.confirmPassword : null}
+								/>
+							</div>
+							<div className={style.permissionCheckbox}>
+								<label className={style.checkboxContainer}>
+									<input
+										type="checkbox"
+										name='isAdmin'
+										className={style.checkboxInput}
+										checked={values.isAdmin}
+										onChange={handleChange}
+									/>
+									<span className={style.checkmark}></span>
+									<div className={style.checkboxContent}>
+										<div className={style.checkboxTitle}>
+											<ShieldIcon className={style.checkboxIcon} />
+											Права администратора
+										</div>
+										<p className={style.checkboxDescription}>
+											Пользователь с правами администратора сможет создавать других пользователей,
+											управлять скриптами всех пользователей и просматривать все задачи в системе.
+										</p>
+									</div>
+								</label>
+							</div>
+							<Button
+								className={style.saveBtn}
+								icon={<SaveIcon />}
+								type='submit'
+								isLoading={isSubmitting}
+							>
+								Создать пользователя
+							</Button>
+						</SectionLayout>
+					</Form>
+				)}
 
+			</Formik>
 			<div className={style.infoSection}>
 				<div>
 					<div className={style.infoIcon}>
@@ -245,6 +166,8 @@ export default function TasksPage() {
 					</p>
 				</div>
 			</div>
-		</PageLayout>
+
+
+		</PageLayout >
 	</>);
 };
