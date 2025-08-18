@@ -1,28 +1,28 @@
 import { Props } from '@/layouts/ScriptParametrsLayout/components/ScriptParametrLayout/ScriptParametr.props';
 export const ScriptInputParametr1: Props = {
-  title: 'Diametr',
-  translation: 'Диаметр трубы',
+  name: 'Diametr',
+  description: 'Диаметр трубы',
   type: 'Вещественные числа',
-  measure: 'м.',
+  unit: 'м.',
 };
 
 export const ScriptInputParametr2: Props = {
-  title: 'GradientPreassure',
-  translation: 'Градиент давления',
+  name: 'GradientPreassure',
+  description: 'Градиент давления',
   type: 'Вещественные числа',
-  measure: 'бар./м.',
+  unit: 'бар./м.',
 };
 
 export const ScriptInputParametr3: Props = {
-  title: 'Roughness',
-  translation: 'Шероховатость трубы',
+  name: 'Roughness',
+  description: 'Шероховатость трубы',
   type: 'Целое число',
-  measure: 'ед.',
+  unit: 'ед.',
 };
 
 export const ScriptOutputParametr1: Props = {
-  title: 'DPGrav',
-  translation: 'Потери давления награвитацию',
+  name: 'DPGrav',
+  description: 'Потери давления награвитацию',
   type: 'Вещественные числа',
-  measure: 'м.',
+  unit: 'м.',
 };

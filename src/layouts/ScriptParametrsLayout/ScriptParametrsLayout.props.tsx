@@ -1,4 +1,4 @@
-import type { IScriptItem } from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
+import { IScript as IScriptItem } from '@/domain/entities/script';
 import type { HTMLAttributes, ReactElement } from 'react';
 
 interface IInputData {

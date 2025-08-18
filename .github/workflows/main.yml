@@ -66,6 +66,23 @@ jobs:
         run: npm ci
       - name: Run stylelint fix
         run: npm run lint:stylelint:fix
+  typescript-check:
+    name: TypeScript check
+    needs: ['install-cache']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the repository code
+        uses: actions/checkout@v5
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ needs.install-cache.outputs.cache-key }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run TypeScript check
+        run: npm run ts:check
+
   build:
     name: Build
     runs-on: ubuntu-latest

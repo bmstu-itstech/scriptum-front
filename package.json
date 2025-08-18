@@ -11,7 +11,8 @@
     "lint:eslint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
     "lint:stylelint": "stylelint '**/*.{css,scss}'",
     "lint:stylelint:fix": "stylelint '**/*.{css,scss}' --fix",
-    "format:fix": "prettier --write src"
+    "format:fix": "prettier --write src",
+    "ts:check": "tsc --noEmit"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.77.2",
