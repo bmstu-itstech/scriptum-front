@@ -52,8 +52,9 @@
 }
 
 .infoblock__header {
-  padding: 1.5rem 1.5rem 0rem 1.5rem;
+  padding: 1.5rem 1.5rem 0;
 }
+
 .infoblock__content {
   display: flex;
   flex-direction: column;

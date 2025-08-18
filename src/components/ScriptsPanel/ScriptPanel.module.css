@@ -10,19 +10,18 @@
   display: grid;
   justify-content: space-between;
   align-items: start;
-  column-gap: 3rem;
-  row-gap: 1.5rem;
+  gap: 1.5rem 3rem;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
 }
 
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
   .scriptsList {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .scriptsList {
     grid-template-columns: 1fr;
   }

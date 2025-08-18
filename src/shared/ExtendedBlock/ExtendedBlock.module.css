@@ -15,10 +15,8 @@
 
 .ScriptParametrsLayout__content {
   display: grid;
-  column-gap: 1.5rem;
-  row-gap: 1.5rem;
+  gap: 1.5rem;
   overflow: hidden;
-
   background: var(--color-white-clear);
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.4s ease-in;
@@ -31,11 +29,12 @@
 .ScriptParametrsLayout__content__children {
   min-height: 0;
   display: grid;
-  column-gap: 1.5rem;
-  row-gap: 1.5rem;
+  gap: 1.5rem;
+
   /* grid-template-columns: repeat(2, 1fr); */
   grid-column: span 2;
   background: var(--color-white-clear);
+
   /* padding: 2rem; */
   height: fit-content;
 }
@@ -45,6 +44,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .ScriptParametrsLayout__extendBtn {
   width: 2rem;
   height: 2rem;
@@ -72,7 +72,7 @@
   padding-top: 0.5rem;
 }
 
-@media (max-width: 1024) {
+@media (width <= 1024) {
   .ScriptParametrsLayout__content {
     grid-template-columns: repeat(1, 1fr);
   }

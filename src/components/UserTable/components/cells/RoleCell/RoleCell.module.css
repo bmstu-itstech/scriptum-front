@@ -62,7 +62,7 @@
   border-color: var(--color-purple-main);
 }
 
-.checkmark:after {
+.checkmark::after {
   content: '';
   position: absolute;
   display: none;
@@ -75,7 +75,7 @@
   transform: rotate(45deg);
 }
 
-.roleCheckbox input:checked ~ .checkmark:after {
+.roleCheckbox input:checked ~ .checkmark::after {
   display: block;
 }
 

@@ -26,8 +26,7 @@
 
 .ScriptParametrsLayout__content {
   display: grid;
-  column-gap: 1.5rem;
-  row-gap: 1.5rem;
+  gap: 1.5rem;
   overflow: hidden;
   grid-template-columns: repeat(2, 1fr);
   background: var(--color-white-clear);
@@ -42,11 +41,11 @@
 .ScriptParametrsLayout__content__children {
   min-height: 0;
   display: grid;
-  column-gap: 1.5rem;
-  row-gap: 1.5rem;
+  gap: 1.5rem;
   grid-template-columns: repeat(2, 1fr);
   grid-column: span 2;
   background: var(--color-white-clear);
+
   /* padding: 2rem; */
   height: fit-content;
 }
@@ -56,6 +55,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .ScriptParametrsLayout__extendBtn {
   width: 2rem;
   height: 2rem;
@@ -74,7 +74,7 @@
   }
 }
 
-@media (max-width: 1024) {
+@media (width <= 1024) {
   .ScriptParametrsLayout__content {
     grid-template-columns: repeat(1, 1fr);
   }

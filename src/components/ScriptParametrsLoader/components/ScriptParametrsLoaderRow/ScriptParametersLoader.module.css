@@ -4,6 +4,7 @@
   height: fit-content;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--color-gray-border);
+
   /* gap: 2.2rem; */
 }
 
@@ -29,6 +30,7 @@
   width: 10.5rem;
   min-width: 10.5rem;
   align-content: center;
+
   /* margin-right: 3rem; */
 }
 
@@ -40,11 +42,13 @@
   min-width: 17.2rem;
   width: 17.2rem;
   align-content: center;
+
   /* margin-right: 1.8rem; */
 }
 
 .input {
   max-width: 12.6rem;
   height: fit-content;
+
   /* margin-right: 2.7rem; */
 }

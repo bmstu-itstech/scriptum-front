@@ -38,17 +38,15 @@
 }
 
 .ScriptSettings__input[type='checkbox'] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-
+  appearance: none;
+  appearance: none;
   border-radius: var(--border-radius-sm);
   background-color: var(--color-white-main);
   border: 1px solid var(--color-gray-border2);
   width: 1.5rem;
   height: 1.5rem;
   position: relative;
-
   cursor: pointer;
   transition: background-color 0.2s;
 }

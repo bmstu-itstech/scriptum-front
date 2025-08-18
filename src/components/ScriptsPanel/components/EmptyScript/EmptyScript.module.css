@@ -21,6 +21,7 @@
   &:hover {
     box-shadow: none;
     border-color: var(--color-purple-main);
+
     /* background-color: var(--color-purple-light); */
     transform: translateY(-2px);
 

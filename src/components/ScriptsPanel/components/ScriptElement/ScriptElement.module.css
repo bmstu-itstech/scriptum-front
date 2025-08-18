@@ -22,7 +22,6 @@
   font-weight: 600;
   transition: color 0.2s;
   color: var(--color-dark-main);
-
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -38,7 +37,6 @@
   color: var(--color-gray-sub);
   font-size: var(--font-size-xs);
   height: 5rem;
-
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;

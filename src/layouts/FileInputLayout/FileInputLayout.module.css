@@ -56,7 +56,7 @@
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.5rem;
-  background-color: rgba(249, 250, 251, 0.5);
+  background-color: rgb(249 250 251 / 50%);
 
   &:hover,
   &:focus-within {

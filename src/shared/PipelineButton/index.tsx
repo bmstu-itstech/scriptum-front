@@ -10,11 +10,12 @@ import { RunningStatusIcon } from '@/components/icons/RunningStatusIcon';
 const getStatusConfig = (status: PipelineStatus): [React.ReactNode, string, string] => {
   switch (status) {
     case PipelineStatus.OK:
-      return [<OkayStatusIcon />, 'OK', style.okay];
+      return [<OkayStatusIcon key="ok" />, 'OK', style.okay];
     case PipelineStatus.ERROR:
-      return [<ErrorStatusIcon />, 'Ошибка', style.error];
+      return [<ErrorStatusIcon key="error" />, 'Ошибка', style.error];
     case PipelineStatus.RUNNING:
-      return [<RunningStatusIcon />, 'Выполнение', style.running];
+      return [<RunningStatusIcon key="running" />, 'Выполнение', style.running];
+
   }
 };
 

@@ -48,7 +48,7 @@
   border: 0.125rem solid var(--color-gray-border);
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .controlPanel {
     padding: 1rem;
   }

@@ -1,16 +1,12 @@
 :root {
-  --background: #ffffff;
+  --background: #fff;
   --foreground: #171717;
-
   --container-max-width: 100rem;
-
-  --color-white: #ffffff;
+  --color-white: #fff;
   --color-white-main: #f9fafb;
   --color-white-sub: #f9fafb50;
-  --color-white-clear: #ffffff;
-
+  --color-white-clear: #fff;
   --color-dark-main: #111827;
-
   --color-gray-sub: #4b5563;
   --color-gray-dark: #374151;
   --color-gray-light: #b6acaf;
@@ -23,12 +19,10 @@
   --color-gray-bio: #374151;
   --color-gray-code: #1f2937;
   --color-gray-close-modal: #9ca3af;
-
   --color-blue-light: #eff6ff;
   --color-blue-light-border: #bfdbfe;
   --color-blue-main: #2563eb;
   --color-blue-background: #dbeafe;
-
   --color-purple-main: #971aff;
   --color-purple-dark: #8e1ced;
   --color-purple-light: #d29cff40;
@@ -37,7 +31,6 @@
   --color-purple-title: #581c87;
   --color-purple-text: #6b21a8;
   --color-purple-border: #e9d5ff;
-
   --color-red-light: #fee2e2;
   --color-red-light-border: #fecaca;
   --color-red-main: #dc2626;
@@ -47,7 +40,6 @@
   --color-red-light-main: #f87171;
   --color-red-background: #fef2f280;
   --color-red-light-background: #fef2f2;
-
   --color-green-main: #15803d;
   --color-green-light: #16a34a;
   --color-green-light-border: #bbf7d0;
@@ -55,14 +47,11 @@
   --color-green-light-stroke: #e8ffef;
   --color-green-background: #f0fdf4;
   --color-green-light-background: #dcfce7;
-
   --color-yellow-main: #f59e0b;
   --color-yellow-light: #fbbf24;
   --color-yellow-background: #fffbeb;
-
   --color-orange-main: #f97316;
   --color-orange-dark-main: #c2410c;
-
   --font-size-lg: 1.875rem;
   --font-size-md: 1.5rem;
   --font-size-large: 1.25rem;
@@ -70,14 +59,11 @@
   --font-size-sm: 1rem;
   --font-size-xs: 0.875rem;
   --font-size-xxs: 0.75rem;
-
   --border-radius-base: 1rem;
   --border-radius-md: 0.75rem;
   --border-radius-sm: 0.5rem;
   --border-radius-xs: 0.25rem;
-
   --animation-appear: appear 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
-
   --shadow-lg: 0px 4px 8px 0px #00000040;
 }
 
@@ -168,7 +154,7 @@ button {
   color: inherit;
   cursor: pointer;
   outline: none;
-  -webkit-user-select: none;
+  user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -191,6 +177,7 @@ input[type='file'] {
     transform: translateY(-100%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
