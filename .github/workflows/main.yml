@@ -1,6 +1,20 @@
 name: Test scriptum-front
 on: [push, workflow_dispatch]
 jobs:
+  telegram-notify:
+    name: Send Telegram notification
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+            Repository: ${{ github.repository }}
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
   install-cache:
     name: Install cache
     runs-on: ubuntu-latest
@@ -19,7 +33,7 @@ jobs:
           path: ~/.npm
           key: ${{ steps.cache-ci.outputs.key }}
   eslint-check:
-    name: eslint check
+    name: Eslint check
     runs-on: ubuntu-latest
     needs: ['install-cache']
     steps:
@@ -35,7 +49,7 @@ jobs:
       - name: Run eslint check
         run: npm run lint:eslint:fix
   prettier-check:
-    name: prettier check
+    name: Prettier check
     runs-on: ubuntu-latest
     needs: ['install-cache']
     steps:
@@ -51,7 +65,7 @@ jobs:
       - name: Run prettier fix
         run: npm run format:fix
   stylelint-check:
-    name: stylelint check
+    name: Stylelint check
     needs: ['install-cache']
     runs-on: ubuntu-latest
     steps:
@@ -86,7 +100,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: ['install-cache', 'eslint-check', 'prettier-check', 'stylelint-check', 'typescript-check']
+    needs:
+      ['install-cache', 'eslint-check', 'prettier-check', 'stylelint-check', 'typescript-check']
     steps:
       - name: Get the repository code
         uses: actions/checkout@v5
