@@ -1,0 +1,12 @@
+name: Test scriptum-front
+on: push
+jobs:
+  name: eslint check
+  runs-on: ubuntu-latest
+  steps: 
+    - name: Get the repository code
+      uses: actions/checkout@v5
+    - name: Install dependecies
+      run: npm ci
+    - name: Run eslint check
+      run: npm run lint:eslint:fix
