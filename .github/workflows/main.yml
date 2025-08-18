@@ -78,5 +78,7 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ needs.install-cache.outputs.cache-key }}
+      - name: Install dependencies
+        run: npm ci
       - name: Run build
         run: npm run build
