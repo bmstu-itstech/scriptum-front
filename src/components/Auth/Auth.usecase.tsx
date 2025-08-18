@@ -19,13 +19,15 @@ export const authUsecase = {
   ),
   center: (
     <>
-      <InputLayout
+      {/* <InputLayout
         isPassword={false}
         isRequired={true}
         placeholder={'Введите ваш логин'}
         errorText={'Логин обязателен для заполнения'}
       />
       <InputLayout
+        name='password'
+        type='password'
         isPassword={true}
         isRequired={true}
         placeholder={'Введите ваш пароль'}
@@ -34,7 +36,7 @@ export const authUsecase = {
           show: <OpenEyeIcon />,
           hide: <CloseEyeIcon />,
         }}
-      />
+      /> */}
     </>
   ),
   tail: (
