@@ -53,7 +53,7 @@ export default function CreatePage() {
         }}
         validationSchema={ScriptSchema}
       >
-        {({ handleSubmit, handleBlur, setFieldValue,  errors, touched, isSubmitting }) => (
+        {({ handleSubmit, handleBlur, setFieldValue,  errors, touched, isSubmitting, values }) => (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <InfoBlockLayout
               headerClassname={styles.infoblock__header}
@@ -111,8 +111,8 @@ export default function CreatePage() {
                 )}
               </FastField>
             </InfoBlockLayout>
-            <ScriptParametrsLoader type='input' />
-            <ScriptParametrsLoader type='output' />
+            <ScriptParametrsLoader params={values.inputParams} type='input' />
+            <ScriptParametrsLoader params={values.outputParams} type='output' />
             <Button isLoading={isSubmitting} className={styles.saveBtn} icon={<SaveScriptIcon />} type='submit'>Сохранить скрипт</Button>
           </Form>
         )}
