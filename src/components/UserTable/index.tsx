@@ -54,7 +54,9 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
 
   const handleDeleteUser = (userId: number) => {
     const user = users.find((u) => u.id === userId);
-    if (!user) return;
+    if (!user) {
+      return;
+    }
 
     setDialog({
       visible: true,

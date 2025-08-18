@@ -1,7 +1,6 @@
 import { Button } from '@/shared/Button';
 import styles from '@/app/(withHeader)/script/create/page.module.css';
 import cn from 'classnames';
-import { AddIcon } from '@/components/icons/Addicon';
 import { AddParametrIcon } from '@/components/icons/AddParametricon';
 import * as Yup from 'yup';
 

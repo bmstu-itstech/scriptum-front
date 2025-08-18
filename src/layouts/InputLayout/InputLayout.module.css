@@ -70,8 +70,6 @@
 
   /* visibility: hidden; */
   user-select: none;
-  user-select: none;
-  user-select: none;
   pointer-events: none;
   color: var(--color-red-main);
   font-weight: 400;

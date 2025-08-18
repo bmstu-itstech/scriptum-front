@@ -8,7 +8,6 @@ import {
   createUserValidationSchema,
 } from './page.usecase';
 import InputLayout from '@/layouts/InputLayout';
-import InputLayoutStyle from '@/layouts/InputLayout/InputLayout.module.css';
 import { SectionLayout } from '@/layouts/SectionLayout';
 import { ShieldIcon } from '@/components/icons/ShieldIcon';
 import { Button } from '@/layouts/Button';
@@ -134,6 +133,7 @@ export default function TasksPage() {
                       className={style.checkboxInput}
                       checked={values.isAdmin}
                       onChange={handleChange}
+                      aria-label='Права администратора'
                     />
                     <span className={style.checkmark}></span>
                     <div className={style.checkboxContent}>

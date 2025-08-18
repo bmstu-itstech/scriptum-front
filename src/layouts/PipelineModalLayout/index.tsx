@@ -102,7 +102,9 @@ export const PipelineModalLayout: FC<Props> = ({
     };
   }, [isOpen, handleKeyDown]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return ReactDOM.createPortal(
     <>
@@ -118,7 +120,7 @@ export const PipelineModalLayout: FC<Props> = ({
       <div className={cn(style.modal, className)} {...props}>
         <div className={style.overlay} onClick={onClose}></div>
         <div className={style.modalContent}>
-          <button className={style.closeButton} onClick={onClose}>
+          <button title='closeButton' className={style.closeButton} onClick={onClose}>
             <CloseModalIcon />
           </button>
 

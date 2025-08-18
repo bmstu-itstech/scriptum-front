@@ -1,5 +1,5 @@
 import type { IScriptItem } from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
-import type { HTMLAttributes, JSX, ReactElement } from 'react';
+import type { HTMLAttributes, ReactElement } from 'react';
 
 interface IInputData {
   title: string;

@@ -13,9 +13,7 @@
   padding: 0.75rem;
   border-radius: 0.5rem;
   color: var(--color-gray-sub);
-}
 
-.scriptElement__delIcon {
   &:hover {
     color: var(--color-red-main);
     background-color: var(--color-red-light-background);

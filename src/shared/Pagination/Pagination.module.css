@@ -19,13 +19,20 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover:not(:disabled) {
-    background: var(--color-gray-superlight);
+  &:first-child,
+  &:last-child {
+    min-width: auto;
+    width: auto;
+    padding: 0.5rem 1rem;
   }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--color-gray-superlight);
   }
 
   &.active {
@@ -39,13 +46,6 @@
   }
 }
 
-.paginationButton:first-child,
-.paginationButton:last-child {
-  min-width: auto;
-  width: auto;
-  padding: 0.5rem 1rem;
-}
-
 .paginationEllipsis {
   display: flex;
   align-items: center;
@@ -53,5 +53,8 @@
   width: 2.625rem;
   height: 2.625rem;
   color: var(--color-gray-sub);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }

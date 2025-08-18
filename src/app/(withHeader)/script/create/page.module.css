@@ -7,7 +7,7 @@
 .desc {
   height: 8rem;
   resize: none;
-  text-wrap: 'pretty';
+  text-wrap: pretty;
 
   &::placeholder {
     /* font-family: Inter; */

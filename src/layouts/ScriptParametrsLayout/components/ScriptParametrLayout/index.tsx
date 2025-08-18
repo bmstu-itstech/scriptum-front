@@ -24,7 +24,7 @@ export const ScriptParametrLayout: FC<ScriptParametrWithTypeOfCard> = ({
           </div>
         </div>
         <FastField name={formikName || ''}>
-          {({ field, form, meta }: FastFieldProps) => (
+          {({ field, meta }: FastFieldProps) => (
             <InputLayout
               type='text'
               placeholder='Введите значение'
@@ -37,7 +37,7 @@ export const ScriptParametrLayout: FC<ScriptParametrWithTypeOfCard> = ({
         <p className={styles.ScriptParametrLayout__translation_input}>{description}</p>
       </div>
     );
-  }, []);
+  }, [description, formikName, name, type, unit]);
 
   const ScriptParametrOutput = useMemo(() => {
     return (
@@ -52,6 +52,6 @@ export const ScriptParametrLayout: FC<ScriptParametrWithTypeOfCard> = ({
         <p className={styles.ScriptParametrLayout__translation_input}>{description}</p>
       </div>
     );
-  }, []);
-  return typeOfCard == 'input' ? ScriptParametrInput : ScriptParametrOutput;
+  }, [description, name, type, unit]);
+  return typeOfCard === 'input' ? ScriptParametrInput : ScriptParametrOutput;
 };

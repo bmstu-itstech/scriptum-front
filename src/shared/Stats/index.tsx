@@ -1,8 +1,7 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import cn from 'classnames';
 import style from './Stats.module.css';
 import { Props } from './Stats.props';
-import React from 'react';
 
 export const Stats: FC<Props> = ({ stats, separator = '|', className, ...props }) => {
   return (

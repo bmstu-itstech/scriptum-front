@@ -1,5 +1,5 @@
 'use client';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { HeaderLayout } from '@/layouts/HeaderLayout';
 import { Props } from './Header.props';
 // import {HeaderUsecase} from './Header.usecase';

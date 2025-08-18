@@ -22,7 +22,9 @@ export const ScriptParametrsLoader: FC<Props> = ({ params, type, className, ...p
         <div className={styles.preblock}>
           <DocumentNoParamsIcon className={styles.preblock__icon} />
           <p className={styles.preblock__text}>Параметры не добавлены</p>
-          <p className={styles.preblock__subtext}>Нажмите "Добавить параметр" для начала</p>
+          <p className={styles.preblock__subtext}>
+            Нажмите &quot;Добавить параметр&quot; для начала
+          </p>
         </div>
       );
     }
@@ -37,7 +39,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ params, type, className, ...p
         )}
       </div>
     );
-  }, [params.length]);
+  }, [params.length, type]);
 
   return (
     <FieldArray name={name}>

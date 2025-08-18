@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: top;
+  justify-content: start;
   align-items: center;
   gap: 2rem;
 }
@@ -9,7 +9,7 @@
 .header {
   display: flex;
   flex-direction: column;
-  justify-content: top;
+  justify-content: start;
   align-items: center;
 }
 

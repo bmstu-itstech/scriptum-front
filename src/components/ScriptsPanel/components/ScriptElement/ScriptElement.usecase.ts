@@ -1,4 +1,3 @@
-import type { Props } from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.props';
 import { APIScripts } from '@/app/(withHeader)/page.usecase';
 
 export const scriptElementUsecase1 = APIScripts[0];

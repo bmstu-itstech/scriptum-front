@@ -3,9 +3,6 @@ import { useState, type FC } from 'react';
 import cn from 'classnames';
 import styles from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.module.css';
 import basicStyles from '@/components/ScriptsPanel/components/EmptyScript/EmptyScript.module.css';
-import { Button } from '@/shared/Button';
-import { RunIcon } from '@/components/icons/RunIcon';
-import { getDate } from '@/utils/getRowFromDate';
 import { TextWithIcon } from '@/shared/TextWithIcon';
 import { PersonIcon } from '@/components/icons/PersonIcon';
 import { CalendarIcon } from '@/components/icons/CalendarIcon';
@@ -21,11 +18,11 @@ export const ScriptElement: FC<Props> = ({
   script_id,
   script_name,
   script_description,
-  in_fields,
-  out_fields,
-  file_id,
+  // in_fields,
+  // out_fields,
+  // file_id,
   owner,
-  visibility,
+  // visibility,
   created_at,
   className,
   ...props

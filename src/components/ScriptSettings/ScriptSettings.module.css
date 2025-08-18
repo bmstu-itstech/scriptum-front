@@ -39,8 +39,6 @@
 
 .ScriptSettings__input[type='checkbox'] {
   appearance: none;
-  appearance: none;
-  appearance: none;
   border-radius: var(--border-radius-sm);
   background-color: var(--color-white-main);
   border: 1px solid var(--color-gray-border2);

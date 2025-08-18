@@ -11,6 +11,12 @@
   }
 }
 
+.EmptyScript__title {
+  margin-top: 0.75rem;
+  font-weight: 500;
+  font-size: var(--font-size-base);
+}
+
 .EmptyScript {
   border: 1px dashed var(--color-gray-stroke);
   justify-content: center;
@@ -41,10 +47,4 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.EmptyScript__title {
-  margin-top: 0.75rem;
-  font-weight: 500;
-  font-size: var(--font-size-base);
 }

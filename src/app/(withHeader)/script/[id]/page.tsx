@@ -2,12 +2,10 @@
 import { ScriptInfo } from '@/components/ScriptInfo';
 import { ScriptParametrs } from '@/components/ScriptParametrs';
 import { PageLayout } from '@/layouts/PageLayout';
-import { scriptElementUsecase1 } from '@/components/ScriptsPanel/components/ScriptElement/ScriptElement.usecase';
 import {
   ScriptParametersInputUsecase,
   ScriptParametersOutputUsecase,
 } from '@/components/ScriptParametrs/ScriptParametrs.usecase';
-import { ScriptParametersLayoutUsecase1 } from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.usecase';
 import { ScriptParametrLayout } from '@/layouts/ScriptParametrsLayout/components/ScriptParametrLayout';
 import { LinkBack } from '@/components/LinkBack';
 import { BackArrowIcon } from '@/components/icons/BackArrowIcon';
@@ -25,13 +23,14 @@ import { useStartScript } from '@/hooks/script/useStartScript';
 export default function Page() {
   const params = useParams();
   const script_id = Number(params.id);
+  const shouldLoad = !isNaN(script_id);
 
-  const { data, isLoading } = useGetScriptById(script_id);
+  const { data, isLoading } = useGetScriptById(shouldLoad ? script_id : 0);
+  const { mutate, isPending } = useStartScript(shouldLoad ? script_id : 0);
 
-  if (!data || isLoading) {
+  if (!shouldLoad || isLoading || !data) {
     return <div>Loading...</div>;
   }
-  const { mutate, isPending } = useStartScript(script_id);
 
   const initialValues = {
     in_params: data.in_fields.map((item) => ({

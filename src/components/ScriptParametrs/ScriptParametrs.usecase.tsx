@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import styles from '@/components/ScriptParametrs/ScriptParametrs.module.css';
 import { GalkaIcon } from '@/components/icons/GalkaIcon';
 import { AttentionIcon } from '@/components/icons/AttentionIcon';

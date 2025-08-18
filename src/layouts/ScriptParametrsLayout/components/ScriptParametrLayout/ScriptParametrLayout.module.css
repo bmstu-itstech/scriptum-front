@@ -13,12 +13,6 @@
   font-size: var(--font-size-xs);
 }
 
-.ScriptParametrLayout__info_input {
-  dispay: flex;
-  justify-content: space-between;
-  align-items: start;
-}
-
 .ScriptParametrLayout__content_input {
   background: var(--color-white-sub);
 }
@@ -41,7 +35,7 @@
   border-radius: var(--border-radius-xs);
   background: var(--color-gray-superlight);
   font-size: var(--font-size-xxs);
-  align-text: center;
+  text-align: center;
   color: var(--color-gray-light2);
 }
 
@@ -51,7 +45,7 @@
   background: var(--color-purple-light);
   color: var(--color-purple-main);
   font-size: var(--font-size-xxs);
-  align-text: center;
+  text-align: center;
 }
 
 .ScriptParametrLayout__input_input {

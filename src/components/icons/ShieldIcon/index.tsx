@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import src from '@/assets/icons/shieldIcon.svg';
 import { Props } from './ShieldIcon.props';
 
 export const ShieldIcon: FC<Props> = ({ className, ...props }) => {

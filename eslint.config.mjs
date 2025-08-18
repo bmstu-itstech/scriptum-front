@@ -27,15 +27,34 @@ export default [
   ),
 
   {
+    ignores: [
+      'node_modules',
+      '.next',
+      'dist',
+      'build',
+      'coverage',
+      'public',
+      '**/*.json',
+      '**/*.md',
+      '**/*.mdx',
+      '**/*.svg',
+    ],
     rules: {
       'no-console': 'warn',
       eqeqeq: 'warn',
       curly: 'warn',
       'no-else-return': 'warn',
       'react/react-in-jsx-scope': 'off',
+
+      '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
+      'react/prop-types': 'off',
+      'jsx-a11y/click-events-have-key-events': 'off',
+      'jsx-a11y/no-static-element-interactions': 'off',
+      'jsx-a11y/no-noninteractive-tabindex': 'warn',
+      '@typescript-eslint/no-empty-object-type': 'warn',
       'unused-imports/no-unused-vars': [
-        'warn',
+        'error',
         {
           vars: 'all',
           varsIgnorePattern: '^_',
@@ -43,6 +62,7 @@ export default [
           argsIgnorePattern: '^_',
         },
       ],
+
       ...eslintPluginPrettier.configs.recommended.rules,
     },
     plugins: {

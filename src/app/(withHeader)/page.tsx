@@ -1,7 +1,7 @@
 'use client';
 
 import { PageLayout } from '@/layouts/PageLayout';
-import { mainPageUsecase } from '@/app/(withHeader)/page.usecase';
+import { mainPageUsecase, APIScripts } from '@/app/(withHeader)/page.usecase';
 import { ScriptPanel } from '@/components/ScriptsPanel';
 import { Search } from '@/components/Search';
 import { SearchIcon } from '@/components/icons/SearchIcon';
@@ -11,8 +11,6 @@ import { useDebounce } from 'use-debounce';
 import { useMemo, useState } from 'react';
 import { Pagination } from '@/shared/Pagination';
 import { Stats } from '@/shared/Stats';
-import { useGetAllScripts } from '@/hooks/script/useGetAllScripts';
-import { APIScripts } from '@/app/(withHeader)/page.usecase';
 
 const ITEMS_PER_PAGE = 6;
 

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, type FC } from 'react';
+import { useCallback, useEffect, useState, type FC } from 'react';
 import { Props } from '@/shared/ExtendedBlock/ExtendedBlock.props';
 import { DownArrowIcon } from '@/components/icons/DownArrowIcon';
 import { UpArrowIcon } from '@/components/icons/UpArrowIcon';
@@ -10,7 +10,7 @@ export const ExtendedBlock: FC<Props> = ({ children, contentClassname, mainExten
   const [countOfChildren, setCountOfChildren] = useState(children.length);
   useEffect(() => {
     setCountOfChildren(children.length);
-  });
+  }, [children.length]);
 
   const onShowMoreClick = useCallback(() => {
     setCountOfShown(countOfChildren);

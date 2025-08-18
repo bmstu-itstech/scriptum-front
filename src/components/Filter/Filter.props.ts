@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import type { GroupBase, StylesConfig } from 'react-select';
 
 interface Option {
@@ -12,7 +12,9 @@ export default interface Props {
   name: string;
   value: string;
   placeholder: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (value: any) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onBlur?: (e: any) => void;
   className?: string;
   selectClassName?: string;

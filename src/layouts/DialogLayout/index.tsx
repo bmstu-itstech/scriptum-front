@@ -1,6 +1,5 @@
 'use client';
-import React, { FC } from 'react';
-import { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import styles from './DialogLayout.module.css';
 import cn from 'classnames';
 import { Props } from './DialogLayout.props';
@@ -56,7 +55,9 @@ export const DialogLayout: FC<Props> = ({
     }
   };
 
-  if (!isVisible) return null;
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>

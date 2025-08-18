@@ -52,8 +52,9 @@
   /* opacity: 0; */
 
   /* visibility: hidden; */
-  user-select: none;
-  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   pointer-events: none;
   color: var(--color-red-main);

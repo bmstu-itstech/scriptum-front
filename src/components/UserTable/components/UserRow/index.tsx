@@ -38,7 +38,9 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
   };
 
   const handleSave = () => {
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      return;
+    }
 
     const editedUser = {
       id: user.id,
@@ -53,7 +55,9 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
   };
 
   const validateForm = () => {
-    if (!editData) return false;
+    if (!editData) {
+      return false;
+    }
 
     const shouldValidatePassword = !!editData.password || !!editData.confirmPassword;
     const newErrors = {
@@ -69,7 +73,9 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!editData) return;
+    if (!editData) {
+      return;
+    }
 
     if (e.target.name === 'password' && e.target.value === '') {
       setEditData({
@@ -93,7 +99,9 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
   };
 
   const handleBlur = (field: 'email' | 'password' | 'fullname') => {
-    if (!editData) return;
+    if (!editData) {
+      return;
+    }
 
     if (field === 'password') {
       const shouldValidatePassword = !!editData.password || !!editData.confirmPassword;
@@ -114,7 +122,9 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
   };
 
   const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!editData) return;
+    if (!editData) {
+      return;
+    }
     setEditData({
       ...editData,
       role: e.target.checked ? UserRole.ADMIN : UserRole.USER,

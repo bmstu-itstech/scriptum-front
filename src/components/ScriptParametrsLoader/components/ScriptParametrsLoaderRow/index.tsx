@@ -6,8 +6,7 @@ import { memo, type FC } from 'react';
 import cn from 'classnames';
 import { Filter } from '@/components/Filter/Filter';
 import { measureUsecase, typeUsecase } from '@/components/Filter/Filter.usecase';
-import { FastField } from 'formik';
-import { FastFieldProps } from 'formik';
+import { FastField, type FastFieldProps } from 'formik';
 
 interface RowProps {
   index: number;
@@ -20,7 +19,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
   return (
     <div className={`${styles.row} animationAppear ${className}`}>
       <FastField name={`${arrayName}[${index}].name`}>
-        {({ field, form, meta }: FastFieldProps) => (
+        {({ field, meta }: FastFieldProps) => (
           <InputLayout
             type='text'
             name={field.name}
@@ -35,7 +34,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
       </FastField>
 
       <FastField name={`${arrayName}[${index}].desc`}>
-        {({ field, form, meta }: FastFieldProps) => (
+        {({ field, meta }: FastFieldProps) => (
           <InputLayout
             type='text'
             name={field.name}
@@ -50,7 +49,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
       </FastField>
 
       <FastField name={`${arrayName}[${index}].type`}>
-        {({ field, form, meta }: FastFieldProps) => (
+        {({ field, meta }: FastFieldProps) => (
           <Filter
             name={field.name}
             index={index}
@@ -68,7 +67,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
       </FastField>
 
       <FastField name={`${arrayName}[${index}].measure`}>
-        {({ field, form, meta }: FastFieldProps) => (
+        {({ field, meta }: FastFieldProps) => (
           <Filter
             name={field.name}
             index={index + 10000}

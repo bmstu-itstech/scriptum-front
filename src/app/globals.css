@@ -155,7 +155,6 @@ button {
   cursor: pointer;
   outline: none;
   user-select: none;
-  user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -166,7 +165,6 @@ input[type='file'] {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
   opacity: 0;

@@ -22,7 +22,9 @@ export const Pagination: FC<Props> = ({
   );
 
   const renderPageNumbers = () => {
-    if (totalPages <= 1) return null;
+    if (totalPages <= 1) {
+      return null;
+    }
 
     const pages: (number | string)[] = [];
     const halfVisible = Math.floor(maxVisiblePages / 2);
@@ -78,7 +80,9 @@ export const Pagination: FC<Props> = ({
     });
   };
 
-  if (totalPages <= 1) return null;
+  if (totalPages <= 1) {
+    return null;
+  }
 
   return (
     <div className={cn(styles.pagination, className)} {...props}>

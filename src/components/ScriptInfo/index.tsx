@@ -1,18 +1,17 @@
 import { Props } from '@/components/ScriptInfo/ScriptInfo.props';
 import type { FC } from 'react';
 import cn from 'classnames';
-import { getDate } from '@/utils/getRowFromDate';
 import styles from '@/components/ScriptInfo/ScriptInfo.module.css';
 
 export const ScriptInfo: FC<Props> = ({
-  script_id,
+  // script_id,
   script_name,
   script_description,
-  in_fields,
-  out_fields,
-  file_id,
+  // in_fields,
+  // out_fields,
+  // file_id,
   owner,
-  visibility,
+  // visibility,
   created_at,
   className,
   ...props

@@ -1,15 +1,8 @@
 'use client';
 import type Props from '@/components/Filter/Filter.props';
-import { type FC, type ReactElement } from 'react';
 import cn from 'classnames';
 import styles from '@/components/Filter/Filter.module.css';
-import Select, {
-  type SingleValue,
-  type ActionMeta,
-  components,
-  type ControlProps,
-  SelectComponentsConfig,
-} from 'react-select';
+import Select, { type SingleValue, components, type ControlProps } from 'react-select';
 import { colourStyles, Option, selectStyles } from '@/components/Filter/Filter.usecase';
 
 export const Filter: React.FC<Props> = ({

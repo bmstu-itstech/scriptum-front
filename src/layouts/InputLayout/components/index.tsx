@@ -1,4 +1,4 @@
-import { useRef, FC, memo, useState, useMemo, useCallback } from 'react';
+import { useRef, FC, memo, useCallback } from 'react';
 import cn from 'classnames';
 import { TextWithIcon } from '@/shared/TextWithIcon';
 import { UploadIcon } from '@/components/icons/UploadIcon';
@@ -109,7 +109,7 @@ const FileInput: FC<FileProps> = ({
           name={name}
           type='file'
           accept='.py'
-          className={styles.fileInput}
+          className={cn(styles.fileInput, inputClassName)}
           onChange={onChange}
         />
       </label>

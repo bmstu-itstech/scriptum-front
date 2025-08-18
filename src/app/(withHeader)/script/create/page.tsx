@@ -3,14 +3,14 @@ import { PageLayout } from '@/layouts/PageLayout';
 import {
   pageCreateUsecase,
   ScriptInitialValues,
+  ScriptSchema,
 } from '@/app/(withHeader)/script/create/page.usecase';
 import InputLayout from '@/layouts/InputLayout';
 import { InfoBlockLayout } from '@/layouts/InfoBlockLayout';
 import styles from '@/app/(withHeader)/script/create/page.module.css';
 import { ScriptParametrsLoader } from '@/components/ScriptParametrsLoader';
-import { Formik, Form, FastField, Field, type FastFieldProps } from 'formik';
+import { Formik, Form, FastField, type FastFieldProps } from 'formik';
 import { Button } from '@/shared/Button';
-import { ScriptSchema } from '@/app/(withHeader)/script/create/page.usecase';
 import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 import { useCreateScript } from '@/hooks/script/useCreateScript';
 import { useUploadFile } from '@/hooks/script/useUploadFile';
