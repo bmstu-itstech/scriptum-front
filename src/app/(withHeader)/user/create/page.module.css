@@ -65,8 +65,6 @@
   width: 0;
 }
 
-
-
 .checkboxInput:checked ~ .checkmark {
   background-color: var(--color-purple-main);
   border-color: var(--color-purple-main);
