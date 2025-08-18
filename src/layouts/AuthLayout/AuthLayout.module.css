@@ -62,17 +62,17 @@
   padding: 0.875rem 1.5rem;
 }
 
-.inputLabel{
-	color: var(--color-gray-dark);
-	font-weight: 600;
-	margin-bottom: 0.5rem;
+.inputLabel {
+  color: var(--color-gray-dark);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-.input{
-	height: 6rem;
+.input {
+  height: 6rem;
 }
 
-.authForm{
+.authForm {
   height: 100dvh;
   display: flex;
   justify-content: center;

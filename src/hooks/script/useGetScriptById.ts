@@ -6,7 +6,7 @@ export const useGetScriptById = (id: number) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['getScript', id],
     queryFn: () => getScriptById(id),
-    placeholderData:  scriptElementUsecase2 //убрать когда будет бэкенд
+    placeholderData: scriptElementUsecase2, //убрать когда будет бэкенд
   });
 
   return { data, isLoading, error };

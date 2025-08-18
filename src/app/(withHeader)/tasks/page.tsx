@@ -1,18 +1,18 @@
 'use client';
-import {APIPipelines, tasksPageUsecase} from './page.usecase';
-import {useState, useMemo} from 'react';
-import {useDebounce} from 'use-debounce';
-import {Search} from '@/components/Search';
-import {SearchIcon} from '@/components/icons/SearchIcon';
-import {Filter} from '@/components/Filter/Filter';
-import {FilterIcon} from '@/components/icons/FilterIcon';
-import {ITEMS_PER_PAGE, PipelineStatus} from '@/shared/consts/pipeline';
-import {PipelineLayout} from '@/layouts/PipelineLayout';
+import { APIPipelines, tasksPageUsecase } from './page.usecase';
+import { useState, useMemo } from 'react';
+import { useDebounce } from 'use-debounce';
+import { Search } from '@/components/Search';
+import { SearchIcon } from '@/components/icons/SearchIcon';
+import { Filter } from '@/components/Filter/Filter';
+import { FilterIcon } from '@/components/icons/FilterIcon';
+import { ITEMS_PER_PAGE, PipelineStatus } from '@/shared/consts/pipeline';
+import { PipelineLayout } from '@/layouts/PipelineLayout';
 import style from './page.module.css';
-import {PageLayout} from '@/layouts/PageLayout';
-import {Pagination} from '@/shared/Pagination';
-import {Stats} from '@/shared/Stats';
-import {pageSelectStyles, statusUsecase} from '@/components/Filter/Filter.usecase';
+import { PageLayout } from '@/layouts/PageLayout';
+import { Pagination } from '@/shared/Pagination';
+import { Stats } from '@/shared/Stats';
+import { pageSelectStyles, statusUsecase } from '@/components/Filter/Filter.usecase';
 
 export default function TasksPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,7 +21,7 @@ export default function TasksPage() {
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
 
   const filteredPipelines = useMemo(() => {
-    return APIPipelines.filter(pipeline => {
+    return APIPipelines.filter((pipeline) => {
       const searchLower = debouncedSearchTerm.toLowerCase();
       const matchesSearch =
         pipeline.scriptName.toLowerCase().includes(searchLower) ||
@@ -46,7 +46,7 @@ export default function TasksPage() {
         <div className={style.searchFilterGroup}>
           <Search
             placeholder='Поиск по названию скрипта или номеру задачи...'
-            callback={value => {
+            callback={(value) => {
               setSearchTerm(value);
               setCurrentPage(1);
             }}
@@ -59,7 +59,7 @@ export default function TasksPage() {
             name='statusFilter'
             style={pageSelectStyles}
             value={statusFilter}
-            onChange={value => {
+            onChange={(value) => {
               setStatusFilter(value as PipelineStatus | 'all');
               setCurrentPage(1);
             }}
@@ -71,15 +71,15 @@ export default function TasksPage() {
 
         <Stats
           stats={[
-            {text: 'Найдено', count: filteredPipelines.length},
-            {text: 'Страница', count: currentPage, total: totalPages},
+            { text: 'Найдено', count: filteredPipelines.length },
+            { text: 'Страница', count: currentPage, total: totalPages },
           ]}
         />
       </div>
 
       <div className={style.pipelines}>
         {paginatedPipelines.length > 0 ? (
-          paginatedPipelines.map(pipeline => (
+          paginatedPipelines.map((pipeline) => (
             <PipelineLayout
               key={pipeline.id}
               status={pipeline.status}

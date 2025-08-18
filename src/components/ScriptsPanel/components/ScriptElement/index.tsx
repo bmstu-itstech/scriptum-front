@@ -55,7 +55,7 @@ export const ScriptElement: FC<Props> = ({
     onConfirm: () => void;
   } | null>(null);
   const { mutate } = useDeleteScript();
-  
+
   const handleDeleteClick = (scriptId: number) => {
     setDialog({
       visible: true,
@@ -119,7 +119,7 @@ export const ScriptElement: FC<Props> = ({
             <EditIcon />
           </span>
           <span
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               handleDeleteClick(script_id);
             }}

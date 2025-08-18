@@ -3,7 +3,6 @@
 import './../globals.css';
 import styles from '@/app/(withoutHeader)/page.module.css';
 
-
 export default function NoHeaderLayout({
   children,
 }: Readonly<{
@@ -11,9 +10,7 @@ export default function NoHeaderLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${styles.body}`}>
-        {children}
-      </body>
+      <body className={`${styles.body}`}>{children}</body>
     </html>
   );
 }

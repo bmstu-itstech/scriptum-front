@@ -5,4 +5,4 @@ const client = axios.create({
   timeout: 1000,
 });
 
-export {client};
+export { client };

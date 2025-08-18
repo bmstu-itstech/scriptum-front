@@ -5,25 +5,28 @@ import cn from 'classnames';
 import styles from '@/components/Search/Search.module.css';
 
 export const Search: FC<Props> = ({ callback, icon, placeholder, className, ...props }) => {
-	const [value, setValue] = useState('');
+  const [value, setValue] = useState('');
 
-	const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-		setValue(e.currentTarget.value);
-		callback(e.currentTarget.value);
-	}, [callback]);
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(e.currentTarget.value);
+      callback(e.currentTarget.value);
+    },
+    [callback],
+  );
 
-	return (
-		<div className={cn(styles.search__container, className)}>
-			{icon && <span className={styles.search__icon}>{icon}</span>}
-			<input
-				type='text'
-				name='search'
-				onChange={onChange}
-				placeholder={placeholder}
-				className={cn(styles.search__input, 'smoothTransition')}
-				value={value}
-				{...props}
-			/>
-		</div>
-	);
+  return (
+    <div className={cn(styles.search__container, className)}>
+      {icon && <span className={styles.search__icon}>{icon}</span>}
+      <input
+        type='text'
+        name='search'
+        onChange={onChange}
+        placeholder={placeholder}
+        className={cn(styles.search__input, 'smoothTransition')}
+        value={value}
+        {...props}
+      />
+    </div>
+  );
 };

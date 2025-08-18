@@ -6,10 +6,9 @@
   width: 100%;
   display: flex;
   align-items: center;
-
 }
 
-.listBorder{
+.listBorder {
   border-bottom: 1px solid var(--color-gray-border);
   margin-bottom: 1rem;
 }

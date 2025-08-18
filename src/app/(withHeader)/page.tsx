@@ -17,34 +17,33 @@ import { APIScripts } from '@/app/(withHeader)/page.usecase';
 const ITEMS_PER_PAGE = 6;
 
 export default function Home() {
-  
   // const { data: data = [], isLoading } = useGetAllScripts();
-  const data = APIScripts
+  const data = APIScripts;
 
-	const [searchTerm, setSearchTerm] = useState('')
-	const [currentPage, setCurrentPage] = useState(1)
-	const [debouncedSearchTerm] = useDebounce(searchTerm, 300)
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
 
-	const filteredScripts = useMemo(() => {
-    return data.filter(script => {
-			const searchLower = debouncedSearchTerm.toLowerCase()
-			return (
-				script.script_name.toLowerCase().includes(searchLower) ||
-				script.script_description.toLowerCase().includes(searchLower)
-			)
-		})
-	}, [debouncedSearchTerm])
+  const filteredScripts = useMemo(() => {
+    return data.filter((script) => {
+      const searchLower = debouncedSearchTerm.toLowerCase();
+      return (
+        script.script_name.toLowerCase().includes(searchLower) ||
+        script.script_description.toLowerCase().includes(searchLower)
+      );
+    });
+  }, [debouncedSearchTerm]);
 
-	const totalPages = Math.ceil(filteredScripts.length / ITEMS_PER_PAGE) || 1
-	const paginatedScripts = useMemo(() => {
-		const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-		return filteredScripts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
-	}, [filteredScripts, currentPage])
+  const totalPages = Math.ceil(filteredScripts.length / ITEMS_PER_PAGE) || 1;
+  const paginatedScripts = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredScripts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredScripts, currentPage]);
 
   return (
     <PageLayout title={mainPageUsecase.title} subtitle={mainPageUsecase.subtitle}>
       <Search
-        callback={value => {
+        callback={(value) => {
           setSearchTerm(value);
           setCurrentPage(1);
         }}
@@ -62,7 +61,7 @@ export default function Home() {
         className={styles.stats}
       />
 
-			<ScriptPanel scripts={paginatedScripts} />
+      <ScriptPanel scripts={paginatedScripts} />
 
       {totalPages > 1 && (
         <Pagination

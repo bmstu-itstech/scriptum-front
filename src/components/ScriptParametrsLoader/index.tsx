@@ -13,7 +13,7 @@ import { DocumentNoParamsIcon } from '@/components/icons/DocumentNoParamsIcon';
 import { FieldArray } from 'formik';
 import { ExtendedBlock } from '@/shared/ExtendedBlock';
 
-export const ScriptParametrsLoader: FC<Props> = ({params, type, className, ...props }) => {
+export const ScriptParametrsLoader: FC<Props> = ({ params, type, className, ...props }) => {
   const name = type === 'input' ? 'inputParams' : 'outputParams';
 
   const PreBlock = useMemo(() => {
@@ -33,7 +33,7 @@ export const ScriptParametrsLoader: FC<Props> = ({params, type, className, ...pr
             <p key={ind} className={cn(`layout__title-sm`, styles.headerItem)}>
               {block}
             </p>
-          )
+          ),
         )}
       </div>
     );
@@ -47,53 +47,46 @@ export const ScriptParametrsLoader: FC<Props> = ({params, type, className, ...pr
           headerClassname={stylesLayout.smallPadding}
           header={
             <div className={cn(styles.headerList, styles.justifyBetween)}>
-              <div className={styles.headerList__left}> 
+              <div className={styles.headerList__left}>
                 <p className={cn('layout__title-sm', styles.headerName)}>
                   {type === 'input' ? 'Входные параметры' : 'Выходные параметры'}
                 </p>
-                <p className={styles.headerList_subtitle}>
-                  Количество параметров: {params.length}
-                </p >
+                <p className={styles.headerList_subtitle}>Количество параметров: {params.length}</p>
               </div>
 
               <Button
                 className={styles.addButton}
-                onClick={() => push({
-                  id: crypto.randomUUID(),
-                  name: '',
-                  desc: '',
-                  type: '',
-                  measure: '',
-                })}
-                icon={<AddParametrIcon className={styles.addIcon} />}
-              >
+                onClick={() =>
+                  push({
+                    id: crypto.randomUUID(),
+                    name: '',
+                    desc: '',
+                    type: '',
+                    measure: '',
+                  })
+                }
+                icon={<AddParametrIcon className={styles.addIcon} />}>
                 Добавить параметр
               </Button>
             </div>
           }
-
-          {...props}
-        >
+          {...props}>
           {PreBlock}
           <ExtendedBlock
             mainExtendedClassname={styles.extendedBlock__main}
             contentClassname={styles.extendedBlock__content}>
-
             {params.map((row, ind) => (
               <ScriptParametersLoaderRow
                 key={row.id}
                 arrayName={name}
                 index={ind}
-                onRemove={() =>  remove(ind)}
+                onRemove={() => remove(ind)}
                 {...row}
               />
-            ))
-
-            }
+            ))}
           </ExtendedBlock>
         </ScriptParametrsLayout>
       )}
     </FieldArray>
-
   );
 };

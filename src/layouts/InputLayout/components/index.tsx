@@ -23,23 +23,30 @@ const FileInput: FC<FileProps> = ({
   const { values, setFieldValue } = useFormikContext<ScriptFormValues>();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleDeleteFile = useCallback((e: React.MouseEvent<HTMLImageElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (inputRef.current) {
-      inputRef.current.value = "";
-    }
-    setFieldValue(name, null);
-  }, [name, setFieldValue]);
+  const handleDeleteFile = useCallback(
+    (e: React.MouseEvent<HTMLImageElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
+      setFieldValue(name, null);
+    },
+    [name, setFieldValue],
+  );
 
   const FileComponent = () => {
-    return (<div className={styles.fileComponent}>
-      <PythonIcon className={styles.python} />
-      <p className={styles.FileName}>{values.file?.name}</p>
-      {values.file?.size && <p className={styles.FileSize}> ({(values.file.size / 1024).toFixed(2)} KB)</p>}
-      <CloseModalIcon onClick={handleDeleteFile} className={styles.deleteFile} />
-    </div>)
-  }
+    return (
+      <div className={styles.fileComponent}>
+        <PythonIcon className={styles.python} />
+        <p className={styles.FileName}>{values.file?.name}</p>
+        {values.file?.size && (
+          <p className={styles.FileSize}> ({(values.file.size / 1024).toFixed(2)} KB)</p>
+        )}
+        <CloseModalIcon onClick={handleDeleteFile} className={styles.deleteFile} />
+      </div>
+    );
+  };
   const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -62,13 +69,12 @@ const FileInput: FC<FileProps> = ({
 
   const handleFileChange = (file: File) => {
     if (inputRef.current) {
-
       const event = {
         target: {
           name: name,
           files: [file],
-          value: file.name
-        }
+          value: file.name,
+        },
       } as unknown as React.ChangeEvent<HTMLInputElement>;
 
       onChange?.(event);
@@ -77,44 +83,40 @@ const FileInput: FC<FileProps> = ({
 
   return (
     <div className={cn(stylesBase.inputContainer, className)} {...props}>
-      {inputTitle && (
-        <p className='layout__inputLabel'>{inputTitle}</p>
-      )}
+      {inputTitle && <p className='layout__inputLabel'>{inputTitle}</p>}
 
       <label
         htmlFor={name}
         tabIndex={0}
         className={cn(styles.fileInput, {
-          [styles.hasError]: errorText
+          [styles.hasError]: errorText,
         })}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
-        onDrop={handleDrop}
-      >
-        {values.file ? <FileComponent /> : (<TextWithIcon icon={<UploadIcon />}>
-          {placeholder || 'Перетащите файл или кликните для выбора'}
-        </TextWithIcon>)}
-
+        onDrop={handleDrop}>
+        {values.file ? (
+          <FileComponent />
+        ) : (
+          <TextWithIcon icon={<UploadIcon />}>
+            {placeholder || 'Перетащите файл или кликните для выбора'}
+          </TextWithIcon>
+        )}
 
         <input
           id={name}
           tabIndex={-1}
           ref={inputRef}
           name={name}
-          type="file"
-          accept=".py"
+          type='file'
+          accept='.py'
           className={styles.fileInput}
           onChange={onChange}
         />
       </label>
 
-      {errorText && (
-        <span className={cn(stylesBase.errorText, styles.fileError)}>
-          {errorText}
-        </span>
-      )}
+      {errorText && <span className={cn(stylesBase.errorText, styles.fileError)}>{errorText}</span>}
     </div>
   );
 };
 
-export default memo(FileInput)
+export default memo(FileInput);

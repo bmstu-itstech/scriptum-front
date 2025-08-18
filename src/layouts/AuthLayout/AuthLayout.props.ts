@@ -1,5 +1,4 @@
 import type { HTMLAttributes } from 'react';
 import React from 'react';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
-}
+export interface Props extends HTMLAttributes<HTMLDivElement> {}

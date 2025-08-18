@@ -18,7 +18,7 @@ export const ExtendedBlock: FC<Props> = ({ children, contentClassname, mainExten
   const onShowLessClick = useCallback(() => {
     setCountOfShown(4);
   }, []);
-  
+
   return (
     <>
       <div className={cn(styles.ExtendedBlock, mainExtendedClassname)}>
@@ -50,7 +50,10 @@ export const ExtendedBlock: FC<Props> = ({ children, contentClassname, mainExten
             <button
               title='showLess'
               type='button'
-              className={cn(styles.ScriptParametrsLayout__extendBtn, styles.ScriptParametrsLayout__extendBtn__showLess)}
+              className={cn(
+                styles.ScriptParametrsLayout__extendBtn,
+                styles.ScriptParametrsLayout__extendBtn__showLess,
+              )}
               onClick={onShowLessClick}>
               <UpArrowIcon className={styles.ScriptParametrsLayout__extendBtn_btn} />
             </button>

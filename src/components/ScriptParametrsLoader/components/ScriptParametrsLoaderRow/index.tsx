@@ -16,16 +16,9 @@ interface RowProps {
   className?: string;
 }
 
-const ScriptParametersLoaderRow: FC<RowProps> = ({
-  index,
-  arrayName,
-  onRemove,
-  className,
-}) => {
-
+const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, className }) => {
   return (
     <div className={`${styles.row} animationAppear ${className}`}>
-
       <FastField name={`${arrayName}[${index}].name`}>
         {({ field, form, meta }: FastFieldProps) => (
           <InputLayout
@@ -62,7 +55,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({
             name={field.name}
             index={index}
             options={typeUsecase}
-            placeholder="Выберите тип"
+            placeholder='Выберите тип'
             value={field.value}
             onChange={field.onChange}
             onBlur={field.onBlur}
@@ -74,14 +67,13 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({
         )}
       </FastField>
 
-
       <FastField name={`${arrayName}[${index}].measure`}>
         {({ field, form, meta }: FastFieldProps) => (
           <Filter
             name={field.name}
             index={index + 10000}
             options={measureUsecase}
-            placeholder="Выберите единицу измерения"
+            placeholder='Выберите единицу измерения'
             value={field.value}
             onChange={field.onChange}
             onBlur={field.onBlur}
@@ -96,8 +88,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({
         title='del'
         type='button'
         onClick={() => onRemove()}
-        className={cn(styles.scriptElement__delIcon, 'smoothTransition')}
-      >
+        className={cn(styles.scriptElement__delIcon, 'smoothTransition')}>
         <DeleteIcon />
       </button>
     </div>

@@ -1,5 +1,5 @@
-import {IUser} from '@/domain/entities/user';
-import {client} from '../axios';
+import { IUser } from '@/domain/entities/user';
+import { client } from '../axios';
 
 const usersList: () => Promise<IUser[]> = async () => {
   const res = await client.get(`/users`);
@@ -9,4 +9,4 @@ const usersList: () => Promise<IUser[]> = async () => {
   return res.data;
 };
 
-export {usersList};
+export { usersList };

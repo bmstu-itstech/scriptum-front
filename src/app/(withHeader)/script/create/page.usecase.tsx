@@ -3,7 +3,7 @@ import styles from '@/app/(withHeader)/script/create/page.module.css';
 import cn from 'classnames';
 import { AddIcon } from '@/components/icons/Addicon';
 import { AddParametrIcon } from '@/components/icons/AddParametricon';
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 
 export const pageCreateUsecase = {
   main: {
@@ -12,18 +12,15 @@ export const pageCreateUsecase = {
       scriptTitle: {
         title: 'Название скрипта *',
         placeholder: 'Введите название скрипта',
-
       },
       scriptCode: {
         title: 'Python-файл (*.py) *',
         placeholder: 'Выберите Python-файл',
-
       },
 
       scriptDesc: {
         title: 'Описание *',
         placeholder: 'Опишите назначение и функцональность скрипта',
-
       },
     },
   },
@@ -61,7 +58,7 @@ const ParametrSheme = Yup.object().shape({
     .min(2, 'Единица измерения должна иметь хотя бы 2 символа')
     .max(50, 'Единица измерения должна быть меньше 50 символов')
     .required('Единица измерения обязательна'),
-})
+});
 
 export const ScriptSchema = Yup.object().shape({
   name: Yup.string()
@@ -88,9 +85,8 @@ export const ScriptSchema = Yup.object().shape({
     .test(
       'fileCount',
       'Можно загрузить только один файл',
-      (value) => value && !Array.isArray(value)
-    )
-
+      (value) => value && !Array.isArray(value),
+    ),
 });
 
 export interface Parameter {
@@ -113,6 +109,9 @@ export interface ScriptFormValues {
 }
 
 export const ScriptInitialValues: ScriptFormValues = {
-  name: '', desc: '', file: null, inputParams: [],
-  outputParams: []
+  name: '',
+  desc: '',
+  file: null,
+  inputParams: [],
+  outputParams: [],
 };

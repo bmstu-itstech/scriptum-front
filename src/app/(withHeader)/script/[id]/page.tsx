@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { ScriptInfo } from '@/components/ScriptInfo';
 import { ScriptParametrs } from '@/components/ScriptParametrs';
 import { PageLayout } from '@/layouts/PageLayout';
@@ -23,7 +23,6 @@ import { runScriptValidationSchema } from '@/app/(withHeader)/script/[id]/page.u
 import { useStartScript } from '@/hooks/script/useStartScript';
 
 export default function Page() {
-
   const params = useParams();
   const script_id = Number(params.id);
 
@@ -40,7 +39,7 @@ export default function Page() {
       data: '',
     })),
     notify_by_email: false,
-  }
+  };
 
   return (
     <PageLayout className={styles.page__container}>
@@ -59,16 +58,26 @@ export default function Page() {
             in_params: values.in_params,
             notify_by_email: values.notify_by_email,
           });
-        }}
-      >
+        }}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
-            <ScriptParametrs contentClassname={cn(styles.col2, styles.padding)} header={ScriptParametersInputUsecase.header}>
+            <ScriptParametrs
+              contentClassname={cn(styles.col2, styles.padding)}
+              header={ScriptParametersInputUsecase.header}>
               {data.in_fields.map((item, id) => {
-                return <ScriptParametrLayout formikName={`in_params[${id}].data`} key={id} typeOfCard='input' {...item} />;
+                return (
+                  <ScriptParametrLayout
+                    formikName={`in_params[${id}].data`}
+                    key={id}
+                    typeOfCard='input'
+                    {...item}
+                  />
+                );
               })}
             </ScriptParametrs>
-            <ScriptParametrs contentClassname={cn(styles.col2, styles.padding)} header={ScriptParametersOutputUsecase.header}>
+            <ScriptParametrs
+              contentClassname={cn(styles.col2, styles.padding)}
+              header={ScriptParametersOutputUsecase.header}>
               {data.out_fields.map((item, id) => {
                 return <ScriptParametrLayout key={id} typeOfCard='output' {...item} />;
               })}
@@ -81,4 +90,3 @@ export default function Page() {
     </PageLayout>
   );
 }
-

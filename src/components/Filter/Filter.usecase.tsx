@@ -44,7 +44,7 @@ export const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     height: '100%',
     minHeight: '100%',
   }),
-  menuPortal: base => ({ ...base, zIndex: 9999 }),
+  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
 
   container: (base, state) => ({
     ...base,
@@ -87,18 +87,18 @@ export const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {
   //   fontSize: 'var(--font-size-base)',
   //   textWrap: 'nowrap',
   // }),
-  menuList: base => ({
+  menuList: (base) => ({
     ...base,
     paddingBlock: '0px',
   }),
-  valueContainer: base => ({
+  valueContainer: (base) => ({
     ...base,
     paddingInlineStart: '1rem',
-  })
+  }),
 };
 
 export const pageSelectStyles: StylesConfig<Option, false, GroupBase<Option>> = {
-  placeholder: base => ({
+  placeholder: (base) => ({
     ...base,
     background: 'var(--color-white)',
     color: 'var(--color-gray-close-modal)',
@@ -106,7 +106,7 @@ export const pageSelectStyles: StylesConfig<Option, false, GroupBase<Option>> = 
     fontSize: 'var(--font-size-base)',
     textWrap: 'nowrap',
   }),
-  singleValue: base => ({
+  singleValue: (base) => ({
     ...base,
     background: 'var(--color-white)',
     color: 'var(--color-dark-main)',
@@ -133,11 +133,10 @@ export const pageSelectStyles: StylesConfig<Option, false, GroupBase<Option>> = 
         : undefined,
     },
   }),
-}
-
+};
 
 export const selectStyles: StylesConfig<Option, false, GroupBase<Option>> = {
-  placeholder: base => ({
+  placeholder: (base) => ({
     ...base,
     background: 'var(--color-white)',
     color: 'var(--color-gray-close-modal)',
@@ -145,7 +144,7 @@ export const selectStyles: StylesConfig<Option, false, GroupBase<Option>> = {
     fontSize: 'var(--font-size-sm)',
     textWrap: 'nowrap',
   }),
-  singleValue: base => ({
+  singleValue: (base) => ({
     ...base,
     background: 'var(--color-white)',
     color: 'var(--color-dark-main)',
@@ -172,4 +171,4 @@ export const selectStyles: StylesConfig<Option, false, GroupBase<Option>> = {
         : undefined,
     },
   }),
-}
+};

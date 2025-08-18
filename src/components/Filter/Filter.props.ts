@@ -1,7 +1,6 @@
 import type { HTMLAttributes, ReactElement } from 'react';
 import type { GroupBase, StylesConfig } from 'react-select';
 
-
 interface Option {
   value: string;
   label: string;

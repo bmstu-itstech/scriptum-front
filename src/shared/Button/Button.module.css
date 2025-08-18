@@ -1,26 +1,26 @@
 .btn {
-	background-color: var(--color-purple-main);
-	padding: 0.625rem 1rem;
-	text-align: center;
-	border: 0.5rem;
-	border-radius: 0.5rem;
-	color: var(--color-white-main);
-	width: 100%;
-	/* max-width: 18rem; */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.5rem;
-	cursor: pointer;
-	transition: background-color 0.2s;
+  background-color: var(--color-purple-main);
+  padding: 0.625rem 1rem;
+  text-align: center;
+  border: 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--color-white-main);
+  width: 100%;
+  /* max-width: 18rem; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
 
-	&:hover {
-		background-color: var(--color-purple-dark);
-	}
+  &:hover {
+    background-color: var(--color-purple-dark);
+  }
 
-	&:disabled {
-		background-color: var(--color-purple-dark);
-		opacity: 0.8;
-		cursor: not-allowed;
-	}
+  &:disabled {
+    background-color: var(--color-purple-dark);
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
 }

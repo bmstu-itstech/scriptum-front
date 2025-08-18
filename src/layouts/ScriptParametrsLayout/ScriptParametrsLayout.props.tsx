@@ -28,5 +28,5 @@ export interface IScriptStruct {
 
 export interface Props extends IScriptStruct, HTMLAttributes<HTMLDivElement> {
   children: ReactElement | ReactElement[];
-  headerClassname?: string; 
+  headerClassname?: string;
 }

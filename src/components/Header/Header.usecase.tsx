@@ -7,35 +7,35 @@ import { CreateUserIcon } from '../icons/CreateUserIcon';
 import { HandleUsersIcon } from '../icons/handleUsersIcon';
 
 interface LinkProps {
-	icon: ReactElement;
-	title: string;
-	direction: string;
+  icon: ReactElement;
+  title: string;
+  direction: string;
 }
 
 export const Links: (LinkProps & { direction: string })[] = [
-	{
-		icon: <HomeIcon />,
-		title: 'Главная',
-		direction: LinkDirection.Main,
-	},
-	{
-		icon: <TaskIcon />,
-		title: 'Задачи',
-		direction: LinkDirection.Tasks,
-	},
-	{
-		icon: <LoadIcon />,
-		title: 'Загрузка',
-		direction: LinkDirection.CreateScript,
-	},
-	{
-		icon: <CreateUserIcon />,
-		title: 'Создание',
-		direction: LinkDirection.CreateUser,
-	},
-	{
-		icon: <HandleUsersIcon />,
-		title: 'Управление',
-		direction: LinkDirection.HandleUsers,
-	},
+  {
+    icon: <HomeIcon />,
+    title: 'Главная',
+    direction: LinkDirection.Main,
+  },
+  {
+    icon: <TaskIcon />,
+    title: 'Задачи',
+    direction: LinkDirection.Tasks,
+  },
+  {
+    icon: <LoadIcon />,
+    title: 'Загрузка',
+    direction: LinkDirection.CreateScript,
+  },
+  {
+    icon: <CreateUserIcon />,
+    title: 'Создание',
+    direction: LinkDirection.CreateUser,
+  },
+  {
+    icon: <HandleUsersIcon />,
+    title: 'Управление',
+    direction: LinkDirection.HandleUsers,
+  },
 ];

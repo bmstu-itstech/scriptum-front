@@ -17,7 +17,12 @@ export const ScriptSettings: FC<Props> = memo(() => {
             {ScriptSettingsUsecase.settings.map((item, id) => {
               return (
                 <div className={styles.ScriptSettings__bit} key={id}>
-                  <input id={item.title} className={styles.ScriptSettings__input} type={item.type} {...field} />
+                  <input
+                    id={item.title}
+                    className={styles.ScriptSettings__input}
+                    type={item.type}
+                    {...field}
+                  />
                   <label htmlFor={item.title} className={styles.ScriptSettings__bit__title}>
                     {item.title}
                   </label>
@@ -31,6 +36,5 @@ export const ScriptSettings: FC<Props> = memo(() => {
         </div>
       )}
     </FastField>
-
   );
 });

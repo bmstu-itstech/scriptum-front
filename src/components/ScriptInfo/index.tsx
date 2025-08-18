@@ -5,26 +5,26 @@ import { getDate } from '@/utils/getRowFromDate';
 import styles from '@/components/ScriptInfo/ScriptInfo.module.css';
 
 export const ScriptInfo: FC<Props> = ({
-	script_id,
-	script_name,
-	script_description,
-	in_fields,
-	out_fields,
-	file_id,
-	owner,
-	visibility,
-	created_at,
-	className,
-	...props
+  script_id,
+  script_name,
+  script_description,
+  in_fields,
+  out_fields,
+  file_id,
+  owner,
+  visibility,
+  created_at,
+  className,
+  ...props
 }) => {
-	return (
-		<div className={cn(className, styles.ScriptInfo)} {...props}>
-			<h1 className={cn(styles.ScriptInfo__title, 'layout__title')}>{script_name}</h1>
-			<h2 className={cn(styles.ScriptInfo__subtitle, 'layout__subtitle')}>{script_description}</h2>
-			<div className={styles.ScriptInfo__info}>
-				<p className={styles.ScriptInfo__author}>Автор: {owner}</p>
-				<p className={styles.ScriptInfo__date}>Создан {created_at}</p>
-			</div>
-		</div>
-	);
+  return (
+    <div className={cn(className, styles.ScriptInfo)} {...props}>
+      <h1 className={cn(styles.ScriptInfo__title, 'layout__title')}>{script_name}</h1>
+      <h2 className={cn(styles.ScriptInfo__subtitle, 'layout__subtitle')}>{script_description}</h2>
+      <div className={styles.ScriptInfo__info}>
+        <p className={styles.ScriptInfo__author}>Автор: {owner}</p>
+        <p className={styles.ScriptInfo__date}>Создан {created_at}</p>
+      </div>
+    </div>
+  );
 };

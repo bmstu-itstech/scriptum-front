@@ -1,4 +1,4 @@
-import type {HTMLAttributes, ReactElement} from 'react';
+import type { HTMLAttributes, ReactElement } from 'react';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   type: string;
@@ -7,4 +7,4 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   unit: string;
 }
 
-export type ScriptParametrWithTypeOfCard = Props & {typeOfCard: string, formikName?: string};
+export type ScriptParametrWithTypeOfCard = Props & { typeOfCard: string; formikName?: string };

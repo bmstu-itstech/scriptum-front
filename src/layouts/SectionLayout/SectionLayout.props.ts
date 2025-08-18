@@ -1,6 +1,6 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes } from 'react';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
-	title: string;
-	subtitle: string;
+  title: string;
+  subtitle: string;
 }

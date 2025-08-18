@@ -1,38 +1,38 @@
 .section {
-	border: 1px solid var(--color-gray-border);
-	border-radius: 1rem;
-	overflow: hidden;
-	max-width: 42rem;
-	width: 100%;
+  border: 1px solid var(--color-gray-border);
+  border-radius: 1rem;
+  overflow: hidden;
+  max-width: 42rem;
+  width: 100%;
 }
 
 .head {
-	display: flex;
-	flex-direction: column;
-	gap: .25rem;
-	background-color: var(--color-white-main);
-	padding: 1.5rem 2rem;
-	border-bottom: 1px solid var(--color-gray-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background-color: var(--color-white-main);
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--color-gray-border);
 }
 
 .title {
-	font-weight: 600;
-	font-size: 1.25rem;
-	line-height: 1.75rem;
-	color: var(--color-dark-main);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: var(--color-dark-main);
 }
 
 .subtitle {
-	font-weight: 400;
-	font-size: 1rem;
-	line-height: 1.5rem;
-	color: var(--color-gray-sub);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--color-gray-sub);
 }
 
 .main {
-	background-color: white;
-	padding: 2rem;
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
+  background-color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }

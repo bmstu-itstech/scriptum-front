@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import {IScript} from '@/domain/entities/script'
+import { IScript } from '@/domain/entities/script';
 // export interface IScriptBit {
 //   type: string;
 //   name: string;

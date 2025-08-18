@@ -1,6 +1,9 @@
-'use client'
+'use client';
 import { PageLayout } from '@/layouts/PageLayout';
-import { pageCreateUsecase, ScriptInitialValues } from '@/app/(withHeader)/script/create/page.usecase';
+import {
+  pageCreateUsecase,
+  ScriptInitialValues,
+} from '@/app/(withHeader)/script/create/page.usecase';
 import InputLayout from '@/layouts/InputLayout';
 import { InfoBlockLayout } from '@/layouts/InfoBlockLayout';
 import styles from '@/app/(withHeader)/script/create/page.module.css';
@@ -12,12 +15,10 @@ import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 import { useCreateScript } from '@/hooks/script/useCreateScript';
 import { useUploadFile } from '@/hooks/script/useUploadFile';
 
-
 export default function CreatePage() {
-
   // console.log('страница перерендерилпсь')
-  const { mutate: createScript } = useCreateScript()
-  const { mutateAsync: uploadFile } = useUploadFile()
+  const { mutate: createScript } = useCreateScript();
+  const { mutateAsync: uploadFile } = useUploadFile();
   return (
     <PageLayout>
       <Formik
@@ -42,25 +43,22 @@ export default function CreatePage() {
                   description: param.desc,
                   unit: param.measure,
                   type: param.type,
-                }))
+                })),
               });
             } catch (error) {
               console.error('Error uploading file or creating script:', error);
             }
-
           }
           setSubmitting(false);
         }}
-        validationSchema={ScriptSchema}
-      >
-        {({ handleSubmit, handleBlur, setFieldValue,  errors, touched, isSubmitting, values }) => (
+        validationSchema={ScriptSchema}>
+        {({ handleSubmit, handleBlur, setFieldValue, errors, touched, isSubmitting, values }) => (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <InfoBlockLayout
               headerClassname={styles.infoblock__header}
               contentClassname={styles.infoblock__content}
               className={styles.infoblock}
-              header={pageCreateUsecase.main.header}
-            >
+              header={pageCreateUsecase.main.header}>
               <div className={styles.flex}>
                 <FastField name={`name`}>
                   {({ field }: FastFieldProps) => (
@@ -72,7 +70,6 @@ export default function CreatePage() {
                       placeholder={pageCreateUsecase.main.blocks.scriptTitle.placeholder}
                       errorText={errors.name && touched.name ? errors.name : null}
                       {...field}
-
                     />
                   )}
                 </FastField>
@@ -92,7 +89,6 @@ export default function CreatePage() {
                     />
                   )}
                 </FastField>
-
               </div>
               <FastField name={`desc`}>
                 {({ field }: FastFieldProps) => (
@@ -106,14 +102,19 @@ export default function CreatePage() {
                     placeholder={pageCreateUsecase.main.blocks.scriptDesc.placeholder}
                     errorText={errors.desc && touched.desc ? errors.desc : null}
                     {...field}
-
                   />
                 )}
               </FastField>
             </InfoBlockLayout>
             <ScriptParametrsLoader params={values.inputParams} type='input' />
             <ScriptParametrsLoader params={values.outputParams} type='output' />
-            <Button isLoading={isSubmitting} className={styles.saveBtn} icon={<SaveScriptIcon />} type='submit'>Сохранить скрипт</Button>
+            <Button
+              isLoading={isSubmitting}
+              className={styles.saveBtn}
+              icon={<SaveScriptIcon />}
+              type='submit'>
+              Сохранить скрипт
+            </Button>
           </Form>
         )}
       </Formik>

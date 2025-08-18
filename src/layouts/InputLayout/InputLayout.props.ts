@@ -1,4 +1,4 @@
-import type {HTMLAttributes, HTMLInputTypeAttribute} from 'react';
+import type { HTMLAttributes, HTMLInputTypeAttribute } from 'react';
 
 export interface Props extends HTMLAttributes<HTMLInputElement> {
   toggleIcons?: {

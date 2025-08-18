@@ -2,17 +2,14 @@
 // import {Geist, Geist_Mono, Inter} from 'next/font/google';
 import styles from '@/app/(withoutHeader)/login/page.module.css';
 
-
 export default function LoginLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang='en'>
-            <body className={`${styles.body}`}>
-                {children}
-            </body>
-        </html>
-    );
+  return (
+    <html lang='en'>
+      <body className={`${styles.body}`}>{children}</body>
+    </html>
+  );
 }

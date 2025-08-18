@@ -1,30 +1,30 @@
 .main {
-	display: flex;
-	flex-direction: column;
-	justify-content: top;
-	align-items: center;
-	gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  gap: 2rem;
 }
 
 .header {
-	display: flex;
-	flex-direction: column;
-	justify-content: top;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
 }
 
 .icon {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .title {
-	font-size: var(--font-size-lg);
-	font-weight: 700;
-	color: var(--color-dark-main);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-dark-main);
 }
 
 .subtitle {
-	font-size: var(--font-size-sm);
-	color: var(--color-gray-sub);
-	margin-top: 0.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-sub);
+  margin-top: 0.5rem;
 }

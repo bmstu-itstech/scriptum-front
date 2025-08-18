@@ -1,5 +1,5 @@
-import {IScript} from '@/domain/entities/script';
-import {client} from '../axios';
+import { IScript } from '@/domain/entities/script';
+import { client } from '../axios';
 
 const scriptsList: () => Promise<IScript[]> = async () => {
   const res = await client.get(`/scripts`);
@@ -9,4 +9,4 @@ const scriptsList: () => Promise<IScript[]> = async () => {
   return res.data;
 };
 
-export {scriptsList};
+export { scriptsList };

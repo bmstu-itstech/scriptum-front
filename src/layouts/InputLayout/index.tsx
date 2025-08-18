@@ -30,7 +30,10 @@ const InputLayout: FC<Props> = ({
     setShowPassword(!showPassword);
   }, [showPassword]);
 
-  const currentIcon = useMemo(() => isPassword ? (showPassword ? toggleIcons?.hide : toggleIcons?.show) : null, [isPassword, showPassword])
+  const currentIcon = useMemo(
+    () => (isPassword ? (showPassword ? toggleIcons?.hide : toggleIcons?.show) : null),
+    [isPassword, showPassword],
+  );
 
   if (type === 'file') {
     return (
@@ -44,7 +47,6 @@ const InputLayout: FC<Props> = ({
         placeholder={placeholder}
         className={className}
       />
-
     );
   }
 
@@ -57,39 +59,46 @@ const InputLayout: FC<Props> = ({
       )}
 
       <div className={cn(styles.inputBlock)}>
-        {isTextArea ? <textarea
-          id={name}
-          name={name}
-          value={type === 'file' ? undefined : value}
-          onChange={onChange as ChangeEventHandler<HTMLTextAreaElement> | undefined}
-          required={isRequired}
-          placeholder={placeholder}
-          className={cn(styles.input, 'smoothTransition', inputClassName, { [styles.errorInput]: errorText })}
-        /> : <input
-          id={name}
-          name={name}
-          value={type === 'file' ? undefined : value}
-          onChange={onChange}
-          required={isRequired}
-          type={isPassword && !showPassword ? 'password' : 'text'}
-          placeholder={placeholder}
-          className={cn(styles.input, 'smoothTransition', inputClassName, { [styles.errorInput]: errorText })}
-        />}
+        {isTextArea ? (
+          <textarea
+            id={name}
+            name={name}
+            value={type === 'file' ? undefined : value}
+            onChange={onChange as ChangeEventHandler<HTMLTextAreaElement> | undefined}
+            required={isRequired}
+            placeholder={placeholder}
+            className={cn(styles.input, 'smoothTransition', inputClassName, {
+              [styles.errorInput]: errorText,
+            })}
+          />
+        ) : (
+          <input
+            id={name}
+            name={name}
+            value={type === 'file' ? undefined : value}
+            onChange={onChange}
+            required={isRequired}
+            type={isPassword && !showPassword ? 'password' : 'text'}
+            placeholder={placeholder}
+            className={cn(styles.input, 'smoothTransition', inputClassName, {
+              [styles.errorInput]: errorText,
+            })}
+          />
+        )}
 
         {isPassword && currentIcon && (
           <button
             type='button'
             className={cn(styles.icon, 'smoothTransition')}
             onClick={togglePasswordVisibility}
-            aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
-          >
+            aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}>
             {currentIcon}
           </button>
         )}
       </div>
       {errorText && <span className={cn(styles.errorText)}>{errorText}</span>}
-    </div>)
+    </div>
+  );
 };
 
-
-export default memo(InputLayout)
+export default memo(InputLayout);

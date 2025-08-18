@@ -3,9 +3,14 @@ import type Props from '@/components/Filter/Filter.props';
 import { type FC, type ReactElement } from 'react';
 import cn from 'classnames';
 import styles from '@/components/Filter/Filter.module.css';
-import Select, { type SingleValue, type ActionMeta, components, type ControlProps, SelectComponentsConfig } from 'react-select';
+import Select, {
+  type SingleValue,
+  type ActionMeta,
+  components,
+  type ControlProps,
+  SelectComponentsConfig,
+} from 'react-select';
 import { colourStyles, Option, selectStyles } from '@/components/Filter/Filter.usecase';
-
 
 export const Filter: React.FC<Props> = ({
   name,
@@ -23,7 +28,6 @@ export const Filter: React.FC<Props> = ({
   options = [],
   ...props
 }) => {
-  
   const handleChange = (newValue: SingleValue<Option>) => {
     onChange?.(newValue?.value ?? '');
   };
@@ -32,8 +36,8 @@ export const Filter: React.FC<Props> = ({
     onChange({
       target: {
         name,
-        value: newValue?.value ?? ''
-      }
+        value: newValue?.value ?? '',
+      },
     });
   };
 
@@ -41,7 +45,7 @@ export const Filter: React.FC<Props> = ({
     onBlur?.({ target: { name } });
   };
 
-  const selectedOption = options.find(option => option.value === value) || null;
+  const selectedOption = options.find((option) => option.value === value) || null;
 
   const Control = ({ children, ...props }: ControlProps<Option, false>) => (
     <components.Control {...props}>
@@ -53,7 +57,9 @@ export const Filter: React.FC<Props> = ({
   return (
     <div className={cn(styles.filter, className)}>
       <Select<Option>
-        className={cn(styles.filter__select, 'smoothTransition', selectClassName, { [styles.error]: errorText })}
+        className={cn(styles.filter__select, 'smoothTransition', selectClassName, {
+          [styles.error]: errorText,
+        })}
         classNamePrefix='select'
         value={selectedOption}
         onChange={isFormik ? handleChangeFormik : handleChange}

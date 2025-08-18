@@ -1,3 +1,1 @@
-export const ShowMoreParametrsUsecase = (
-    <>показать еще</>
-)
+export const ShowMoreParametrsUsecase = <>показать еще</>;

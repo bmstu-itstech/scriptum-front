@@ -1,5 +1,5 @@
-import {type IScriptSend} from '@/domain/entities/script';
-import {client} from '../axios';
+import { type IScriptSend } from '@/domain/entities/script';
+import { client } from '../axios';
 
 const createScript: (values: IScriptSend) => Promise<IScriptSend> = async (values) => {
   const res = await client.post(`/scripts`, values);
@@ -9,4 +9,4 @@ const createScript: (values: IScriptSend) => Promise<IScriptSend> = async (value
   return res.data;
 };
 
-export {createScript};
+export { createScript };

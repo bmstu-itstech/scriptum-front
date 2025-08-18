@@ -1,16 +1,11 @@
-import {useQuery} from '@tanstack/react-query';
-import {searchScriptsList} from '@/shared/api/script/getSearchScripts';
+import { useQuery } from '@tanstack/react-query';
+import { searchScriptsList } from '@/shared/api/script/getSearchScripts';
 
 export const useSearchScripts = (name: string) => {
-  const {
-    data,
-    isLoading,
-    refetch,
-    error,
-  } = useQuery({
+  const { data, isLoading, refetch, error } = useQuery({
     queryKey: ['searchScripts'],
     queryFn: () => searchScriptsList(name),
   });
 
-  return {data, isLoading, refetch, error};
+  return { data, isLoading, refetch, error };
 };

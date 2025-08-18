@@ -1,18 +1,18 @@
 .stats {
-	display: flex;
-	gap: 0.75rem;
-	align-items: center;
-	color: var(--color-gray-sub);
-	font-size: 0.875rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  color: var(--color-gray-sub);
+  font-size: 0.875rem;
 }
 
 .divider {
-	color: var(--color-gray-border);
+  color: var(--color-gray-border);
 }
 
 @media (max-width: 768px) {
-	.stats {
-		flex-wrap: wrap;
-		justify-content: center;
-	}
+  .stats {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
