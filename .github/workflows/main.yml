@@ -33,3 +33,19 @@ jobs:
         run: npm ci
       - name: Run prettier fix
         run: npm run format:fix
+  stylelint-check:
+    name: stylelint check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the repository code
+        uses: actions/checkout@v5
+      - name: Cache ci dependencies
+        id: cache-ci
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run stylelint fix
+        run: npm run lint:stylelint:fix

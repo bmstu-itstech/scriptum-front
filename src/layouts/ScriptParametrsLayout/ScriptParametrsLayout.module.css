@@ -74,7 +74,7 @@
   }
 }
 
-@media (width <= 1024) {
+@media (width <= 1024px) {
   .ScriptParametrsLayout__content {
     grid-template-columns: repeat(1, 1fr);
   }
