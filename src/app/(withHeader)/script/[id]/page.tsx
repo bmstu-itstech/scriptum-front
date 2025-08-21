@@ -15,7 +15,7 @@ import { ScriptSettings } from '@/components/ScriptSettings';
 import { RunCodeButton } from '@/shared/RunCodeButton';
 import { useGetScriptById } from '@/hooks/script/useGetScriptById';
 import cn from 'classnames';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Formik } from 'formik';
 import { runScriptValidationSchema } from '@/app/(withHeader)/script/[id]/page.usecase';
 import { useStartScript } from '@/hooks/script/useStartScript';
@@ -24,9 +24,10 @@ export default function Page() {
   const params = useParams();
   const script_id = Number(params.id);
   const shouldLoad = !isNaN(script_id);
+  const router = useRouter();
 
   const { data, isLoading } = useGetScriptById(shouldLoad ? script_id : 0);
-  const { mutate, isPending } = useStartScript(shouldLoad ? script_id : 0);
+  const { mutate, isPending } = useStartScript({ id: shouldLoad ? script_id : 0, onSuccess: () => { router.push('/') } });
 
   if (!shouldLoad || isLoading || !data) {
     return <div>Loading...</div>;
