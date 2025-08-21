@@ -5,7 +5,11 @@ const uploadFileScript: (file: File) => Promise<IScriptFileCreateReturn> = async
   const formData = new FormData();
   formData.append('file', file);
 
-  const res = await client.post(`/scripts/upload`, formData);
+  const res = await client.post(`/scripts/upload`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   if (res.status >= 300) {
     throw new Error();
   }
