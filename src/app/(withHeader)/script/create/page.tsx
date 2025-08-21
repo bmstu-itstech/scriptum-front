@@ -14,11 +14,31 @@ import { Button } from '@/shared/Button';
 import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 import { useCreateScript } from '@/hooks/script/useCreateScript';
 import { useUploadFile } from '@/hooks/script/useUploadFile';
+import { ParametrType } from '@/shared/consts/parametr';
+import { useRouter } from 'next/navigation';
+
 
 export default function CreatePage() {
   // console.log('страница перерендерилпсь')
-  const { mutate: createScript } = useCreateScript();
+  const router = useRouter();
+  const { mutate: createScript } = useCreateScript({
+    onSuccess: () => {
+      router.push('/');
+    },
+  });
   const { mutateAsync: uploadFile } = useUploadFile();
+
+  const getSendValues = (value: string) => {
+    switch (value) {
+      case ParametrType.FLOAT:
+        return 'float'
+      case ParametrType.INT:
+        return 'integer'
+      case ParametrType.COMP:
+        return 'complex'
+    }
+    return 'error'
+  }
   return (
     <PageLayout>
       <Formik
@@ -36,13 +56,13 @@ export default function CreatePage() {
                   name: param.name,
                   description: param.desc,
                   unit: param.measure,
-                  type: param.type,
+                  type: getSendValues(param.type),
                 })),
                 out_fields: values.outputParams.map((param) => ({
                   name: param.name,
                   description: param.desc,
                   unit: param.measure,
-                  type: param.type,
+                  type: getSendValues(param.type),
                 })),
               });
             } catch (error) {
