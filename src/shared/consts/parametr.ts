@@ -1,5 +1,5 @@
 export enum ParametrMeasure {
-  None = 'Безразмерная',
+  None = 'Б/м',
   M = 'Метры',
   CM = 'Сантиметры',
   MM = 'Миллиметры',
