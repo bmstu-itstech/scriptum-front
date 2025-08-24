@@ -27,7 +27,7 @@ export default function Page() {
   const router = useRouter();
 
   const { data, isLoading } = useGetScriptById(shouldLoad ? script_id : 0);
-  const { mutate, isPending } = useStartScript({ id: shouldLoad ? script_id : 0, onSuccess: () => { router.push('/') } });
+  const { mutate, isPending } = useStartScript({ id: shouldLoad ? script_id : 0 });
 
   if (!shouldLoad || isLoading || !data) {
     return <div>Loading...</div>;
@@ -54,10 +54,20 @@ export default function Page() {
         initialValues={initialValues}
         validationSchema={runScriptValidationSchema}
         onSubmit={(values) => {
-          mutate({
-            in_params: values.in_params,
-            notify_by_email: values.notify_by_email,
-          });
+          mutate(
+            {
+              in_params: values.in_params.map((param) => ({
+                type: param.type,
+                data: param.data,
+              })),
+              notify_by_email: values.notify_by_email,
+            },
+            {
+              onSuccess: () => {
+                router.push('/tasks');
+              },
+            },
+          );
         }}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
