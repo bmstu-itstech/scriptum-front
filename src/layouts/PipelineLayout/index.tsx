@@ -1,17 +1,19 @@
 'use client';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Props from './PipelineLayout.props';
 import style from './PipelineLayout.module.css';
 import cn from 'classnames';
 import { PipelineButton } from '@/shared/PipelineButton';
 import { PipelineModalLayout } from '../PipelineModalLayout';
+import { formatDuration } from '@/utils/getDiffTime';
+import { getDate } from '@/utils/getRowFromDate';
 
 export const PipelineLayout: FC<Props> = ({
   status,
   scriptNumber,
   scriptName,
   timeStart,
-  duration,
+  timeFinish,
   input,
   output,
   className,
@@ -19,6 +21,17 @@ export const PipelineLayout: FC<Props> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const statusButton = <PipelineButton status={status} />;
+  const [duration, setDuration] = useState(
+    formatDuration(timeStart, timeFinish ? timeFinish : new Date()),
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDuration(formatDuration(timeStart, timeFinish ? timeFinish : new Date()));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timeStart, timeFinish]);
 
   return (
     <>
@@ -34,7 +47,7 @@ export const PipelineLayout: FC<Props> = ({
         <div className={style.timeBlock}>
           <div className={cn(style.dataSection, style.time)}>
             <p className={style.title}>Время запуска</p>
-            <p className={style.content}>{timeStart}</p>
+            <p className={style.content}>{getDate(timeStart, true)}</p>
           </div>
 
           <div className={cn(style.dataSection, style.time)}>
@@ -51,7 +64,7 @@ export const PipelineLayout: FC<Props> = ({
         status={status}
         scriptNumber={scriptNumber}
         scriptName={scriptName}
-        timeStart={timeStart}
+        timeStart={getDate(timeStart, true)}
         duration={duration}
         input={input}
         output={output}

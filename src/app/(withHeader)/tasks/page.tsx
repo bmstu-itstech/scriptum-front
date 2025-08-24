@@ -1,5 +1,4 @@
 'use client';
-import { APIPipelines, tasksPageUsecase } from './page.usecase';
 import { useState, useMemo } from 'react';
 import { useDebounce } from 'use-debounce';
 import { Search } from '@/components/Search';
@@ -13,20 +12,30 @@ import { PageLayout } from '@/layouts/PageLayout';
 import { Pagination } from '@/shared/Pagination';
 import { Stats } from '@/shared/Stats';
 import { pageSelectStyles, statusUsecase } from '@/components/Filter/Filter.usecase';
+import { useGetJobs } from '@/hooks/job/useGetJobs';
+import { tasksPageUsecase } from '@/app/(withHeader)/tasks/page.usecase';
+import { getInputText, getOutputText, getStatus } from '@/utils/send';
 
 export default function TasksPage() {
+  const { data, isLoading } = useGetJobs();
+
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<PipelineStatus | 'all'>('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
 
   const filteredPipelines = useMemo(() => {
-    return APIPipelines.filter((pipeline) => {
+    if (!data) {
+      return [];
+    }
+    return data.filter((pipeline) => {
       const searchLower = debouncedSearchTerm.toLowerCase();
       const matchesSearch =
-        pipeline.scriptName.toLowerCase().includes(searchLower) ||
-        pipeline.scriptNumber.toLowerCase().includes(searchLower);
-      const matchesStatus = statusFilter === 'all' || pipeline.status === statusFilter;
+        `${pipeline.job.script_name}`.toLowerCase().includes(searchLower) ||
+        `${pipeline.job.script_name}`.toLowerCase().includes(searchLower);
+      const matchesStatus =
+        statusFilter === 'all' ||
+        getStatus(pipeline.job.status, pipeline.code ?? 200) === statusFilter;
       return matchesSearch && matchesStatus;
     });
   }, [debouncedSearchTerm, statusFilter]);
@@ -34,8 +43,12 @@ export default function TasksPage() {
   const totalPages = Math.ceil(filteredPipelines.length / ITEMS_PER_PAGE);
   const paginatedPipelines = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    return filteredPipelines.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    return filteredPipelines?.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [filteredPipelines, currentPage]);
+
+  if (!data || isLoading || data.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <PageLayout
@@ -71,7 +84,7 @@ export default function TasksPage() {
 
         <Stats
           stats={[
-            { text: 'Найдено', count: filteredPipelines.length },
+            { text: 'Найдено', count: filteredPipelines?.length },
             { text: 'Страница', count: currentPage, total: totalPages },
           ]}
         />
@@ -81,14 +94,14 @@ export default function TasksPage() {
         {paginatedPipelines.length > 0 ? (
           paginatedPipelines.map((pipeline) => (
             <PipelineLayout
-              key={pipeline.id}
-              status={pipeline.status}
-              scriptNumber={pipeline.scriptNumber}
-              scriptName={pipeline.scriptName}
-              timeStart={pipeline.timeStart}
-              duration={pipeline.duration}
-              input={pipeline.input}
-              output={pipeline.output}
+              key={pipeline.job.job_id}
+              status={getStatus(pipeline.job.status, pipeline?.code ?? 200)}
+              scriptNumber={`${pipeline.job.job_id}`}
+              scriptName={pipeline.job.script_name}
+              timeStart={pipeline.job.created_at}
+              timeFinish={pipeline.job.finished_at}
+              input={getInputText(pipeline.job)}
+              output={pipeline.error_message ? pipeline.error_message : getOutputText(pipeline)}
             />
           ))
         ) : (
