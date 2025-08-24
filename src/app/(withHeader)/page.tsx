@@ -1,7 +1,7 @@
 'use client';
 
 import { PageLayout } from '@/layouts/PageLayout';
-import { mainPageUsecase, APIScripts } from '@/app/(withHeader)/page.usecase';
+import { mainPageUsecase } from '@/app/(withHeader)/page.usecase';
 import { ScriptPanel } from '@/components/ScriptsPanel';
 import { Search } from '@/components/Search';
 import { SearchIcon } from '@/components/icons/SearchIcon';
@@ -17,16 +17,15 @@ const ITEMS_PER_PAGE = 6;
 
 export default function Home() {
   const { data, isLoading } = useGetAllScripts();
-  // const data = APIScripts;
 
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
 
-
-
   const filteredScripts = useMemo(() => {
-    if (!data) return [];
+    if (!data) {
+      return [];
+    }
     return data.filter((script) => {
       const searchLower = debouncedSearchTerm.toLowerCase();
       return (
@@ -41,7 +40,6 @@ export default function Home() {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredScripts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [filteredScripts, currentPage]);
-
 
   if (!data || isLoading || data.length === 0) {
     return <div>Loading...</div>;
@@ -62,7 +60,7 @@ export default function Home() {
       <Stats
         stats={[
           { text: 'Всего скриптов', count: data.length },
-          { text: 'Найдено', count: filteredScripts.length},
+          { text: 'Найдено', count: filteredScripts.length },
           { text: 'Страница', count: currentPage, total: totalPages },
         ]}
         className={styles.stats}
