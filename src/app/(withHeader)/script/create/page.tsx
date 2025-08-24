@@ -14,31 +14,15 @@ import { Button } from '@/shared/Button';
 import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 import { useCreateScript } from '@/hooks/script/useCreateScript';
 import { useUploadFile } from '@/hooks/script/useUploadFile';
-import { ParametrType } from '@/shared/consts/parametr';
 import { useRouter } from 'next/navigation';
-
+import { getSendValues } from '@/utils/send';
 
 export default function CreatePage() {
   // console.log('страница перерендерилпсь')
   const router = useRouter();
-  const { mutate: createScript } = useCreateScript({
-    onSuccess: () => {
-      router.push('/');
-    },
-  });
+  const { mutate: createScript } = useCreateScript();
   const { mutateAsync: uploadFile } = useUploadFile();
 
-  const getSendValues = (value: string) => {
-    switch (value) {
-      case ParametrType.FLOAT:
-        return 'float'
-      case ParametrType.INT:
-        return 'integer'
-      case ParametrType.COMP:
-        return 'complex'
-    }
-    return 'error'
-  }
   return (
     <PageLayout>
       <Formik
@@ -48,23 +32,30 @@ export default function CreatePage() {
             setSubmitting(true);
             try {
               const { file_id } = await uploadFile(values.file);
-              createScript({
-                script_name: values.name,
-                script_description: values.desc,
-                file_id: file_id,
-                in_fields: values.inputParams.map((param) => ({
-                  name: param.name,
-                  description: param.desc,
-                  unit: param.measure,
-                  type: getSendValues(param.type),
-                })),
-                out_fields: values.outputParams.map((param) => ({
-                  name: param.name,
-                  description: param.desc,
-                  unit: param.measure,
-                  type: getSendValues(param.type),
-                })),
-              });
+              createScript(
+                {
+                  script_name: values.name,
+                  script_description: values.desc,
+                  file_id: file_id,
+                  in_fields: values.inputParams.map((param) => ({
+                    name: param.name,
+                    description: param.desc,
+                    unit: param.measure,
+                    type: getSendValues(param.type),
+                  })),
+                  out_fields: values.outputParams.map((param) => ({
+                    name: param.name,
+                    description: param.desc,
+                    unit: param.measure,
+                    type: getSendValues(param.type),
+                  })),
+                },
+                {
+                  onSuccess: () => {
+                    router.push('/');
+                  },
+                },
+              );
             } catch (error) {
               console.error('Error uploading file or creating script:', error);
             }

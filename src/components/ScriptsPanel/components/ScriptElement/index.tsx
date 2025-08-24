@@ -98,7 +98,6 @@ export const ScriptElement: FC<Props> = ({
         {...props}>
         <div className={styles.scriptElement__supblock}>
           <h2 className={styles.scriptElement__title}>{script_name}</h2>
-          <p className={styles.scriptElement__runs}>Кол. запусков: {2}</p>
         </div>
 
         <h3 className={styles.scriptElement__subtitle}>{script_description}</h3>

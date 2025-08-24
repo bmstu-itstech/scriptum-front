@@ -4,6 +4,7 @@ import { ScriptElement } from './components/ScriptElement';
 import { EmptyScript } from './components/EmptyScript';
 import cn from 'classnames';
 import { Props } from './ScriptsPanel.props';
+import { getDate } from '@/utils/getRowFromDate';
 
 export const ScriptPanel: FC<Props> = ({ scripts, className, ...props }) => {
   return (
@@ -21,7 +22,7 @@ export const ScriptPanel: FC<Props> = ({ scripts, className, ...props }) => {
               file_id={script.file_id}
               owner={script.owner}
               visibility={script.visibility}
-              created_at={script.created_at}
+              created_at={getDate(script.created_at)}
               // className={cn()}
             />
           ))
