@@ -65,7 +65,7 @@ export const ScriptElement: FC<Props> = ({
         mutate(scriptId, {
           onSuccess: () => {
             refetch();
-          }
+          },
         });
         showPopup('success', 'Скрипт удалён', `Скрипт "${script_name}" был удалён`);
         setDialog(null);

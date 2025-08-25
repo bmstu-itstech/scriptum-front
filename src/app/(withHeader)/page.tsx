@@ -43,11 +43,13 @@ export default function Home() {
   const totalPages = Math.ceil(filteredScripts.length / ITEMS_PER_PAGE) || 1;
   const paginatedScripts = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const scriptsWithRefetch: ScriptWithRefetch[] = filteredScripts.map((script) => ({
-      ...script,
-      refetch: refetch,
-    })).slice(startIndex, startIndex + ITEMS_PER_PAGE);
-    return scriptsWithRefetch
+    const scriptsWithRefetch: ScriptWithRefetch[] = filteredScripts
+      .map((script) => ({
+        ...script,
+        refetch: refetch,
+      }))
+      .slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    return scriptsWithRefetch;
   }, [filteredScripts, currentPage, refetch]);
 
   if (!data || isLoading) {

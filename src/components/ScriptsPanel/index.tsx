@@ -24,8 +24,8 @@ export const ScriptPanel: FC<Props> = ({ scripts, className, ...props }) => {
               visibility={script.visibility}
               refetch={script.refetch}
               created_at={getDate(script.created_at)}
-              
-            // className={cn()}
+
+              // className={cn()}
             />
           ))
         ) : (
