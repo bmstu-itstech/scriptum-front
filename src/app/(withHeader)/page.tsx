@@ -12,11 +12,16 @@ import { useMemo, useState } from 'react';
 import { Pagination } from '@/shared/Pagination';
 import { Stats } from '@/shared/Stats';
 import { useGetAllScripts } from '@/hooks/script/useGetAllScripts';
+import type { IScript } from '@/domain/entities/script';
 
 const ITEMS_PER_PAGE = 6;
 
+interface ScriptWithRefetch extends IScript {
+  refetch: () => void;
+}
+
 export default function Home() {
-  const { data, isLoading } = useGetAllScripts();
+  const { data, isLoading, refetch } = useGetAllScripts();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,10 +43,14 @@ export default function Home() {
   const totalPages = Math.ceil(filteredScripts.length / ITEMS_PER_PAGE) || 1;
   const paginatedScripts = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    return filteredScripts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  }, [filteredScripts, currentPage]);
+    const scriptsWithRefetch: ScriptWithRefetch[] = filteredScripts.map((script) => ({
+      ...script,
+      refetch: refetch,
+    })).slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    return scriptsWithRefetch
+  }, [filteredScripts, currentPage, refetch]);
 
-  if (!data || isLoading || data.length === 0) {
+  if (!data || isLoading) {
     return <div>Loading...</div>;
   }
 

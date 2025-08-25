@@ -25,6 +25,7 @@ export const ScriptElement: FC<Props> = ({
   // visibility,
   created_at,
   className,
+  refetch,
   ...props
 }) => {
   const [popup, setPopup] = useState<{
@@ -61,7 +62,11 @@ export const ScriptElement: FC<Props> = ({
       title: 'Подтвердите удаление',
       message: `Вы уверены, что хотите удалить скрипт "${script_name}"?`,
       onConfirm: () => {
-        mutate(scriptId);
+        mutate(scriptId, {
+          onSuccess: () => {
+            refetch();
+          }
+        });
         showPopup('success', 'Скрипт удалён', `Скрипт "${script_name}" был удалён`);
         setDialog(null);
       },
