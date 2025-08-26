@@ -14,17 +14,17 @@ export const getSendValues = (value: string) => {
   return 'error';
 };
 
-export const getStatus = (status: IJobStatus, code: number) => {
+export const getStatus = (status: IJobStatus, error: string | undefined) => {
   switch (status) {
     case IJobStatus.RUNNING:
       return PipelineStatus.RUNNING;
     case IJobStatus.FINISHED:
-      if (code >= 300) {
+      if (error) {
         return PipelineStatus.ERROR;
       }
       return PipelineStatus.OK;
     case IJobStatus.PENDING:
-      return PipelineStatus.RUNNING;
+      return PipelineStatus.PENDING;
     default:
       return PipelineStatus.ERROR;
   }

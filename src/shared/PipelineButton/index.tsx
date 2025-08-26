@@ -6,6 +6,7 @@ import { PipelineStatus } from '@/shared/consts/pipeline';
 import { OkayStatusIcon } from '@/components/icons/OkayStatusIcon';
 import { ErrorStatusIcon } from '@/components/icons/ErrorStatusIcon';
 import { RunningStatusIcon } from '@/components/icons/RunningStatusIcon';
+import { PendingStatusIcon } from '@/components/icons/PendingStatusIcon';
 
 const getStatusConfig = (status: PipelineStatus): [React.ReactNode, string, string] => {
   switch (status) {
@@ -15,6 +16,8 @@ const getStatusConfig = (status: PipelineStatus): [React.ReactNode, string, stri
       return [<ErrorStatusIcon key='error' />, 'Ошибка', style.error];
     case PipelineStatus.RUNNING:
       return [<RunningStatusIcon key='running' />, 'Выполнение', style.running];
+    case PipelineStatus.PENDING:
+      return [<PendingStatusIcon key='pending' />, 'В очереди', style.pending];
   }
 };
 

@@ -26,6 +26,12 @@
     background-color: var(--color-blue-background);
     color: var(--color-blue-main);
   }
+
+  &.pending {
+    border-color: var(--color-yellow-stroke);
+    background-color: var(--color-yellow-light2);
+    color: var(--color-yellow-text);
+  }
 }
 
 .icon {

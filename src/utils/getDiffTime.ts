@@ -27,7 +27,6 @@ export function formatDuration(createdAt: string | Date, end: string | Date): st
   const hours = Math.floor(diffSec / 3600);
   const minutes = Math.floor((diffSec % 3600) / 60);
   const seconds = diffSec % 60;
-
   const parts = [];
   if (hours > 0) {
     parts.push(`${hours} ч.`);
@@ -35,7 +34,7 @@ export function formatDuration(createdAt: string | Date, end: string | Date): st
   if (minutes > 0) {
     parts.push(`${minutes} мин.`);
   }
-  if (hours === 0 && minutes === 0) {
+  if (hours === 0) {
     parts.push(`${seconds} сек.`);
   }
 
