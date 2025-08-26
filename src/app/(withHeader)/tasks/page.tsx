@@ -38,15 +38,15 @@ export default function TasksPage() {
         getStatus(pipeline.job.status, pipeline.code ?? 200) === statusFilter;
       return matchesSearch && matchesStatus;
     });
-  }, [debouncedSearchTerm, statusFilter]);
+  }, [data, debouncedSearchTerm, statusFilter]);
 
   const totalPages = Math.ceil(filteredPipelines.length / ITEMS_PER_PAGE);
   const paginatedPipelines = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredPipelines?.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  }, [filteredPipelines, currentPage]);
+  }, [filteredPipelines, currentPage, ITEMS_PER_PAGE]);
 
-  if (!data || isLoading || data.length === 0) {
+  if (!data || isLoading) {
     return <div>Loading...</div>;
   }
 

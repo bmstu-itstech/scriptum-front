@@ -12,6 +12,7 @@
     "lint:stylelint": "stylelint '**/*.{css,scss}'",
     "lint:stylelint:fix": "stylelint '**/*.{css,scss}' --fix",
     "format:fix": "prettier --write src",
+    "lint:all": "npm run lint:eslint:fix && npm run lint:stylelint:fix && npm run format:fix",
     "ts:check": "tsc --noEmit"
   },
   "dependencies": {
