@@ -19,12 +19,15 @@ import { useParams, useRouter } from 'next/navigation';
 import { Formik } from 'formik';
 import { runScriptValidationSchema } from '@/app/(withHeader)/script/[id]/page.usecase';
 import { useStartScript } from '@/hooks/script/useStartScript';
+import { useCustomToast } from '@/hooks/other/useCustomToast';
+import { getErrorText } from '@/utils/getErrorText';
 
 export default function Page() {
   const params = useParams();
   const script_id = Number(params.id);
   const shouldLoad = !isNaN(script_id);
   const router = useRouter();
+  const notify = useCustomToast();
 
   const { data, isLoading } = useGetScriptById(shouldLoad ? script_id : 0);
   const { mutate, isPending } = useStartScript({ id: shouldLoad ? script_id : 0 });
@@ -65,6 +68,10 @@ export default function Page() {
             {
               onSuccess: () => {
                 router.push('/tasks');
+                notify('Задача успешно запущена', 'success');
+              },
+              onError: (error) => {
+                notify(getErrorText(error.response!!.status), 'error');
               },
             },
           );

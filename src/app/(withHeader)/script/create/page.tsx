@@ -16,12 +16,14 @@ import { useCreateScript } from '@/hooks/script/useCreateScript';
 import { useUploadFile } from '@/hooks/script/useUploadFile';
 import { useRouter } from 'next/navigation';
 import { getSendValues } from '@/utils/send';
+import { useCustomToast } from '@/hooks/other/useCustomToast';
+import { getErrorText } from '@/utils/getErrorText';
 
 export default function CreatePage() {
-  // console.log('страница перерендерилпсь')
   const router = useRouter();
   const { mutate: createScript } = useCreateScript();
   const { mutateAsync: uploadFile } = useUploadFile();
+  const notify = useCustomToast();
 
   return (
     <PageLayout>
@@ -53,6 +55,10 @@ export default function CreatePage() {
                 {
                   onSuccess: () => {
                     router.push('/');
+                    notify('Скрипт успешно создан', 'success');
+                  },
+                  onError: (error) => {
+                    notify(getErrorText(error.response!!.status), 'error');
                   },
                 },
               );

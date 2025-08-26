@@ -12,38 +12,14 @@ import { SectionLayout } from '@/layouts/SectionLayout';
 import { ShieldIcon } from '@/components/icons/ShieldIcon';
 import { Button } from '@/layouts/Button';
 import { SaveIcon } from '@/components/icons/SaveIcon';
-import { useState } from 'react';
-import { PopupLayout } from '@/layouts/PopupLayout';
 import { Form, Formik } from 'formik';
+import { useCustomToast } from '@/hooks/other/useCustomToast';
 
 export default function TasksPage() {
-  const [popup, setPopup] = useState<{
-    visible: boolean;
-    variant: 'success' | 'error' | 'warning';
-    title: string;
-    description?: string;
-  } | null>(null);
-
-  const showPopup = (
-    variant: 'success' | 'error' | 'warning',
-    title: string,
-    description?: string,
-  ) => {
-    setPopup({ visible: true, variant, title, description });
-    setTimeout(() => setPopup(null), 5000);
-  };
+  const notify = useCustomToast();
 
   return (
     <>
-      {popup && (
-        <PopupLayout
-          variant={popup.variant}
-          title={popup.title}
-          description={popup.description || ''}
-          onClose={() => setPopup(null)}
-        />
-      )}
-
       <PageLayout
         title={createUserPageUsecase.title}
         subtitle={createUserPageUsecase.subtitle}
@@ -54,11 +30,7 @@ export default function TasksPage() {
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(true);
             // Simulate API call
-            setTimeout(() => {
-              console.log('User created:', values);
-              showPopup('success', 'Готово!', 'Аккаунт пользователя успешно создан');
-              setSubmitting(false);
-            }, 1000);
+            notify('Аккаунт пользователя успешно создан', 'success');
             setSubmitting(false);
           }}>
           {({ errors, touched, handleBlur, handleChange, values, isSubmitting }) => (

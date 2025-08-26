@@ -35,7 +35,7 @@ export default function TasksPage() {
         `${pipeline.job.script_name}`.toLowerCase().includes(searchLower);
       const matchesStatus =
         statusFilter === 'all' ||
-        getStatus(pipeline.job.status, pipeline.code ?? 200) === statusFilter;
+        getStatus(pipeline.job.status, pipeline.error_message) === statusFilter;
       return matchesSearch && matchesStatus;
     });
   }, [data, debouncedSearchTerm, statusFilter]);
@@ -95,7 +95,7 @@ export default function TasksPage() {
           paginatedPipelines.map((pipeline) => (
             <PipelineLayout
               key={pipeline.job.job_id}
-              status={getStatus(pipeline.job.status, pipeline?.code ?? 200)}
+              status={getStatus(pipeline.job.status, pipeline?.error_message)}
               scriptNumber={`${pipeline.job.job_id}`}
               scriptName={pipeline.job.script_name}
               timeStart={pipeline.job.created_at}

@@ -1,5 +1,8 @@
 import type { IScriptBit } from '@/domain/entities/script';
 
+export interface IJobError {
+  message: string;
+}
 export interface IJobIn {
   type: string;
   data: string;

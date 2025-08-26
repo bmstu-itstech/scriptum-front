@@ -8,42 +8,22 @@ import { PersonIcon } from '@/components/icons/PersonIcon';
 import { CalendarIcon } from '@/components/icons/CalendarIcon';
 import Link from 'next/link';
 import { DeleteIcon } from '@/components/icons/DeleteIcon';
-import { EditIcon } from '@/components/icons/EditIcon';
 import { DialogLayout } from '@/layouts/DialogLayout';
-import { PopupLayout } from '@/layouts/PopupLayout';
 import { RunCodeButton } from '@/shared/RunCodeButton';
 import { useDeleteScript } from '@/hooks/script/useDeleteScript';
+import { useCustomToast } from '@/hooks/other/useCustomToast';
 
 export const ScriptElement: FC<Props> = ({
   script_id,
   script_name,
   script_description,
-  // in_fields,
-  // out_fields,
-  // file_id,
   owner,
-  // visibility,
   created_at,
   className,
   refetch,
   ...props
 }) => {
-  const [popup, setPopup] = useState<{
-    visible: boolean;
-    variant: 'success' | 'error' | 'warning';
-    title: string;
-    description?: string;
-  } | null>(null);
-
-  const showPopup = (
-    variant: 'success' | 'error' | 'warning',
-    title: string,
-    description?: string,
-  ) => {
-    setPopup({ visible: true, variant, title, description });
-    setTimeout(() => setPopup(null), 5000);
-  };
-
+  const notify = useCustomToast();
   const [dialog, setDialog] = useState<{
     visible: boolean;
     type: 'save' | 'delete';
@@ -65,9 +45,12 @@ export const ScriptElement: FC<Props> = ({
         mutate(scriptId, {
           onSuccess: () => {
             refetch();
+            notify('Скрипт успешно удалён', 'success');
+          },
+          onError: (error) => {
+            notify(error?.message || 'Не удалось удалить скрипт', 'error');
           },
         });
-        showPopup('success', 'Скрипт удалён', `Скрипт "${script_name}" был удалён`);
         setDialog(null);
       },
     });
@@ -85,15 +68,6 @@ export const ScriptElement: FC<Props> = ({
           onConfirm={dialog.onConfirm}
           confirmText={dialog.type === 'save' ? 'Сохранить' : 'Удалить'}
           cancelText='Отмена'
-        />
-      )}
-
-      {popup && (
-        <PopupLayout
-          variant={popup.variant}
-          title={popup.title}
-          description={popup.description || ''}
-          onClose={() => setPopup(null)}
         />
       )}
 
@@ -116,9 +90,6 @@ export const ScriptElement: FC<Props> = ({
         </div>
         <div className={styles.scriptElement__interactive}>
           <RunCodeButton />
-          <span className={cn(styles.scriptElement__editIcon, 'smoothTransition')}>
-            <EditIcon />
-          </span>
           <span
             onClick={(e) => {
               e.preventDefault();

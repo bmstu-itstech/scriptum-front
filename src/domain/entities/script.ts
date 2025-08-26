@@ -1,3 +1,7 @@
+export interface IScriptError {
+  message: string;
+}
+
 export interface IScriptBit {
   type: string;
   name: string;
