@@ -1,10 +1,10 @@
 'use client';
-import { FC, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import cn from 'classnames';
 import styles from './Pagination.module.css';
 import { Props } from './Pagination.props';
 
-export const Pagination: FC<Props> = ({
+const Pagination: FC<Props> = ({
   currentPage,
   totalPages,
   onPageChange,
@@ -106,3 +106,5 @@ export const Pagination: FC<Props> = ({
     </div>
   );
 };
+Pagination.displayName = 'Pagination';
+export default memo(Pagination);

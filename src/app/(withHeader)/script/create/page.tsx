@@ -58,7 +58,10 @@ export default function CreatePage() {
                     notify('Скрипт успешно создан', 'success');
                   },
                   onError: (error) => {
-                    notify(getErrorText(error.response?.status ? error.response.status : 7777), 'error');
+                    notify(
+                      getErrorText(error.response?.status ? error.response.status : 7777),
+                      'error',
+                    );
                   },
                 },
               );

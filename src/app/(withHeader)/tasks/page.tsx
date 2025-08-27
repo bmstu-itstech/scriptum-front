@@ -9,7 +9,7 @@ import { ITEMS_PER_PAGE, PipelineStatus } from '@/shared/consts/pipeline';
 import { PipelineLayout } from '@/layouts/PipelineLayout';
 import style from './page.module.css';
 import { PageLayout } from '@/layouts/PageLayout';
-import { Pagination } from '@/shared/Pagination';
+import Pagination from '@/shared/Pagination';
 import { Stats } from '@/shared/Stats';
 import { pageSelectStyles, statusUsecase } from '@/components/Filter/Filter.usecase';
 import { useGetJobs } from '@/hooks/job/useGetJobs';

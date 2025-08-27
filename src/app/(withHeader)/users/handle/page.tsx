@@ -9,7 +9,7 @@ import { SearchIcon } from '@/components/icons/SearchIcon';
 import { FilterIcon } from '@/components/icons/FilterIcon';
 import { Stats } from '@/shared/Stats';
 import { UserRole } from '@/shared/consts/user';
-import { Pagination } from '@/shared/Pagination';
+import Pagination from '@/shared/Pagination';
 import style from './page.module.css';
 import { UserTable } from '@/components/UserTable';
 import { pageSelectStyles, roleUsecase } from '@/components/Filter/Filter.usecase';

@@ -1,8 +1,8 @@
-export interface IErrorToText{
-    400: string;
-    401: string;
-    404: string;
-    500: string;
+export interface IErrorToText {
+  400: string;
+  401: string;
+  404: string;
+  500: string;
 }
 
 export const errorsToText: IErrorToText = {
