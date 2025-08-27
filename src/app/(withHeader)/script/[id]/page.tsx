@@ -71,7 +71,7 @@ export default function Page() {
                 notify('Задача успешно запущена', 'success');
               },
               onError: (error) => {
-                notify(getErrorText(error.response!!.status), 'error');
+                notify(getErrorText(error.response?.status ? error.response.status : 7777), 'error');
               },
             },
           );
