@@ -44,7 +44,7 @@ export default function TasksPage() {
   const paginatedPipelines = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredPipelines?.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  }, [filteredPipelines, currentPage, ITEMS_PER_PAGE]);
+  }, [filteredPipelines, currentPage]);
 
   if (!data || isLoading) {
     return <div>Loading...</div>;

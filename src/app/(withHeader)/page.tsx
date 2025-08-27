@@ -47,7 +47,7 @@ export default function Home() {
 
   const totalPages = useMemo(() => {
     return data ? Math.ceil(data.length / ITEMS_PER_PAGE) : 1;
-  }, [data, ITEMS_PER_PAGE]);
+  }, [data]);
   const paginatedScripts = useMemo(() => {
     if (!data) {
       return [];

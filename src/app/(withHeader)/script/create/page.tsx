@@ -66,7 +66,10 @@ export default function CreatePage() {
                 },
               );
             } catch (error) {
-              console.error('Error uploading file or creating script:', error);
+              notify(
+                'Произошла ошибка при загрузке файла, попробуйте ещё раз',
+                'error',
+              );
             }
           }
           setSubmitting(false);
