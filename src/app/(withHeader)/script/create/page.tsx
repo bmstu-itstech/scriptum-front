@@ -65,11 +65,8 @@ export default function CreatePage() {
                   },
                 },
               );
-            } catch (error) {
-              notify(
-                'Произошла ошибка при загрузке файла, попробуйте ещё раз',
-                'error',
-              );
+            } catch {
+              notify('Произошла ошибка при загрузке файла, попробуйте ещё раз', 'error');
             }
           }
           setSubmitting(false);
