@@ -79,3 +79,9 @@
   line-height: 1rem;
   color: var(--color-gray-sub);
 }
+
+.checkFile {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+}

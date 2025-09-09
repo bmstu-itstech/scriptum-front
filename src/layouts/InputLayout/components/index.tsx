@@ -9,6 +9,7 @@ import { useFormikContext } from 'formik';
 import { type ScriptFormValues } from '@/app/(withHeader)/script/create/page.usecase';
 import { CloseModalIcon } from '@/components/icons/CloseModalIcon';
 import { PythonIcon } from '@/components/icons/AttentionIcon copy';
+import { CheckFileIcon } from '@/components/icons/CheckFileIcon';
 
 const FileInput: FC<FileProps> = ({
   onChange,
@@ -43,6 +44,7 @@ const FileInput: FC<FileProps> = ({
         {values.file?.size && (
           <p className={styles.FileSize}> ({(values.file.size / 1024).toFixed(2)} KB)</p>
         )}
+        <CheckFileIcon className={styles.checkFile} />
         <CloseModalIcon onClick={handleDeleteFile} className={styles.deleteFile} />
       </div>
     );

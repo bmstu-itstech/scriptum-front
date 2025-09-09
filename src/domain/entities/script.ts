@@ -19,7 +19,8 @@ export interface IScriptSend {
   script_description: string;
   in_fields: IScriptBit[];
   out_fields: IScriptBit[];
-  file_id: number;
+  main_file_id: number;
+  extra_file_ids: number[] | [];
 }
 
 export interface IScript {

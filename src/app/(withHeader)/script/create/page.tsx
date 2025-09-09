@@ -38,7 +38,8 @@ export default function CreatePage() {
                 {
                   script_name: values.name,
                   script_description: values.desc,
-                  file_id: file_id,
+                  main_file_id: file_id,
+                  extra_file_ids: [],
                   in_fields: values.inputParams.map((param) => ({
                     name: param.name,
                     description: param.desc,
