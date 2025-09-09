@@ -21,6 +21,7 @@ import { runScriptValidationSchema } from '@/app/(withHeader)/script/[id]/page.u
 import { useStartScript } from '@/hooks/script/useStartScript';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { getErrorText } from '@/utils/getErrorText';
+import { Loading } from '@/shared/Loading';
 
 export default function Page() {
   const params = useParams();
@@ -33,7 +34,7 @@ export default function Page() {
   const { mutate, isPending } = useStartScript({ id: shouldLoad ? script_id : 0 });
 
   if (!shouldLoad || isLoading || !data) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
 
   const initialValues = {

@@ -15,6 +15,7 @@ import { pageSelectStyles, statusUsecase } from '@/components/Filter/Filter.usec
 import { useGetJobs } from '@/hooks/job/useGetJobs';
 import { tasksPageUsecase } from '@/app/(withHeader)/tasks/page.usecase';
 import { getInputText, getOutputText, getStatus } from '@/utils/send';
+import { Loading } from '@/shared/Loading';
 
 export default function TasksPage() {
   const { data, isLoading } = useGetJobs();
@@ -47,7 +48,7 @@ export default function TasksPage() {
   }, [filteredPipelines, currentPage]);
 
   if (!data || isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

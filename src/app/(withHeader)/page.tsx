@@ -14,6 +14,7 @@ import { Stats } from '@/shared/Stats';
 import { useGetAllScripts } from '@/hooks/script/useGetAllScripts';
 import type { IScript } from '@/domain/entities/script';
 import { useSearchScripts } from '@/hooks/script/useSearchScripts';
+import { Loading } from '@/shared/Loading';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -90,7 +91,7 @@ export default function Home() {
         className={styles.stats}
       />
       {isLoading || searchLoading ? (
-        <div className={styles.loading}>Loading...</div>
+        <Loading />
       ) : (
         <>
           <ScriptPanel scripts={paginatedScripts} />

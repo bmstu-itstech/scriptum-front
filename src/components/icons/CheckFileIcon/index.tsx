@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import type { FC } from 'react';
-import classNames from 'classnames'; 
+import classNames from 'classnames';
 import styles from './CheckFileIcon.module.css';
 import { Props } from './CheckFileIcon.props';
 
-export const CheckFileIcon: FC<Props> = ({ className }) => {
+export const CheckFileIcon: FC<Props> = ({ className, onClick }) => {
     const [checked, setChecked] = useState(false);
     const toggleChecked = () => setChecked(prev => !prev);
-    const onClick = (e : React.MouseEvent<SVGSVGElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
+    const handleClick = (e: React.MouseEvent<SVGSVGElement>) => {
+        onClick?.(e);
         toggleChecked();
     }
     return (
         <svg
-            onClick={onClick}
+            onClick={handleClick}
             width='20'
             height='20'
             viewBox='0 0 20 20'

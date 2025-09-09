@@ -36,6 +36,15 @@ const FileInput: FC<FileProps> = ({
     [name, setFieldValue],
   );
 
+  const handleCheckFile = useCallback(
+    (e: React.MouseEvent<SVGSVGElement>) => {
+      e.stopPropagation();
+      e.preventDefault();
+      setFieldValue(`${name}_checked`, null);
+    },
+    [name, setFieldValue],
+  );
+
   const FileComponent = () => {
     return (
       <div className={styles.fileComponent}>
@@ -44,7 +53,7 @@ const FileInput: FC<FileProps> = ({
         {values.file?.size && (
           <p className={styles.FileSize}> ({(values.file.size / 1024).toFixed(2)} KB)</p>
         )}
-        <CheckFileIcon className={styles.checkFile} />
+        <CheckFileIcon onClick={handleCheckFile} className={styles.checkFile} />
         <CloseModalIcon onClick={handleDeleteFile} className={styles.deleteFile} />
       </div>
     );
