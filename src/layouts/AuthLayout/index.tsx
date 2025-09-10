@@ -12,7 +12,6 @@ import { Button } from '@/shared/Button';
 import { Form, Formik } from 'formik';
 import { authValidationSchema } from '@/app/(withoutHeader)/login/page.usecase';
 
-
 export const AuthLayout: FC<Props> = ({ className, ...props }) => {
   return (
     <Formik
@@ -36,12 +35,11 @@ export const AuthLayout: FC<Props> = ({ className, ...props }) => {
           // редирект после успешного логина
           window.location.href = '/';
         } catch (err) {
-          console.error('Ошибка логина', err);
+          alert('Ошибка логина');
         } finally {
           setSubmitting(false);
         }
-      }}
-    >
+      }}>
       {({ values, handleBlur, handleChange, errors, touched, isSubmitting }) => (
         <Form className={cn(styles.authForm, className)}>
           <div className={cn(styles.authContainer)} {...props}>

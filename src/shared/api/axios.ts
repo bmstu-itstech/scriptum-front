@@ -6,7 +6,7 @@ export const client = axios.create({
   withCredentials: true, // важно
   headers: {
     Authorization:
-    // admin
+      // admin
       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE4Mzk4NDc0MTYsInVzZXJfaWQiOjF9.UEx85Sk1ZlsF_QzCpRC9uYe_pKPNiLUOkm8ZuVt61_k',
     // user
     //   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE4Mzk4NDc0MTYsInVzZXJfaWQiOjJ9.ytwRkTI38hHQyctxSanWiTksh8cktVPF22K1h3vXsy0',
@@ -25,7 +25,7 @@ export const client = axios.create({
 //     if (cookieValue) {
 //       config.headers['Authorization'] = `Bearer ${cookieValue}`;
 //     }
-//   } 
+//   }
 
-  // return config;
+// return config;
 // });

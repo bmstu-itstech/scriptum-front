@@ -40,7 +40,6 @@ export const AdminLinks: (LinkProps & { direction: string })[] = [
   },
 ];
 
-
 export const UserLinks: (LinkProps & { direction: string })[] = [
   {
     icon: <HomeIcon />,

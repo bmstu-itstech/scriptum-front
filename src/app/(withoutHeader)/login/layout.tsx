@@ -7,9 +7,5 @@ export default function LoginLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-    children
-
-  );
+  return children;
 }

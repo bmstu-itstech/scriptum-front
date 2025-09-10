@@ -32,7 +32,6 @@ export default function CreatePage() {
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
           try {
-            
             const uploadedFiles = await Promise.all(
               values.file!.map(async (file) => {
                 // Дополнительные проверки (например, по размеру)
@@ -47,12 +46,12 @@ export default function CreatePage() {
                   name: file.name,
                   id: file_id,
                 };
-              })
+              }),
             );
 
             // Найдём ID основного файла (проверенного)
             const mainFile = uploadedFiles.find(
-              (uploaded) => uploaded.name === values.file_checked?.name
+              (uploaded) => uploaded.name === values.file_checked?.name,
             );
             const main_file_id = mainFile?.id;
 
@@ -93,21 +92,18 @@ export default function CreatePage() {
                   notify('Скрипт успешно создан', 'success');
                 },
                 onError: (error) => {
-                  notify(
-                    getErrorText(error.response?.status ?? 7777),
-                    'error'
-                  );
+                  notify(getErrorText(error.response?.status ?? 7777), 'error');
                 },
-              }
+              },
             );
-          } catch (err) {
+          } catch (_) {
             notify('Произошла ошибка при загрузке файла, попробуйте ещё раз', 'error');
           }
 
           setSubmitting(false);
         }}
         validationSchema={ScriptSchema}>
-        {({ handleSubmit, handleBlur, setFieldValue, errors, touched, isSubmitting, values }) => (
+        {({ handleSubmit, handleBlur, errors, touched, isSubmitting, values }) => (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <InfoBlockLayout
               headerClassname={styles.infoblock__header}
