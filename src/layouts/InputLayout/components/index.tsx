@@ -1,4 +1,4 @@
-import { useRef, FC, memo, useCallback } from 'react';
+import { useRef, FC, memo, useCallback, useState, useMemo } from 'react';
 import cn from 'classnames';
 import { TextWithIcon } from '@/shared/TextWithIcon';
 import { UploadIcon } from '@/components/icons/UploadIcon';
@@ -12,7 +12,6 @@ import { PythonIcon } from '@/components/icons/AttentionIcon copy';
 import { CheckFileIcon } from '@/components/icons/CheckFileIcon';
 
 const FileInput: FC<FileProps> = ({
-  onChange,
   name,
   placeholder,
   errorText,
@@ -23,72 +22,78 @@ const FileInput: FC<FileProps> = ({
 }) => {
   const { values, setFieldValue } = useFormikContext<ScriptFormValues>();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isDragActive, setIsDragActive] = useState(false);
+  const files = values['file'] || [];
+  const file_checked = values['file_checked'];
 
   const handleDeleteFile = useCallback(
-    (e: React.MouseEvent<HTMLImageElement>) => {
+    (index: number) => (e: React.MouseEvent<SVGSVGElement>) => {
       e.preventDefault();
       e.stopPropagation();
-      if (inputRef.current) {
-        inputRef.current.value = '';
-      }
-      setFieldValue(name, null);
+      files.splice(index, 1);
+      setFieldValue('file', files.length ? files : []);
     },
-    [name, setFieldValue],
+    [values, setFieldValue],
   );
 
   const handleCheckFile = useCallback(
-    (e: React.MouseEvent<SVGSVGElement>) => {
-      e.stopPropagation();
-      e.preventDefault();
-      setFieldValue(`${name}_checked`, null);
+    (file: File) => (e: React.MouseEvent<SVGSVGElement>) => {
+      setFieldValue('file_checked', file);
+    
     },
-    [name, setFieldValue],
+    [setFieldValue]
   );
 
-  const FileComponent = () => {
+  const FileList = () => useMemo(() => {
+    console.log('рендер списка файлов');
     return (
-      <div className={styles.fileComponent}>
-        <PythonIcon className={styles.python} />
-        <p className={styles.FileName}>{values.file?.name}</p>
-        {values.file?.size && (
-          <p className={styles.FileSize}> ({(values.file.size / 1024).toFixed(2)} KB)</p>
-        )}
-        <CheckFileIcon onClick={handleCheckFile} className={styles.checkFile} />
-        <CloseModalIcon onClick={handleDeleteFile} className={styles.deleteFile} />
-      </div>
+      <div className={styles.fileList} >
+        {
+          files.map((file, index) => {
+            return (
+              <div className={styles.fileComponent} key={index}>
+                <PythonIcon className={styles.python} />
+                <p className={styles.FileName}>{file.name}</p>
+                <p className={styles.FileSize}>({(file.size / 1024).toFixed(2)} KB)</p>
+                <CheckFileIcon isChecked={file.name === file_checked?.name} onClick={handleCheckFile(file)} className={styles.checkFile} />
+                <CloseModalIcon onClick={handleDeleteFile(index)} className={styles.deleteFile} />
+              </div>
+            );
+          })
+        }
+      </div >
     );
-  };
-  const handleDragEnter = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-  };
+  }, [files, handleDeleteFile, handleCheckFile, file_checked]);
 
-  const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const handleFileChange = (files: FileList | File[]) => {
+    const fileArray = Array.from(files);
+    setFieldValue('file', fileArray);
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      handleFileChange(files[0]);
-    }
+  const handleDragEnter = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(true);
   };
 
-  const handleFileChange = (file: File) => {
-    if (inputRef.current) {
-      const event = {
-        target: {
-          name: name,
-          files: [file],
-          value: file.name,
-        },
-      } as unknown as React.ChangeEvent<HTMLInputElement>;
+  const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
-      onChange?.(event);
+  const handleDragLeave = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+    const droppedFiles = e.dataTransfer.files;
+    if (droppedFiles.length > 0) {
+      handleFileChange(droppedFiles);
     }
   };
 
@@ -101,15 +106,17 @@ const FileInput: FC<FileProps> = ({
         tabIndex={0}
         className={cn(styles.fileInput, {
           [styles.hasError]: errorText,
+          [styles.dragActive]: isDragActive,
         })}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
         onDrop={handleDrop}>
-        {values.file ? (
-          <FileComponent />
+        {values['file']?.length ? (
+          <FileList />
         ) : (
           <TextWithIcon icon={<UploadIcon />}>
-            {placeholder || 'Перетащите файл или кликните для выбора'}
+            {placeholder || 'Перетащите файлы или кликните для выбора'}
           </TextWithIcon>
         )}
 
@@ -119,9 +126,14 @@ const FileInput: FC<FileProps> = ({
           ref={inputRef}
           name={name}
           type='file'
+          multiple
           accept='.py'
           className={cn(styles.fileInput, inputClassName)}
-          onChange={onChange}
+          onChange={(e) => {
+            if (e.target.files) {
+              handleFileChange(e.target.files);
+            }
+          }}
         />
       </label>
 

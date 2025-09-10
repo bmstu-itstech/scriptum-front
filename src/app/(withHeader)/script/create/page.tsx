@@ -30,46 +30,80 @@ export default function CreatePage() {
       <Formik
         initialValues={ScriptInitialValues}
         onSubmit={async (values, { setSubmitting }) => {
-          if (values.file) {
-            setSubmitting(true);
-            try {
-              const { file_id } = await uploadFile(values.file);
-              createScript(
-                {
-                  script_name: values.name,
-                  script_description: values.desc,
-                  main_file_id: file_id,
-                  extra_file_ids: [],
-                  in_fields: values.inputParams.map((param) => ({
-                    name: param.name,
-                    description: param.desc,
-                    unit: param.measure,
-                    type: getSendValues(param.type),
-                  })),
-                  out_fields: values.outputParams.map((param) => ({
-                    name: param.name,
-                    description: param.desc,
-                    unit: param.measure,
-                    type: getSendValues(param.type),
-                  })),
-                },
-                {
-                  onSuccess: () => {
-                    router.push('/');
-                    notify('Скрипт успешно создан', 'success');
-                  },
-                  onError: (error) => {
-                    notify(
-                      getErrorText(error.response?.status ? error.response.status : 7777),
-                      'error',
-                    );
-                  },
-                },
-              );
-            } catch {
-              notify('Произошла ошибка при загрузке файла, попробуйте ещё раз', 'error');
+          setSubmitting(true);
+          try {
+            
+            const uploadedFiles = await Promise.all(
+              values.file!.map(async (file) => {
+                // Дополнительные проверки (например, по размеру)
+                if (file.size > 5 * 1024 * 1024) {
+                  notify('Размер файла не должен превышать 5 МБ', 'error');
+                }
+
+                // Загрузка файла
+                const { file_id } = await uploadFile(file);
+
+                return {
+                  name: file.name,
+                  id: file_id,
+                };
+              })
+            );
+
+            // Найдём ID основного файла (проверенного)
+            const mainFile = uploadedFiles.find(
+              (uploaded) => uploaded.name === values.file_checked?.name
+            );
+            const main_file_id = mainFile?.id;
+
+            if (!main_file_id) {
+              notify('Основной файл не выбран или не загружен', 'error');
+              setSubmitting(false);
+              return;
             }
+
+            // Соберём остальные файлы (если нужно)
+            const extra_file_ids = uploadedFiles
+              .filter((f) => f.id !== main_file_id)
+              .map((f) => f.id);
+
+            // Отправим createScript
+            createScript(
+              {
+                script_name: values.name,
+                script_description: values.desc,
+                main_file_id: main_file_id,
+                extra_file_ids: extra_file_ids,
+                in_fields: values.inputParams.map((param) => ({
+                  name: param.name,
+                  description: param.desc,
+                  unit: param.measure,
+                  type: getSendValues(param.type),
+                })),
+                out_fields: values.outputParams.map((param) => ({
+                  name: param.name,
+                  description: param.desc,
+                  unit: param.measure,
+                  type: getSendValues(param.type),
+                })),
+              },
+              {
+                onSuccess: () => {
+                  router.push('/');
+                  notify('Скрипт успешно создан', 'success');
+                },
+                onError: (error) => {
+                  notify(
+                    getErrorText(error.response?.status ?? 7777),
+                    'error'
+                  );
+                },
+              }
+            );
+          } catch (err) {
+            notify('Произошла ошибка при загрузке файла, попробуйте ещё раз', 'error');
           }
+
           setSubmitting(false);
         }}
         validationSchema={ScriptSchema}>
@@ -100,9 +134,6 @@ export default function CreatePage() {
                       type='file'
                       name={field.name}
                       value={field.value ?? ''}
-                      onChange={(event) => {
-                        setFieldValue('file', event.currentTarget.files?.[0]);
-                      }}
                       inputTitle={pageCreateUsecase.main.blocks.scriptCode.title}
                       placeholder={pageCreateUsecase.main.blocks.scriptCode.placeholder}
                       errorText={errors.file && touched.file ? errors.file : null}

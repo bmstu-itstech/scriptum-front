@@ -18,7 +18,7 @@ export const pageCreateUsecase = {
       },
 
       scriptDesc: {
-        title: 'Описание *',
+        title: 'Описание (необязательно)',
         placeholder: 'Опишите назначение и функцональность скрипта',
       },
     },
@@ -100,7 +100,8 @@ export interface ParameterWithId extends Parameter {
 export interface ScriptFormValues {
   name: string;
   desc: string;
-  file: File | null;
+  file: File[] | null;
+  file_checked: File | null;
   inputParams: ParameterWithId[];
   outputParams: ParameterWithId[];
 }
@@ -109,6 +110,7 @@ export const ScriptInitialValues: ScriptFormValues = {
   name: '',
   desc: '',
   file: null,
+  file_checked: null,
   inputParams: [],
   outputParams: [],
 };
