@@ -8,7 +8,6 @@ export async function middleware(req: NextRequest) {
   // console.log('[MIDDLEWARE] путь:', pathname, req.cookies);
   // читаем JWT из cookie csrftoken
   const token = req.cookies.get('csrftoken')?.value;
-  console.log('[MIDDLEWARE] токен из cookie:', token);
 
   if (!token) {
     return NextResponse.redirect(new URL('/login', req.url));
