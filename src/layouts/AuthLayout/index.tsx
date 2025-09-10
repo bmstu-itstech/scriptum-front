@@ -12,15 +12,36 @@ import { Button } from '@/shared/Button';
 import { Form, Formik } from 'formik';
 import { authValidationSchema } from '@/app/(withoutHeader)/login/page.usecase';
 
+
 export const AuthLayout: FC<Props> = ({ className, ...props }) => {
   return (
     <Formik
       initialValues={{ username: '', password: '' }}
       validationSchema={authValidationSchema}
-      onSubmit={(values) => {
-        console.log('Form submitted:', values);
-        alert('Гойда');
-      }}>
+      onSubmit={async (values, { setSubmitting }) => {
+        try {
+          const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
+          });
+
+          if (!res.ok) {
+            alert('Неверный логин или пароль');
+            return;
+          }
+
+          // редирект после успешного логина
+          window.location.href = '/';
+        } catch (err) {
+          console.error('Ошибка логина', err);
+        } finally {
+          setSubmitting(false);
+        }
+      }}
+    >
       {({ values, handleBlur, handleChange, errors, touched, isSubmitting }) => (
         <Form className={cn(styles.authForm, className)}>
           <div className={cn(styles.authContainer)} {...props}>

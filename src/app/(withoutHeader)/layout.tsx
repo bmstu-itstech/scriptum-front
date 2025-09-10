@@ -10,7 +10,7 @@ export default function NoHeaderLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${styles.body}`}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
