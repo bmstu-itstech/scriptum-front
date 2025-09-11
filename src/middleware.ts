@@ -1,5 +1,4 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { jwtVerify } from 'jose';
 
 // const SECRET_KEY = new TextEncoder().encode(process.env.JWT_SECRET!);
 
@@ -18,17 +17,17 @@ export async function middleware(req: NextRequest) {
 
   let role = null;
 
-  if (token == process.env.NEXT_PUBLIC_JWT_ADMIN) {
+  if (token === process.env.NEXT_PUBLIC_JWT_ADMIN) {
     res.headers.set('x-user-role', 'admin');
     role = 'admin';
   }
 
-  if (token == process.env.NEXT_PUBLIC_JWT_USER) {
+  if (token === process.env.NEXT_PUBLIC_JWT_USER) {
     res.headers.set('x-user-role', 'user');
     role = 'user';
   }
-    
-    // let payload: any;
+
+  // let payload: any;
   // try {
   //   const { payload: decoded } = await jwtVerify(token, SECRET_KEY);
   //   payload = decoded;

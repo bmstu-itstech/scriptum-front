@@ -1,4 +1,4 @@
-import type { HTMLAttributes, MouseEventHandler } from 'react';
+import type { HTMLAttributes } from 'react';
 
 export interface Props extends HTMLAttributes<HTMLInputElement> {
   toggleIcons?: {

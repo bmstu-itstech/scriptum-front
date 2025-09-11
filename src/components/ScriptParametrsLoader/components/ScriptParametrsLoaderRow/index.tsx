@@ -5,7 +5,7 @@ import { DeleteIcon } from '@/components/icons/DeleteIcon';
 import { memo, type FC } from 'react';
 import cn from 'classnames';
 import { Filter } from '@/components/Filter/Filter';
-import { measureUsecase, typeUsecase } from '@/components/Filter/Filter.usecase';
+import { typeUsecase } from '@/components/Filter/Filter.usecase';
 import { FastField, type FastFieldProps } from 'formik';
 
 interface RowProps {
