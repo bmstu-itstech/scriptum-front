@@ -14,10 +14,11 @@ import { Button } from '@/layouts/Button';
 import { SaveIcon } from '@/components/icons/SaveIcon';
 import { Form, Formik } from 'formik';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
+import { useRouter } from 'next/navigation';
 
 export default function TasksPage() {
   const notify = useCustomToast();
-
+  const router = useRouter();
   return (
     <>
       <PageLayout
@@ -30,6 +31,7 @@ export default function TasksPage() {
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(true);
             // Simulate API call
+            router.push('/users/handle');
             notify('Аккаунт пользователя успешно создан', 'success');
             setSubmitting(false);
           }}>

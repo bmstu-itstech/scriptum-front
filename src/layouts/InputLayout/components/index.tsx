@@ -39,35 +39,34 @@ const FileInput: FC<FileProps> = ({
 	);
 
 	const handleCheckFile = useCallback(
-		(file: File) => (e: React.MouseEvent<SVGSVGElement>) => {
+		(file: File) => (_: React.MouseEvent<SVGSVGElement>) => {
 			setFieldValue('file_checked', file);
 		},
-		[setFieldValue]
+		[setFieldValue],
 	);
 
-	const FileList = useMemo(() => {
-		console.log('рендер списка файлов');
-		return (
-			<div className={styles.fileList}>
-				{files.map((file, index) => (
-					<div className={styles.fileComponent} key={index}>
-						<PythonIcon className={styles.python} />
-						<p className={styles.FileName}>{file.name}</p>
-						<p className={styles.FileSize}>({(file.size / 1024).toFixed(2)} KB)</p>
-						<CheckFileIcon
-							isChecked={file.name === file_checked?.name}
-							onClick={handleCheckFile(file)}
-							className={styles.checkFile}
-						/>
-						<CloseModalIcon
-							onClick={handleDeleteFile(index)}
-							className={styles.deleteFile}
-						/>
-					</div>
-				))}
-			</div>
-		);
-	}, [files, file_checked, handleCheckFile, handleDeleteFile]);
+	const FileList = () =>
+		useMemo(() => {
+			return (
+				<div className={styles.fileList}>
+					{files.map((file, index) => {
+						return (
+							<div className={styles.fileComponent} key={index}>
+								<PythonIcon className={styles.python} />
+								<p className={styles.FileName}>{file.name}</p>
+								<p className={styles.FileSize}>({(file.size / 1024).toFixed(2)} KB)</p>
+								<CheckFileIcon
+									isChecked={file.name === file_checked?.name}
+									onClick={handleCheckFile(file)}
+									className={styles.checkFile}
+								/>
+								<CloseModalIcon onClick={handleDeleteFile(index)} className={styles.deleteFile} />
+							</div>
+						);
+					})}
+				</div>
+			);
+		}, [files, handleDeleteFile, handleCheckFile, file_checked]);
 
 	const handleFileChange = useCallback((files: FileList | File[]) => {
 		const fileArray = Array.from(files);

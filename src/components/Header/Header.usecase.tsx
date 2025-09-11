@@ -12,7 +12,7 @@ interface LinkProps {
   direction: string;
 }
 
-export const Links: (LinkProps & { direction: string })[] = [
+export const AdminLinks: (LinkProps & { direction: string })[] = [
   {
     icon: <HomeIcon />,
     title: 'Главная',
@@ -37,5 +37,23 @@ export const Links: (LinkProps & { direction: string })[] = [
     icon: <HandleUsersIcon />,
     title: 'Управление',
     direction: LinkDirection.HandleUsers,
+  },
+];
+
+export const UserLinks: (LinkProps & { direction: string })[] = [
+  {
+    icon: <HomeIcon />,
+    title: 'Главная',
+    direction: LinkDirection.Main,
+  },
+  {
+    icon: <TaskIcon />,
+    title: 'Задачи',
+    direction: LinkDirection.Tasks,
+  },
+  {
+    icon: <LoadIcon />,
+    title: 'Загрузка',
+    direction: LinkDirection.CreateScript,
   },
 ];

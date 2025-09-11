@@ -34,7 +34,7 @@ export default function Page() {
   const { mutate, isPending } = useStartScript({ id: shouldLoad ? script_id : 0 });
 
   if (!shouldLoad || isLoading || !data) {
-    return <Loading />
+    return <Loading />;
   }
 
   const initialValues = {

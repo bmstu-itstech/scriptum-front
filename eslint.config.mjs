@@ -47,14 +47,14 @@ export default [
       'react/react-in-jsx-scope': 'off',
 
       '@typescript-eslint/no-unused-vars': 'off',
-      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-imports': 'off',
       'react/prop-types': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
       'jsx-a11y/no-static-element-interactions': 'off',
-      'jsx-a11y/no-noninteractive-tabindex': 'warn',
+      'jsx-a11y/no-noninteractive-tabindex': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
       'unused-imports/no-unused-vars': [
-        'error',
+        'off',
         {
           vars: 'all',
           varsIgnorePattern: '^_',

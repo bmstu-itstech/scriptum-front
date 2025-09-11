@@ -10,15 +10,15 @@ import Link from 'next/link';
 import { LogoutIcon } from '../icons/LogoutIcon';
 import { Button } from '@/layouts/Button';
 import { PersonIcon } from '../icons/PersonIcon';
-import { Links } from '@/components/Header/Header.usecase';
+import { AdminLinks, UserLinks } from '@/components/Header/Header.usecase';
 import { usePathname } from 'next/navigation';
 import { LinkDirection } from '@/shared/consts/links';
 import axios from 'axios';
 
-export const Header: FC<Props> = ({ activePath, className, ...props }) => {
+export const Header: FC<Props> = ({ isAdmin = false, activePath, className, ...props }) => {
   const activeNextPathName = usePathname();
   activePath = activePath === undefined ? activeNextPathName : activePath;
-
+  const cur_links = isAdmin ? AdminLinks : UserLinks;
   return (
     <HeaderLayout
       head={
@@ -32,7 +32,7 @@ export const Header: FC<Props> = ({ activePath, className, ...props }) => {
       }
       center={
         <div className={cn(style.links)}>
-          {Links.map((link) => (
+          {cur_links.map((link) => (
             <Link
               key={link.direction}
               href={link.direction}
@@ -52,11 +52,14 @@ export const Header: FC<Props> = ({ activePath, className, ...props }) => {
             <PersonIcon className={cn(style.personIcon)} />
             <p className={cn(style.personData)}>Иванов Иван</p>
           </div>
-          <Button onClick={() => {
-            axios.post('api/logout').then(() => {
-              location.reload();
-            });
-          }} className={style.logoutBtn} icon={<LogoutIcon />}>
+          <Button
+            onClick={() => {
+              axios.post('api/logout').then(() => {
+                location.reload();
+              });
+            }}
+            className={style.logoutBtn}
+            icon={<LogoutIcon />}>
             Выйти
           </Button>
         </div>

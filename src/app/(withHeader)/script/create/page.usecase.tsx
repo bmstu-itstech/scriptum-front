@@ -78,12 +78,9 @@ export const ScriptSchema = Yup.object().shape({
   //   .min(2, 'Единица измерения должна иметь хотя бы 2 символа')
   //   .max(50, 'Единица измерения должна быть меньше 50 символов')
   //   .required('Единица измерения обязательна'),
-  file: Yup.mixed()
-    .required('Скрипт обязателен'),
+  file: Yup.mixed().required('Скрипт обязателен'),
 
-  file_checked: Yup.mixed()
-    .required('Выберите исполняемый файл')
-
+  file_checked: Yup.mixed().required('Выберите исполняемый файл'),
 });
 
 export interface Parameter {
