@@ -1,6 +1,8 @@
 .row {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+
+  /* justify-content: space-between; */
   height: fit-content;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--color-gray-border);
@@ -10,7 +12,9 @@
 
 .scriptElement__delIcon {
   line-height: 0;
+  width: 10%;
   padding: 0.75rem;
+  padding-inline: 1.5rem;
   border-radius: 0.5rem;
   color: var(--color-gray-sub);
 
@@ -20,13 +24,21 @@
   }
 }
 
+.fastfield__type {
+  padding-inline: 1.5rem;
+  width: 22.5%;
+}
+
 .filter__type {
   height: 3.25rem;
   max-height: 3.25rem;
   min-height: 3.25rem;
-  max-width: 10.5rem;
+
+  /* padding-inline: 1.5rem; */
+
+  /* max-width: 10.5rem;
   width: 10.5rem;
-  min-width: 10.5rem;
+  min-width: 10.5rem; */
   align-content: center;
 
   /* margin-right: 3rem; */
@@ -36,17 +48,27 @@
   height: 3.25rem;
   max-height: 3.25rem;
   min-height: 3.25rem;
-  max-width: 17.2rem;
+
+  /* padding-inline: 1.5rem; */
+
+  /* max-width: 17.2rem;
   min-width: 17.2rem;
-  width: 17.2rem;
+  width: 17.2rem; */
+
   align-content: center;
 
   /* margin-right: 1.8rem; */
 }
 
 .input {
-  max-width: 12.6rem;
+  /* max-width: 12.6rem; */
   height: fit-content;
+  width: 22.5%;
+  padding-inline: 1.5rem;
+  font-weight: 400;
 
   /* margin-right: 2.7rem; */
+  &::placeholder {
+    font-weight: 400;
+  }
 }

@@ -29,7 +29,7 @@ export const ScriptParametrsLoader: FC<Props> = ({ params, type, className, ...p
       );
     }
     return (
-      <div className={cn(styles.headerList, styles.listBorder, styles.justifyBetween)}>
+      <div className={cn(styles.headerList, styles.listBorder)}>
         {(type === 'input' ? pageCreateUsecase.input.blocks : pageCreateUsecase.output.blocks).map(
           (block, ind) => (
             <p key={ind} className={cn(`layout__title-sm`, styles.headerItem)}>

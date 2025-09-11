@@ -48,7 +48,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
         )}
       </FastField>
 
-      <FastField name={`${arrayName}[${index}].type`}>
+      <FastField className={styles.fastfield__type} name={`${arrayName}[${index}].type`}>
         {({ field, meta }: FastFieldProps) => (
           <Filter
             name={field.name}
@@ -58,6 +58,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
             value={field.value}
             onChange={field.onChange}
             onBlur={field.onBlur}
+            className={styles.fastfield__type}
             errorText={meta.touched && meta.error ? meta.error : null}
             selectClassName={styles.filter__type}
             // className={styles.filter__type}
@@ -71,7 +72,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
           <InputLayout
             type='text'
             name={field.name}
-            placeholder={usecase.name.placeholder}
+            placeholder={'Единица измерения'}
             value={field.value}
             onChange={field.onChange}
             className={styles.input}

@@ -26,14 +26,18 @@
 }
 
 .headerItem {
-  width: fit-content;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: start; */
+  width: 22.5%;
   padding: 0.75rem 1.5rem;
   color: var(--color-gray-light2);
   font-weight: 500;
   font-size: var(--font-size-xxs);
+
+  &:last-child {
+    width: 10%;
+  }
 }
 
 .addButton {
@@ -53,9 +57,9 @@
   height: fit-content;
 }
 
-.extendedBlock__main {
+/* .extendedBlock__main {
   padding-inline: 1.5rem;
-}
+} */
 
 .extendedBlock__content {
   grid-template-columns: 1fr;
