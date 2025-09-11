@@ -13,19 +13,6 @@
   gap: 1.5rem;
 }
 
-.ScriptParametrsLayout__content {
-  display: grid;
-  gap: 1.5rem;
-  overflow: hidden;
-  background: var(--color-white-clear);
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s ease-in;
-}
-
-.ScriptParametrsLayout__content.expanded {
-  grid-template-rows: 1fr;
-}
-
 .ScriptParametrsLayout__content__children {
   min-height: 0;
   display: grid;
@@ -37,6 +24,25 @@
 
   /* padding: 2rem; */
   height: fit-content;
+
+  /* padding: 0 !important; */
+}
+
+.ScriptParametrsLayout__content {
+  display: grid;
+  gap: 1.5rem;
+  overflow: hidden;
+  background: var(--color-white-clear);
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease-in;
+
+  & .ScriptParametrsLayout__content__children {
+    padding: 0;
+  }
+}
+
+.ScriptParametrsLayout__content.expanded {
+  grid-template-rows: 1fr;
 }
 
 .ScriptParametrsLayout__btn {
