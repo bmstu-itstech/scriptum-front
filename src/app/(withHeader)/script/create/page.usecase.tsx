@@ -61,11 +61,10 @@ const ParametrSheme = Yup.object().shape({
 
 export const ScriptSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, 'Название должно иметь хотя бы 2 символа')
+    .min(1, 'Название должно иметь хотя бы 2 символа')
     .max(50, 'Название должно быть меньше 50 символов')
     .required('Название обязательно'),
   desc: Yup.string()
-    .min(2, 'Описание должно иметь хотя бы 2 символа')
     .max(50, 'Описание должно быть меньше 50 символов'),
   inputParams: Yup.array().of(ParametrSheme),
   outputParams: Yup.array().of(ParametrSheme),
