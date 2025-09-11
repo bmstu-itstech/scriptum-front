@@ -68,17 +68,15 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
 
       <FastField name={`${arrayName}[${index}].measure`}>
         {({ field, meta }: FastFieldProps) => (
-          <Filter
+          <InputLayout
+            type='text'
             name={field.name}
-            index={index + 10000}
-            options={measureUsecase}
-            placeholder='Выберите единицу измерения'
+            placeholder={usecase.name.placeholder}
             value={field.value}
             onChange={field.onChange}
+            className={styles.input}
             onBlur={field.onBlur}
             errorText={meta.touched && meta.error ? meta.error : null}
-            selectClassName={styles.filter__measure}
-            isFormik
           />
         )}
       </FastField>
