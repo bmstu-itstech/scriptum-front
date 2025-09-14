@@ -3,6 +3,7 @@
   background-color: var(--color-white-main);
   border: 1px solid var(--color-gray-border);
   width: 100%;
+  overflow: auto;
 }
 
 .ScriptParametrsLayout__header {

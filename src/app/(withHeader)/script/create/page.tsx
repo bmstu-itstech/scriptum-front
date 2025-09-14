@@ -103,7 +103,7 @@ export default function CreatePage() {
           setSubmitting(false);
         }}
         validationSchema={ScriptSchema}>
-        {({ handleSubmit, handleBlur, setFieldValue, errors, touched, isSubmitting, values }) => (
+        {({ handleSubmit, handleBlur, errors, touched, isSubmitting, values }) => (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <InfoBlockLayout
               headerClassname={styles.infoblock__header}
