@@ -18,6 +18,14 @@
   border-radius: 0.5rem;
   color: var(--color-gray-sub);
 
+  &:focus,
+  &:active,
+  &:focus-visible,
+  &:focus-within {
+    color: var(--color-purple-main);
+    background-color: var(--color-purple-light-background);
+  }
+  
   &:hover {
     color: var(--color-red-main);
     background-color: var(--color-red-light-background);
