@@ -150,7 +150,7 @@ export const PipelineModalLayout: FC<Props> = ({
                 <div className={style.actionButtons}>
                   <button
                     className={style.actionButton}
-                    onClick={() => handleDownload(input, INPUT_FILENAME)}>
+                    onClick={() => handleDownload(input, scriptName+'_input.txt')}>
                     <ExportTxtIcon />
                     <span>Скачать</span>
                   </button>
@@ -176,7 +176,7 @@ export const PipelineModalLayout: FC<Props> = ({
                 <div className={style.actionButtons}>
                   <button
                     className={style.actionButton}
-                    onClick={() => handleDownload(output, OUTPUT_FILENAME)}>
+                    onClick={() => handleDownload(output, scriptName + '_output.txt')}>
                     <ExportTxtIcon />
                     <span>Скачать</span>
                   </button>
