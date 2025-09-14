@@ -19,13 +19,13 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
   return (
     <div className={`${styles.row} animationAppear ${className}`}>
       <FastField name={`${arrayName}[${index}].name`}>
-        {({ field, meta }: FastFieldProps) => (
+        {({ form, field, meta }: FastFieldProps) => (
           <InputLayout
             type='text'
             name={field.name}
             placeholder={usecase.name.placeholder}
             value={field.value}
-            onChange={field.onChange}
+            onChange={(value) => form.setFieldValue(field.name, value)}
             className={styles.input}
             onBlur={field.onBlur}
             errorText={meta.touched && meta.error ? meta.error : null}
@@ -34,13 +34,13 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
       </FastField>
 
       <FastField name={`${arrayName}[${index}].desc`}>
-        {({ field, meta }: FastFieldProps) => (
+        {({ form, field, meta }: FastFieldProps) => (
           <InputLayout
             type='text'
             name={field.name}
             placeholder={usecase.desc.placeholder}
             value={field.value}
-            onChange={field.onChange}
+            onChange={(value) => form.setFieldValue(field.name, value)}
             className={styles.input}
             onBlur={field.onBlur}
             errorText={meta.touched && meta.error ? meta.error : null}
@@ -49,7 +49,7 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
       </FastField>
 
       <FastField className={styles.fastfield__type} name={`${arrayName}[${index}].type`}>
-        {({ field, meta }: FastFieldProps) => (
+        {({ form, field, meta }: FastFieldProps) => (
           <Filter
             name={field.name}
             index={index}
@@ -68,13 +68,13 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
       </FastField>
 
       <FastField name={`${arrayName}[${index}].measure`}>
-        {({ field, meta }: FastFieldProps) => (
+        {({ form, field, meta }: FastFieldProps) => (
           <InputLayout
             type='text'
             name={field.name}
             placeholder={'Единица измерения'}
             value={field.value}
-            onChange={field.onChange}
+            onChange={(value) => form.setFieldValue(field.name, value)}
             className={styles.input}
             onBlur={field.onBlur}
             errorText={meta.touched && meta.error ? meta.error : null}

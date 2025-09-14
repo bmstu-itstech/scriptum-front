@@ -1,6 +1,6 @@
 'use client';
 import { ScriptParametrsLayout } from '@/layouts/ScriptParametrsLayout';
-import { type FC } from 'react';
+import { memo, type FC } from 'react';
 import { Props } from '@/components/ScriptParametrsLoader/ScriptParametrsLoader.props';
 import stylesLayout from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.module.css';
 import styles from '@/components/ScriptParametrsLoader/ScriptParametersLoader.module.css';
@@ -10,9 +10,8 @@ import { ExtendedBlock } from '@/shared/ExtendedBlock';
 import { ScriptParametrsLoaderHeader } from '@/components/ScriptParametrsLoader/components/ScriptParametrsLoaderHeader';
 import { ScriptParametersLoaderPreblock } from '@/components/ScriptParametrsLoader/components/ScriptParametrsLoaderPreblock';
 
-export const ScriptParametrsLoader: FC<Props> = ({ params, type, className, ...props }) => {
+export const ScriptParametrsLoader: FC<Props> = memo(({ params, type, className, ...props }) => {
   const name = type === 'input' ? 'inputParams' : 'outputParams';
-  console.log('render loader')
 
   return (
     <FieldArray name={name}>
@@ -40,4 +39,6 @@ export const ScriptParametrsLoader: FC<Props> = ({ params, type, className, ...p
       )}
     </FieldArray>
   );
-};
+});
+
+ScriptParametrsLoader.displayName = 'ScriptParametrsLoader';

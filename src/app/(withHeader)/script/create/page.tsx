@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { getSendValues } from '@/utils/send';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { getErrorText } from '@/utils/getErrorText';
+import { ScriptFormInfoBlock } from '@/components/ScriptFormInfoBlock';
 
 export default function CreatePage() {
   const router = useRouter();
@@ -105,55 +106,7 @@ export default function CreatePage() {
         validationSchema={ScriptSchema}>
         {({ handleSubmit, handleBlur, errors, touched, isSubmitting, values }) => (
           <Form onSubmit={handleSubmit} className={styles.form}>
-            <InfoBlockLayout
-              headerClassname={styles.infoblock__header}
-              contentClassname={styles.infoblock__content}
-              className={styles.infoblock}
-              header={pageCreateUsecase.main.header}>
-              <div className={styles.flex}>
-                <FastField name={`name`}>
-                  {({ field }: FastFieldProps) => (
-                    <InputLayout
-                      type='text'
-                      // value={field.value ?? ''}
-                      inputTitle={pageCreateUsecase.main.blocks.scriptTitle.title}
-                      className={styles.input}
-                      placeholder={pageCreateUsecase.main.blocks.scriptTitle.placeholder}
-                      errorText={errors.name && touched.name ? errors.name : null}
-                      {...field}
-                    />
-                  )}
-                </FastField>
-                <FastField name={`file`}>
-                  {({ field }: FastFieldProps) => (
-                    <InputLayout
-                      type='file'
-                      name={field.name}
-                      value={field.value ?? ''}
-                      inputTitle={pageCreateUsecase.main.blocks.scriptCode.title}
-                      placeholder={pageCreateUsecase.main.blocks.scriptCode.placeholder}
-                      errorText={errors.file && touched.file ? errors.file : null}
-                      onBlur={handleBlur}
-                    />
-                  )}
-                </FastField>
-              </div>
-              <FastField name={`desc`}>
-                {({ field }: FastFieldProps) => (
-                  <InputLayout
-                    type='text'
-                    inputTitle={pageCreateUsecase.main.blocks.scriptDesc.title}
-                    className={styles.input}
-                    isTextArea
-                    inputClassName={styles.desc}
-                    // value={field.value ?? ''}
-                    placeholder={pageCreateUsecase.main.blocks.scriptDesc.placeholder}
-                    errorText={errors.desc && touched.desc ? errors.desc : null}
-                    {...field}
-                  />
-                )}
-              </FastField>
-            </InfoBlockLayout>
+            <ScriptFormInfoBlock />
             <ScriptParametrsLoader params={values.inputParams} type='input' />
             <ScriptParametrsLoader params={values.outputParams} type='output' />
             <Button

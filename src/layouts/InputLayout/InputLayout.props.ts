@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 
-export interface Props extends HTMLAttributes<HTMLInputElement> {
+export interface Props extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
   toggleIcons?: {
     show: React.ReactNode;
     hide: React.ReactNode;
@@ -15,15 +15,6 @@ export interface Props extends HTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   isRequired?: boolean;
   isTextArea?: boolean;
+  onChange?: (value: string, name?: string) => void;
   inputLabelClassName?: string;
-}
-
-export interface FileProps extends HTMLAttributes<HTMLInputElement> {
-  type: string;
-  errorText: string | null;
-  name: string;
-  inputClassName?: string;
-  inputTitle?: string;
-  placeholder?: string;
-  isRequired?: boolean;
 }

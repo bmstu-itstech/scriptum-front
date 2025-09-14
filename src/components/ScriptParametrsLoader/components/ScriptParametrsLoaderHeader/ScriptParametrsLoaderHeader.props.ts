@@ -4,5 +4,5 @@ import type { HTMLAttributes } from 'react';
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   params: ParameterWithId[];
   type: 'input' | 'output';
-  push: <X = any>(obj: X) => void;
+  push: (obj: ParameterWithId) => void;
 }

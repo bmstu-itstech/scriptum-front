@@ -1,10 +1,10 @@
-// InputLayout.tsx
 'use client';
-import { FC, memo, useCallback, useMemo, useState, type ChangeEventHandler } from 'react';
+import { FC, memo, useCallback, useMemo, useState, useEffect } from 'react';
+import { useDebounce } from 'use-debounce';
 import { Props } from './InputLayout.props';
 import cn from 'classnames';
 import styles from './InputLayout.module.css';
-import FileInput from '@/layouts/InputLayout/components';
+import FileInput from '@/layouts/InputLayout/components/FileInput';
 
 const InputLayout: FC<Props> = ({
   onChange,
@@ -34,12 +34,32 @@ const InputLayout: FC<Props> = ({
     [isPassword, showPassword, toggleIcons?.hide, toggleIcons?.show],
   );
 
+  const [localValue, setLocalValue] = useState(value ?? '');
+
+  const [debouncedValue] = useDebounce(localValue, 200);
+
+  useEffect(() => {
+    if (value !== localValue) {
+      setLocalValue(value ?? '');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(debouncedValue, name);
+    }
+  }, [debouncedValue, name, onChange]);
+
+  const handleLocalChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setLocalValue(e.target.value);
+  };
+
   if (type === 'file') {
     return (
       <FileInput
         type={type}
         name={name}
-        onChange={onChange}
         inputClassName={inputClassName}
         errorText={errorText}
         inputTitle={inputTitle}
@@ -62,8 +82,8 @@ const InputLayout: FC<Props> = ({
           <textarea
             id={name}
             name={name}
-            value={type === 'file' ? undefined : value}
-            onChange={onChange as ChangeEventHandler<HTMLTextAreaElement> | undefined}
+            value={localValue}
+            onChange={handleLocalChange}
             required={isRequired}
             placeholder={placeholder}
             className={cn(styles.input, 'smoothTransition', inputClassName, {
@@ -74,8 +94,8 @@ const InputLayout: FC<Props> = ({
           <input
             id={name}
             name={name}
-            value={type === 'file' ? undefined : value}
-            onChange={onChange}
+            value={localValue}
+            onChange={handleLocalChange}
             required={isRequired}
             type={isPassword && !showPassword ? 'password' : 'text'}
             placeholder={placeholder}
