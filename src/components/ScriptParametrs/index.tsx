@@ -5,17 +5,25 @@ import type { FC } from 'react';
 // import styles from '@/components/ScriptParametrs/ScriptParametrs.module.css';
 import { ScriptParametrsLayout } from '@/layouts/ScriptParametrsLayout';
 import { ExtendedBlock } from '@/shared/ExtendedBlock';
+import styles from '@/components/ScriptParametrs/ScriptParametrs.module.css';
 
 export const ScriptParametrs: FC<Props> = ({
   header,
   className,
   contentClassname,
+  innerContentClassname,
   children,
   ...props
 }) => {
   return (
     <ScriptParametrsLayout header={header} className={className} {...props}>
-      <ExtendedBlock contentClassname={contentClassname}>{children}</ExtendedBlock>
+      <div className={styles.innerContent}>
+        <ExtendedBlock
+          innerContentClassname={innerContentClassname}
+          contentClassname={contentClassname}>
+          {children}
+        </ExtendedBlock>
+      </div>
     </ScriptParametrsLayout>
   );
 };

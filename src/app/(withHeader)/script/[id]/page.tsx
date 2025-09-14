@@ -83,7 +83,8 @@ export default function Page() {
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit} className={styles.form}>
             <ScriptParametrs
-              contentClassname={cn(styles.col2, styles.padding)}
+              contentClassname={cn(styles.col2)}
+              innerContentClassname={cn(styles.col2)}
               header={ScriptParametersInputUsecase.header}>
               {data.in_fields.map((item, id) => {
                 return (
@@ -97,7 +98,8 @@ export default function Page() {
               })}
             </ScriptParametrs>
             <ScriptParametrs
-              contentClassname={cn(styles.col2, styles.padding)}
+              contentClassname={cn(styles.col2)}
+              innerContentClassname={cn(styles.col2)}
               header={ScriptParametersOutputUsecase.header}>
               {data.out_fields.map((item, id) => {
                 return <ScriptParametrLayout key={id} typeOfCard='output' {...item} />;

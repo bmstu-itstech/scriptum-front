@@ -9,3 +9,7 @@
   gap: 0.5rem;
   align-items: center;
 }
+
+.innerContent {
+  padding: 2rem;
+}

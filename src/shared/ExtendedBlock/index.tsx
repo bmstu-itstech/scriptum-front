@@ -5,7 +5,12 @@ import { UpArrowIcon } from '@/components/icons/UpArrowIcon';
 import styles from '@/shared/ExtendedBlock/ExtendedBlock.module.css';
 import cn from 'classnames';
 
-export const ExtendedBlock: FC<Props> = ({ children, contentClassname, mainExtendedClassname }) => {
+export const ExtendedBlock: FC<Props> = ({
+  children,
+  contentClassname,
+  innerContentClassname,
+  mainExtendedClassname,
+}) => {
   const [countOfShown, setCountOfShown] = useState(4);
   const [countOfChildren, setCountOfChildren] = useState(children.length);
   useEffect(() => {
@@ -30,7 +35,11 @@ export const ExtendedBlock: FC<Props> = ({ children, contentClassname, mainExten
             className={cn(styles.ScriptParametrsLayout__content, contentClassname, {
               [styles.expanded]: countOfShown > 4,
             })}>
-            <div className={cn(styles.ScriptParametrsLayout__content__children, contentClassname)}>
+            <div
+              className={cn(
+                styles.ScriptParametrsLayout__content__children,
+                innerContentClassname,
+              )}>
               {children.slice(4)}
             </div>
           </div>

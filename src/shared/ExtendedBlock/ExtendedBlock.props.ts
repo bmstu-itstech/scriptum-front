@@ -4,4 +4,5 @@ export type Props = HTMLAttributes<HTMLDivElement> & {
   children: ReactElement[];
   contentClassname?: string;
   mainExtendedClassname?: string;
+  innerContentClassname?: string;
 };

@@ -150,7 +150,7 @@ export const PipelineModalLayout: FC<Props> = ({
                 <div className={style.actionButtons}>
                   <button
                     className={style.actionButton}
-                    onClick={() => handleDownload(input, scriptName+'_input.txt')}>
+                    onClick={() => handleDownload(input, scriptName + '_input.txt')}>
                     <ExportTxtIcon />
                     <span>Скачать</span>
                   </button>

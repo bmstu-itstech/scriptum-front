@@ -23,6 +23,7 @@
   background: var(--color-white-clear);
 
   /* padding: 2rem; */
+
   height: fit-content;
 
   /* padding: 0 !important; */
@@ -35,10 +36,6 @@
   background: var(--color-white-clear);
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.4s ease-in;
-
-  & .ScriptParametrsLayout__content__children {
-    padding: 0;
-  }
 }
 
 .ScriptParametrsLayout__content.expanded {
