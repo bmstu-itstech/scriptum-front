@@ -11,6 +11,28 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 11;
+  overflow-y: auto;
+  max-height: 80%;
+  scrollbar-color: var(--color-gray-light2) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-gray-light2);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-light2);
+  }
 }
 
 .overlay {
