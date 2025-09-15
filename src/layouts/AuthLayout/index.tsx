@@ -9,7 +9,7 @@ import { OpenEyeIcon } from '@/components/icons/OpenEyeIcon';
 import { CloseEyeIcon } from '@/components/icons/CloseEyeIcon';
 import { LoginIcon } from '@/components/icons/LoginIcon';
 import { Button } from '@/shared/Button';
-import { Form, Formik } from 'formik';
+import { FastField, Form, Formik, type FastFieldProps } from 'formik';
 import { authValidationSchema } from '@/app/(withoutHeader)/login/page.usecase';
 
 export const AuthLayout: FC<Props> = ({ className, ...props }) => {
@@ -40,7 +40,7 @@ export const AuthLayout: FC<Props> = ({ className, ...props }) => {
           setSubmitting(false);
         }
       }}>
-      {({ values, handleBlur, handleChange, errors, touched, isSubmitting }) => (
+      {({ isSubmitting }) => (
         <Form className={cn(styles.authForm, className)}>
           <div className={cn(styles.authContainer)} {...props}>
             <div className={cn(styles.header)}>
@@ -52,37 +52,44 @@ export const AuthLayout: FC<Props> = ({ className, ...props }) => {
             </div>
 
             <div className={styles.center}>
-              <InputLayout
-                type='text'
-                name='username'
-                isRequired={true}
-                inputTitle='Логин'
-                inputLabelClassName={styles.inputLabel}
-                className={styles.input}
-                value={values.username}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                placeholder={'Введите ваш логин'}
-                errorText={touched.username && errors.username ? errors.username : null}
-              />
-              <InputLayout
-                type='password'
-                isPassword
-                isRequired
-                inputTitle='Пароль'
-                name='password'
-                value={values.password}
-                inputLabelClassName={styles.inputLabel}
-                className={styles.input}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                placeholder={'Введите ваш пароль'}
-                errorText={touched.password && errors.password ? errors.password : null}
-                toggleIcons={{
-                  show: <OpenEyeIcon />,
-                  hide: <CloseEyeIcon />,
-                }}
-              />
+
+              <FastField name={'username'}>
+                {({ form, field, meta }: FastFieldProps) => (
+                  <InputLayout
+                    type='text'
+                    name={field.name}
+                    inputLabelClassName={styles.inputLabel}
+                    placeholder={'Введите ваш логин'}
+                    value={field.value}
+                    onChange={(value) => form.setFieldValue(field.name, value)}
+                    className={styles.input}
+                    onBlur={field.onBlur}
+                    errorText={meta.touched && meta.error ? meta.error : null}
+                  />
+                )}
+              </FastField>
+
+              <FastField name={'password'}>
+                {({ form, field, meta }: FastFieldProps) => (
+                  <InputLayout
+                    type='password'
+                    isPassword
+                    inputTitle='Пароль'
+                    name={field.name}
+                    inputLabelClassName={styles.inputLabel}
+                    placeholder={'Введите ваш пароль'}
+                    value={field.value}
+                    onChange={(value) => form.setFieldValue(field.name, value)}
+                    className={styles.input}
+                    onBlur={field.onBlur}
+                    errorText={meta.touched && meta.error ? meta.error : null}
+                    toggleIcons={{
+                      show: <OpenEyeIcon />,
+                      hide: <CloseEyeIcon />,
+                    }}
+                  />
+                )}
+              </FastField>
             </div>
             <div className={cn(styles.tail, className)}>
               <Button
