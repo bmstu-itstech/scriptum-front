@@ -24,11 +24,12 @@ export const ScriptParametrLayout: FC<ScriptParametrWithTypeOfCard> = ({
           </div>
         </div>
         <FastField name={formikName || ''}>
-          {({ field, meta }: FastFieldProps) => (
+          {({ form, field, meta }: FastFieldProps) => (
             <InputLayout
               type='text'
               placeholder='Введите значение'
               {...field}
+              onChange={(value) => form.setFieldValue(field.name, value)}
               value={field.value ?? ''}
               errorText={meta.touched && meta.error ? meta.error : null}
             />
