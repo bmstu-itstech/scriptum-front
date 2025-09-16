@@ -40,7 +40,9 @@ const InputLayout: FC<Props> = ({
 
   useEffect(() => {
     if (value !== localValue) {
-      setLocalValue(value ?? '');
+      if (value) { 
+        setLocalValue(value ?? '');
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);

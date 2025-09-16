@@ -22,6 +22,8 @@ import { useStartScript } from '@/hooks/script/useStartScript';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { getErrorText } from '@/utils/getErrorText';
 import { Loading } from '@/shared/Loading';
+import { CsvUploader } from '@/components/CsvUploader';
+
 
 export default function Page() {
   const params = useParams();
@@ -36,6 +38,7 @@ export default function Page() {
   if (!shouldLoad || isLoading || !data) {
     return <Loading />;
   }
+
 
   const initialValues = {
     in_params: data.in_fields.map((item) => ({
@@ -80,34 +83,53 @@ export default function Page() {
             },
           );
         }}>
-        {({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <ScriptParametrs
-              contentClassname={cn(styles.col2)}
-              innerContentClassname={cn(styles.col2)}
-              header={ScriptParametersInputUsecase.header}>
-              {data.in_fields.map((item, id) => {
-                return (
-                  <ScriptParametrLayout
-                    formikName={`in_params[${id}].data`}
-                    key={id}
-                    typeOfCard='input'
-                    {...item}
-                  />
-                );
-              })}
-            </ScriptParametrs>
-            <ScriptParametrs
-              contentClassname={cn(styles.col2)}
-              innerContentClassname={cn(styles.col2)}
-              header={ScriptParametersOutputUsecase.header}>
-              {data.out_fields.map((item, id) => {
-                return <ScriptParametrLayout key={id} typeOfCard='output' {...item} />;
-              })}
-            </ScriptParametrs>
-            <ScriptSettings />
-            <RunCodeButton isLoading={isPending} className={styles.page_runScriptBtn} />
-          </form>
+        {({ handleSubmit, setFieldValue }) => (
+          <>
+            <CsvUploader
+              onParsed={(csvValues) => {
+                if (csvValues.length !== data.in_fields.length) {
+                  notify(
+                    `Ожидалось ${data.in_fields.length} значений, а получено ${csvValues.length}.`,
+                    'error'
+                  );
+                  return;
+                }
+                csvValues.forEach((val, idx) => {
+                  setFieldValue(`in_params[${idx}].data`, val);
+                });
+
+                notify('Данные из CSV успешно подставлены.', 'success');
+              }}
+            />
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <ScriptParametrs
+                contentClassname={cn(styles.col2)}
+                innerContentClassname={cn(styles.col2)}
+                header={ScriptParametersInputUsecase.header}>
+                {data.in_fields.map((item, id) => {
+                  return (
+                    <ScriptParametrLayout
+                      formikName={`in_params[${id}].data`}
+                      key={id}
+                      typeOfCard='input'
+                      {...item}
+                    />
+                  );
+                })}
+              </ScriptParametrs>
+              <ScriptParametrs
+                contentClassname={cn(styles.col2)}
+                innerContentClassname={cn(styles.col2)}
+                header={ScriptParametersOutputUsecase.header}>
+                {data.out_fields.map((item, id) => {
+                  return <ScriptParametrLayout key={id} typeOfCard='output' {...item} />;
+                })}
+              </ScriptParametrs>
+              <ScriptSettings />
+              <RunCodeButton isLoading={isPending} className={styles.page_runScriptBtn} />
+            </form>
+          </>
+
         )}
       </Formik>
     </PageLayout>
