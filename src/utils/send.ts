@@ -34,7 +34,7 @@ export const getInputText = (job: IJob) => {
   let res = '';
   const minn_length = Math.min(job.in.length, job.expected.length);
   for (let i = 0; i < minn_length; i++) {
-    res += job.expected[i].name + ': ' + job.in[i].data;
+    res += job.expected[i].name + ': ' + job.in[i].data + '\n';
   }
   return res;
 };

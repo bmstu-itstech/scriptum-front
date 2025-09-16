@@ -35,7 +35,7 @@ export const AuthLayout: FC<Props> = ({ className, ...props }) => {
           // редирект после успешного логина
           window.location.href = '/';
         } catch (err) {
-          console.error('Ошибка логина', err);
+          alert('Ошибка логина: ' + err);
         } finally {
           setSubmitting(false);
         }
@@ -52,7 +52,6 @@ export const AuthLayout: FC<Props> = ({ className, ...props }) => {
             </div>
 
             <div className={styles.center}>
-
               <FastField name={'username'}>
                 {({ form, field, meta }: FastFieldProps) => (
                   <InputLayout
