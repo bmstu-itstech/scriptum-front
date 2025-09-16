@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 
 export default function TasksPage() {
   const notify = useCustomToast();
-  const router = useRouter()
+  const router = useRouter();
   return (
     <>
       <PageLayout
@@ -32,7 +32,7 @@ export default function TasksPage() {
             setSubmitting(true);
             // Simulate API call
             notify('Аккаунт пользователя успешно создан', 'success');
-            router.push('/users/handle')
+            router.push('/users/handle');
             setSubmitting(false);
           }}>
           {({ setFieldValue, handleChange, values, isSubmitting }) => (
@@ -57,7 +57,6 @@ export default function TasksPage() {
                       />
                     )}
                   </FastField>
-
                 </div>
                 <div className={style.createUserInput}>
                   <p className={style.label}>Email адрес</p>
@@ -75,7 +74,6 @@ export default function TasksPage() {
                       />
                     )}
                   </FastField>
-
                 </div>
                 <div className={style.createUserInput}>
                   <p className={style.label}>Пароль</p>

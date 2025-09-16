@@ -40,7 +40,7 @@ const InputLayout: FC<Props> = ({
 
   useEffect(() => {
     if (value !== localValue) {
-      if (value) { 
+      if (value) {
         setLocalValue(value ?? '');
       }
     }

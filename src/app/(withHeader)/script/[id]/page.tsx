@@ -24,7 +24,6 @@ import { getErrorText } from '@/utils/getErrorText';
 import { Loading } from '@/shared/Loading';
 import { CsvUploader } from '@/components/CsvUploader';
 
-
 export default function Page() {
   const params = useParams();
   const script_id = Number(params.id);
@@ -38,7 +37,6 @@ export default function Page() {
   if (!shouldLoad || isLoading || !data) {
     return <Loading />;
   }
-
 
   const initialValues = {
     in_params: data.in_fields.map((item) => ({
@@ -90,7 +88,7 @@ export default function Page() {
                 if (csvValues.length !== data.in_fields.length) {
                   notify(
                     `Ожидалось ${data.in_fields.length} значений, а получено ${csvValues.length}.`,
-                    'error'
+                    'error',
                   );
                   return;
                 }
@@ -129,7 +127,6 @@ export default function Page() {
               <RunCodeButton isLoading={isPending} className={styles.page_runScriptBtn} />
             </form>
           </>
-
         )}
       </Formik>
     </PageLayout>
