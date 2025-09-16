@@ -12,12 +12,13 @@ import { SectionLayout } from '@/layouts/SectionLayout';
 import { ShieldIcon } from '@/components/icons/ShieldIcon';
 import { Button } from '@/layouts/Button';
 import { SaveIcon } from '@/components/icons/SaveIcon';
-import { Form, Formik } from 'formik';
+import { FastField, Form, Formik, type FastFieldProps } from 'formik';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
+import { useRouter } from 'next/navigation';
 
 export default function TasksPage() {
   const notify = useCustomToast();
-
+  const router = useRouter()
   return (
     <>
       <PageLayout
@@ -31,71 +32,86 @@ export default function TasksPage() {
             setSubmitting(true);
             // Simulate API call
             notify('Аккаунт пользователя успешно создан', 'success');
+            router.push('/users/handle')
             setSubmitting(false);
           }}>
-          {({ errors, touched, handleBlur, handleChange, values, isSubmitting }) => (
+          {({ setFieldValue, handleChange, values, isSubmitting }) => (
             <Form>
               <SectionLayout
                 title={createUserSectionUsecase.title}
                 subtitle={createUserSectionUsecase.subtitle}>
                 <div className={style.createUserInput}>
                   <p className={style.label}>Полное имя</p>
-                  <InputLayout
-                    type='text'
-                    value={values.fullName}
-                    name='fullName'
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isRequired
-                    placeholder={'Введите полное имя (ФИО)'}
-                    errorText={errors.fullName && touched.fullName ? errors.fullName : null}
-                    // className={errors.fullName && InputLayoutStyle.error}
-                  />
+
+                  <FastField name='fullName'>
+                    {({ field, meta }: FastFieldProps) => (
+                      <InputLayout
+                        type='text'
+                        value={field.value}
+                        name='fullName'
+                        onChange={(value) => setFieldValue('fullName', value)}
+                        onBlur={field.onBlur}
+                        isRequired
+                        placeholder={'Введите полное имя (ФИО)'}
+                        errorText={meta.touched && meta.error ? meta.error : null}
+                      />
+                    )}
+                  </FastField>
+
                 </div>
                 <div className={style.createUserInput}>
                   <p className={style.label}>Email адрес</p>
-                  <InputLayout
-                    type='email'
-                    name='email'
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isRequired
-                    placeholder={'Введите email адрес'}
-                    errorText={errors.email && touched.email ? errors.email : null}
-                  />
+                  <FastField name='email'>
+                    {({ field, meta }: FastFieldProps) => (
+                      <InputLayout
+                        type='email'
+                        name='email'
+                        value={field.value}
+                        onChange={(value) => setFieldValue('email', value)}
+                        errorText={meta.touched && meta.error ? meta.error : null}
+                        onBlur={field.onBlur}
+                        isRequired
+                        placeholder={'Введите email адрес'}
+                      />
+                    )}
+                  </FastField>
+
                 </div>
                 <div className={style.createUserInput}>
                   <p className={style.label}>Пароль</p>
-                  <InputLayout
-                    type='password'
-                    name='password'
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isPassword
-                    isRequired
-                    placeholder={'Введите пароль'}
-                    errorText={errors.password && touched.password ? errors.password : null}
-                  />
+                  <FastField name='password'>
+                    {({ field, meta }: FastFieldProps) => (
+                      <InputLayout
+                        type='password'
+                        name='password'
+                        value={field.value}
+                        onChange={(value) => setFieldValue('password', value)}
+                        errorText={meta.touched && meta.error ? meta.error : null}
+                        onBlur={field.onBlur}
+                        isPassword
+                        isRequired
+                        placeholder={'Введите пароль'}
+                      />
+                    )}
+                  </FastField>
                 </div>
                 <div className={style.createUserInput}>
                   <p className={style.label}>Повторите пароль</p>
-                  <InputLayout
-                    type='password'
-                    name='confirmPassword'
-                    value={values.confirmPassword}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    isPassword
-                    isRequired
-                    placeholder={'Введите еще раз пароль'}
-                    errorText={
-                      errors.confirmPassword && touched.confirmPassword
-                        ? errors.confirmPassword
-                        : null
-                    }
-                  />
+                  <FastField name='confirmPassword'>
+                    {({ field, meta }: FastFieldProps) => (
+                      <InputLayout
+                        type='password'
+                        name='confirmPassword'
+                        value={field.value}
+                        onChange={(value) => setFieldValue('confirmPassword', value)}
+                        errorText={meta.touched && meta.error ? meta.error : null}
+                        onBlur={field.onBlur}
+                        isPassword
+                        isRequired
+                        placeholder={'Введите еще раз пароль'}
+                      />
+                    )}
+                  </FastField>
                 </div>
                 <div className={style.permissionCheckbox}>
                   <label className={style.checkboxContainer}>

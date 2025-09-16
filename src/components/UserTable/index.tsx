@@ -6,15 +6,16 @@ import { IUser } from '@/shared/consts/user';
 import { UserRow } from './components/UserRow';
 import { UserTableHeader } from './components/UserTableHeader';
 import { DialogLayout } from '@/layouts/DialogLayout';
-import { PopupLayout } from '@/layouts/PopupLayout';
+// import { PopupLayout } from '@/layouts/PopupLayout';
 import { Props } from './UserTable.props';
+import { useCustomToast } from '@/hooks/other/useCustomToast';
 
-type PopupState = {
-  visible: boolean;
-  variant: 'success' | 'error' | 'warning';
-  title: string;
-  description?: string;
-} | null;
+// type PopupState = {
+//   visible: boolean;
+//   variant: 'success' | 'error' | 'warning';
+//   title: string;
+//   description?: string;
+// } | null;
 
 type DialogState = {
   visible: boolean;
@@ -26,17 +27,18 @@ type DialogState = {
 } | null;
 
 export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUser }) => {
-  const [popup, setPopup] = useState<PopupState>(null);
+  // const [popup, setPopup] = useState<PopupState>(null);
   const [dialog, setDialog] = useState<DialogState>(null);
+  const notify = useCustomToast();
 
-  const showPopup = (
-    variant: 'success' | 'error' | 'warning',
-    title: string,
-    description?: string,
-  ) => {
-    setPopup({ visible: true, variant, title, description });
-    setTimeout(() => setPopup(null), 5000);
-  };
+  // const showPopup = (
+  //   variant: 'success' | 'error' | 'warning',
+  //   title: string,
+  //   description?: string,
+  // ) => {
+  //   setPopup({ visible: true, variant, title, description });
+  //   setTimeout(() => setPopup(null), 5000);
+  // };
 
   const handleEditUser = (user: IUser) => {
     setDialog({
@@ -46,8 +48,9 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
       message: `Вы уверены, что хотите сохранить изменения для пользователя ${user.email}?`,
       onConfirm: () => {
         onEditUser(user);
-        showPopup('success', 'Изменения сохранены', `Данные пользователя ${user.email} обновлены`);
-        setDialog(null);
+        notify(`Данные пользователя ${user.email} обновлены`, 'success');
+        // showPopup('success', 'Изменения сохранены', `Данные пользователя ${user.email} обновлены`);
+        setDialog(null);  
       },
     });
   };
@@ -66,7 +69,8 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
       message: `Вы уверены, что хотите удалить пользователя ${user.email}?`,
       onConfirm: () => {
         onDeleteUser(userId);
-        showPopup('success', 'Пользователь удалён', `Пользователь ${user.email} был удалён`);
+        notify(`Пользователь ${user.email} был удалён`, 'success');
+        // showPopup('success', 'Пользователь удалён', `Пользователь ${user.email} был удалён`);
         setDialog(null);
       },
     });
@@ -86,7 +90,7 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
           cancelText='Отмена'
         />
       )}
-
+{/* 
       {popup && (
         <PopupLayout
           variant={popup.variant}
@@ -94,7 +98,7 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
           description={popup.description || ''}
           onClose={() => setPopup(null)}
         />
-      )}
+      )} */}
 
       <div className={styles.usersTable}>
         <UserTableHeader />
