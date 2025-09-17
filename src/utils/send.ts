@@ -14,12 +14,12 @@ export const getSendValues = (value: string) => {
   return 'error';
 };
 
-export const getStatus = (status: IJobStatus, error: string | undefined) => {
+export const getStatus = (status: IJobStatus, code: number | undefined) => {
   switch (status) {
     case IJobStatus.RUNNING:
       return PipelineStatus.RUNNING;
     case IJobStatus.FINISHED:
-      if (error) {
+      if (code != 0) {
         return PipelineStatus.ERROR;
       }
       return PipelineStatus.OK;
