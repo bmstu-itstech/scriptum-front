@@ -73,7 +73,7 @@
   line-height: 1.25rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; 
+  -webkit-box-orient: vertical;
   mask-image: linear-gradient(to bottom, #000 0%, #000 100%);
 }
 
@@ -95,8 +95,8 @@
   width: 100%;
   padding-inline: 1rem;
   gap: 0.5rem;
-	flex-wrap: wrap;
-	justify-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .dragActive {
