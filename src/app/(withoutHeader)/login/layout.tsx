@@ -24,7 +24,9 @@ export default function LoginLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable}`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

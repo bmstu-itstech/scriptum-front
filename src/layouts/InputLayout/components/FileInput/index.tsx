@@ -109,9 +109,8 @@ const FileInput: FC<FileProps> = ({
         tabIndex={0}
         className={cn(styles.fileInput, {
           [styles.hasError]: errorText,
-          [styles.dragActive]: isDragActive
-        }
-        )}
+          [styles.dragActive]: isDragActive,
+        })}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
