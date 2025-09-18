@@ -104,7 +104,7 @@ export default function CreatePage() {
           setSubmitting(false);
         }}
         validationSchema={ScriptSchema}>
-        {({ handleSubmit, handleBlur, errors, touched, isSubmitting, values }) => (
+        {({ handleSubmit, isSubmitting, values }) => (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <ScriptFormInfoBlock />
             <ScriptParametrsLoader params={values.inputParams} type='input' />

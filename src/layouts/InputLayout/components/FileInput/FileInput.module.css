@@ -74,6 +74,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 100%);
   mask-image: linear-gradient(to bottom, #000 0%, #000 100%);
 }
 

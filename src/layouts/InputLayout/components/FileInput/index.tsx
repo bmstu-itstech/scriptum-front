@@ -25,6 +25,7 @@ const FileInput: FC<FileProps> = ({
   const { values, setFieldValue } = useFormikContext<ScriptFormValues>();
 
   const [files, setFiles] = useState<File[]>(values.file || []);
+  const [isDragActive, setIsDragActive] = useState(false);
   const [file_checked, setFileChecked] = useState<File | null>(values.file_checked || null);
 
   useEffect(() => {
@@ -75,6 +76,7 @@ const FileInput: FC<FileProps> = ({
   const handleDragEnter = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsDragActive(true);
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -85,6 +87,7 @@ const FileInput: FC<FileProps> = ({
   const handleDragLeave = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsDragActive(false);
   };
 
   const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -93,6 +96,7 @@ const FileInput: FC<FileProps> = ({
     const droppedFiles = e.dataTransfer.files;
     if (droppedFiles.length > 0) {
       handleFileChange(droppedFiles);
+      setIsDragActive(false);
     }
   };
 
@@ -103,7 +107,11 @@ const FileInput: FC<FileProps> = ({
       <label
         htmlFor={name}
         tabIndex={0}
-        className={cn(styles.fileInput, { [styles.hasError]: errorText })}
+        className={cn(styles.fileInput, {
+          [styles.hasError]: errorText,
+          [styles.dragActive]: isDragActive
+        }
+        )}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
