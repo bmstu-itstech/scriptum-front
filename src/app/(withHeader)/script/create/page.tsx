@@ -33,47 +33,29 @@ export default function CreatePage() {
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
           try {
-            const uploadedFiles = await Promise.all(
-              values.file!.map(async (file) => {
-                // Дополнительные проверки (например, по размеру)
-                if (file.size > 5 * 1024 * 1024) {
-                  notify('Размер файла не должен превышать 5 МБ', 'error');
-                }
-
-                // Загрузка файла
-                const { file_id } = await uploadFile(file);
-
-                return {
-                  name: file.name,
-                  id: file_id,
-                };
-              }),
-            );
-
-            // Найдём ID основного файла (проверенного)
-            const mainFile = uploadedFiles.find(
-              (uploaded) => uploaded.name === values.file_checked?.name,
-            );
-            const main_file_id = mainFile?.id;
-
-            if (!main_file_id) {
-              notify('Основной файл не выбран или не загружен', 'error');
+            if (!values.file) {
+              notify('Файл не выбран', 'error');
               setSubmitting(false);
               return;
             }
 
-            // Соберём остальные файлы (если нужно)
-            const extra_file_ids = uploadedFiles
-              .filter((f) => f.id !== main_file_id)
-              .map((f) => f.id);
+            // Дополнительные проверки (например, по размеру)
+            if (values.file.size > 5 * 1024 * 1024) {
+              notify('Размер файла не должен превышать 5 МБ', 'error');
+              setSubmitting(false);
+              return;
+            }
+
+            // Загрузка файла
+            const { file_id } = await uploadFile(values.file);
 
             // Отправим createScript
             createScript(
               {
                 script_name: values.name,
                 script_description: values.desc,
-                main_file_id: main_file_id,
-                extra_file_ids: extra_file_ids,
+                main_file_id: file_id,
+                extra_file_ids: [],
                 in_fields: values.inputParams.map((param) => ({
                   name: param.name,
                   description: param.desc,

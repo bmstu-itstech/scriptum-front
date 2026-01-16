@@ -1,6 +1,6 @@
 .fileInput {
   border: 2px dashed var(--color-gray-stroke);
-  transition: background 0.5s;
+  transition: background 0.5s, opacity 0.3s, cursor 0.3s;
   border-radius: var(--border-radius-md);
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@
   padding-block: 0.8005rem;
   cursor: pointer;
 
-  &:hover {
+  &:hover:not(.fileLoaded) {
     background-color: var(--color-gray-superlight);
   }
 
@@ -24,6 +24,15 @@
   &.hasError:hover,
   &.hasError:focus {
     border-color: var(--color-red-light-main);
+  }
+
+  &.fileLoaded {
+    cursor: default;
+    opacity: 0.7;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
 }
 
@@ -48,6 +57,7 @@
   flex-direction: column;
   border: 1px dashed var(--color-dark-main);
   color: var(--color-dark-main);
+  pointer-events: auto;
 }
 
 .deleteFile {
@@ -98,9 +108,27 @@
   gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dragActive {
   border: 2px dashed purple;
   background-color: #f9f5ff;
+}
+
+.dockerfileHint {
+  margin-top: 0.5rem;
+  font-size: var(--font-size-xxs);
+  color: var(--color-gray-sub);
+  line-height: 1rem;
+}
+
+.fileLoadedHint {
+  margin-top: 0.5rem;
+  font-size: var(--font-size-xxs);
+  color: var(--color-gray-sub);
+  line-height: 1rem;
+  text-align: center;
+  font-style: italic;
 }

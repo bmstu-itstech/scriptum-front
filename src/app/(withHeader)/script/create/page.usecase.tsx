@@ -13,8 +13,8 @@ export const pageCreateUsecase = {
         placeholder: 'Введите название скрипта',
       },
       scriptCode: {
-        title: 'Python-файл (*.py) *',
-        placeholder: 'Выберите Python-файл',
+        title: 'Tar-архив (*.tar) *',
+        placeholder: 'Выберите tar-архив',
       },
 
       scriptDesc: {
@@ -77,8 +77,6 @@ export const ScriptSchema = Yup.object().shape({
   //   .max(50, 'Единица измерения должна быть меньше 50 символов')
   //   .required('Единица измерения обязательна'),
   file: Yup.mixed().required('Скрипт обязателен'),
-
-  file_checked: Yup.mixed().required('Выберите исполняемый файл'),
 });
 
 export interface Parameter {
@@ -95,8 +93,7 @@ export interface ParameterWithId extends Parameter {
 export interface ScriptFormValues {
   name: string;
   desc: string;
-  file: File[] | null;
-  file_checked: File | null;
+  file: File | null;
   inputParams: ParameterWithId[];
   outputParams: ParameterWithId[];
 }
@@ -105,7 +102,6 @@ export const ScriptInitialValues: ScriptFormValues = {
   name: '',
   desc: '',
   file: null,
-  file_checked: null,
   inputParams: [],
   outputParams: [],
 };
