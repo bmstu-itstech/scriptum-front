@@ -19,7 +19,7 @@ export const getStatus = (status: IJobStatus, code: number | undefined) => {
     case IJobStatus.RUNNING:
       return PipelineStatus.RUNNING;
     case IJobStatus.FINISHED:
-      if (code != 0) {
+      if (code !== 0) {
         return PipelineStatus.ERROR;
       }
       return PipelineStatus.OK;

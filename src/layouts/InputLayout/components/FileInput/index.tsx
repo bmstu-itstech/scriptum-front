@@ -10,6 +10,7 @@ import { TextWithIcon } from '@/shared/TextWithIcon';
 import { UploadIcon } from '@/components/icons/UploadIcon';
 import { CloseModalIcon } from '@/components/icons/CloseModalIcon';
 import { TarFileIcon } from '@/components/icons/TarFileIcon';
+import { useCustomToast } from '@/hooks/other/useCustomToast';
 
 const FileInput: FC<FileProps> = ({
   name,
@@ -22,6 +23,7 @@ const FileInput: FC<FileProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { values, setFieldValue } = useFormikContext<ScriptFormValues>();
+  const notify = useCustomToast();
 
   const [file, setFile] = useState<File | null>(values.file || null);
   const [isDragActive, setIsDragActive] = useState(false);
@@ -33,10 +35,18 @@ const FileInput: FC<FileProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.file]);
 
+  const isTarFile = (selectedFile: File) =>
+    selectedFile.name.toLowerCase().endsWith('.tar') || selectedFile.type === 'application/x-tar';
+
   const handleFileChange = (selectedFile: File | null) => {
     if (!selectedFile) {
       setFile(null);
       setFieldValue('file', null);
+      return;
+    }
+
+    if (!isTarFile(selectedFile)) {
+      notify('Неверный формат файла. Загрузите архив в формате .tar', 'error');
       return;
     }
 
@@ -101,13 +111,6 @@ const FileInput: FC<FileProps> = ({
     }
   };
 
-  const handleLabelClick = (e: React.MouseEvent<HTMLLabelElement>) => {
-    if (file) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  };
-
   return (
     <div className={cn(stylesBase.inputContainer, className)} {...props}>
       {inputTitle && <p className='layout__inputLabel'>{inputTitle}</p>}
@@ -123,8 +126,7 @@ const FileInput: FC<FileProps> = ({
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        onClick={handleLabelClick}>
+        onDrop={handleDrop}>
         {file ? (
           <div className={styles.fileList}>
             <div className={styles.fileComponent}>
