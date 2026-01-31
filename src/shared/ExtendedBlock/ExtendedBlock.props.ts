@@ -5,4 +5,5 @@ export type Props = HTMLAttributes<HTMLDivElement> & {
   contentClassname?: string;
   mainExtendedClassname?: string;
   innerContentClassname?: string;
+  autoExpand?: boolean;
 };

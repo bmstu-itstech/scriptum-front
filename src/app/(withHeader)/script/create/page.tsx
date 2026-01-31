@@ -19,6 +19,7 @@ import { getSendValues } from '@/utils/send';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { getErrorText } from '@/utils/getErrorText';
 import { ScriptFormInfoBlock } from '@/components/ScriptFormInfoBlock';
+import { ValueType } from '@/shared/api/generated/data-contracts';
 
 export default function CreatePage() {
   const router = useRouter();
@@ -39,34 +40,31 @@ export default function CreatePage() {
               return;
             }
 
-            // Дополнительные проверки (например, по размеру)
-            if (values.file.size > 5 * 1024 * 1024) {
-              notify('Размер файла не должен превышать 5 МБ', 'error');
+            if (values.file.size > 50 * 1024 * 1024) {
+              notify('Размер файла не должен превышать 50 МБ', 'error');
               setSubmitting(false);
               return;
             }
 
-            // Загрузка файла
-            const { file_id } = await uploadFile(values.file);
+            const response = await uploadFile(values.file);
+            const file_id = response.data.fileID;
 
-            // Отправим createScript
             createScript(
               {
-                script_name: values.name,
-                script_description: values.desc,
-                main_file_id: file_id,
-                extra_file_ids: [],
-                in_fields: values.inputParams.map((param) => ({
+                name: values.name,
+                desc: values.desc,
+                archiveID: String(file_id),
+                in: values.inputParams.map((param) => ({
                   name: param.name,
-                  description: param.desc,
+                  desc: param.desc,
                   unit: param.measure,
-                  type: getSendValues(param.type),
+                  type: getSendValues(param.type) as ValueType,
                 })),
-                out_fields: values.outputParams.map((param) => ({
+                out: values.outputParams.map((param) => ({
                   name: param.name,
-                  description: param.desc,
+                  desc: param.desc,
                   unit: param.measure,
-                  type: getSendValues(param.type),
+                  type: getSendValues(param.type) as ValueType,
                 })),
               },
               {

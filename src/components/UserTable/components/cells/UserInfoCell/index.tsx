@@ -19,17 +19,17 @@ export const UserInfoCell: FC<Props> = ({
         <>
           <input
             type='text'
-            name='fullname'
-            value={editData.fullname}
+            name='name'
+            value={editData.name}
             onChange={onInputChange}
-            onBlur={() => onInputBlur('fullname')}
+            onBlur={() => onInputBlur('name')}
             className={cn(generalStyle.editInput, {
-              [generalStyle.invalidInput]: errors.fullname,
+              [generalStyle.invalidInput]: errors.name,
             })}
             placeholder='ФИО'
             required
           />
-          {errors.fullname && <span className={generalStyle.errorMessage}>{errors.fullname}</span>}
+          {errors.name && <span className={generalStyle.errorMessage}>{errors.name}</span>}
           <input
             type='email'
             name='email'
@@ -46,7 +46,7 @@ export const UserInfoCell: FC<Props> = ({
         </>
       ) : (
         <>
-          <p className={styles.userName}>{user.fullname}</p>
+          <p className={styles.userName}>{user.name}</p>
           <p className={styles.userEmail}>{user.email}</p>
         </>
       )}

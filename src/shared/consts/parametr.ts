@@ -10,5 +10,5 @@ export enum ParametrMeasure {
 export enum ParametrType {
   FLOAT = 'Вещественный',
   INT = 'Целый',
-  COMP = 'Комплексный',
+  STR = 'Строка',
 }

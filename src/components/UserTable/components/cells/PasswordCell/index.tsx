@@ -26,6 +26,7 @@ export const PasswordCell: FC<Props> = ({
               [generalStyle.invalidInput]: errors.password,
             })}
             placeholder='Новый пароль (необязательно)'
+            autoComplete='new-password'
           />
           {editData.password && (
             <input
@@ -38,6 +39,7 @@ export const PasswordCell: FC<Props> = ({
                 [generalStyle.invalidInput]: errors.password,
               })}
               placeholder='Повторите пароль'
+              autoComplete='new-password'
             />
           )}
           {errors.password && <span className={generalStyle.errorMessage}>{errors.password}</span>}

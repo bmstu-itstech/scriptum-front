@@ -1,7 +1,7 @@
 export const validateEmail = (email: string): string | null => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!email) {
+  if (!email || !email.trim()) {
     return 'Email обязателен для заполнения';
   }
 
@@ -37,7 +37,7 @@ export const validatePassword = (password: string, confirmPassword?: string): st
 };
 
 export const validateFullname = (fullname: string): string | null => {
-  if (!fullname.trim()) {
+  if (!fullname || !fullname.trim()) {
     return 'ФИО обязательно для заполнения';
   }
 

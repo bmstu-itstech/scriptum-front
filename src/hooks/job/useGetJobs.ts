@@ -1,10 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import { jobsList } from '@/shared/api/job/getAllJobs';
+import { jobsApi } from '@/shared/api/JobsClient';
+import type { Job } from '@/shared/api/generated/data-contracts';
 
 export const useGetJobs = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<Job[]>({
     queryKey: ['jobs'],
-    queryFn: jobsList,
+    queryFn: async (): Promise<Job[]> => {
+      const response = await jobsApi.getJobs();
+      return response.data;
+    },
+    refetchInterval: 5000,
   });
   return { data, isLoading };
 };

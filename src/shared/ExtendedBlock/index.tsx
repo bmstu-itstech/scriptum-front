@@ -10,12 +10,19 @@ export const ExtendedBlock: FC<Props> = ({
   contentClassname,
   innerContentClassname,
   mainExtendedClassname,
+  autoExpand,
 }) => {
   const [countOfShown, setCountOfShown] = useState(4);
   const [countOfChildren, setCountOfChildren] = useState(children.length);
   useEffect(() => {
     setCountOfChildren(children.length);
   }, [children.length]);
+
+  useEffect(() => {
+    if (autoExpand && countOfChildren > 4) {
+      setCountOfShown(countOfChildren);
+    }
+  }, [autoExpand, countOfChildren]);
 
   const onShowMoreClick = useCallback(() => {
     setCountOfShown(countOfChildren);

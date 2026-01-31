@@ -1,13 +1,16 @@
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
-import { scriptsList } from '@/shared/api/script/getAllScripts';
-import type { IScript } from '@/domain/entities/script';
+import { blueprintsApi } from '@/shared/api/BlueprintsClient';
+import type { Blueprint } from '@/shared/api/generated/data-contracts';
 
-export const useGetAllScripts = (options?: Partial<UseQueryOptions<IScript[]>>) => {
-  const { data, isLoading, refetch, error } = useQuery({
-    ...options,
-    queryKey: ['scripts'],
-    queryFn: scriptsList,
-  });
+export const useGetAllScripts = (options?: Partial<UseQueryOptions<Blueprint[]>>) => {
+	const { data, isLoading, refetch, error } = useQuery({
+		...options,
+		queryKey: ['scripts'],
+		queryFn: async () => {
+			const response = await blueprintsApi.getBlueprints();
+			return response.data;
+		},
+	});
 
-  return { data, isLoading, refetch, error };
+	return { data, isLoading, refetch, error };
 };

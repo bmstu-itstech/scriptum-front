@@ -18,6 +18,12 @@ export const roleUsecase = [
   { value: UserRole.USER, label: 'Пользователи' },
 ];
 
+export const ownerFilterUsecase = [
+  { value: 'all', label: 'Все' },
+  { value: 'mine', label: 'Мои' },
+  { value: 'others', label: 'Общие' },
+];
+
 export const measureUsecase = [
   { value: ParametrMeasure.None, label: ParametrMeasure.None },
   { value: ParametrMeasure.M, label: 'Метры (м)' },
@@ -31,7 +37,7 @@ export const measureUsecase = [
 export const typeUsecase = [
   { value: ParametrType.FLOAT, label: ParametrType.FLOAT },
   { value: ParametrType.INT, label: ParametrType.INT },
-  { value: ParametrType.COMP, label: ParametrType.COMP },
+  { value: ParametrType.STR, label: ParametrType.STR },
 ];
 
 export const colourStyles: StylesConfig<Option, false, GroupBase<Option>> = {

@@ -21,6 +21,8 @@ const InputLayout: FC<Props> = ({
   value,
   inputClassName,
   className,
+  autoComplete,
+  'aria-autocomplete': _ariaAutocomplete,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -72,7 +74,7 @@ const InputLayout: FC<Props> = ({
   }
 
   return (
-    <div className={cn(styles.inputContainer, className)} {...props}>
+    <div className={cn(styles.inputContainer, className)}>
       {inputTitle && (
         <label htmlFor={name} className={cn('layout__inputLabel', inputLabelClassName)}>
           {inputTitle}
@@ -91,6 +93,7 @@ const InputLayout: FC<Props> = ({
             className={cn(styles.input, 'smoothTransition', inputClassName, {
               [styles.errorInput]: errorText,
             })}
+            {...props}
           />
         ) : (
           <input
@@ -104,6 +107,10 @@ const InputLayout: FC<Props> = ({
             className={cn(styles.input, 'smoothTransition', inputClassName, {
               [styles.errorInput]: errorText,
             })}
+            autoComplete={autoComplete}
+            {...props}
+            aria-autocomplete={autoComplete === 'new-password' ? 'none' : undefined}
+            suppressHydrationWarning
           />
         )}
 

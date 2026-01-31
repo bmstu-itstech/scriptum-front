@@ -1,7 +1,8 @@
 'use client';
 import { FC, useState } from 'react';
 import { Props } from './UserRow.props';
-import { EditUserData, UserRole } from '@/shared/consts/user';
+import { EditUserData } from '@/shared/consts/user';
+import { Role } from '@/shared/api/generated/data-contracts';
 import { UserInfoCell } from '../cells/UserInfoCell';
 import { PasswordCell } from '../cells/PasswordCell';
 import { RoleCell } from '../cells/RoleCell';
@@ -12,7 +13,7 @@ import generalStyle from './../../UserTable.module.css';
 export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState<EditUserData>({
-    fullname: user.fullname,
+    name: user.name,
     email: user.email,
     password: '',
     confirmPassword: '',
@@ -23,7 +24,7 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
   const handleEdit = () => {
     setIsEditing(true);
     setEditData({
-      fullname: user.fullname,
+      name: user.name,
       email: user.email,
       password: '',
       confirmPassword: '',
@@ -44,9 +45,10 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
 
     const editedUser = {
       id: user.id,
-      fullname: editData.fullname,
+      name: editData.name,
       email: editData.email,
       role: editData.role,
+      createdAt: user.createdAt,
       ...(editData.password ? { password: editData.password } : {}),
     };
 
@@ -65,7 +67,7 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
       password: shouldValidatePassword
         ? validatePassword(editData.password, editData.confirmPassword)
         : null,
-      fullname: validateFullname(editData.fullname),
+      name: validateFullname(editData.name),
     };
 
     setErrors(newErrors);
@@ -98,7 +100,7 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
     }
   };
 
-  const handleBlur = (field: 'email' | 'password' | 'fullname') => {
+  const handleBlur = (field: 'email' | 'password' | 'name') => {
     if (!editData) {
       return;
     }
@@ -116,8 +118,7 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
 
     setErrors((prev) => ({
       ...prev,
-      [field]:
-        field === 'email' ? validateEmail(editData.email) : validateFullname(editData.fullname),
+      [field]: field === 'email' ? validateEmail(editData.email) : validateFullname(editData.name),
     }));
   };
 
@@ -127,7 +128,7 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
     }
     setEditData({
       ...editData,
-      role: e.target.checked ? UserRole.ADMIN : UserRole.USER,
+      role: e.target.checked ? Role.Admin : Role.User,
     });
   };
 

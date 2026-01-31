@@ -1,7 +1,8 @@
 import type { HTMLAttributes } from 'react';
-import { IScript } from '@/domain/entities/script';
+import type { Blueprint } from '@/shared/api/generated/data-contracts';
 
 export type Props = HTMLAttributes<HTMLAnchorElement> &
-  IScript & {
+  Blueprint & {
     refetch: () => void;
+    currentUserId?: string;
   };

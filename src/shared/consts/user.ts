@@ -1,3 +1,5 @@
+import { Role } from '@/shared/api/generated/data-contracts';
+
 export enum UserRole {
   ADMIN = 'admin',
   USER = 'user',
@@ -11,9 +13,9 @@ export interface IUser {
 }
 
 export interface EditUserData {
-  fullname: string;
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
-  role: UserRole;
+  role: Role;
 }

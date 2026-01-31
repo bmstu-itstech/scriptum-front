@@ -2,17 +2,16 @@
 import { FC, useState } from 'react';
 import styles from './UserTable.module.css';
 import cn from 'classnames';
-import { IUser } from '@/shared/consts/user';
+import type { User } from '@/shared/api/generated/data-contracts';
 import { UserRow } from './components/UserRow';
 import { UserTableHeader } from './components/UserTableHeader';
 import { DialogLayout } from '@/layouts/DialogLayout';
 import { Props } from './UserTable.props';
-import { useCustomToast } from '@/hooks/other/useCustomToast';
 
 type DialogState = {
   visible: boolean;
   type: 'save' | 'delete';
-  userId?: number;
+  userId?: string;
   title: string;
   message: string;
   onConfirm: () => void;
@@ -20,9 +19,8 @@ type DialogState = {
 
 export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUser }) => {
   const [dialog, setDialog] = useState<DialogState>(null);
-  const notify = useCustomToast();
 
-  const handleEditUser = (user: IUser) => {
+  const handleEditUser = (user: User) => {
     setDialog({
       visible: true,
       type: 'save',
@@ -30,13 +28,12 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
       message: `Вы уверены, что хотите сохранить изменения для пользователя ${user.email}?`,
       onConfirm: () => {
         onEditUser(user);
-        notify(`Данные пользователя ${user.email} обновлены`, 'success');
         setDialog(null);
       },
     });
   };
 
-  const handleDeleteUser = (userId: number) => {
+  const handleDeleteUser = (userId: string) => {
     const user = users.find((u) => u.id === userId);
     if (!user) {
       return;
@@ -50,7 +47,6 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
       message: `Вы уверены, что хотите удалить пользователя ${user.email}?`,
       onConfirm: () => {
         onDeleteUser(userId);
-        notify(`Пользователь ${user.email} был удалён`, 'success');
         setDialog(null);
       },
     });

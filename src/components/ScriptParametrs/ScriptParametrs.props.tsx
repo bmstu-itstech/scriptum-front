@@ -5,4 +5,5 @@ export interface Props extends IScriptStruct, HTMLAttributes<HTMLDivElement> {
   children: ReactElement[];
   contentClassname?: string;
   innerContentClassname?: string;
+  autoExpand?: boolean;
 }

@@ -13,12 +13,14 @@ export const ScriptParametrs: FC<Props> = ({
   contentClassname,
   innerContentClassname,
   children,
+  autoExpand,
   ...props
 }) => {
   return (
     <ScriptParametrsLayout header={header} className={className} {...props}>
       <div className={styles.innerContent}>
         <ExtendedBlock
+          autoExpand={autoExpand}
           innerContentClassname={innerContentClassname}
           contentClassname={contentClassname}>
           {children}

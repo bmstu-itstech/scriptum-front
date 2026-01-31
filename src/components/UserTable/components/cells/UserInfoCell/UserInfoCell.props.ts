@@ -6,9 +6,9 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   editData: EditUserData;
   errors: Record<string, string | null>;
   user: {
-    fullname: string;
+    name: string;
     email: string;
   };
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onInputBlur: (field: 'email' | 'password' | 'fullname') => void;
+  onInputBlur: (field: 'email' | 'password' | 'name') => void;
 }

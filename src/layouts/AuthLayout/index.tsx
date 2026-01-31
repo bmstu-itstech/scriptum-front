@@ -11,34 +11,46 @@ import { LoginIcon } from '@/components/icons/LoginIcon';
 import { Button } from '@/shared/Button';
 import { FastField, Form, Formik, type FastFieldProps } from 'formik';
 import { authValidationSchema } from '@/app/(withoutHeader)/login/page.usecase';
+import { useLogin } from '@/hooks/auth/useLogin';
+import { useRouter } from 'next/navigation';
+import { useCustomToast } from '@/hooks/other/useCustomToast';
+import { useGetUserMe } from '@/hooks/user/useGetUserMe';
 
 export const AuthLayout: FC<Props> = ({ className, ...props }) => {
+  const { mutate: login } = useLogin();
+  const router = useRouter();
+  const notify = useCustomToast();
+  const { refetch } = useGetUserMe({ enabled: false });
+
   return (
     <Formik
-      initialValues={{ username: '', password: '' }}
+      initialValues={{ email: '', password: '' }}
       validationSchema={authValidationSchema}
-      onSubmit={async (values, { setSubmitting }) => {
-        try {
-          const res = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
+      onSubmit={(values, { setSubmitting }) => {
+        login(
+          {
+            email: values.email,
+            password: values.password,
+          },
+          {
+            onSuccess: async (data) => {
+              document.cookie = `access_token=${data.accessToken}; path=/; max-age=${60 * 60 * 24}; SameSite=Lax`;
+              try {
+                await refetch();
+              } catch (error) {
+                notify('Ошибка при получении данных пользователя', 'error');
+              }
+              notify('Успешный вход в систему', 'success');
+              router.push('/');
             },
-            body: JSON.stringify(values),
-          });
-
-          if (!res.ok) {
-            alert('Неверный логин или пароль');
-            return;
-          }
-
-          // редирект после успешного логина
-          window.location.href = '/';
-        } catch (err) {
-          alert('Ошибка логина: ' + err);
-        } finally {
-          setSubmitting(false);
-        }
+            onError: () => {
+              notify('Неверный email или пароль', 'error');
+            },
+            onSettled: () => {
+              setSubmitting(false);
+            },
+          },
+        );
       }}>
       {({ isSubmitting }) => (
         <Form className={cn(styles.authForm, className)}>
@@ -52,18 +64,20 @@ export const AuthLayout: FC<Props> = ({ className, ...props }) => {
             </div>
 
             <div className={styles.center}>
-              <FastField name={'username'}>
+              <FastField name={'email'}>
                 {({ form, field, meta }: FastFieldProps) => (
                   <InputLayout
-                    type='text'
+                    type='email'
+                    inputTitle='Email'
                     name={field.name}
                     inputLabelClassName={styles.inputLabel}
-                    placeholder={'Введите ваш логин'}
+                    placeholder={'Введите ваш email'}
                     value={field.value}
                     onChange={(value) => form.setFieldValue(field.name, value)}
                     className={styles.input}
                     onBlur={field.onBlur}
                     errorText={meta.touched && meta.error ? meta.error : null}
+                    autoComplete='email'
                   />
                 )}
               </FastField>
@@ -82,6 +96,7 @@ export const AuthLayout: FC<Props> = ({ className, ...props }) => {
                     className={styles.input}
                     onBlur={field.onBlur}
                     errorText={meta.touched && meta.error ? meta.error : null}
+                    autoComplete='current-password'
                     toggleIcons={{
                       show: <OpenEyeIcon />,
                       hide: <CloseEyeIcon />,
@@ -100,7 +115,6 @@ export const AuthLayout: FC<Props> = ({ className, ...props }) => {
               </Button>
             </div>
           </div>
-          )
         </Form>
       )}
     </Formik>

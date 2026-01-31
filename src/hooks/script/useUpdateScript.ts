@@ -6,7 +6,7 @@ import type { IScript, IScriptError } from '@/domain/entities/script';
 export const useUpdateScript = (id: number) => {
   const { data, isPending, error } = useMutation<IScript, AxiosError<IScriptError>>({
     mutationKey: ['updateScript', id.toString()],
-    mutationFn: () => updateScript(id),
+    mutationFn: async () => await updateScript(id),
   });
 
   return { data, isPending, error };

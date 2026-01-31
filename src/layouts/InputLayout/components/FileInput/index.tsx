@@ -35,8 +35,18 @@ const FileInput: FC<FileProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.file]);
 
-  const isTarFile = (selectedFile: File) =>
-    selectedFile.name.toLowerCase().endsWith('.tar') || selectedFile.type === 'application/x-tar';
+  const isTarFile = (selectedFile: File) => {
+    const name = selectedFile.name.toLowerCase();
+    const type = selectedFile.type;
+
+    const isByExtension =
+      name.endsWith('.tar') || name.endsWith('.tar.gz') || name.endsWith('.tgz');
+
+    const isByMimeType =
+      type === 'application/x-tar' || type === 'application/gzip' || type === 'application/x-gzip';
+
+    return isByExtension || isByMimeType;
+  };
 
   const handleFileChange = (selectedFile: File | null) => {
     if (!selectedFile) {
@@ -46,7 +56,7 @@ const FileInput: FC<FileProps> = ({
     }
 
     if (!isTarFile(selectedFile)) {
-      notify('Неверный формат файла. Загрузите архив в формате .tar', 'error');
+      notify('Неверный формат файла. Загрузите архив в формате .tar или .tar.gz', 'error');
       return;
     }
 
@@ -149,7 +159,7 @@ const FileInput: FC<FileProps> = ({
           ref={inputRef}
           name={name}
           type='file'
-          accept='.tar'
+          accept='.tar,.tar.gz,.tgz'
           disabled={!!file}
           className={cn(styles.fileInput, inputClassName)}
           onChange={(e) => {

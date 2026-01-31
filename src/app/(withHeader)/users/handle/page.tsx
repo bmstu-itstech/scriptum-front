@@ -1,34 +1,51 @@
 'use client';
 import { PageLayout } from '@/layouts/PageLayout';
-import { APIUsers, handleUsersPageUsecase } from './page.usecase';
+import { handleUsersPageUsecase } from './page.usecase';
 import { Search } from '@/components/Search';
 import { Filter } from '@/components/Filter/Filter';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
 import { SearchIcon } from '@/components/icons/SearchIcon';
 import { FilterIcon } from '@/components/icons/FilterIcon';
 import { Stats } from '@/shared/Stats';
-import { UserRole } from '@/shared/consts/user';
 import Pagination from '@/shared/Pagination';
+import { Role } from '@/shared/api/generated/data-contracts';
+import type { User } from '@/shared/api/generated/data-contracts';
 import style from './page.module.css';
 import { UserTable } from '@/components/UserTable';
 import { pageSelectStyles, roleUsecase } from '@/components/Filter/Filter.usecase';
+import { useGetAllUsers } from '@/hooks/user/useGetAllUsers';
+import { usePatchUser } from '@/hooks/user/usePatchUser';
+import { useDeleteUser } from '@/hooks/user/useDeleteUser';
+import { useCustomToast } from '@/hooks/other/useCustomToast';
+import { getErrorText } from '@/utils/getErrorText';
 
 const ITEMS_PER_PAGE = 8;
 
 export default function HandlePage() {
-  const [users, setUsers] = useState(APIUsers);
+  const { data: usersData, isLoading, refetch } = useGetAllUsers();
+  const { mutate: patchUser } = usePatchUser();
+  const { mutate: deleteUser } = useDeleteUser();
+  const notify = useCustomToast();
+  const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [roleFilter, setRoleFilter] = useState<UserRole | 'all'>('all');
+  const [roleFilter, setRoleFilter] = useState<Role | 'all'>('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
+
+  useEffect(() => {
+    if (usersData) {
+      setUsers(usersData);
+    }
+  }, [usersData]);
 
   const filteredUsers = useMemo(() => {
     return users.filter((user) => {
       const searchLower = debouncedSearchTerm.toLowerCase();
+      const name = user.name || '';
+      const email = user.email || '';
       const matchesSearch =
-        user.fullname.toLowerCase().includes(searchLower) ||
-        user.email.toLowerCase().includes(searchLower);
+        name.toLowerCase().includes(searchLower) || email.toLowerCase().includes(searchLower);
       const matchesRole = roleFilter === 'all' || user.role === roleFilter;
       return matchesSearch && matchesRole;
     });
@@ -40,17 +57,58 @@ export default function HandlePage() {
     return filteredUsers.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }, [filteredUsers, currentPage]);
 
-  const adminCount = users.filter((u) => u.role === UserRole.ADMIN).length;
+  const adminCount = users.filter((u) => u.role === Role.Admin).length;
 
-  const handleEditUser = (editedUser: (typeof users)[0]) => {
-    setUsers(users.map((u) => (u.id === editedUser.id ? editedUser : u)));
+  const handleEditUser = (editedUser: User & { password?: string }) => {
+    const patchData: {
+      name?: string;
+      email?: string;
+      password?: string;
+      role?: string;
+    } = {};
+
+    if (editedUser.name) {
+      patchData.name = editedUser.name;
+    }
+    if (editedUser.email) {
+      patchData.email = editedUser.email;
+    }
+    if (editedUser.password) {
+      patchData.password = editedUser.password;
+    }
+    if (editedUser.role) {
+      patchData.role = editedUser.role;
+    }
+
+    patchUser(
+      { id: editedUser.id, data: patchData },
+      {
+        onSuccess: (data) => {
+          setUsers(users.map((u) => (u.id === editedUser.id ? data : u)));
+          notify('Данные пользователя успешно обновлены', 'success');
+          refetch();
+        },
+        onError: (error) => {
+          notify(getErrorText(error.response?.status ?? 7777), 'error');
+        },
+      },
+    );
   };
 
-  const handleDeleteUser = (userId: number) => {
-    setUsers(users.filter((u) => u.id !== userId));
-    if (paginatedUsers.length === 1 && currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
+  const handleDeleteUser = (userId: string) => {
+    deleteUser(userId, {
+      onSuccess: () => {
+        setUsers(users.filter((u) => u.id !== userId));
+        if (paginatedUsers.length === 1 && currentPage > 1) {
+          setCurrentPage(currentPage - 1);
+        }
+        notify('Пользователь успешно удалён', 'success');
+        refetch();
+      },
+      onError: (error) => {
+        notify(getErrorText(error.response?.status ?? 7777), 'error');
+      },
+    });
   };
 
   return (
@@ -75,7 +133,7 @@ export default function HandlePage() {
             name='roleFilter'
             value={roleFilter}
             onChange={(value) => {
-              setRoleFilter(value as UserRole | 'all');
+              setRoleFilter(value as Role | 'all');
               setCurrentPage(1);
             }}
             options={roleUsecase}
@@ -96,7 +154,9 @@ export default function HandlePage() {
       </div>
 
       <div className={style.usersList}>
-        {paginatedUsers.length > 0 ? (
+        {isLoading ? (
+          <div className={style.emptyState}>Загрузка...</div>
+        ) : paginatedUsers.length > 0 ? (
           <UserTable
             users={paginatedUsers}
             onEditUser={handleEditUser}
@@ -114,7 +174,6 @@ export default function HandlePage() {
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
-          className={style.paginationContainer}
         />
       )}
     </PageLayout>

@@ -1,6 +1,6 @@
-import type { HTMLAttributes } from 'react';
+import type { InputHTMLAttributes } from 'react';
 
-export interface Props extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'autoComplete'> {
   toggleIcons?: {
     show: React.ReactNode;
     hide: React.ReactNode;
@@ -17,4 +17,5 @@ export interface Props extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'
   isTextArea?: boolean;
   onChange?: (value: string, name?: string) => void;
   inputLabelClassName?: string;
+  autoComplete?: string;
 }

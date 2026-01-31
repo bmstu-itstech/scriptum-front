@@ -2,16 +2,8 @@ export function parseUTCAsLocal(dateStr: string | Date): Date {
   if (typeof dateStr !== 'string') {
     return dateStr;
   }
-  const date = new Date(dateStr);
-  return new Date(
-    date.getUTCFullYear(),
-    date.getUTCMonth(),
-    date.getUTCDate(),
-    date.getUTCHours(),
-    date.getUTCMinutes(),
-    date.getUTCSeconds(),
-    date.getUTCMilliseconds(),
-  );
+
+  return new Date(dateStr);
 }
 
 export function formatDuration(createdAt: string | Date, end: string | Date): string {

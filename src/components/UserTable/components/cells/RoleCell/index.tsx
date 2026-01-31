@@ -3,7 +3,7 @@ import { FC } from 'react';
 import styles from './RoleCell.module.css';
 import { ShieldIcon } from '@/components/icons/ShieldIcon';
 import { UserIcon } from '@/components/icons/UserIcon';
-import { UserRole } from '@/shared/consts/user';
+import { Role } from '@/shared/api/generated/data-contracts';
 import { Props } from './RoleCell.props';
 import cn from 'classnames';
 import generalStyle from './../../../UserTable.module.css';
@@ -15,13 +15,13 @@ export const RoleCell: FC<Props> = ({ isEditing, editData, user, onRoleChange })
         <label className={styles.roleCheckbox}>
           <input
             type='checkbox'
-            checked={editData.role === UserRole.ADMIN}
+            checked={editData.role === Role.Admin}
             onChange={onRoleChange}
           />
           <span className={styles.checkmark}></span>
           <span className={styles.roleLabel}>Администратор</span>
         </label>
-      ) : user.role === UserRole.ADMIN ? (
+      ) : user.role === Role.Admin ? (
         <>
           <ShieldIcon className={styles.roleAdminIcon} />
           <span className={styles.roleAdmin}>Администратор</span>

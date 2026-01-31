@@ -1,6 +1,7 @@
-import { IJobStatus, type IJob, type IJobResult } from '@/domain/entities/job';
 import { ParametrType } from '@/shared/consts/parametr';
 import { PipelineStatus } from '@/shared/consts/pipeline';
+import { JobState } from '@/shared/api/generated/data-contracts';
+import type { Job } from '@/shared/api/generated/data-contracts';
 
 export const getSendValues = (value: string) => {
   switch (value) {
@@ -8,48 +9,45 @@ export const getSendValues = (value: string) => {
       return 'real';
     case ParametrType.INT:
       return 'integer';
-    case ParametrType.COMP:
-      return 'complex';
+    case ParametrType.STR:
+      return 'string';
   }
   return 'error';
 };
 
-export const getStatus = (status: IJobStatus, code: number | undefined) => {
-  switch (status) {
-    case IJobStatus.RUNNING:
+export const getStatus = (state: JobState, code: number | undefined) => {
+  switch (state) {
+    case JobState.Running:
       return PipelineStatus.RUNNING;
-    case IJobStatus.FINISHED:
+    case JobState.Finished:
       if (code !== 0) {
         return PipelineStatus.ERROR;
       }
       return PipelineStatus.OK;
-    case IJobStatus.PENDING:
+    case JobState.Pending:
       return PipelineStatus.PENDING;
     default:
       return PipelineStatus.ERROR;
   }
 };
 
-export const getInputText = (job: IJob) => {
+export const getInputText = (job: Job) => {
   let res = '';
-  const minn_length = Math.min(job.in.length, job.expected.length);
-  for (let i = 0; i < minn_length; i++) {
-    res += job.expected[i].name + ': ' + job.in[i].data + '\n';
+  const len = Math.min(job.input.length, job.in.length);
+  for (let i = 0; i < len; i++) {
+    res += job.in[i].name + ': ' + (job.input[i].value || '') + '\n';
   }
   return res;
 };
 
-export const getOutputText = (pipeline: IJobResult) => {
+export const getOutputText = (job: Job) => {
   let res = '';
-  const minn_length = Math.min(
-    pipeline.out ? pipeline.out.length : 100,
-    pipeline.job.expected.length,
-  );
-  if (pipeline.out) {
-    for (let i = 0; i < minn_length; i++) {
-      res += pipeline.job.expected[i].name + ': ' + pipeline.out[i].data;
+  const len = Math.min(job.output.length, job.out.length);
+  for (let i = 0; i < len; i++) {
+    res += job.out[i].name + ': ' + (job.output[i].value || '');
+    if (i < len - 1) {
+      res += '\n';
     }
   }
-
   return res;
 };

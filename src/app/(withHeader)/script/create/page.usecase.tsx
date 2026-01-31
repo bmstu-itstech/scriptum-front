@@ -13,13 +13,13 @@ export const pageCreateUsecase = {
         placeholder: 'Введите название скрипта',
       },
       scriptCode: {
-        title: 'Tar-архив (*.tar) *',
+        title: 'Tar-архив (.tar, .tar.gz, .tgz) *',
         placeholder: 'Выберите tar-архив',
       },
 
       scriptDesc: {
-        title: 'Описание (необязательно)',
-        placeholder: 'Опишите назначение и функцональность скрипта',
+        title: 'Описание',
+        placeholder: 'Опишите назначение и функциональность скрипта',
       },
     },
   },

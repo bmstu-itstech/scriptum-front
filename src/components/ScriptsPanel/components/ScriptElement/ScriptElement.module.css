@@ -15,6 +15,7 @@
   border: 1px solid var(--color-gray-border);
   justify-content: space-between;
   gap: 0.5rem;
+  min-width: 0; /* позволяет карточке сжиматься в grid-ячейке, не растягивая её из-за nowrap-текста */
 
   &:hover .scriptElement__title {
     color: var(--color-purple-main);
@@ -43,11 +44,29 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   line-clamp: 4;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .scriptElement__author {
   color: var(--color-gray-light2);
   font-size: var(--font-size-xs);
+  min-width: 0;
+}
+
+.scriptElement__info .scriptElement__author {
+  justify-content: flex-start;
+}
+
+.scriptElement__author > *:first-child {
+  flex-shrink: 0;
+}
+
+.scriptElement__authorText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .scriptElement__data {
