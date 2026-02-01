@@ -29,10 +29,7 @@ const FileInput: FC<FileProps> = ({
   const [isDragActive, setIsDragActive] = useState(false);
 
   useEffect(() => {
-    if (values.file !== file) {
-      setFile(values.file || null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setFile(values.file ?? null);
   }, [values.file]);
 
   const isTarFile = (selectedFile: File) => {
@@ -56,7 +53,7 @@ const FileInput: FC<FileProps> = ({
     }
 
     if (!isTarFile(selectedFile)) {
-      notify('Неверный формат файла. Загрузите архив в формате .tar или .tar.gz', 'error');
+      notify('Неверный формат файла. Загрузите архив в формате .tar, .tar.gz или .tgz', 'error');
       return;
     }
 

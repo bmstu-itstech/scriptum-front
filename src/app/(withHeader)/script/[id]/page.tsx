@@ -20,7 +20,7 @@ import { Formik } from 'formik';
 import { runScriptValidationSchema } from '@/app/(withHeader)/script/[id]/page.usecase';
 import { useStartScript } from '@/hooks/script/useStartScript';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
-import { getErrorText } from '@/utils/getErrorText';
+import { notifyMutationError } from '@/utils/notifyMutationError';
 import { Loading } from '@/shared/Loading';
 import { CsvUploader } from '@/components/CsvUploader';
 
@@ -53,15 +53,10 @@ export default function Page() {
         icon={<BackArrowIcon />}
       />
       <ScriptInfo
-        script_name={data.name}
-        script_description={data.desc || ''}
-        owner={Number(data.ownerID) || 0}
-        created_at={data.createdAt}
-        script_id={0}
-        in_fields={[]}
-        out_fields={[]}
-        file_id={0}
-        visibility='private'
+        name={data.name}
+        desc={data.desc}
+        ownerName={data.ownerName}
+        createdAt={data.createdAt}
       />
 
       <Formik
@@ -81,12 +76,7 @@ export default function Page() {
                 router.push('/tasks');
                 notify('Задача успешно запущена', 'success');
               },
-              onError: (error) => {
-                notify(
-                  getErrorText(error.response?.status ? error.response.status : 7777),
-                  'error',
-                );
-              },
+              onError: notifyMutationError(notify),
             },
           );
         }}>
@@ -126,7 +116,6 @@ export default function Page() {
                       fieldIndexMap.set(field.name.toLowerCase().trim(), idx);
                     });
 
-                    // Проверяем дублирующиеся заголовки
                     const seenHeaders = new Set<string>();
                     const duplicateHeaders: string[] = [];
                     headers.forEach((header) => {
@@ -167,7 +156,6 @@ export default function Page() {
                       }
                     });
 
-                    // Проверяем пустые значения
                     if (hasEmptyValue) {
                       notify(
                         `Пустое значение для поля "${emptyFieldName}". Все поля должны быть заполнены`,
@@ -188,7 +176,6 @@ export default function Page() {
                       setFieldValue(`in_params[${fieldIdx}].data`, value);
                     });
 
-                    // Предупреждаем о лишних колонках, но не блокируем подстановку значений
                     if (extraColumns.length > 0) {
                       notify(
                         `Данные из CSV подставлены, но обнаружены лишние колонки, которые не соответствуют полям формы: ${extraColumns.join(', ')}`,

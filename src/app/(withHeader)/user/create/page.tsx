@@ -17,7 +17,8 @@ import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { useRouter } from 'next/navigation';
 import { useCreateUser } from '@/hooks/user/useCreateUser';
 import { Role } from '@/shared/api/generated/data-contracts';
-import { getErrorText } from '@/utils/getErrorText';
+import { notifyMutationError } from '@/utils/notifyMutationError';
+import { LinkDirection } from '@/shared/consts/links';
 
 export default function TasksPage() {
   const notify = useCustomToast();
@@ -43,12 +44,10 @@ export default function TasksPage() {
               },
               {
                 onSuccess: () => {
-                  router.push('/users/handle');
+                  router.push(LinkDirection.HandleUsers);
                   notify('Аккаунт пользователя успешно создан', 'success');
                 },
-                onError: (error) => {
-                  notify(getErrorText(error.response?.status ?? 7777), 'error');
-                },
+                onError: notifyMutationError(notify),
                 onSettled: () => {
                   setSubmitting(false);
                 },

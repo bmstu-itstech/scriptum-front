@@ -1,6 +1,5 @@
 import { Header } from '@/components/Header';
 import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
 export default function WithHeaderLayout({
   children,
@@ -12,7 +11,6 @@ export default function WithHeaderLayout({
       <Header />
       {children}
       <ToastContainer />
-      {/* <Footer/> */}
     </>
   );
 }

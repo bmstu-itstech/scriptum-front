@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import { blueprintsApi } from '@/shared/api/BlueprintsClient';
-import type { IScriptStart } from '@/domain/entities/script';
 import type {
   StartJobRequest,
   StartJobResponse,
@@ -10,14 +9,19 @@ import type {
 import type { AxiosError } from 'axios';
 import { ValueType } from '@/shared/api/generated/data-contracts';
 
+export interface StartScriptFormInput {
+  in_params: { type: string; data: string }[];
+  notify_by_email: boolean;
+}
+
 export const useStartScript = ({ id }: { id: string }) => {
   const { isPending, error, mutate } = useMutation<
     StartJobResponse,
     AxiosError<InvalidInputError | PlainError>,
-    IScriptStart
+    StartScriptFormInput
   >({
     mutationKey: ['startScript', id],
-    mutationFn: async (value: IScriptStart) => {
+    mutationFn: async (value: StartScriptFormInput) => {
       const request: StartJobRequest = {
         values: value.in_params.map((param) => ({
           type: param.type as ValueType,

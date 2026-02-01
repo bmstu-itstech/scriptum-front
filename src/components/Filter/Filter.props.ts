@@ -6,16 +6,18 @@ interface Option {
   label: string;
 }
 
+export type FilterChangeValue = string | { target: { name: string; value: string } };
+
+export type FilterBlurEvent = { target: { name: string } };
+
 export default interface Props {
   index?: number;
   icon?: ReactElement;
   name: string;
   value: string;
   placeholder: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onChange: (value: any) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onBlur?: (e: any) => void;
+  onChange: (value: FilterChangeValue) => void;
+  onBlur?: (e: FilterBlurEvent) => void;
   className?: string;
   selectClassName?: string;
   options: Option[];

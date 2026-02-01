@@ -2,7 +2,6 @@
 import { FC, useMemo } from 'react';
 import { HeaderLayout } from '@/layouts/HeaderLayout';
 import { Props } from './Header.props';
-// import {HeaderUsecase} from './Header.usecase';
 import style from './Header.module.css';
 import cn from 'classnames';
 import { SiriusIcon } from '../icons/SiriusIcon';
@@ -12,7 +11,7 @@ import { Button } from '@/layouts/Button';
 import { PersonIcon } from '../icons/PersonIcon';
 import { Links } from '@/components/Header/Header.usecase';
 import { usePathname } from 'next/navigation';
-import { LinkDirection } from '@/shared/consts/links';
+import { ADMIN_ROUTES, LinkDirection } from '@/shared/consts/links';
 import { useGetUserMe } from '@/hooks/user/useGetUserMe';
 import { Role } from '@/shared/api/generated/data-contracts';
 import { useLogout } from '@/hooks/auth/useLogout';
@@ -23,17 +22,12 @@ export const Header: FC<Props> = ({ activePath, className, ...props }) => {
   const { data: userData } = useGetUserMe();
   const { logout } = useLogout();
 
-  // Фильтруем ссылки в зависимости от роли пользователя
   const visibleLinks = useMemo(() => {
     const isAdmin = userData?.role === Role.Admin;
-    const adminRoutes = [LinkDirection.CreateUser, LinkDirection.HandleUsers];
-
     return Links.filter((link) => {
-      // Если это админский маршрут, показываем только админам
-      if (adminRoutes.includes(link.direction)) {
+      if (ADMIN_ROUTES.includes(link.direction)) {
         return isAdmin;
       }
-      // Остальные ссылки показываем всем
       return true;
     });
   }, [userData?.role]);

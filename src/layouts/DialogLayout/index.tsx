@@ -71,7 +71,11 @@ export const DialogLayout: FC<Props> = ({
             <div className={styles.titleWrapper}>
               <h3 className={styles.title}>{title}</h3>
             </div>
-            <button onClick={onClose} className={styles.closeButton}>
+            <button
+              type='button'
+              onClick={onClose}
+              className={styles.closeButton}
+              aria-label='Закрыть'>
               <CloseIcon className={styles.closeIcon} />
             </button>
           </div>

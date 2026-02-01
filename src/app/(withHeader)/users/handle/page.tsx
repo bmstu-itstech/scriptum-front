@@ -18,7 +18,7 @@ import { useGetAllUsers } from '@/hooks/user/useGetAllUsers';
 import { usePatchUser } from '@/hooks/user/usePatchUser';
 import { useDeleteUser } from '@/hooks/user/useDeleteUser';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
-import { getErrorText } from '@/utils/getErrorText';
+import { notifyMutationError } from '@/utils/notifyMutationError';
 
 const ITEMS_PER_PAGE = 8;
 
@@ -88,9 +88,7 @@ export default function HandlePage() {
           notify('Данные пользователя успешно обновлены', 'success');
           refetch();
         },
-        onError: (error) => {
-          notify(getErrorText(error.response?.status ?? 7777), 'error');
-        },
+        onError: notifyMutationError(notify),
       },
     );
   };
@@ -105,9 +103,7 @@ export default function HandlePage() {
         notify('Пользователь успешно удалён', 'success');
         refetch();
       },
-      onError: (error) => {
-        notify(getErrorText(error.response?.status ?? 7777), 'error');
-      },
+      onError: notifyMutationError(notify),
     });
   };
 

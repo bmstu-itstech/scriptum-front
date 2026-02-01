@@ -74,7 +74,11 @@ export const PopupLayout: FC<Props> = ({
           <p className={styles.description}>{description}</p>
         </div>
 
-        <button className={styles.closeButton} onClick={handleClose} aria-label='Close alert'>
+        <button
+          type='button'
+          className={styles.closeButton}
+          onClick={handleClose}
+          aria-label='Закрыть уведомление'>
           <CloseIcon className={styles.closeIcon} />
         </button>
 

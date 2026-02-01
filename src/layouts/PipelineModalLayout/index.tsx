@@ -1,9 +1,9 @@
 'use client';
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import Props from './PipelineModalLayout.props';
 import style from './PipelineModalLayout.module.css';
 import cn from 'classnames';
-import { PipelineStatus, OUTPUT_FILENAME, INPUT_FILENAME } from '@/shared/consts/pipeline';
+import { PipelineStatus } from '@/shared/consts/pipeline';
 import { PipelineButton } from '@/shared/PipelineButton';
 import { CloseModalIcon } from '@/components/icons/CloseModalIcon';
 import { CopyTxtIcon } from '@/components/icons/CopyTxtIcon';
@@ -58,14 +58,12 @@ export const PipelineModalLayout: FC<Props> = ({
   );
 
   const convertToCSV = useCallback((text: string): string => {
-    // Разбиваем текст на строки
     const lines = text.split('\n').filter((line) => line.trim());
 
     if (lines.length === 0) {
       return '';
     }
 
-    // Парсим строки формата "name: value"
     const parsedData: { name: string; value: string }[] = [];
 
     for (const line of lines) {
@@ -81,7 +79,6 @@ export const PipelineModalLayout: FC<Props> = ({
       return text;
     }
 
-    // Формируем CSV: заголовки в первой строке, значения во второй
     const headers = parsedData.map((item) => item.name).join(';');
     const values = parsedData.map((item) => item.value).join(';');
 
@@ -160,7 +157,12 @@ export const PipelineModalLayout: FC<Props> = ({
       <div className={cn(style.modal, className)} {...props}>
         <div className={style.overlay} onClick={onClose}></div>
         <div className={style.modalContent}>
-          <button title='closeButton' className={style.closeButton} onClick={onClose}>
+          <button
+            type='button'
+            className={style.closeButton}
+            onClick={onClose}
+            aria-label='Закрыть'
+            title='Закрыть'>
             <CloseModalIcon />
           </button>
 

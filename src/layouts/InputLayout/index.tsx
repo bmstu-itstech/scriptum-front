@@ -1,5 +1,5 @@
 'use client';
-import { FC, memo, useCallback, useMemo, useState, useEffect } from 'react';
+import { FC, memo, useCallback, useMemo, useRef, useState, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
 import { Props } from './InputLayout.props';
 import cn from 'classnames';
@@ -37,23 +37,27 @@ const InputLayout: FC<Props> = ({
   );
 
   const [localValue, setLocalValue] = useState(value ?? '');
+  const skipNextEmitRef = useRef(false);
 
   const [debouncedValue] = useDebounce(localValue, 200);
 
   useEffect(() => {
-    if (value !== localValue) {
-      if (value) {
-        setLocalValue(value ?? '');
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setLocalValue(value ?? '');
+    skipNextEmitRef.current = true;
   }, [value]);
 
   useEffect(() => {
-    if (onChange) {
+    if (!onChange) {
+      return;
+    }
+    if (skipNextEmitRef.current) {
+      skipNextEmitRef.current = false;
+      return;
+    }
+    if (debouncedValue === localValue) {
       onChange(debouncedValue, name);
     }
-  }, [debouncedValue, name, onChange]);
+  }, [debouncedValue, localValue, name, onChange]);
 
   const handleLocalChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setLocalValue(e.target.value);

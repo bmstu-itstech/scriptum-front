@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { Users } from '@/shared/api/generated/Users';
+import { ADMIN_ROUTES } from '@/shared/consts/links';
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -9,8 +10,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
-  const adminRoutes = ['/user/create', '/users/handle'];
-  const isAdminRoute = adminRoutes.some((route) => pathname.startsWith(route));
+  const isAdminRoute = ADMIN_ROUTES.some((route) => pathname.startsWith(route));
 
   if (isAdminRoute) {
     try {
@@ -38,8 +38,7 @@ export async function middleware(req: NextRequest) {
       } else {
         return NextResponse.redirect(new URL('/', req.url));
       }
-    } catch (error) {
-      console.error('[MIDDLEWARE] Error checking user role:', error);
+    } catch {
       return NextResponse.redirect(new URL('/', req.url));
     }
   }
@@ -48,5 +47,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!login|_next|favicon.ico|api).*)'],
+  matcher: ['/((?!login|_next|favicon\\.ico|icon\\.svg|api).*)'],
 };

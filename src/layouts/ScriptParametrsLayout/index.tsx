@@ -3,6 +3,7 @@ import { Props } from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.pro
 import { type FC } from 'react';
 import cn from 'classnames';
 import styles from '@/layouts/ScriptParametrsLayout/ScriptParametrsLayout.module.css';
+
 export const ScriptParametrsLayout: FC<Props> = ({
   header,
   headerClassname,

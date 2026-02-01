@@ -4,10 +4,10 @@
   transition: color 0.2s;
   color: var(--color-dark-main);
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .scriptElement {
@@ -15,7 +15,7 @@
   border: 1px solid var(--color-gray-border);
   justify-content: space-between;
   gap: 0.5rem;
-  min-width: 0; /* позволяет карточке сжиматься в grid-ячейке, не растягивая её из-за nowrap-текста */
+  min-width: 0;
 
   &:hover .scriptElement__title {
     color: var(--color-purple-main);
@@ -28,6 +28,9 @@
   justify-content: space-between;
   align-items: start;
   height: 5rem;
+  min-width: 0;
+  overflow: hidden;
+  width: 100%;
 }
 
 .scriptElement__runs {

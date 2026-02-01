@@ -67,15 +67,6 @@ export const ScriptSchema = Yup.object().shape({
   desc: Yup.string().max(50, 'Описание должно быть меньше 50 символов'),
   inputParams: Yup.array().of(ParametrSheme),
   outputParams: Yup.array().of(ParametrSheme),
-  // parameter['type']: Yup.string(),
-  // type: Yup.string()
-  //   .min(2, 'Тип должен иметь хотя бы 2 символа')
-  //   .max(50, 'Тип должен быть меньше 50 символов')
-  //   .required('Тип обязателен'),
-  // measure: Yup.string()
-  //   .min(2, 'Единица измерения должна иметь хотя бы 2 символа')
-  //   .max(50, 'Единица измерения должна быть меньше 50 символов')
-  //   .required('Единица измерения обязательна'),
   file: Yup.mixed().required('Скрипт обязателен'),
 });
 
