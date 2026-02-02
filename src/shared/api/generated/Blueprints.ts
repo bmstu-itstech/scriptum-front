@@ -20,12 +20,10 @@ import {
   SearchBlueprintsResponse,
   StartJobRequest,
   StartJobResponse,
-} from "./data-contracts";
-import { ContentType, HttpClient, RequestParams } from "./http-client";
+} from './data-contracts';
+import { ContentType, HttpClient, RequestParams } from './http-client';
 
-export class Blueprints<
-  SecurityDataType = unknown,
-> extends HttpClient<SecurityDataType> {
+export class Blueprints<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
    * @description Возвращает полный список доступных пользователю шаблонов (blueprints). Пользователю доступны собственные  шаблоны и публичные.
    *
@@ -37,9 +35,9 @@ export class Blueprints<
   getBlueprints = (params: RequestParams = {}) =>
     this.request<GetBlueprintsResponse, PlainError>({
       path: `/blueprints`,
-      method: "GET",
+      method: 'GET',
       secure: true,
-      format: "json",
+      format: 'json',
       ...params,
     });
   /**
@@ -50,17 +48,14 @@ export class Blueprints<
    * @request POST:/blueprints
    * @secure
    */
-  createBlueprint = (
-    data: CreateBlueprintRequest,
-    params: RequestParams = {},
-  ) =>
+  createBlueprint = (data: CreateBlueprintRequest, params: RequestParams = {}) =>
     this.request<CreateBlueprintResponse, InvalidInputError | PlainError>({
       path: `/blueprints`,
-      method: "POST",
+      method: 'POST',
       body: data,
       secure: true,
       type: ContentType.Json,
-      format: "json",
+      format: 'json',
       ...params,
     });
   /**
@@ -80,10 +75,10 @@ export class Blueprints<
   ) =>
     this.request<SearchBlueprintsResponse, PlainError>({
       path: `/blueprints/search`,
-      method: "GET",
+      method: 'GET',
       query: query,
       secure: true,
-      format: "json",
+      format: 'json',
       ...params,
     });
   /**
@@ -97,9 +92,9 @@ export class Blueprints<
   getBlueprint = (id: string, params: RequestParams = {}) =>
     this.request<GetBlueprintResponse, PlainError>({
       path: `/blueprints/${id}`,
-      method: "GET",
+      method: 'GET',
       secure: true,
-      format: "json",
+      format: 'json',
       ...params,
     });
   /**
@@ -113,7 +108,7 @@ export class Blueprints<
   deleteBlueprint = (id: string, params: RequestParams = {}) =>
     this.request<void, PlainError>({
       path: `/blueprints/${id}`,
-      method: "DELETE",
+      method: 'DELETE',
       secure: true,
       ...params,
     });
@@ -128,11 +123,11 @@ export class Blueprints<
   startJob = (id: string, data: StartJobRequest, params: RequestParams = {}) =>
     this.request<StartJobResponse, InvalidInputError | PlainError>({
       path: `/blueprints/${id}/start`,
-      method: "POST",
+      method: 'POST',
       body: data,
       secure: true,
       type: ContentType.Json,
-      format: "json",
+      format: 'json',
       ...params,
     });
 }

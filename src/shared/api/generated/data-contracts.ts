@@ -11,25 +11,25 @@
  */
 
 export enum Role {
-  User = "user",
-  Admin = "admin",
+  User = 'user',
+  Admin = 'admin',
 }
 
 export enum JobState {
-  Pending = "pending",
-  Running = "running",
-  Finished = "finished",
+  Pending = 'pending',
+  Running = 'running',
+  Finished = 'finished',
 }
 
 export enum Visibility {
-  Public = "public",
-  Private = "private",
+  Public = 'public',
+  Private = 'private',
 }
 
 export enum ValueType {
-  Integer = "integer",
-  Real = "real",
-  String = "string",
+  Integer = 'integer',
+  Real = 'real',
+  String = 'string',
 }
 
 export interface Field {
