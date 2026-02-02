@@ -1,4 +1,3 @@
-// components/ScriptFormInfoBlock.tsx
 'use client';
 import { FC, memo } from 'react';
 import { FastField, type FastFieldProps } from 'formik';

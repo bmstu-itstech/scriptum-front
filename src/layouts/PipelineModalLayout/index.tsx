@@ -1,15 +1,15 @@
 'use client';
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import Props from './PipelineModalLayout.props';
 import style from './PipelineModalLayout.module.css';
 import cn from 'classnames';
-import { PipelineStatus, OUTPUT_FILENAME, INPUT_FILENAME } from '@/shared/consts/pipeline';
+import { PipelineStatus } from '@/shared/consts/pipeline';
 import { PipelineButton } from '@/shared/PipelineButton';
 import { CloseModalIcon } from '@/components/icons/CloseModalIcon';
 import { CopyTxtIcon } from '@/components/icons/CopyTxtIcon';
-import { ExportTxtIcon } from '@/components/icons/ExportTxtIcon';
 import ReactDOM from 'react-dom';
 import { PopupLayout } from '../PopupLayout';
+import { ExportCVSIcon } from '@/components/icons/ExportCSVIcon';
 
 const getResultTitle = (status: PipelineStatus) => {
   switch (status) {
@@ -40,6 +40,7 @@ export const PipelineModalLayout: FC<Props> = ({
   const button = <PipelineButton status={status} />;
   const resultTitle = getResultTitle(status);
   const isError = status === PipelineStatus.ERROR;
+  const isResultReady = status === PipelineStatus.OK;
 
   const [popup, setPopup] = useState<{
     visible: boolean;
@@ -48,41 +49,77 @@ export const PipelineModalLayout: FC<Props> = ({
     description?: string;
   } | null>(null);
 
-  const showPopup = (
-    variant: 'success' | 'error' | 'warning',
-    title: string,
-    description?: string,
-  ) => {
-    setPopup({ visible: true, variant, title, description });
-    setTimeout(() => setPopup(null), 5000);
-  };
+  const showPopup = useCallback(
+    (variant: 'success' | 'error' | 'warning', title: string, description?: string) => {
+      setPopup({ visible: true, variant, title, description });
+      setTimeout(() => setPopup(null), 5000);
+    },
+    [],
+  );
 
-  const handleCopy = useCallback(async (text: string, type: 'input' | 'output') => {
-    try {
-      await navigator.clipboard.writeText(text);
-      if (type === 'input') {
-        setShowInputTooltip(true);
-        setTimeout(() => setShowInputTooltip(false), 2000);
-      } else {
-        setShowOutputTooltip(true);
-        setTimeout(() => setShowOutputTooltip(false), 2000);
-      }
-    } catch {
-      showPopup('error', 'Ошибка при копировании', `Не удалось скопировать текст`);
+  const convertToCSV = useCallback((text: string): string => {
+    const lines = text.split('\n').filter((line) => line.trim());
+
+    if (lines.length === 0) {
+      return '';
     }
+
+    const parsedData: { name: string; value: string }[] = [];
+
+    for (const line of lines) {
+      const colonIndex = line.indexOf(':');
+      if (colonIndex !== -1) {
+        const name = line.substring(0, colonIndex).trim();
+        const value = line.substring(colonIndex + 1).trim();
+        parsedData.push({ name, value });
+      }
+    }
+
+    if (parsedData.length === 0) {
+      return text;
+    }
+
+    const headers = parsedData.map((item) => item.name).join(';');
+    const values = parsedData.map((item) => item.value).join(';');
+
+    return [headers, values].join('\n');
   }, []);
 
-  const handleDownload = useCallback((text: string, filename: string) => {
-    const blob = new Blob([text], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }, []);
+  const handleCopy = useCallback(
+    async (text: string, type: 'input' | 'output') => {
+      try {
+        const csvText = convertToCSV(text);
+        await navigator.clipboard.writeText(csvText);
+        if (type === 'input') {
+          setShowInputTooltip(true);
+          setTimeout(() => setShowInputTooltip(false), 2000);
+        } else {
+          setShowOutputTooltip(true);
+          setTimeout(() => setShowOutputTooltip(false), 2000);
+        }
+      } catch {
+        showPopup('error', 'Ошибка при копировании', `Не удалось скопировать текст`);
+      }
+    },
+    [convertToCSV, showPopup],
+  );
+
+  const handleDownload = useCallback(
+    (text: string, filename: string) => {
+      const csvText = convertToCSV(text);
+      const csvFilename = filename.replace(/\.txt$/, '.csv');
+      const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = csvFilename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    },
+    [convertToCSV],
+  );
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -120,7 +157,12 @@ export const PipelineModalLayout: FC<Props> = ({
       <div className={cn(style.modal, className)} {...props}>
         <div className={style.overlay} onClick={onClose}></div>
         <div className={style.modalContent}>
-          <button title='closeButton' className={style.closeButton} onClick={onClose}>
+          <button
+            type='button'
+            className={style.closeButton}
+            onClick={onClose}
+            aria-label='Закрыть'
+            title='Закрыть'>
             <CloseModalIcon />
           </button>
 
@@ -151,7 +193,7 @@ export const PipelineModalLayout: FC<Props> = ({
                   <button
                     className={style.actionButton}
                     onClick={() => handleDownload(input, scriptName + '_input.txt')}>
-                    <ExportTxtIcon />
+                    <ExportCVSIcon />
                     <span>Скачать</span>
                   </button>
                   <div className={style.tooltipContainer}>
@@ -173,23 +215,25 @@ export const PipelineModalLayout: FC<Props> = ({
                 <p className={cn(style.sectionTitle, { [style.errorTitle]: isError })}>
                   {resultTitle}
                 </p>
-                <div className={style.actionButtons}>
-                  <button
-                    className={style.actionButton}
-                    onClick={() => handleDownload(output, scriptName + '_output.txt')}>
-                    <ExportTxtIcon />
-                    <span>Скачать</span>
-                  </button>
-                  <div className={style.tooltipContainer}>
+                {isResultReady && (
+                  <div className={style.actionButtons}>
                     <button
                       className={style.actionButton}
-                      onClick={() => handleCopy(output, 'output')}>
-                      <CopyTxtIcon />
-                      <span>Копировать</span>
+                      onClick={() => handleDownload(output, scriptName + '_output.txt')}>
+                      <ExportCVSIcon />
+                      <span>Скачать</span>
                     </button>
-                    {showOutputTooltip && <span className={style.tooltip}>Скопировано!</span>}
+                    <div className={style.tooltipContainer}>
+                      <button
+                        className={style.actionButton}
+                        onClick={() => handleCopy(output, 'output')}>
+                        <CopyTxtIcon />
+                        <span>Копировать</span>
+                      </button>
+                      {showOutputTooltip && <span className={style.tooltip}>Скопировано!</span>}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
               <pre className={cn(style.codeBlock, { [style.errorCode]: isError })}>{output}</pre>
             </div>

@@ -10,12 +10,19 @@ export const ExtendedBlock: FC<Props> = ({
   contentClassname,
   innerContentClassname,
   mainExtendedClassname,
+  autoExpand,
 }) => {
   const [countOfShown, setCountOfShown] = useState(4);
   const [countOfChildren, setCountOfChildren] = useState(children.length);
   useEffect(() => {
     setCountOfChildren(children.length);
   }, [children.length]);
+
+  useEffect(() => {
+    if (autoExpand && countOfChildren > 4) {
+      setCountOfShown(countOfChildren);
+    }
+  }, [autoExpand, countOfChildren]);
 
   const onShowMoreClick = useCallback(() => {
     setCountOfShown(countOfChildren);
@@ -49,21 +56,23 @@ export const ExtendedBlock: FC<Props> = ({
         <div className={styles.ScriptParametrsLayout__btn}>
           {countOfChildren > countOfShown ? (
             <button
-              title='showMore'
               type='button'
               className={styles.ScriptParametrsLayout__extendBtn}
-              onClick={onShowMoreClick}>
+              onClick={onShowMoreClick}
+              aria-label='Показать больше'
+              title='Показать больше'>
               <DownArrowIcon className={styles.ScriptParametrsLayout__extendBtn_btn} />
             </button>
           ) : (
             <button
-              title='showLess'
               type='button'
               className={cn(
                 styles.ScriptParametrsLayout__extendBtn,
                 styles.ScriptParametrsLayout__extendBtn__showLess,
               )}
-              onClick={onShowLessClick}>
+              onClick={onShowLessClick}
+              aria-label='Показать меньше'
+              title='Показать меньше'>
               <UpArrowIcon className={styles.ScriptParametrsLayout__extendBtn_btn} />
             </button>
           )}

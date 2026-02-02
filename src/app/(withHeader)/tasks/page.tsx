@@ -29,13 +29,14 @@ export default function TasksPage() {
     if (!data) {
       return [];
     }
-    return data.filter((pipeline) => {
+    return data.filter((job) => {
       const searchLower = debouncedSearchTerm.toLowerCase();
+      const scriptName = job.blueprintName || '';
+      const jobId = job.id || '';
       const matchesSearch =
-        `${pipeline.job.script_name}`.toLowerCase().includes(searchLower) ||
-        `${pipeline.job.script_name}`.toLowerCase().includes(searchLower);
+        scriptName.toLowerCase().includes(searchLower) || jobId.toLowerCase().includes(searchLower);
       const matchesStatus =
-        statusFilter === 'all' || getStatus(pipeline.job.status, pipeline?.code) === statusFilter;
+        statusFilter === 'all' || getStatus(job.state, job.resultCode) === statusFilter;
       return matchesSearch && matchesStatus;
     });
   }, [data, debouncedSearchTerm, statusFilter]);
@@ -89,7 +90,8 @@ export default function TasksPage() {
 
         <Stats
           stats={[
-            { text: 'Найдено', count: filteredPipelines?.length },
+            { text: 'Всего задач', count: data?.length ?? 0 },
+            { text: 'Найдено', count: filteredPipelines?.length ?? 0 },
             { text: 'Страница', count: currentPage, total: totalPages },
           ]}
         />
@@ -97,16 +99,16 @@ export default function TasksPage() {
 
       <div className={style.pipelines}>
         {paginatedPipelines.length > 0 ? (
-          paginatedPipelines.map((pipeline) => (
+          paginatedPipelines.map((job) => (
             <PipelineLayout
-              key={pipeline.job.job_id}
-              status={getStatus(pipeline.job.status, pipeline?.code)}
-              scriptNumber={`${pipeline.job.job_id}`}
-              scriptName={pipeline.job.script_name}
-              timeStart={pipeline.job.created_at}
-              timeFinish={pipeline.job.finished_at}
-              input={getInputText(pipeline.job)}
-              output={pipeline.error_message ? pipeline.error_message : getOutputText(pipeline)}
+              key={job.id}
+              status={getStatus(job.state, job.resultCode)}
+              scriptNumber={job.id}
+              scriptName={job.blueprintName || ''}
+              timeStart={job.createdAt}
+              timeFinish={job.finishedAt || ''}
+              input={getInputText(job)}
+              output={job.resultMsg || getOutputText(job)}
             />
           ))
         ) : (

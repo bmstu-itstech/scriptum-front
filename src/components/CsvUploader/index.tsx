@@ -5,20 +5,36 @@ import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { useState, useCallback } from 'react';
 import styles from './CsvUploader.module.css';
 
-function parseCsv(file: File): Promise<string[]> {
+function parseCsv(file: File): Promise<{ headers: string[]; values: string[] }> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (event) => {
       const content = event.target?.result;
       if (typeof content !== 'string') {
-        return reject('Файл пустой или недопустимый.');
+        return reject('Файл пустой или недопустимый');
       }
 
-      const values = content.split(';').map((v) => v.trim());
-      resolve(values);
+      const lines = content
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0);
+
+      if (lines.length < 2) {
+        return reject('Файл должен содержать строку заголовков и строки с данными');
+      }
+
+      const headers = lines[0].split(';').map((v) => v.trim());
+      const dataLine = lines[1];
+      const values = dataLine.split(';').map((v) => v.trim());
+
+      if (headers.length !== values.length) {
+        return reject('Количество заголовков не совпадает с количеством значений');
+      }
+
+      resolve({ headers, values });
     };
 
-    reader.onerror = () => reject('Ошибка при чтении файла.');
+    reader.onerror = () => reject('Ошибка при чтении файла');
     reader.readAsText(file);
   });
 }
@@ -31,9 +47,9 @@ export const CsvUploader: React.FC<CsvUploaderProps> = ({ onParsed }) => {
   const handleFile = useCallback(
     async (file: File) => {
       try {
-        const values = await parseCsv(file);
+        const csvData = await parseCsv(file);
         setFileName(file.name);
-        onParsed(values);
+        onParsed(csvData, file);
       } catch (err) {
         notify(err instanceof Error ? err.message : String(err), 'error');
       }
@@ -52,7 +68,7 @@ export const CsvUploader: React.FC<CsvUploaderProps> = ({ onParsed }) => {
     e.preventDefault();
     setIsDragging(false);
     const file = e.dataTransfer.files?.[0];
-    if (file && file.type === 'text/csv') {
+    if (file) {
       handleFile(file);
     }
   };
@@ -78,7 +94,7 @@ export const CsvUploader: React.FC<CsvUploaderProps> = ({ onParsed }) => {
           <span className={styles.filename}>{fileName}</span>
         ) : (
           <span className={styles.placeholder}>
-            Перетащите CSV-файл или <u>нажмите</u>, чтобы выбрать
+            Перетащите файл или <u>нажмите</u>, чтобы выбрать
           </span>
         )}
         <input
@@ -89,6 +105,10 @@ export const CsvUploader: React.FC<CsvUploaderProps> = ({ onParsed }) => {
           onChange={handleInputChange}
         />
       </label>
+      <div className={styles.hint}>
+        Загрузите CSV-файл с разделителем в виде точки с запятой (;), в котором первая строка
+        содержит заголовки столбцов
+      </div>
     </div>
   );
 };

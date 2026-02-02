@@ -13,7 +13,8 @@
     "lint:stylelint:fix": "stylelint '**/*.{css,scss}' --fix",
     "format:fix": "prettier --write src",
     "lint:all": "npm run lint:eslint:fix && npm run lint:stylelint:fix && npm run format:fix",
-    "ts:check": "tsc --noEmit"
+    "ts:check": "tsc --noEmit",
+    "api:generate": "npx swagger-typescript-api generate --path https://raw.githubusercontent.com/bmstu-itstech/scriptum-back/refs/heads/main/api/v2/scriptum.swagger.yaml --output ./src/shared/api/generated --modular --axios"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.77.2",

@@ -45,17 +45,19 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  min-width: 0;
 }
 
 .personBlock {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .personIcon {
   width: 1rem;
-  height: 1rem;
+  height: auto;
 }
 
 .personData {
@@ -63,6 +65,10 @@
   font-weight: 500;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 18rem;
 }
 
 .link {

@@ -22,17 +22,21 @@ export const ActionsCell: FC<Props> = ({
       {isEditing ? (
         <>
           <button
+            type='button'
             onClick={onSave}
             disabled={Object.values(errors).some((error) => error !== null)}
             className={cn(styles.actionButton, styles.saveIcon, {
               [styles.disabledButton]: Object.values(errors).some((error) => error !== null),
             })}
+            aria-label='Сохранить'
             title='Сохранить'>
             <DocumentIcon width={16} height={16} />
           </button>
           <button
+            type='button'
             onClick={onCancel}
             className={cn(styles.actionButton, styles.cancelIcon)}
+            aria-label='Отменить'
             title='Отменить'>
             <CloseIcon width={16} height={16} />
           </button>
@@ -40,14 +44,18 @@ export const ActionsCell: FC<Props> = ({
       ) : (
         <>
           <button
+            type='button'
             onClick={onEdit}
             className={cn(styles.actionButton, styles.editIcon)}
+            aria-label='Редактировать'
             title='Редактировать'>
             <EditIcon width={16} height={16} />
           </button>
           <button
+            type='button'
             onClick={onDelete}
             className={cn(styles.actionButton, styles.delIcon)}
+            aria-label='Удалить'
             title='Удалить'>
             <DeleteIcon width={16} height={16} />
           </button>

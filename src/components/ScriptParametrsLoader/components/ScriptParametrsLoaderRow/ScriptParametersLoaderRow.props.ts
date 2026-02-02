@@ -1,6 +1,5 @@
 export interface Props extends React.HTMLAttributes<HTMLDivElement> {
   index: number;
-  // onUpdate: () => {};
   onRemove: (index: number) => {};
 }
 

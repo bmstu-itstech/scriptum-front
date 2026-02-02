@@ -1,11 +1,14 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { searchScriptsList } from '@/shared/api/script/getSearchScripts';
-import type { IScript } from '@/domain/entities/script';
+import { blueprintsApi } from '@/shared/api/BlueprintsClient';
+import type { Blueprint } from '@/shared/api/generated/data-contracts';
 
-export const useSearchScripts = (name: string, options?: Partial<UseQueryOptions<IScript[]>>) => {
-  return useQuery({
-    ...options,
-    queryKey: ['searchScripts', name],
-    queryFn: () => searchScriptsList(name),
-  });
+export const useSearchScripts = (name: string, options?: Partial<UseQueryOptions<Blueprint[]>>) => {
+	return useQuery({
+		...options,
+		queryKey: ['searchScripts', name],
+		queryFn: async () => {
+			const response = await blueprintsApi.searchBlueprints({ name });
+			return response.data;
+		},
+	});
 };

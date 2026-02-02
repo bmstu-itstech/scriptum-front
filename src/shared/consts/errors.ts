@@ -1,3 +1,5 @@
+export const UNKNOWN_STATUS = 0;
+
 export interface IErrorToText {
   400: string;
   401: string;
@@ -11,3 +13,5 @@ export const errorsToText: IErrorToText = {
   404: 'Не найдено',
   500: 'Ошибка сервера, попробуйте позже',
 };
+
+export const SERVER_MESSAGE_TEMPLATE = 'Ошибка: {message}';

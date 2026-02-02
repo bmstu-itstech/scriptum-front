@@ -43,5 +43,4 @@ setLocale({
   },
 });
 
-// Export Yup for use in your application
 export { string, ObjectSchema, setLocale, number, object, ref, array, mixed, boolean };

@@ -18,8 +18,7 @@
 .center {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 12rem;
+  gap: 1rem;
   width: 100%;
 }
 
@@ -69,7 +68,7 @@
 }
 
 .input {
-  height: 6rem;
+  min-height: 3rem;
 }
 
 .authForm {

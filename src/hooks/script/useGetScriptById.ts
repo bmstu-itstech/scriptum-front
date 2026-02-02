@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { getScriptById } from '@/shared/api/script/getScriptById';
+import { blueprintsApi } from '@/shared/api/BlueprintsClient';
 
-export const useGetScriptById = (id: number) => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['getScript', id],
-    queryFn: () => getScriptById(id),
-  });
+export const useGetScriptById = (id: string | number) => {
+	const { data, isLoading, error } = useQuery({
+		queryKey: ['getScript', id],
+		queryFn: async () => {
+			const response = await blueprintsApi.getBlueprint(String(id));
+			return response.data;
+		},
+	});
 
-  return { data, isLoading, error };
+	return { data, isLoading, error };
 };

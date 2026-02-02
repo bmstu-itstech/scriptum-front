@@ -29,5 +29,4 @@ export const DownArrowIcon: FC<Props> = ({ className, ...props }) => {
       </g>
     </svg>
   );
-  // return <Image alt='DownArrowIcon' src={src} className={className} {...props} />;
 };

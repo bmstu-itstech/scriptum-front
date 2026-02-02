@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
-import { uploadFileScript } from '@/shared/api/script/uploadFileScript';
+import { filesApi } from '@/shared/api/FilesClient';
 
 export const useUploadFile = () => {
   const { isPending, error, mutateAsync } = useMutation({
     mutationKey: ['uploadFile'],
-    mutationFn: (file: File) => uploadFileScript(file),
+    mutationFn: (file: File) => filesApi.uploadFile({ attachment: file }),
   });
 
   return { isPending, error, mutateAsync };

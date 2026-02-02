@@ -1,63 +1,51 @@
 import { NextResponse, NextRequest } from 'next/server';
-
-// const SECRET_KEY = new TextEncoder().encode(process.env.JWT_SECRET!);
+import { Users } from '@/shared/api/generated/Users';
+import { ADMIN_ROUTES } from '@/shared/consts/links';
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  // console.log('[MIDDLEWARE] путь:', pathname, req.cookies);
-  // читаем JWT из cookie csrftoken
-  const token = req.cookies.get('csrftoken')?.value;
-  // console.log('[MIDDLEWARE] токен из cookie:', token);
+  const token = req.cookies.get('access_token')?.value;
 
   if (!token) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
-  const res = NextResponse.next();
+  const isAdminRoute = ADMIN_ROUTES.some((route) => pathname.startsWith(route));
 
-  let role = null;
+  if (isAdminRoute) {
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) {
+        return NextResponse.redirect(new URL('/', req.url));
+      }
 
-  if (token === process.env.NEXT_PUBLIC_JWT_ADMIN) {
-    res.headers.set('x-user-role', 'admin');
-    role = 'admin';
+      const usersApi = new Users({
+        baseURL: apiUrl,
+        securityWorker: async () => ({
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+      });
+
+      const userResponse = await usersApi.getUserMe();
+
+      if (userResponse.status === 200 && userResponse.data) {
+        const user = userResponse.data;
+        if (user.role !== 'admin') {
+          return NextResponse.redirect(new URL('/', req.url));
+        }
+      } else {
+        return NextResponse.redirect(new URL('/', req.url));
+      }
+    } catch {
+      return NextResponse.redirect(new URL('/', req.url));
+    }
   }
 
-  if (token === process.env.NEXT_PUBLIC_JWT_USER) {
-    res.headers.set('x-user-role', 'user');
-    role = 'user';
-  }
-
-  // let payload: any;
-  // try {
-  //   const { payload: decoded } = await jwtVerify(token, SECRET_KEY);
-  //   payload = decoded;
-  // } catch (err) {
-  //   console.error('[MIDDLEWARE] JWT verification failed:', err);
-  //   return NextResponse.redirect(new URL('/login', req.url));
-  // }
-
-  // const userId = payload?.user_id;
-  // if (!userId) {
-  //   return NextResponse.redirect(new URL('/login', req.url));
-  // }
-
-  // маршруты
-  const adminRoutes = ['/user/create', '/users/handle'];
-  // const userRoutes = ['/', '/tasks', '/script/create'];
-
-  if (adminRoutes.some((route) => pathname.startsWith(route)) && role !== 'admin') {
-    return NextResponse.redirect(new URL('/', req.url));
-  }
-
-  // if (userRoutes.some((route) => pathname.startsWith(route)) && userId !== 2) {
-  //   return NextResponse.redirect(new URL('/', req.url));
-  // }
-
-  // const res = NextResponse.next();
-  // res.headers.set('x-user-role', userId === 1 ? 'admin' : 'user');
-  return res;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!login|_next|favicon.ico|api).*)'],
+  matcher: ['/((?!login|_next|favicon\\.ico|icon\\.svg|api).*)'],
 };

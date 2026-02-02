@@ -12,35 +12,44 @@ import { DialogLayout } from '@/layouts/DialogLayout';
 import { RunCodeButton } from '@/shared/RunCodeButton';
 import { useDeleteScript } from '@/hooks/script/useDeleteScript';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
+import { getDate } from '@/utils/getRowFromDate';
 
 export const ScriptElement: FC<Props> = ({
-  script_id,
-  script_name,
-  script_description,
-  owner,
-  created_at,
+  id,
+  name,
+  desc,
+  ownerID,
+  ownerName,
+  createdAt,
   className,
   refetch,
+  archiveID,
+  visibility,
+  in: inFields,
+  out: outFields,
+  currentUserId,
   ...props
 }) => {
   const notify = useCustomToast();
   const [dialog, setDialog] = useState<{
     visible: boolean;
     type: 'save' | 'delete';
-    scriptId?: number;
+    scriptId?: string;
     title: string;
     message: string;
     onConfirm: () => void;
   } | null>(null);
   const { mutate } = useDeleteScript();
 
-  const handleDeleteClick = (scriptId: number) => {
+  const canDelete = currentUserId && currentUserId === ownerID;
+
+  const handleDeleteClick = (scriptId: string) => {
     setDialog({
       visible: true,
       type: 'delete',
       scriptId,
       title: 'Подтвердите удаление',
-      message: `Вы уверены, что хотите удалить скрипт "${script_name}"?`,
+      message: `Вы уверены, что хотите удалить скрипт "${name}"?`,
       onConfirm: () => {
         mutate(scriptId, {
           onSuccess: () => {
@@ -72,32 +81,34 @@ export const ScriptElement: FC<Props> = ({
       )}
 
       <Link
-        href={`/script/${script_id}`}
+        href={`/script/${id}`}
         className={cn(className, styles.scriptElement, basicStyles.layout)}
         {...props}>
         <div className={styles.scriptElement__supblock}>
-          <h2 className={styles.scriptElement__title}>{script_name}</h2>
+          <h2 className={styles.scriptElement__title}>{name}</h2>
         </div>
 
-        <h3 className={styles.scriptElement__subtitle}>{script_description}</h3>
+        <h3 className={styles.scriptElement__subtitle}>{desc || ''}</h3>
         <div className={styles.scriptElement__info}>
           <TextWithIcon icon={<PersonIcon />} className={styles.scriptElement__author}>
-            {owner}
+            <span className={styles.scriptElement__authorText}>{ownerName}</span>
           </TextWithIcon>
           <TextWithIcon icon={<CalendarIcon />} className={styles.scriptElement__data}>
-            {created_at}
+            {getDate(createdAt)}
           </TextWithIcon>
         </div>
         <div className={styles.scriptElement__interactive}>
           <RunCodeButton />
-          <span
-            onClick={(e) => {
-              e.preventDefault();
-              handleDeleteClick(script_id);
-            }}
-            className={cn(styles.scriptElement__delIcon, 'smoothTransition')}>
-            <DeleteIcon />
-          </span>
+          {canDelete && (
+            <span
+              onClick={(e) => {
+                e.preventDefault();
+                handleDeleteClick(id);
+              }}
+              className={cn(styles.scriptElement__delIcon, 'smoothTransition')}>
+              <DeleteIcon />
+            </span>
+          )}
         </div>
       </Link>
     </>

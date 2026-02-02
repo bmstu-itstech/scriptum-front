@@ -1,19 +1,9 @@
-export enum UserRole {
-  ADMIN = 'admin',
-  USER = 'user',
-}
-
-export interface IUser {
-  id: number;
-  fullname: string;
-  email: string;
-  role: UserRole;
-}
+import type { Role } from '@/shared/api/generated/data-contracts';
 
 export interface EditUserData {
-  fullname: string;
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
-  role: UserRole;
+  role: Role;
 }

@@ -10,7 +10,7 @@ import { FastField, type FastFieldProps } from 'formik';
 
 interface RowProps {
   index: number;
-  arrayName: string; // 'inputParams' или 'outputParams'
+  arrayName: string;
   onRemove: () => void;
   className?: string;
 }
@@ -61,7 +61,6 @@ const ScriptParametersLoaderRow: FC<RowProps> = ({ index, arrayName, onRemove, c
             className={styles.fastfield__type}
             errorText={meta.touched && meta.error ? meta.error : null}
             selectClassName={styles.filter__type}
-            // className={styles.filter__type}
             isFormik
           />
         )}

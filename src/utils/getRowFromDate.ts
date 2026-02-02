@@ -1,16 +1,23 @@
 import { parseUTCAsLocal } from '@/utils/getDiffTime';
 
-export const getDate = (date: Date | string, withTime?: boolean): string => {
+export const getDate = (date: Date | string | null | undefined, withTime?: boolean): string => {
+  if (!date) {
+    return '—';
+  }
+
   if (typeof date === 'string') {
+    if (date.trim() === '') {
+      return '—';
+    }
     date = parseUTCAsLocal(date);
   }
+
   if (!(date instanceof Date) || isNaN(date.getTime())) {
-    throw new Error('Некорректный объект Date');
+    return '—';
   }
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
-  // console.log(date);
   if (withTime) {
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');

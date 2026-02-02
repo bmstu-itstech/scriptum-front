@@ -1,3 +1,3 @@
 export type CsvUploaderProps = {
-  onParsed: (values: string[]) => void;
+  onParsed: (data: { headers: string[]; values: string[] }, file: File) => void;
 };

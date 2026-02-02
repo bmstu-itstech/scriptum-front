@@ -1,15 +1,9 @@
 'use client';
 import { PageLayout } from '@/layouts/PageLayout';
-import {
-  pageCreateUsecase,
-  ScriptInitialValues,
-  ScriptSchema,
-} from '@/app/(withHeader)/script/create/page.usecase';
-import InputLayout from '@/layouts/InputLayout';
-import { InfoBlockLayout } from '@/layouts/InfoBlockLayout';
+import { ScriptInitialValues, ScriptSchema } from '@/app/(withHeader)/script/create/page.usecase';
 import styles from '@/app/(withHeader)/script/create/page.module.css';
 import { ScriptParametrsLoader } from '@/components/ScriptParametrsLoader';
-import { Formik, Form, FastField, type FastFieldProps } from 'formik';
+import { Formik, Form } from 'formik';
 import { Button } from '@/shared/Button';
 import { SaveScriptIcon } from '@/components/icons/SaveScriptIcon';
 import { useCreateScript } from '@/hooks/script/useCreateScript';
@@ -17,8 +11,9 @@ import { useUploadFile } from '@/hooks/script/useUploadFile';
 import { useRouter } from 'next/navigation';
 import { getSendValues } from '@/utils/send';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
-import { getErrorText } from '@/utils/getErrorText';
+import { notifyMutationError } from '@/utils/notifyMutationError';
 import { ScriptFormInfoBlock } from '@/components/ScriptFormInfoBlock';
+import { ValueType } from '@/shared/api/generated/data-contracts';
 
 export default function CreatePage() {
   const router = useRouter();
@@ -33,58 +28,37 @@ export default function CreatePage() {
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
           try {
-            const uploadedFiles = await Promise.all(
-              values.file!.map(async (file) => {
-                // Дополнительные проверки (например, по размеру)
-                if (file.size > 5 * 1024 * 1024) {
-                  notify('Размер файла не должен превышать 5 МБ', 'error');
-                }
-
-                // Загрузка файла
-                const { file_id } = await uploadFile(file);
-
-                return {
-                  name: file.name,
-                  id: file_id,
-                };
-              }),
-            );
-
-            // Найдём ID основного файла (проверенного)
-            const mainFile = uploadedFiles.find(
-              (uploaded) => uploaded.name === values.file_checked?.name,
-            );
-            const main_file_id = mainFile?.id;
-
-            if (!main_file_id) {
-              notify('Основной файл не выбран или не загружен', 'error');
+            if (!values.file) {
+              notify('Файл не выбран', 'error');
               setSubmitting(false);
               return;
             }
 
-            // Соберём остальные файлы (если нужно)
-            const extra_file_ids = uploadedFiles
-              .filter((f) => f.id !== main_file_id)
-              .map((f) => f.id);
+            if (values.file.size > 50 * 1024 * 1024) {
+              notify('Размер файла не должен превышать 50 МБ', 'error');
+              setSubmitting(false);
+              return;
+            }
 
-            // Отправим createScript
+            const response = await uploadFile(values.file);
+            const file_id = response.data.fileID;
+
             createScript(
               {
-                script_name: values.name,
-                script_description: values.desc,
-                main_file_id: main_file_id,
-                extra_file_ids: extra_file_ids,
-                in_fields: values.inputParams.map((param) => ({
+                name: values.name,
+                desc: values.desc,
+                archiveID: String(file_id),
+                in: values.inputParams.map((param) => ({
                   name: param.name,
-                  description: param.desc,
+                  desc: param.desc,
                   unit: param.measure,
-                  type: getSendValues(param.type),
+                  type: getSendValues(param.type) as ValueType,
                 })),
-                out_fields: values.outputParams.map((param) => ({
+                out: values.outputParams.map((param) => ({
                   name: param.name,
-                  description: param.desc,
+                  desc: param.desc,
                   unit: param.measure,
-                  type: getSendValues(param.type),
+                  type: getSendValues(param.type) as ValueType,
                 })),
               },
               {
@@ -92,9 +66,7 @@ export default function CreatePage() {
                   router.push('/');
                   notify('Скрипт успешно создан', 'success');
                 },
-                onError: (error) => {
-                  notify(getErrorText(error.response?.status ?? 7777), 'error');
-                },
+                onError: notifyMutationError(notify),
               },
             );
           } catch (err) {

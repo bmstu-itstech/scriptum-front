@@ -18,6 +18,8 @@
   font-weight: 700;
   font-size: 1.875rem;
   line-height: 2.25rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .ScriptInfo__subtitle {

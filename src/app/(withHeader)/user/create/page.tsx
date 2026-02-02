@@ -15,10 +15,15 @@ import { SaveIcon } from '@/components/icons/SaveIcon';
 import { FastField, Form, Formik, type FastFieldProps } from 'formik';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { useRouter } from 'next/navigation';
+import { useCreateUser } from '@/hooks/user/useCreateUser';
+import { Role } from '@/shared/api/generated/data-contracts';
+import { notifyMutationError } from '@/utils/notifyMutationError';
+import { LinkDirection } from '@/shared/consts/links';
 
 export default function TasksPage() {
   const notify = useCustomToast();
   const router = useRouter();
+  const { mutate: createUser } = useCreateUser();
   return (
     <>
       <PageLayout
@@ -30,10 +35,24 @@ export default function TasksPage() {
           initialValues={createUserInitialValues}
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(true);
-            // Simulate API call
-            notify('Аккаунт пользователя успешно создан', 'success');
-            router.push('/users/handle');
-            setSubmitting(false);
+            createUser(
+              {
+                name: values.fullName,
+                email: values.email,
+                password: values.password,
+                role: values.isAdmin ? Role.Admin : Role.User,
+              },
+              {
+                onSuccess: () => {
+                  router.push(LinkDirection.HandleUsers);
+                  notify('Аккаунт пользователя успешно создан', 'success');
+                },
+                onError: notifyMutationError(notify),
+                onSettled: () => {
+                  setSubmitting(false);
+                },
+              },
+            );
           }}>
           {({ setFieldValue, handleChange, values, isSubmitting }) => (
             <Form>
@@ -54,6 +73,7 @@ export default function TasksPage() {
                         isRequired
                         placeholder={'Введите полное имя (ФИО)'}
                         errorText={meta.touched && meta.error ? meta.error : null}
+                        autoComplete='off'
                       />
                     )}
                   </FastField>
@@ -71,6 +91,7 @@ export default function TasksPage() {
                         onBlur={field.onBlur}
                         isRequired
                         placeholder={'Введите email адрес'}
+                        autoComplete='off'
                       />
                     )}
                   </FastField>
@@ -89,6 +110,7 @@ export default function TasksPage() {
                         isPassword
                         isRequired
                         placeholder={'Введите пароль'}
+                        autoComplete='new-password'
                       />
                     )}
                   </FastField>
@@ -107,6 +129,7 @@ export default function TasksPage() {
                         isPassword
                         isRequired
                         placeholder={'Введите еще раз пароль'}
+                        autoComplete='new-password'
                       />
                     )}
                   </FastField>

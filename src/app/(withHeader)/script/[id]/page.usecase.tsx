@@ -1,21 +1,21 @@
 import * as Yup from 'yup';
 
-type FieldType = 'integer' | 'real' | 'complex';
+type FieldType = 'integer' | 'real' | 'string';
 interface PatternMap {
   integer: RegExp;
   real: RegExp;
-  complex: RegExp;
+  string: RegExp;
 }
 
-const patterns: PatternMap = {
+export const patterns: PatternMap = {
   integer: /^-?\d+$/,
   real: /^-?\d+(\.\d+)?$/,
-  complex: /^[+-]?\d+(\.\d+)?[+-]\d+(\.\d+)?i$/,
+  string: /^.+$/,
 };
 
 const in_fieldsSchema = Yup.object({
   type: Yup.string()
-    .oneOf(['integer', 'real', 'complex'], 'Неверный тип')
+    .oneOf(['integer', 'real', 'string'], 'Неверный тип')
     .required('Название обязательно'),
   data: Yup.string()
     .required('Данные обязательны')
