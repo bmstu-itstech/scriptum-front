@@ -3,9 +3,7 @@ import { getCookie } from '@/utils/getCookie';
 function getApiBaseUrl(): string {
   const url = process.env.NEXT_PUBLIC_API_URL;
   if (!url || url.trim() === '') {
-    throw new Error(
-      'NEXT_PUBLIC_API_URL не задан! Добавьте его в .env, например: NEXT_PUBLIC_API_URL=https://your-api-host/api/v2/',
-    );
+    throw new Error('Путь к API не задан! Добавьте его в переменную среду');
   }
   return url;
 }
