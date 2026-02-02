@@ -1,6 +1,8 @@
-import type { InputHTMLAttributes } from 'react';
+import type { HTMLAttributes, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
 
-export interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'autoComplete'> {
+type BaseProps = Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'autoComplete'>;
+
+export interface Props extends BaseProps {
   toggleIcons?: {
     show: React.ReactNode;
     hide: React.ReactNode;

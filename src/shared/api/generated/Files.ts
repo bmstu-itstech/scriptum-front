@@ -10,12 +10,10 @@
  * ---------------------------------------------------------------
  */
 
-import { PlainError, UploadFileResponse } from "./data-contracts";
-import { ContentType, HttpClient, RequestParams } from "./http-client";
+import { PlainError, UploadFileResponse } from './data-contracts';
+import { ContentType, HttpClient, RequestParams } from './http-client';
 
-export class Files<
-  SecurityDataType = unknown,
-> extends HttpClient<SecurityDataType> {
+export class Files<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
@@ -36,11 +34,11 @@ export class Files<
   ) =>
     this.request<UploadFileResponse, PlainError>({
       path: `/files`,
-      method: "POST",
+      method: 'POST',
       body: data,
       secure: true,
       type: ContentType.FormData,
-      format: "json",
+      format: 'json',
       ...params,
     });
 }

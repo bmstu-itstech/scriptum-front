@@ -1,6 +1,9 @@
 .fileInput {
   border: 2px dashed var(--color-gray-stroke);
-  transition: background 0.5s, opacity 0.3s, cursor 0.3s;
+  transition:
+    background 0.5s,
+    opacity 0.3s,
+    cursor 0.3s;
   border-radius: var(--border-radius-md);
   display: flex;
   justify-content: center;
