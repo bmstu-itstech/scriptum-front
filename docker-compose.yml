@@ -1,14 +1,11 @@
-version: '3.8'
-
 services:
-  nextjs:
-    build:
+  web:
+    build: 
       context: .
-      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: $NEXT_PUBLIC_API_URL
     ports:
-      - "3000:3000"
-    env_file:
-      - .env
+      - "${EXTERNAL_PORT:-3000}:3000"
     environment:
-      - NODE_ENV=production
+      PORT: 3000
     restart: unless-stopped
