@@ -137,6 +137,6 @@ jobs:
           script: |
             cd ${{ vars.PROJECT_DIR }}
             git stash
-            git checkout dev
-            git pull origin dev
+            git checkout main
+            git pull origin main
             docker compose -f docker-compose.yaml up --build -d
