@@ -42,7 +42,6 @@
     line-height: 1.75rem;
     color: var(--color-dark-main);
     overflow-wrap: break-word;
-    word-break: break-word;
   }
 }
 

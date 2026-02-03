@@ -105,7 +105,6 @@
   color: var(--color-dark-main);
   margin: 0;
   overflow-wrap: break-word;
-  word-break: break-word;
 }
 
 .scriptName {
@@ -115,7 +114,6 @@
   color: var(--color-gray-sub);
   margin: 0;
   overflow-wrap: break-word;
-  word-break: break-word;
 }
 
 .content {

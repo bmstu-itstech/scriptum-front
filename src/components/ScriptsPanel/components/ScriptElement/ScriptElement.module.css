@@ -48,7 +48,6 @@
   -webkit-line-clamp: 4;
   line-clamp: 4;
   overflow-wrap: break-word;
-  word-break: break-word;
 }
 
 .scriptElement__author {
