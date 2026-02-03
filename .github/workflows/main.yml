@@ -133,6 +133,7 @@ jobs:
           username: ${{ vars.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script_stop: true
+          command_timeout: 15m
           envs: EXTERNAL_PORT, NEXT_PUBLIC_API_URL
           script: |
             cd ${{ vars.PROJECT_DIR }}
