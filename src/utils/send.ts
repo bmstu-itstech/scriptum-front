@@ -1,6 +1,6 @@
 import { ParametrType } from '@/shared/consts/parametr';
 import { PipelineStatus } from '@/shared/consts/pipeline';
-import { JobState } from '@/shared/api/generated/data-contracts';
+import { JobState, ValueType } from '@/shared/api/generated/data-contracts';
 import type { Job } from '@/shared/api/generated/data-contracts';
 
 export const getSendValues = (value: string) => {
@@ -13,6 +13,19 @@ export const getSendValues = (value: string) => {
       return 'string';
   }
   return 'error';
+};
+
+export const getTypeLabelRu = (value: string) => {
+  switch (value) {
+    case ValueType.Real:
+      return 'Вещественное';
+    case ValueType.Integer:
+      return 'Целое';
+    case ValueType.String:
+      return 'Строка';
+    default:
+      return value;
+  }
 };
 
 export const getStatus = (state: JobState, code: number | undefined) => {

@@ -21,6 +21,7 @@ import { runScriptValidationSchema } from '@/app/(withHeader)/script/[id]/page.u
 import { useStartScript } from '@/hooks/script/useStartScript';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { notifyMutationError } from '@/utils/notifyMutationError';
+import { getTypeLabelRu } from '@/utils/send';
 import { Loading } from '@/shared/Loading';
 import { CsvUploader } from '@/components/CsvUploader';
 
@@ -200,7 +201,7 @@ export default function Page() {
                         formikName={`in_params[${id}].data`}
                         key={id}
                         typeOfCard='input'
-                        type={item.type}
+                        type={getTypeLabelRu(item.type)}
                         name={item.name}
                         description={item.desc || ''}
                         unit={item.unit || ''}
@@ -217,7 +218,7 @@ export default function Page() {
                       <ScriptParametrLayout
                         key={id}
                         typeOfCard='output'
-                        type={item.type}
+                        type={getTypeLabelRu(item.type)}
                         name={item.name}
                         description={item.desc || ''}
                         unit={item.unit || ''}
