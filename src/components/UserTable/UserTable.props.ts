@@ -3,6 +3,7 @@ import type { HTMLAttributes } from 'react';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   users: User[];
+  currentUserId?: string;
   className?: string;
   onEditUser: (user: User) => void;
   onDeleteUser: (userId: string) => void;

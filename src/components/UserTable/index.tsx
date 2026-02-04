@@ -17,8 +17,19 @@ type DialogState = {
   onConfirm: () => void;
 } | null;
 
-export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUser }) => {
+export const UserTable: FC<Props> = ({
+  users,
+  currentUserId,
+  className,
+  onEditUser,
+  onDeleteUser,
+}) => {
   const [dialog, setDialog] = useState<DialogState>(null);
+
+  const orderedUsers =
+    currentUserId != null
+      ? [...users].sort((a, b) => (a.id === currentUserId ? -1 : b.id === currentUserId ? 1 : 0))
+      : users;
 
   const handleEditUser = (user: User) => {
     setDialog({
@@ -34,7 +45,7 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
   };
 
   const handleDeleteUser = (userId: string) => {
-    const user = users.find((u) => u.id === userId);
+    const user = orderedUsers.find((u) => u.id === userId);
     if (!user) {
       return;
     }
@@ -68,10 +79,11 @@ export const UserTable: FC<Props> = ({ users, className, onEditUser, onDeleteUse
       )}
       <div className={styles.usersTable}>
         <UserTableHeader />
-        {users.map((user) => (
+        {orderedUsers.map((user) => (
           <UserRow
             key={user.id}
             user={user}
+            isCurrentUser={user.id === currentUserId}
             onEditUser={handleEditUser}
             onDeleteUser={handleDeleteUser}
           />
