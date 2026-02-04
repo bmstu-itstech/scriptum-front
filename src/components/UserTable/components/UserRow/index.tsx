@@ -8,9 +8,10 @@ import { PasswordCell } from '../cells/PasswordCell';
 import { RoleCell } from '../cells/RoleCell';
 import { ActionsCell } from '../cells/ActionsCell';
 import { validateEmail, validateFullname, validatePassword } from '@/utils/validators';
+import cn from 'classnames';
 import generalStyle from './../../UserTable.module.css';
 
-export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
+export const UserRow: FC<Props> = ({ user, isCurrentUser, onEditUser, onDeleteUser }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState<EditUserData>({
     name: user.name,
@@ -133,7 +134,9 @@ export const UserRow: FC<Props> = ({ user, onEditUser, onDeleteUser }) => {
   };
 
   return (
-    <div className={generalStyle.tableRow}>
+    <div
+      className={cn(generalStyle.tableRow, isCurrentUser && generalStyle.currentUserRow)}
+      data-current-user={isCurrentUser || undefined}>
       <UserInfoCell
         isEditing={isEditing}
         editData={editData}

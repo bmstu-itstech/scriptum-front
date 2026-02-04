@@ -4,6 +4,8 @@ import cn from 'classnames';
 import { AddParametrIcon } from '@/components/icons/AddParametricon';
 import * as Yup from 'yup';
 
+const trimString = (v: unknown) => (typeof v === 'string' ? v.trim() : v);
+
 export const pageCreateUsecase = {
   main: {
     header: <p className='layout__title-sm'>Основная информация</p>,
@@ -13,7 +15,7 @@ export const pageCreateUsecase = {
         placeholder: 'Введите название скрипта',
       },
       scriptCode: {
-        title: 'Tar-архив (.tar, .tar.gz, .tgz) *',
+        title: 'tar-архив (.tar, .tar.gz, .tgz) *',
         placeholder: 'Выберите tar-архив',
       },
 
@@ -42,29 +44,32 @@ export const pageCreateUsecase = {
 
 const ParametrSheme = Yup.object().shape({
   name: Yup.string()
-    .min(1, 'Название должно иметь хотя бы 2 символа')
+    .transform(trimString)
+    .min(1, 'Название должно иметь хотя бы 1 символ')
     .max(50, 'Название должно быть меньше 50 символов')
     .required('Название обязательно'),
   desc: Yup.string()
-    .min(1, 'Описание должно иметь хотя бы 2 символа')
-    .max(50, 'Описание должно быть меньше 50 символов')
-    .required('Описание обязательно'),
+    .transform(trimString)
+    .max(80, 'Описание должно быть меньше 80 символов')
+    .optional(),
   type: Yup.string()
-    .min(1, 'Тип должен иметь хотя бы 2 символа')
+    .transform(trimString)
+    .min(1, 'Тип должен иметь хотя бы 1 символ')
     .max(50, 'Тип должен быть меньше 50 символов')
     .required('Тип обязателен'),
   measure: Yup.string()
-    .min(1, 'Единица измерения должна иметь хотя бы 2 символа')
+    .transform(trimString)
     .max(50, 'Единица измерения должна быть меньше 50 символов')
-    .required('Единица измерения обязательна'),
+    .optional(),
 });
 
 export const ScriptSchema = Yup.object().shape({
   name: Yup.string()
-    .min(1, 'Название должно иметь хотя бы 2 символа')
-    .max(50, 'Название должно быть меньше 50 символов')
+    .transform(trimString)
+    .min(1, 'Название должно иметь хотя бы 1 символ')
+    .max(80, 'Название должно быть меньше 80 символов')
     .required('Название обязательно'),
-  desc: Yup.string().max(50, 'Описание должно быть меньше 50 символов'),
+  desc: Yup.string().transform(trimString).max(1000, 'Описание должно быть меньше 1000 символов'),
   inputParams: Yup.array().of(ParametrSheme),
   outputParams: Yup.array().of(ParametrSheme),
   file: Yup.mixed().required('Скрипт обязателен'),

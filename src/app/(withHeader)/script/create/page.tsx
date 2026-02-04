@@ -45,19 +45,19 @@ export default function CreatePage() {
 
             createScript(
               {
-                name: values.name,
-                desc: values.desc,
+                name: values.name.trim(),
+                desc: values.desc?.trim() ?? '',
                 archiveID: String(file_id),
                 in: values.inputParams.map((param) => ({
-                  name: param.name,
-                  desc: param.desc,
-                  unit: param.measure,
+                  name: param.name.trim(),
+                  desc: param.desc?.trim() ?? '',
+                  unit: param.measure?.trim() ?? '',
                   type: getSendValues(param.type) as ValueType,
                 })),
                 out: values.outputParams.map((param) => ({
-                  name: param.name,
-                  desc: param.desc,
-                  unit: param.measure,
+                  name: param.name.trim(),
+                  desc: param.desc?.trim() ?? '',
+                  unit: param.measure?.trim() ?? '',
                   type: getSendValues(param.type) as ValueType,
                 })),
               },

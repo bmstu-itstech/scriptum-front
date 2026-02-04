@@ -20,7 +20,7 @@ export const ScriptParametrLayout: FC<ScriptParametrWithTypeOfCard> = ({
           <p className={styles.ScriptParametrLayout__title_input}>{name}</p>
           <div className={styles.ScriptParametrLayout__type_measure_input}>
             <p className={styles.ScriptParametrLayout__type_input}>{type}</p>
-            <p className={styles.ScriptParametrLayout__measure_input}>{unit}</p>
+            {unit && <p className={styles.ScriptParametrLayout__measure_input}>{unit}</p>}
           </div>
         </div>
         <FastField name={formikName || ''}>
@@ -47,7 +47,7 @@ export const ScriptParametrLayout: FC<ScriptParametrWithTypeOfCard> = ({
           <p className={'layout__title-xs'}>{name}</p>
           <div className={styles.ScriptParametrLayout__type_measure_input}>
             <p className={styles.ScriptParametrLayout__type_input}>{type}</p>
-            <p className={styles.ScriptParametrLayout__measure_input}>{unit}</p>
+            {unit && <p className={styles.ScriptParametrLayout__measure_input}>{unit}</p>}
           </div>
         </div>
         <p className={styles.ScriptParametrLayout__translation_input}>{description}</p>

@@ -15,6 +15,7 @@ import style from './page.module.css';
 import { UserTable } from '@/components/UserTable';
 import { pageSelectStyles, roleUsecase } from '@/components/Filter/Filter.usecase';
 import { useGetAllUsers } from '@/hooks/user/useGetAllUsers';
+import { useGetUserMe } from '@/hooks/user/useGetUserMe';
 import { usePatchUser } from '@/hooks/user/usePatchUser';
 import { useDeleteUser } from '@/hooks/user/useDeleteUser';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
@@ -24,6 +25,7 @@ const ITEMS_PER_PAGE = 8;
 
 export default function HandlePage() {
   const { data: usersData, isLoading, refetch } = useGetAllUsers();
+  const { data: currentUser } = useGetUserMe();
   const { mutate: patchUser } = usePatchUser();
   const { mutate: deleteUser } = useDeleteUser();
   const notify = useCustomToast();
@@ -155,6 +157,7 @@ export default function HandlePage() {
         ) : paginatedUsers.length > 0 ? (
           <UserTable
             users={paginatedUsers}
+            currentUserId={currentUser?.id}
             onEditUser={handleEditUser}
             onDeleteUser={handleDeleteUser}
           />
