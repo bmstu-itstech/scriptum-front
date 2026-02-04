@@ -13,7 +13,7 @@ export const pageCreateUsecase = {
         placeholder: 'Введите название скрипта',
       },
       scriptCode: {
-        title: 'Tar-архив (.tar, .tar.gz, .tgz) *',
+        title: 'tar-архив (.tar, .tar.gz, .tgz) *',
         placeholder: 'Выберите tar-архив',
       },
 
