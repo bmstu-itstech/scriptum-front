@@ -28,3 +28,9 @@
     display: none;
   }
 }
+
+@media (width < 371px) {
+  .stats .divider:is([data-divider-index="2"]) {
+    display: none;
+  }
+}

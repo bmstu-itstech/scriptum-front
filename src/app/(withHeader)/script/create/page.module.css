@@ -76,3 +76,9 @@
   color: var(--color-white-main);
   padding: 1rem 2rem;
 }
+
+@media (width < 610px) {
+  .flex {
+    flex-wrap: wrap;
+  }
+}

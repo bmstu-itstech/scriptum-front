@@ -24,6 +24,12 @@
   }
 }
 
+@media (width < 1024px) {
+  .headerList.listBorder {
+    display: none;
+  }
+}
+
 .preblock {
   display: flex;
   flex-direction: column;
@@ -38,9 +44,11 @@
 .preblock__text {
   color: var(--color-gray-light2);
   font-size: var(--font-size-sm);
+  text-align: center;
 }
 
 .preblock__subtext {
   color: var(--color-gray-light2);
   font-size: var(--font-size-xs);
+  text-align: center;
 }

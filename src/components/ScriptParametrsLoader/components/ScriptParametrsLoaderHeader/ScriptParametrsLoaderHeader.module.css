@@ -6,6 +6,8 @@
   width: 100%;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
 }
 
 .listBorder {
@@ -16,7 +18,8 @@
 .headerList__left {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
 }
 
 .headerList_subtitle {
