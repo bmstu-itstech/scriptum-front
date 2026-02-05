@@ -13,6 +13,7 @@
   z-index: 11;
   overflow-y: auto;
   max-height: 80%;
+  max-width: 70%;
   scrollbar-color: var(--color-gray-light2) transparent;
   scrollbar-width: thin;
 
@@ -212,13 +213,14 @@
   padding: 1rem;
   background: var(--color-white-main);
   border: 1px solid var(--color-gray-border);
-  white-space: pre-line;
+  white-space: pre;
   font-family: Consolas, monospace;
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--color-gray-code);
   margin: 0;
+  overflow-x: auto;
 }
 
 .errorSection {
