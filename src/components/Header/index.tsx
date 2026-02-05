@@ -1,5 +1,5 @@
 'use client';
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { HeaderLayout } from '@/layouts/HeaderLayout';
 import { Props } from './Header.props';
 import style from './Header.module.css';
@@ -18,9 +18,16 @@ import { useLogout } from '@/hooks/auth/useLogout';
 
 export const Header: FC<Props> = ({ activePath, className, ...props }) => {
   const activeNextPathName = usePathname();
+  const [isNavigating, setIsNavigating] = useState(false);
+
   activePath = activePath === undefined ? activeNextPathName : activePath;
   const { data: userData } = useGetUserMe();
   const { logout } = useLogout();
+
+  useEffect(() => {
+    // как только роут сменился — считаем, что навигация завершена
+    setIsNavigating(false);
+  }, [activeNextPathName]);
 
   const visibleLinks = useMemo(() => {
     const isAdmin = userData?.role === Role.Admin;
@@ -49,6 +56,13 @@ export const Header: FC<Props> = ({ activePath, className, ...props }) => {
             <Link
               key={link.direction}
               href={link.direction}
+              onClick={(event) => {
+                if (activePath === link.direction || isNavigating) {
+                  event.preventDefault();
+                  return;
+                }
+                setIsNavigating(true);
+              }}
               className={cn(
                 style.link,
                 activePath === link.direction ? style.linkActive : style.linkHover,
