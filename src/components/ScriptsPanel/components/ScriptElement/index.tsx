@@ -84,10 +84,7 @@ export const ScriptElement: FC<Props> = ({
         href={`/script/${id}`}
         className={cn(className, styles.scriptElement, basicStyles.layout)}
         {...props}>
-        <div className={styles.scriptElement__supblock}>
-          <h2 className={styles.scriptElement__title}>{name}</h2>
-        </div>
-
+        <h2 className={styles.scriptElement__title}>{name}</h2>
         <h3 className={styles.scriptElement__subtitle}>{desc || ''}</h3>
         <div className={styles.scriptElement__info}>
           <TextWithIcon icon={<PersonIcon />} className={styles.scriptElement__author}>
