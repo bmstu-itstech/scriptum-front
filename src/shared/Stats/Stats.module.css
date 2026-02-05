@@ -16,3 +16,15 @@
     justify-content: center;
   }
 }
+
+@media (width < 467px) {
+  .stats .divider:is([data-divider-index="1"]) {
+    display: none;
+  }
+}
+
+@media (width < 326px) {
+  .stats .divider:is([data-divider-index="0"]) {
+    display: none;
+  }
+}

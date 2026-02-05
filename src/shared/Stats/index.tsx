@@ -14,7 +14,11 @@ export const Stats: FC<Props> = ({ stats, separator = '|', className, ...props }
             {stat.unit && ` ${stat.unit}`}
           </span>
 
-          {index < stats.length - 1 && <span className={style.divider}>{separator}</span>}
+          {index < stats.length - 1 && (
+            <span className={style.divider} data-divider-index={index}>
+              {separator}
+            </span>
+          )}
         </React.Fragment>
       ))}
     </div>

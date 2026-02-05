@@ -58,3 +58,10 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.paginationNumbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+}
