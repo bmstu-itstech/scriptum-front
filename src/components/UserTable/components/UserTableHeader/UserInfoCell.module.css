@@ -2,6 +2,12 @@
   background-color: var(--color-white-main);
 }
 
+@media (max-width: 767px) {
+  .headerRow {
+    display: none;
+  }
+}
+
 .headerCell {
   color: var(--color-gray-light2);
   font-weight: 500;

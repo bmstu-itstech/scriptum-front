@@ -39,6 +39,8 @@
   width: fit-content;
   display: flex;
   gap: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .options {
@@ -46,6 +48,8 @@
   align-items: center;
   gap: 1rem;
   min-width: 0;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .personBlock {
