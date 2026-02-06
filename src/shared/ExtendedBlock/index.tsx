@@ -39,9 +39,14 @@ export const ExtendedBlock: FC<Props> = ({
         </div>
         {countOfChildren > 4 && (
           <div
-            className={cn(styles.ScriptParametrsLayout__content, contentClassname, {
-              [styles.expanded]: countOfShown > 4,
-            })}>
+            className={cn(
+              styles.ScriptParametrsLayout__content,
+              styles.childrenBlock,
+              contentClassname,
+              {
+                [styles.expanded]: countOfShown > 4,
+              },
+            )}>
             <div
               className={cn(
                 styles.ScriptParametrsLayout__content__children,
