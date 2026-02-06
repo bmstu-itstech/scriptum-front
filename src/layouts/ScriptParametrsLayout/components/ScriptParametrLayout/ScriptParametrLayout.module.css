@@ -22,6 +22,7 @@
   justify-content: space-between;
   align-items: start;
   width: 100%;
+  word-break: break-all;
 }
 
 .ScriptParametrLayout__type_measure_input {
@@ -71,6 +72,7 @@
 .ScriptParametrLayout__translation_input {
   font-size: var(--font-size-xs);
   color: var(--color-gray-sub);
+  word-break: break-all;
 }
 
 .ScriptParametrLayout__output {
