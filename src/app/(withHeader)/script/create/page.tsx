@@ -13,7 +13,7 @@ import { getSendValues } from '@/utils/send';
 import { useCustomToast } from '@/hooks/other/useCustomToast';
 import { notifyMutationError } from '@/utils/notifyMutationError';
 import { ScriptFormInfoBlock } from '@/components/ScriptFormInfoBlock';
-import { ValueType } from '@/shared/api/generated/data-contracts';
+import { ValueType, Visibility } from '@/shared/api/generated/data-contracts';
 
 export default function CreatePage() {
   const router = useRouter();
@@ -48,6 +48,7 @@ export default function CreatePage() {
                 name: values.name.trim(),
                 desc: values.desc?.trim() ?? '',
                 archiveID: String(file_id),
+                visibility: values.visibility,
                 in: values.inputParams.map((param) => ({
                   name: param.name.trim(),
                   desc: param.desc?.trim() ?? '',

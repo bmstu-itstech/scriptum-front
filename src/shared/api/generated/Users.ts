@@ -20,10 +20,12 @@ import {
   PatchUserRequest,
   PatchUserResponse,
   PlainError,
-} from './data-contracts';
-import { ContentType, HttpClient, RequestParams } from './http-client';
+} from "./data-contracts";
+import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Users<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class Users<
+  SecurityDataType = unknown,
+> extends HttpClient<SecurityDataType> {
   /**
    * @description Возвращает полный список пользователей платформы. Запрос доступен только администраторам.
    *
@@ -35,9 +37,9 @@ export class Users<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
   getUsers = (params: RequestParams = {}) =>
     this.request<GetUsersResponse, PlainError>({
       path: `/users`,
-      method: 'GET',
+      method: "GET",
       secure: true,
-      format: 'json',
+      format: "json",
       ...params,
     });
   /**
@@ -51,11 +53,11 @@ export class Users<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
   createUser = (data: CreateUserRequest, params: RequestParams = {}) =>
     this.request<CreateUserResponse, InvalidInputError | PlainError>({
       path: `/users`,
-      method: 'POST',
+      method: "POST",
       body: data,
       secure: true,
       type: ContentType.Json,
-      format: 'json',
+      format: "json",
       ...params,
     });
   /**
@@ -69,9 +71,9 @@ export class Users<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
   getUserMe = (params: RequestParams = {}) =>
     this.request<GetUserMeResponse, PlainError>({
       path: `/users/me`,
-      method: 'GET',
+      method: "GET",
       secure: true,
-      format: 'json',
+      format: "json",
       ...params,
     });
   /**
@@ -85,9 +87,9 @@ export class Users<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
   getUser = (id: string, params: RequestParams = {}) =>
     this.request<GetUserResponse, PlainError>({
       path: `/users/${id}`,
-      method: 'GET',
+      method: "GET",
       secure: true,
-      format: 'json',
+      format: "json",
       ...params,
     });
   /**
@@ -98,14 +100,18 @@ export class Users<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
    * @request PATCH:/users/{id}
    * @secure
    */
-  patchUser = (id: string, data: PatchUserRequest, params: RequestParams = {}) =>
+  patchUser = (
+    id: string,
+    data: PatchUserRequest,
+    params: RequestParams = {},
+  ) =>
     this.request<PatchUserResponse, InvalidInputError | PlainError>({
       path: `/users/${id}`,
-      method: 'PATCH',
+      method: "PATCH",
       body: data,
       secure: true,
       type: ContentType.Json,
-      format: 'json',
+      format: "json",
       ...params,
     });
   /**
@@ -119,7 +125,7 @@ export class Users<SecurityDataType = unknown> extends HttpClient<SecurityDataTy
   deleteUser = (id: string, params: RequestParams = {}) =>
     this.request<void, PlainError>({
       path: `/users/${id}`,
-      method: 'DELETE',
+      method: "DELETE",
       secure: true,
       ...params,
     });

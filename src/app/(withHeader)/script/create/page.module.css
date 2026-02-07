@@ -77,8 +77,88 @@
   padding: 1rem 2rem;
 }
 
-@media (width < 610px) {
-  .flex {
-    flex-wrap: wrap;
-  }
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-gray-border);
+  background-color: var(--color-white-main);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.checkboxLabel:hover {
+  border-color: var(--color-purple-dark);
+  box-shadow: 0 0 0 1px var(--color-purple-dark);
+}
+
+.checkboxInput {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.checkboxMark {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--color-gray-border);
+  border-radius: 0.375rem;
+  background-color: var(--color-white-main);
+  transition: all 0.2s;
+  position: relative;
+}
+
+.checkboxInput:focus-visible + .checkboxMark {
+  outline: 2px solid var(--color-purple-dark);
+  outline-offset: 2px;
+}
+
+.checkboxLabel:hover .checkboxMark {
+  border-color: var(--color-purple-dark);
+}
+
+.checkboxInput:checked ~ .checkboxMark {
+  background-color: var(--color-purple-dark);
+  border-color: var(--color-purple-dark);
+}
+
+.checkboxMark::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 0.25rem;
+  top: 0.0625rem;
+  width: 0.375rem;
+  height: 0.625rem;
+  border: solid var(--color-white-main);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkboxInput:checked ~ .checkboxMark::after {
+  display: block;
+}
+
+.checkboxContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.checkboxText {
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-dark-main);
+  user-select: none;
+}
+
+.checkboxHint {
+  font-size: var(--font-size-xxs);
+  color: var(--color-gray-light2);
+  user-select: none;
 }

@@ -10,10 +10,12 @@
  * ---------------------------------------------------------------
  */
 
-import { GetJobsResponse, JobState, PlainError } from './data-contracts';
-import { HttpClient, RequestParams } from './http-client';
+import { GetJobsResponse, JobState, PlainError } from "./data-contracts";
+import { HttpClient, RequestParams } from "./http-client";
 
-export class Jobs<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class Jobs<
+  SecurityDataType = unknown,
+> extends HttpClient<SecurityDataType> {
   /**
    * @description Возвращает список всех пользовательских задач (jobs). Возможна фильтрация по состоянию задачи.
    *
@@ -30,10 +32,10 @@ export class Jobs<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
   ) =>
     this.request<GetJobsResponse, PlainError>({
       path: `/jobs`,
-      method: 'GET',
+      method: "GET",
       query: query,
       secure: true,
-      format: 'json',
+      format: "json",
       ...params,
     });
   /**
@@ -47,9 +49,9 @@ export class Jobs<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
   getJob = (id: string, params: RequestParams = {}) =>
     this.request<GetJobsResponse, void | PlainError>({
       path: `/jobs/${id}`,
-      method: 'GET',
+      method: "GET",
       secure: true,
-      format: 'json',
+      format: "json",
       ...params,
     });
 }
