@@ -3,6 +3,7 @@ import styles from '@/app/(withHeader)/script/create/page.module.css';
 import cn from 'classnames';
 import { AddParametrIcon } from '@/components/icons/AddParametricon';
 import * as Yup from 'yup';
+import { Visibility } from '@/shared/api/generated/data-contracts';
 
 const trimString = (v: unknown) => (typeof v === 'string' ? v.trim() : v);
 
@@ -90,6 +91,7 @@ export interface ScriptFormValues {
   name: string;
   desc: string;
   file: File | null;
+  visibility: Visibility;
   inputParams: ParameterWithId[];
   outputParams: ParameterWithId[];
 }
@@ -98,6 +100,7 @@ export const ScriptInitialValues: ScriptFormValues = {
   name: '',
   desc: '',
   file: null,
+  visibility: Visibility.Private,
   inputParams: [],
   outputParams: [],
 };

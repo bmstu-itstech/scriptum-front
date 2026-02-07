@@ -10,10 +10,12 @@
  * ---------------------------------------------------------------
  */
 
-import { LoginRequest, LoginResponse, PlainError } from './data-contracts';
-import { ContentType, HttpClient, RequestParams } from './http-client';
+import { LoginRequest, LoginResponse, PlainError } from "./data-contracts";
+import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class Auth<
+  SecurityDataType = unknown,
+> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
@@ -25,11 +27,11 @@ export class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataTyp
   login = (data: LoginRequest, params: RequestParams = {}) =>
     this.request<LoginResponse, PlainError>({
       path: `/auth/login`,
-      method: 'POST',
+      method: "POST",
       body: data,
       secure: true,
       type: ContentType.Json,
-      format: 'json',
+      format: "json",
       ...params,
     });
 }
