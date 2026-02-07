@@ -94,7 +94,7 @@ const Pagination: FC<Props> = ({
         Назад
       </button>
 
-      {renderPageNumbers()}
+      <div className={styles.paginationNumbers}>{renderPageNumbers()}</div>
 
       <button
         onClick={() => handlePageChange(currentPage + 1)}
