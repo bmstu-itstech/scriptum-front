@@ -10,6 +10,8 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 RUN yarn build
 
 FROM node:20-alpine AS runner
@@ -26,7 +28,7 @@ RUN yarn install --frozen-lockfile --production
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/next.config.ts ./
+COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
 
 USER nextjs
